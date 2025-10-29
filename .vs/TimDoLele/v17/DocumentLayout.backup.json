@@ -31,8 +31,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -56,8 +60,7 @@
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\Endereco.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:51:35.708Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T00:51:35.708Z"
             },
             {
               "$type": "Document",
@@ -69,8 +72,7 @@
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\Cliente.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:51:25.987Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T00:51:25.987Z"
             },
             {
               "$type": "Document",
@@ -82,8 +84,7 @@
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\Adicional.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:51:14.688Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T00:51:14.688Z"
             },
             {
               "$type": "Document",
@@ -95,8 +96,7 @@
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\ItemPedido.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:50:50.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T00:50:50.775Z"
             },
             {
               "$type": "Document",
@@ -108,8 +108,7 @@
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\Pedido.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:50:37.388Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-29T00:50:37.388Z"
             },
             {
               "$type": "Document",
@@ -121,12 +120,7 @@
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\BaseEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:49:35.063Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "WhenOpened": "2025-10-29T00:49:35.063Z"
             }
           ]
         }
