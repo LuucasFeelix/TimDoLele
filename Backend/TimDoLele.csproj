@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="TimDolele.Core\**" />
+    <Content Remove="TimDolele.Core\**" />
+    <EmbeddedResource Remove="TimDolele.Core\**" />
+    <None Remove="TimDolele.Core\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
