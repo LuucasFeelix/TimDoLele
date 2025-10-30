@@ -1,0 +1,69 @@
+# ========================
+# Geral
+# ========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+*.env
+.env.*
+
+# ========================
+# Frontend Angular
+# ========================
+frontend/tim-do-lele-food/node_modules/
+frontend/tim-do-lele-food/dist/
+frontend/tim-do-lele-food/out-tsc/
+frontend/tim-do-lele-food/.angular/
+frontend/tim-do-lele-food/.angular-cache/
+
+# Logs e arquivos temporários do npm
+frontend/tim-do-lele-food/npm-debug.log*
+frontend/tim-do-lele-food/yarn-debug.log*
+frontend/tim-do-lele-food/yarn-error.log*
+
+# ========================
+# Backend .NET 8
+# ========================
+# Build outputs
+backend/**/bin/
+backend/**/obj/
+
+# User-specific files
+backend/**/*.user
+backend/**/*.suo
+backend/**/*.userosscache
+backend/**/*.sln.docstates
+
+# Rider / VS Code / VS
+backend/.vs/
+backend/.vscode/
+backend/*.csproj.user
+backend/*.dbmdl
+
+# Resíduos de pacotes NuGet
+backend/**/packages/
+backend/**/project.lock.json
+backend/**/project.fragment.lock.json
+
+# Logs
+backend/**/*.log
+
+# Arquivos de publish
+backend/**/publish/
+backend/**/artifacts/
+
+# Diretórios temporários
+backend/**/TestResults/
+backend/**/Coverage/
+backend/**/GeneratedArtifacts/
+
+# ========================
+# Outras coisas que podem ser ignoradas
+# ========================
+# npm lock
+frontend/tim-do-lele-food/package-lock.json
+frontend/tim-do-lele-food/yarn.lock
+# NuGet lock
+backend/packages.lock.json

@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  margin-top: auto;
+
+  width: 100%;/* ou var(--primary) */
+  font-size: 14px;
+
+  .border-line {
+    width: 100%; /* w-full */
+    border-bottom: 2px solid; /* border-b-2 + border-slate-500 */
+    margin-top: 1rem; /* md:mt-24 → 24 * 0.25rem = 6rem */
+    height: auto;
+    margin-bottom: 2rem;
+  }
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px; /* mesma margem que a linha */
+  }
+  .footer-right a {
+    text-decoration: none;
+    color: inherit;
+    margin-left: 20px;
+  }
+  .footer-right a:hover span {
+    text-decoration: underline;
+  }
+
+
+}
