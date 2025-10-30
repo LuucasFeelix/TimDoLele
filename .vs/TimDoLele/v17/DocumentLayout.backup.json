@@ -60,7 +60,8 @@
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\Endereco.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:51:35.708Z"
+              "WhenOpened": "2025-10-29T00:51:35.708Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -72,7 +73,8 @@
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\Cliente.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:51:25.987Z"
+              "WhenOpened": "2025-10-29T00:51:25.987Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -82,9 +84,10 @@
               "RelativeDocumentMoniker": "..\\TimDolele.Core\\Entities\\Adicional.cs",
               "ToolTip": "D:\\Projetos em desenvolvimento\\Projetos em C#\\Tim do Lele\\TimDolele.Core\\Entities\\Adicional.cs",
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\Adicional.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAYwBYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:51:14.688Z"
+              "WhenOpened": "2025-10-29T00:51:14.688Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -94,9 +97,10 @@
               "RelativeDocumentMoniker": "..\\TimDolele.Core\\Entities\\ItemPedido.cs",
               "ToolTip": "D:\\Projetos em desenvolvimento\\Projetos em C#\\Tim do Lele\\TimDolele.Core\\Entities\\ItemPedido.cs",
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\ItemPedido.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:50:50.775Z"
+              "WhenOpened": "2025-10-29T00:50:50.775Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -106,9 +110,10 @@
               "RelativeDocumentMoniker": "..\\TimDolele.Core\\Entities\\Pedido.cs",
               "ToolTip": "D:\\Projetos em desenvolvimento\\Projetos em C#\\Tim do Lele\\TimDolele.Core\\Entities\\Pedido.cs",
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\Pedido.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAswBgAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:50:37.388Z"
+              "WhenOpened": "2025-10-29T00:50:37.388Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -118,9 +123,10 @@
               "RelativeDocumentMoniker": "..\\TimDolele.Core\\Entities\\BaseEntity.cs",
               "ToolTip": "D:\\Projetos em desenvolvimento\\Projetos em C#\\Tim do Lele\\TimDolele.Core\\Entities\\BaseEntity.cs",
               "RelativeToolTip": "..\\TimDolele.Core\\Entities\\BaseEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T00:49:35.063Z"
+              "WhenOpened": "2025-10-29T00:49:35.063Z",
+              "EditorCaption": ""
             }
           ]
         }
