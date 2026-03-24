@@ -8,13 +8,29 @@
 
   <ItemGroup>
     <Compile Remove="TimDolele.Core\**" />
+    <Compile Remove="TimDoLele.Infrastructure\**" />
     <Content Remove="TimDolele.Core\**" />
+    <Content Remove="TimDoLele.Infrastructure\**" />
     <EmbeddedResource Remove="TimDolele.Core\**" />
+    <EmbeddedResource Remove="TimDoLele.Infrastructure\**" />
     <None Remove="TimDolele.Core\**" />
+    <None Remove="TimDoLele.Infrastructure\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TimDoLele.Application\TimDoLele.Application.csproj" />
+    <ProjectReference Include="TimDolele.Core\TimDolele.Core.csproj" />
+    <ProjectReference Include="TimDoLele.Infrastructure\TimDoLele.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

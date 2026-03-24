@@ -6,30 +6,49 @@ using System.Threading.Tasks;
 
 namespace TimDolele.Core.Entities
 {
-    class ItemPedido : BaseEntity
+    public class ItemPedido : BaseEntity
     {
         public Guid PedidoId { get; private set; }
-        public string Descricao { get; private set; }
+
+        public Guid ProdutoId { get; private set; }
+        public Produto? Produto { get; private set; }
+
         public int Quantidade { get; private set; }
         public decimal ValorUnitario { get; private set; }
         public decimal Valor { get; private set; }
         public string? Observacao { get; private set; }
 
-        public List<Adicional> Adicionais { get; private set; } = new();
+        public List<ItemPedidoAdicional> Adicionais { get; private set; } = new();
 
-        public ItemPedido(string descricao, int quantidade, decimal valorUnitario, string? observacao = null)
+        private ItemPedido() { }
+
+        public ItemPedido(Produto produto, int quantidade, string? observacao = null)
         {
-            Descricao = descricao;
+            Produto = produto;
+            ProdutoId = produto.Id;
+
             Quantidade = quantidade;
-            ValorUnitario = valorUnitario;
-            Valor = Quantidade * valorUnitario;
+            ValorUnitario = produto.Preco;
+
             Observacao = observacao;
+
+            RecalcularValor();
         }
 
-        public void AdicionarAdicional(Adicional adicional)
+        public void AdicionarAdicional(Guid adicionalId, decimal preco)
         {
-            Adicionais.Add(adicional);
-            Valor += adicional.Preco;
+            if (Adicionais.Any(a => a.AdicionalId == adicionalId))
+                return;
+
+            Adicionais.Add(new ItemPedidoAdicional(adicionalId, preco));
+
+            RecalcularValor();
+        }
+
+        private void RecalcularValor()
+        {
+            var totalAdicionais = Adicionais.Sum(a => a.Preco);
+            Valor = (ValorUnitario + totalAdicionais) * Quantidade;
         }
     }
 }

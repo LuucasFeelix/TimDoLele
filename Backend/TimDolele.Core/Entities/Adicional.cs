@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace TimDolele.Core.Entities
 {
-    class Adicional : BaseEntity
+    public class Adicional : BaseEntity
     {
         public string Nome { get; private set; }
         public decimal Preco { get; private set; }
+        public List<ProdutoAdicional> ProdutosAdicionais { get; private set; } = new();
 
         private Adicional() { }
 
@@ -18,5 +19,6 @@ namespace TimDolele.Core.Entities
             Nome = nome;
             Preco = preco;
         }
+
     }
 }
