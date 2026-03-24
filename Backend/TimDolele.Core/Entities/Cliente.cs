@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimDolele.Core.Entities
 {
-    class Cliente : BaseEntity
+    public class Cliente : BaseEntity
     {
         public string Nome { get; private set; }
         public string Telefone { get; private set; }

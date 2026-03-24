@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimDolele.Core.Entities
 {
-    class Pagamento : BaseEntity
+    public class Pagamento : BaseEntity
     {
         public string Forma { get; private set; }
         public decimal Subtotal { get; private set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TimDolele.Core.Entities
 {
-    class Endereco
+    public class Endereco
     {
         public string Rua { get; private set; }
         public string Numero { get; private set; }

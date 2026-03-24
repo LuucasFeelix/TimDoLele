@@ -1,5 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using TimDoLele.Application.Services;
+using TimDoLele.Infrastructure.Data;
 
-namespace TimDoLele
+namespace TimDoLeLe
 {
     public class Program
     {
@@ -8,11 +11,15 @@ namespace TimDoLele
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<PedidoService>();
+
+            // Registrar o DbContext
+            builder.Services.AddDbContext<TimDoLeleDbContext>(options =>
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
@@ -20,13 +27,16 @@ namespace TimDoLele
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TimDoLele API");
+                    c.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

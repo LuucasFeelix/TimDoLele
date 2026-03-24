@@ -1,50 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TimDolele.Core.Entities;
 
-namespace TimDolele.Core.Entities
+public class Pedido : BaseEntity
 {
-    class Pedido : BaseEntity
+    public string Codigo { get; private set; } = string.Empty;
+    public DateTime DataHora { get; private set; }
+    public Guid ClienteId { get; private set; }
+    public Cliente? Cliente { get; private set; }
+
+    public List<ItemPedido> Itens { get; private set; } = new();
+
+    public Guid? PagamentoId { get; private set; }
+    public Pagamento? Pagamento { get; private set; }
+
+    public decimal Subtotal { get; private set; }
+    public decimal Delivery { get; private set; }
+    public decimal Total { get; private set; }
+
+    private Pedido() { }
+
+    public Pedido(Guid clienteId, decimal delivery = 0)
     {
-        public string Codigo { get; private set; }
-        public DateTime DataHora { get; private set; }
-        public Guid ClienteId { get; private set; }
-        public Cliente Cliente { get; private set; } = null!;
-        public List<ItemPedido> Itens { get; private set; } = new();
-        public Pagamento Pagamento { get; private set; } = null!;
-        public decimal Subtotal { get; private set; }
-        public decimal Delivery { get; private set; }
-        public decimal Total { get; private set; }
+        ClienteId = clienteId;
+        DataHora = DateTime.Now;
+        Delivery = delivery;
 
-        private Pedido() { }
+        Codigo = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+    }
 
-        public Pedido(string codigo, DateTime dataHora, Cliente cliente, decimal delivery)
-        {
-            Codigo = codigo;
-            DataHora = dataHora;
-            Cliente = cliente;
-            ClienteId = cliente.Id;
-            Delivery = delivery;
-        }
+    public void AdicionarItem(ItemPedido item)
+    {
+        Itens.Add(item);
+        RecalcularTotais();
+    }
 
+    private void RecalcularTotais()
+    {
+        Subtotal = Itens.Sum(i => i.Valor);
+        Total = Subtotal + Delivery;
+    }
 
-        public void AdicionarItem(ItemPedido item)
-        {
-            Itens.Add(item);
-            RecalcularTotais();
-        }
-
-        private void RecalcularTotais()
-        {
-            Subtotal = Itens.Sum(i => i.Valor);
-            Total = Subtotal + Delivery;
-        }
-
-        public void DefinirPagamento(Pagamento pagamento)
-        {
-            pagamento = pagamento;
-        }
+    public void DefinirPagamento(Pagamento pagamento)
+    {
+        Pagamento = pagamento;
     }
 }
