@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TimDoLele.Application.DTOs;
-using TimDoLele.Infrastructure.Data;
 using TimDolele.Core.Entities;
+using TimDolele.Core.Enums;
+using TimDoLele.Application.DTOs;
+using TimDoLele.Application.DTOs.Common;
+using TimDoLele.Infrastructure.Data;
 
 namespace TimDoLele.Application.Services
 {
@@ -64,26 +66,49 @@ namespace TimDoLele.Application.Services
             }
         }
 
-        public async Task<List<PedidoResponseDto>> ObterPedidosAsync()
+        public async Task<PagedResult<PedidoResponseDto>> ObterPedidosAsync(
+            Guid? clienteId,
+            StatusPedido? status,
+            int page = 1,
+        int pageSize = 10)
         {
-            var pedidos = await _context.Pedidos
+            var query = _context.Pedidos
                 .Include(p => p.Cliente)
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Produto)
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Adicionais)
+                .AsQueryable();
+
+            if (clienteId.HasValue)
+                query = query.Where(p => p.ClienteId == clienteId.Value);
+
+            if (status.HasValue)
+                query = query.Where(p => p.Status == status.Value);
+
+            query = query.OrderByDescending(p => p.DataHora);
+
+            if (page <= 0) page = 1;
+            if (pageSize <= 0) pageSize = 10;
+            if (pageSize > 50) pageSize = 50;
+
+            var total = await query.CountAsync();
+
+            var pedidos = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
-            var resultado = pedidos.Select(p => new PedidoResponseDto
+            var data = pedidos.Select(p => new PedidoResponseDto
             {
                 Id = p.Id,
                 Codigo = p.Codigo,
                 DataHora = p.DataHora,
                 NomeCliente = p.Cliente!.Nome,
-
                 SubTotal = p.Subtotal,
                 Delivery = p.Delivery,
                 Total = p.Total,
+                Status = p.Status.ToString(),
 
                 Itens = p.Itens.Select(i => new ItemPedidoResponseDto
                 {
@@ -97,11 +122,17 @@ namespace TimDoLele.Application.Services
                         AdicionalId = a.AdicionalId,
                         Preco = a.Preco
                     }).ToList()
-
                 }).ToList()
             }).ToList();
 
-            return resultado;
+            return new PagedResult<PedidoResponseDto>
+            {
+                Page = page,
+                PageSize = pageSize,
+                Total = total,
+                TotalPages = (int)Math.Ceiling((double)total / pageSize),
+                Data = data
+            };
         }
 
         public async Task<PedidoResponseDto?> ObterPedidoPorIdAsync(Guid id)
@@ -142,6 +173,56 @@ namespace TimDoLele.Application.Services
                     }).ToList()
 
                 }).ToList()
+            };
+        }
+
+        public async Task AtualizarStatusAsync(Guid pedidoId, StatusPedido status)
+        {
+            var pedido = await _context.Pedidos.FindAsync(pedidoId);
+
+            if (pedido == null)
+                throw new Exception("Pedido não encontrado");
+
+            pedido.AtualizarStatus(status);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<DashBoardPedidosDto> ObterDashboardAsync()
+        {
+            var hoje = DateTime.Today;
+
+            var pendentes = await _context.Pedidos
+                .CountAsync(p => p.Status == StatusPedido.Pendente);
+
+            var emPreparo = await _context.Pedidos
+                .CountAsync(p => p.Status == StatusPedido.EmPreparo);
+
+            var saiuEntrega = await _context.Pedidos
+                .CountAsync(p => p.Status == StatusPedido.SaiuParaEntrega);
+
+            var entregues = await _context.Pedidos
+                .CountAsync(p => p.Status == StatusPedido.Entregue);
+
+            var cancelados = await _context.Pedidos
+                .CountAsync(p => p.Status == StatusPedido.Cancelado);
+
+            var faturamentoHoje = await _context.Pedidos
+                .Where(p => p.DataHora.Date == hoje && p.Status == StatusPedido.Entregue)
+                .SumAsync(p => (decimal?)p.Total) ?? 0;
+
+            var quantidadeHoje = await _context.Pedidos
+                .CountAsync(p => p.DataHora.Date == hoje);
+
+            return new DashBoardPedidosDto
+            {
+                Pendentes = pendentes,
+                EmPreparo = emPreparo,
+                SaiuParaEntrega = saiuEntrega,
+                Entregues = entregues,
+                Cancelados = cancelados,
+                FaturamentoHoje = faturamentoHoje,
+                QuantidadePedidosHoje = quantidadeHoje
             };
         }
     }

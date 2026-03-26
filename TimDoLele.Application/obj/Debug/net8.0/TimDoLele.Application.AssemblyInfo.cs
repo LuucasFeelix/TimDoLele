@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TimDoLele.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a68e030769699a4f7dbd5da3194e49320673e069")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11a3f48ed247353fa28df8b8c35f56868ab8e5d3")]
 [assembly: System.Reflection.AssemblyProductAttribute("TimDoLele.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TimDoLele.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
