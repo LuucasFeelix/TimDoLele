@@ -24,6 +24,7 @@ namespace TimDoLele.Infrastructure.Data
         public DbSet<Produto> Produtos => Set<Produto>();
         public DbSet <ProdutoAdicional> ProdutosAdicionais => Set<ProdutoAdicional>();
         public DbSet<ItemPedidoAdicional> ItensPedidoAdicionais => Set<ItemPedidoAdicional>();
+        public DbSet<Usuarios> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

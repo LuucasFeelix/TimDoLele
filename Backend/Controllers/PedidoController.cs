@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
 using TimDoLele.Application.Services;
 
 namespace TimDoLele.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/pedidos")]
     public class PedidoController : ControllerBase
@@ -31,7 +33,11 @@ namespace TimDoLele.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] Guid? clienteId, [FromQuery] StatusPedido? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> Get(
+            [FromQuery] Guid? clienteId,
+            [FromQuery] StatusPedido? status,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10)
         {
             var result = await _pedidoService.ObterPedidosAsync(clienteId, status, page, pageSize);
             return Ok(result);
@@ -62,7 +68,6 @@ namespace TimDoLele.Controllers
             }
         }
 
-
         [HttpGet("dashboard")]
         public async Task<IActionResult> GetDashboard()
         {
@@ -70,5 +75,4 @@ namespace TimDoLele.Controllers
             return Ok(dashboard);
         }
     }
-
 }
