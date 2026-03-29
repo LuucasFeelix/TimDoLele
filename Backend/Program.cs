@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 using TimDoLele.Application.Services;
 using TimDoLele.Infrastructure.Data;
 
@@ -10,20 +14,84 @@ namespace TimDoLeLe
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<PedidoService>();
+            var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);
 
-            // Registrar o DbContext
+            // Controllers
+            builder.Services.AddControllers();
+
+            // Swagger + JWT 🔐
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "TimDoLele API",
+                    Version = "v1"
+                });
+
+                // 🔐 CONFIG DO BOTÃO AUTHORIZE
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Digite: Bearer SEU_TOKEN_AQUI",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
+            });
+
+            // Services
+            builder.Services.AddScoped<PedidoService>();
+            builder.Services.AddScoped<AuthService>();
+
+            // DbContext
             builder.Services.AddDbContext<TimDoLeleDbContext>(options =>
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            // 🔐 JWT
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                };
+            });
+
+            builder.Services.AddAuthorization();
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Swagger
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -36,6 +104,7 @@ namespace TimDoLeLe
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

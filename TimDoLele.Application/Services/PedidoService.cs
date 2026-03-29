@@ -70,7 +70,7 @@ namespace TimDoLele.Application.Services
             Guid? clienteId,
             StatusPedido? status,
             int page = 1,
-        int pageSize = 10)
+            int pageSize = 10)
         {
             var query = _context.Pedidos
                 .Include(p => p.Cliente)
@@ -154,7 +154,6 @@ namespace TimDoLele.Application.Services
                 Codigo = pedido.Codigo,
                 DataHora = pedido.DataHora,
                 NomeCliente = pedido.Cliente!.Nome,
-
                 SubTotal = pedido.Subtotal,
                 Delivery = pedido.Delivery,
                 Total = pedido.Total,
@@ -171,7 +170,6 @@ namespace TimDoLele.Application.Services
                         AdicionalId = a.AdicionalId,
                         Preco = a.Preco
                     }).ToList()
-
                 }).ToList()
             };
         }
@@ -190,7 +188,8 @@ namespace TimDoLele.Application.Services
 
         public async Task<DashBoardPedidosDto> ObterDashboardAsync()
         {
-            var hoje = DateTime.Today;
+            var inicioHoje = DateTime.Today;
+            var fimHoje = inicioHoje.AddDays(1);
 
             var pendentes = await _context.Pedidos
                 .CountAsync(p => p.Status == StatusPedido.Pendente);
@@ -208,11 +207,14 @@ namespace TimDoLele.Application.Services
                 .CountAsync(p => p.Status == StatusPedido.Cancelado);
 
             var faturamentoHoje = await _context.Pedidos
-                .Where(p => p.DataHora.Date == hoje && p.Status == StatusPedido.Entregue)
+                .Where(p => p.DataHora >= inicioHoje
+                         && p.DataHora < fimHoje
+                         && p.Status == StatusPedido.Entregue)
                 .SumAsync(p => (decimal?)p.Total) ?? 0;
 
             var quantidadeHoje = await _context.Pedidos
-                .CountAsync(p => p.DataHora.Date == hoje);
+                .CountAsync(p => p.DataHora >= inicioHoje
+                              && p.DataHora < fimHoje);
 
             return new DashBoardPedidosDto
             {
