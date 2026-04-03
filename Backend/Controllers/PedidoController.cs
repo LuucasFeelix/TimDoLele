@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
 using TimDoLele.Application.Services;
+using System.Security.Claims;
 
 namespace TimDoLele.Controllers
 {
@@ -18,12 +19,20 @@ namespace TimDoLele.Controllers
             _pedidoService = service;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] CriarPedidoDto dto)
         {
             try
             {
-                var pedidoId = await _pedidoService.CriarPedidoAsync(dto);
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                Console.WriteLine(userId);
+
+                if (userId == null)
+                    return Unauthorized();
+
+                var pedidoId = await _pedidoService.CriarPedidoAsync(dto, Guid.Parse(userId));
+
                 return Ok(new { pedidoId });
             }
             catch (Exception ex)
@@ -39,21 +48,31 @@ namespace TimDoLele.Controllers
             [FromQuery] int page = 1,
             [FromQuery] int pageSize = 10)
         {
-            var result = await _pedidoService.ObterPedidosAsync(clienteId, status, page, pageSize);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            Guid? usuarioId = null;
+
+            if (!string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                if (userId == null)
+                    return Unauthorized();
+
+                usuarioId = Guid.Parse(userId);
+            }
+
+            var result = await _pedidoService.ObterPedidosAsync(
+                clienteId,
+                status,
+                page,
+                pageSize,
+                usuarioId
+            );
+
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
-        {
-            var pedido = await _pedidoService.ObterPedidoPorIdAsync(id);
-
-            if (pedido == null)
-                return NotFound("Pedido não encontrado");
-
-            return Ok(pedido);
-        }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}/status")]
         public async Task<IActionResult> AtualizarStatus(Guid id, [FromBody] StatusPedido status)
         {
@@ -73,6 +92,26 @@ namespace TimDoLele.Controllers
         {
             var dashboard = await _pedidoService.ObterDashboardAsync();
             return Ok(dashboard);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            var pedido = await _pedidoService.ObterPedidoPorIdAsync(id);
+
+            if (pedido == null)
+                return NotFound("Pedido não encontrado");
+
+            if (!string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                if (userId == null || pedido.UsuarioId != Guid.Parse(userId))
+                    return Forbid();
+            }
+
+            return Ok(pedido);
         }
     }
 }

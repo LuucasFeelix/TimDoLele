@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimDoLele.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TimDoLele.Infrastructure.Data;
 namespace TimDoLele.Infrastructure.Migrations
 {
     [DbContext(typeof(TimDoLeleDbContext))]
-    partial class TimDoLeleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260331031757_AddUsuarioNoPedido")]
+    partial class AddUsuarioNoPedido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,13 +59,16 @@ namespace TimDoLele.Infrastructure.Migrations
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("UsuariosId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("PagamentoId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UsuariosId");
 
                     b.ToTable("Pedidos");
                 });
@@ -290,8 +296,8 @@ namespace TimDoLele.Infrastructure.Migrations
 
                     b.HasOne("TimDolele.Core.Entities.Usuarios", "Usuarios")
                         .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("UsuariosId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");

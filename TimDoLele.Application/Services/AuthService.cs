@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TimDolele.Core.Entities;
 using TimDoLele.Infrastructure.Data;
+using TimDoLele.Application.Helpers;
 
 namespace TimDoLele.Application.Services
 {
@@ -32,8 +33,8 @@ namespace TimDoLele.Application.Services
             if (usuario == null)
                 return null;
 
-            // ⚠️ depois vamos melhorar com hash (por enquanto simples)
-            if (usuario.SenhaHash != senha)
+            if (string.IsNullOrEmpty(usuario.SenhaHash) ||
+                !PasswordHelper.Verificar(senha, usuario.SenhaHash))
                 return null;
 
             return GerarToken(usuario);
@@ -45,6 +46,7 @@ namespace TimDoLele.Application.Services
 
             var claims = new[]
             {
+                new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
                 new Claim(ClaimTypes.Name, usuario.Email),
                 new Claim(ClaimTypes.Role, usuario.Role)
             };

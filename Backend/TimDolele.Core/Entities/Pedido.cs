@@ -3,6 +3,8 @@ using TimDolele.Core.Enums;
 
 public class Pedido : BaseEntity
 {
+    public Guid UsuarioId { get; private set; }
+    public Usuarios Usuarios { get; private set; }
     public string Codigo { get; private set; } = string.Empty;
     public DateTime DataHora { get; private set; }
     public Guid ClienteId { get; private set; }
@@ -20,9 +22,10 @@ public class Pedido : BaseEntity
 
     private Pedido() { }
 
-    public Pedido(Guid clienteId, decimal delivery = 0)
+    public Pedido(Guid clienteId, Guid usuarioId, decimal delivery = 0)
     {
         ClienteId = clienteId;
+        UsuarioId = usuarioId;
         DataHora = DateTime.Now;
         Delivery = delivery;
         Status = StatusPedido.Pendente;

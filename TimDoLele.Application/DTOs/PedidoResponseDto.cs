@@ -18,6 +18,7 @@ namespace TimDoLele.Application.DTOs
         public decimal Delivery { get; set; }
         public decimal Total { get; set; }
         public string Status { get; set; } = string.Empty;
+        public Guid UsuarioId { get; set; }
 
         public List<ItemPedidoResponseDto> Itens { get; set; } = new();
     }
