@@ -16,7 +16,7 @@ namespace TimDoLele.Application.Services
             _context = context;
         }
 
-        public async Task<Guid> CriarPedidoAsync(CriarPedidoDto dto)
+        public async Task<Guid> CriarPedidoAsync(CriarPedidoDto dto, Guid usuarioId)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace TimDoLele.Application.Services
                 if (cliente == null)
                     throw new Exception("Cliente não encontrado");
 
-                var pedido = new Pedido(cliente.Id);
+                var pedido = new Pedido(cliente.Id, usuarioId);
 
                 foreach (var itemDto in dto.Itens)
                 {
@@ -70,8 +70,9 @@ namespace TimDoLele.Application.Services
             Guid? clienteId,
             StatusPedido? status,
             int page = 1,
-            int pageSize = 10)
-        {
+            int pageSize = 10,
+            Guid? usuarioId = null) 
+            {
             var query = _context.Pedidos
                 .Include(p => p.Cliente)
                 .Include(p => p.Itens)
@@ -79,6 +80,9 @@ namespace TimDoLele.Application.Services
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Adicionais)
                 .AsQueryable();
+
+            if (usuarioId.HasValue)
+                query = query.Where(p => p.UsuarioId == usuarioId.Value);
 
             if (clienteId.HasValue)
                 query = query.Where(p => p.ClienteId == clienteId.Value);
@@ -109,6 +113,7 @@ namespace TimDoLele.Application.Services
                 Delivery = p.Delivery,
                 Total = p.Total,
                 Status = p.Status.ToString(),
+                UsuarioId = p.UsuarioId,
 
                 Itens = p.Itens.Select(i => new ItemPedidoResponseDto
                 {

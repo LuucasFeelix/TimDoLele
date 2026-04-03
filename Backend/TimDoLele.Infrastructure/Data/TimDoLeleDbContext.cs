@@ -22,7 +22,7 @@ namespace TimDoLele.Infrastructure.Data
         public DbSet<Pagamento> Pagamentos => Set<Pagamento>();
         public DbSet<Categoria> Categorias => Set<Categoria>();
         public DbSet<Produto> Produtos => Set<Produto>();
-        public DbSet <ProdutoAdicional> ProdutosAdicionais => Set<ProdutoAdicional>();
+        public DbSet<ProdutoAdicional> ProdutosAdicionais => Set<ProdutoAdicional>();
         public DbSet<ItemPedidoAdicional> ItensPedidoAdicionais => Set<ItemPedidoAdicional>();
         public DbSet<Usuarios> Usuarios { get; set; }
 
@@ -56,7 +56,13 @@ namespace TimDoLele.Infrastructure.Data
                 .WithMany()
                 .HasForeignKey(ipa => ipa.AdicionalId);
 
-            base.OnModelCreating(modelBuilder); 
+            modelBuilder.Entity<Pedido>()
+                .HasOne(p => p.Usuarios)
+                .WithMany()
+                .HasForeignKey(p => p.UsuarioId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
