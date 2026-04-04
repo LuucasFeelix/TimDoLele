@@ -1,0 +1,16 @@
+2026-04-04 18:04:58.198 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-04 18:04:58.596 -03:00 [INF] Now listening on: https://localhost:57668
+2026-04-04 18:04:58.599 -03:00 [INF] Now listening on: http://localhost:57669
+2026-04-04 18:04:58.948 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-04 18:04:58.949 -03:00 [INF] Hosting environment: Development
+2026-04-04 18:04:58.950 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos em C#\TimDoLele\Backend
+2026-04-04 18:05:01.344 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-04-04 18:05:01.652 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 321.5612ms
+2026-04-04 18:05:01.675 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-04 18:05:01.676 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-04-04 18:05:01.678 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-04-04 18:05:01.684 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 7.4477ms
+2026-04-04 18:05:01.702 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 26.9772ms
+2026-04-04 18:05:01.745 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 67.4695ms
+2026-04-04 18:05:01.845 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-04-04 18:05:01.891 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 45.6055ms
