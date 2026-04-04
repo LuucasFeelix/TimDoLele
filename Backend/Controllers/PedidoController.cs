@@ -4,6 +4,7 @@ using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
 using TimDoLele.Application.Services;
 using System.Security.Claims;
+using TimDoLele.Application.DTOs.Common;
 
 namespace TimDoLele.Controllers
 {
@@ -33,11 +34,11 @@ namespace TimDoLele.Controllers
 
                 var pedidoId = await _pedidoService.CriarPedidoAsync(dto, Guid.Parse(userId));
 
-                return Ok(new { pedidoId });
+                return Ok(ApiResponse<object>.Ok(new { pedidoId }, "Pedido Criado com sucesso"));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ApiResponse<string>.Fail(ex.Message));
             }
         }
 

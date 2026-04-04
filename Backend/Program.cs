@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using TimDoLele.Application.Services;
 using TimDoLele.Infrastructure.Data;
+using TimDoLele.Middlewares;
 
 namespace TimDoLeLe
 {
@@ -106,6 +107,8 @@ namespace TimDoLeLe
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.MapControllers();
 
