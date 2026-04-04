@@ -4,6 +4,7 @@ using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
 using TimDoLele.Application.DTOs.Common;
 using TimDoLele.Infrastructure.Data;
+using TimDoLele.Application.Exceptions;
 
 namespace TimDoLele.Application.Services
 {
@@ -18,52 +19,63 @@ namespace TimDoLele.Application.Services
 
         public async Task<Guid> CriarPedidoAsync(CriarPedidoDto dto, Guid usuarioId)
         {
-            try
+            if (dto == null)
+                throw new BadRequestException("Dados do pedido não informados");
+
+            if (dto.Itens == null || !dto.Itens.Any())
+                throw new BadRequestException("Pedido deve conter pelo menos um item");
+
+            if (dto.ClienteId == Guid.Empty)
+                throw new BadRequestException("Cliente inválido");
+
+            var cliente = await _context.Clientes
+                .FirstOrDefaultAsync(c => c.Id == dto.ClienteId);
+
+            if (cliente == null)
+                throw new NotFoundException("Cliente não encontrado");
+
+            var pedido = new Pedido(cliente.Id, usuarioId);
+
+            foreach (var itemDto in dto.Itens)
             {
-                var cliente = await _context.Clientes
-                    .FirstOrDefaultAsync(c => c.Id == dto.ClienteId);
+                if (itemDto.ProdutoId == Guid.Empty)
+                    throw new BadRequestException("ProdutoId inválido");
 
-                if (cliente == null)
-                    throw new Exception("Cliente não encontrado");
+                if (itemDto.Quantidade <= 0)
+                    throw new BadRequestException("Quantidade deve ser maior que zero");
 
-                var pedido = new Pedido(cliente.Id, usuarioId);
+                var produto = await _context.Produtos
+                    .FirstOrDefaultAsync(p => p.Id == itemDto.ProdutoId);
 
-                foreach (var itemDto in dto.Itens)
+                if (produto == null)
+                    throw new NotFoundException($"Produto não encontrado: {itemDto.ProdutoId}");
+
+                var item = new ItemPedido(produto, itemDto.Quantidade);
+
+                if (itemDto.Adicionais != null && itemDto.Adicionais.Any())
                 {
-                    var produto = await _context.Produtos
-                        .FirstOrDefaultAsync(p => p.Id == itemDto.ProdutoId);
-
-                    if (produto == null)
-                        throw new Exception("Produto não encontrado");
-
-                    var item = new ItemPedido(produto, itemDto.Quantidade);
-
-                    if (itemDto.Adicionais != null && itemDto.Adicionais.Any())
+                    foreach (var adicionalDto in itemDto.Adicionais)
                     {
-                        foreach (var adicionalDto in itemDto.Adicionais)
-                        {
-                            var adicional = await _context.Adicionais
-                                .FirstOrDefaultAsync(a => a.Id == adicionalDto.AdicionalId);
+                        if (adicionalDto.AdicionalId == Guid.Empty)
+                            throw new BadRequestException("AdicionalId inválido");
 
-                            if (adicional == null)
-                                throw new Exception($"Adicional não encontrado: {adicionalDto.AdicionalId}");
+                        var adicional = await _context.Adicionais
+                            .FirstOrDefaultAsync(a => a.Id == adicionalDto.AdicionalId);
 
-                            item.AdicionarAdicional(adicional.Id, adicional.Preco);
-                        }
+                        if (adicional == null)
+                            throw new NotFoundException($"Adicional não encontrado: {adicionalDto.AdicionalId}");
+
+                        item.AdicionarAdicional(adicional.Id, adicional.Preco);
                     }
-
-                    pedido.AdicionarItem(item);
                 }
 
-                await _context.Pedidos.AddAsync(pedido);
-                await _context.SaveChangesAsync();
+                pedido.AdicionarItem(item);
+            }
 
-                return pedido.Id;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.InnerException?.Message ?? ex.Message);
-            }
+            await _context.Pedidos.AddAsync(pedido);
+            await _context.SaveChangesAsync();
+
+            return pedido.Id;
         }
 
         public async Task<PagedResult<PedidoResponseDto>> ObterPedidosAsync(
@@ -71,8 +83,8 @@ namespace TimDoLele.Application.Services
             StatusPedido? status,
             int page = 1,
             int pageSize = 10,
-            Guid? usuarioId = null) 
-            {
+            Guid? usuarioId = null)
+        {
             var query = _context.Pedidos
                 .Include(p => p.Cliente)
                 .Include(p => p.Itens)
@@ -151,7 +163,7 @@ namespace TimDoLele.Application.Services
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (pedido == null)
-                return null;
+                throw new NotFoundException("Pedido não encontrado");
 
             return new PedidoResponseDto
             {
@@ -162,6 +174,8 @@ namespace TimDoLele.Application.Services
                 SubTotal = pedido.Subtotal,
                 Delivery = pedido.Delivery,
                 Total = pedido.Total,
+                Status = pedido.Status.ToString(),
+                UsuarioId = pedido.UsuarioId,
 
                 Itens = pedido.Itens.Select(i => new ItemPedidoResponseDto
                 {
@@ -184,7 +198,7 @@ namespace TimDoLele.Application.Services
             var pedido = await _context.Pedidos.FindAsync(pedidoId);
 
             if (pedido == null)
-                throw new Exception("Pedido não encontrado");
+                throw new NotFoundException("Pedido não encontrado");
 
             pedido.AtualizarStatus(status);
 
