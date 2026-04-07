@@ -7,6 +7,9 @@ using TimDoLele.Application.Services;
 using TimDoLele.Infrastructure.Data;
 using Serilog;
 using TimDoLeLe.Middlewares;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using TimDoLele.Application.Validators;
 
 namespace TimDoLeLe
 {
@@ -14,7 +17,6 @@ namespace TimDoLeLe
     {
         public static void Main(string[] args)
         {
-            // 🔥 CONFIG SERILOG
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
@@ -24,33 +26,37 @@ namespace TimDoLeLe
             {
                 var builder = WebApplication.CreateBuilder(args);
 
-                builder.Host.UseSerilog(); // 🔥 ativa serilog
+                builder.Host.UseSerilog();
 
                 var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);
 
-                // Controllers
                 builder.Services.AddControllers();
 
-                // Swagger + JWT 🔐
+                builder.Services.AddFluentValidationAutoValidation();
+                builder.Services.AddValidatorsFromAssemblyContaining<CriarPedidoValidator>();
+
                 builder.Services.AddEndpointsApiExplorer();
-                builder.Services.AddSwaggerGen(c =>
+
+                builder.Services.AddSwaggerGen(options =>
                 {
-                    c.SwaggerDoc("v1", new OpenApiInfo
+                    options.SwaggerDoc("v1", new OpenApiInfo
                     {
                         Title = "TimDoLele API",
-                        Version = "v1"
+                        Version = "v1",
+                        Description = "API Tim do Lelê 🍔"
                     });
 
-                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                     {
-                        Description = "Digite: Bearer SEU_TOKEN_AQUI",
                         Name = "Authorization",
+                        Type = SecuritySchemeType.Http, 
+                        Scheme = "bearer",              
+                        BearerFormat = "JWT",
                         In = ParameterLocation.Header,
-                        Type = SecuritySchemeType.ApiKey,
-                        Scheme = "Bearer"
+                        Description = "Digite: seu token"
                     });
 
-                    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    options.AddSecurityRequirement(new OpenApiSecurityRequirement
                     {
                         {
                             new OpenApiSecurityScheme
@@ -66,16 +72,13 @@ namespace TimDoLeLe
                     });
                 });
 
-                // Services
                 builder.Services.AddScoped<PedidoService>();
                 builder.Services.AddScoped<AuthService>();
 
-                // DbContext
                 builder.Services.AddDbContext<TimDoLeleDbContext>(options =>
                     options.UseSqlServer(
                         builder.Configuration.GetConnectionString("DefaultConnection")));
 
-                // 🔐 JWT
                 builder.Services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -102,13 +105,14 @@ namespace TimDoLeLe
 
                 var app = builder.Build();
 
-                // Swagger
+                app.UseMiddleware<ErrorHandlingMiddleware>();
+
                 if (app.Environment.IsDevelopment())
                 {
                     app.UseSwagger();
                     app.UseSwaggerUI(c =>
                     {
-                        c.SwaggerEndpoint("/swagger/v1/swagger.json", "TimDoLele API");
+                        c.SwaggerEndpoint("/swagger/v1/swagger.json", "TimDoLele API v1");
                         c.RoutePrefix = string.Empty;
                     });
                 }
@@ -117,9 +121,6 @@ namespace TimDoLeLe
 
                 app.UseAuthentication();
                 app.UseAuthorization();
-
-                // 🔥 MIDDLEWARE GLOBAL DE ERRO
-                app.UseMiddleware<ErrorHandlingMiddleware>();
 
                 app.MapControllers();
 

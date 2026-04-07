@@ -19,15 +19,6 @@ namespace TimDoLele.Application.Services
 
         public async Task<Guid> CriarPedidoAsync(CriarPedidoDto dto, Guid usuarioId)
         {
-            if (dto == null)
-                throw new BadRequestException("Dados do pedido não informados");
-
-            if (dto.Itens == null || !dto.Itens.Any())
-                throw new BadRequestException("Pedido deve conter pelo menos um item");
-
-            if (dto.ClienteId == Guid.Empty)
-                throw new BadRequestException("Cliente inválido");
-
             var cliente = await _context.Clientes
                 .FirstOrDefaultAsync(c => c.Id == dto.ClienteId);
 
@@ -38,12 +29,6 @@ namespace TimDoLele.Application.Services
 
             foreach (var itemDto in dto.Itens)
             {
-                if (itemDto.ProdutoId == Guid.Empty)
-                    throw new BadRequestException("ProdutoId inválido");
-
-                if (itemDto.Quantidade <= 0)
-                    throw new BadRequestException("Quantidade deve ser maior que zero");
-
                 var produto = await _context.Produtos
                     .FirstOrDefaultAsync(p => p.Id == itemDto.ProdutoId);
 
@@ -56,9 +41,6 @@ namespace TimDoLele.Application.Services
                 {
                     foreach (var adicionalDto in itemDto.Adicionais)
                     {
-                        if (adicionalDto.AdicionalId == Guid.Empty)
-                            throw new BadRequestException("AdicionalId inválido");
-
                         var adicional = await _context.Adicionais
                             .FirstOrDefaultAsync(a => a.Id == adicionalDto.AdicionalId);
 
