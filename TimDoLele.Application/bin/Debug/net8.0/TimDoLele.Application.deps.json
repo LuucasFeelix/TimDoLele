@@ -9,6 +9,7 @@
       "TimDoLele.Application/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.1.0",
+          "FluentValidation": "8.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.0",
           "TimDoLele.Infrastructure": "1.0.0",
           "TimDolele.Core": "1.0.0"
@@ -48,6 +49,14 @@
           "lib/netstandard2.1/BCrypt.Net-Next.dll": {
             "assemblyVersion": "4.1.0.0",
             "fileVersion": "4.1.0.0"
+          }
+        }
+      },
+      "FluentValidation/8.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/FluentValidation.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.0.0"
           }
         }
       },
@@ -547,6 +556,13 @@
       "sha512": "sha512-5YT3DKllmtkyW68PjURu/V1TOe4MKiByKwsRNVcfYE1S5KuFTeozdmKzyNzolKiQF391OXCaQtINvYT3j1ERzQ==",
       "path": "bcrypt.net-next/4.1.0",
       "hashPath": "bcrypt.net-next.4.1.0.nupkg.sha512"
+    },
+    "FluentValidation/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AUU39mFdeiPGG8+aNTOKWVTbG2GfguXvmWb+osxWPcZKv+tZjOcQg/jlJby3X8P1bXEAEPFW+Ky3sobufcHshA==",
+      "path": "fluentvalidation/8.0.0",
+      "hashPath": "fluentvalidation.8.0.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",

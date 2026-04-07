@@ -1,16 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using TimDolele.Core.Entities;
 using TimDoLele.Infrastructure.Data;
 using TimDoLele.Application.Helpers;
+using TimDoLele.Application.Exceptions;
 
 namespace TimDoLele.Application.Services
 {
@@ -25,17 +22,17 @@ namespace TimDoLele.Application.Services
             _config = config;
         }
 
-        public async Task<string?> LoginAsync(string email, string senha)
+        public async Task<string> LoginAsync(string email, string senha)
         {
             var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(u => u.Email == email);
 
             if (usuario == null)
-                return null;
+                throw new NotFoundException("Usuário ou senha inválidos");
 
             if (string.IsNullOrEmpty(usuario.SenhaHash) ||
                 !PasswordHelper.Verificar(senha, usuario.SenhaHash))
-                return null;
+                throw new BadRequestException("Usuário ou senha inválidos");
 
             return GerarToken(usuario);
         }
@@ -48,7 +45,8 @@ namespace TimDoLele.Application.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
                 new Claim(ClaimTypes.Name, usuario.Email),
-                new Claim(ClaimTypes.Role, usuario.Role)
+                new Claim(ClaimTypes.Role, usuario.Role),
+                new Claim("userId", usuario.Id.ToString())
             };
 
             var credenciais = new SigningCredentials(

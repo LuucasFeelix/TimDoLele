@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
-using TimDoLele.Application.Services;
-using System.Security.Claims;
 using TimDoLele.Application.DTOs.Common;
+using TimDoLele.Application.Services;
 
-namespace TimDoLele.Controllers
+namespace TimDoLeLe.Controllers
 {
     [Authorize]
     [ApiController]
@@ -20,26 +20,17 @@ namespace TimDoLele.Controllers
             _pedidoService = service;
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] CriarPedidoDto dto)
         {
-            try
-            {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                Console.WriteLine(userId);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-                if (userId == null)
-                    return Unauthorized();
+            if (userId == null)
+                return Unauthorized();
 
-                var pedidoId = await _pedidoService.CriarPedidoAsync(dto, Guid.Parse(userId));
+            var pedidoId = await _pedidoService.CriarPedidoAsync(dto, Guid.Parse(userId));
 
-                return Ok(ApiResponse<object>.Ok(new { pedidoId }, "Pedido Criado com sucesso"));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ApiResponse<string>.Fail(ex.Message));
-            }
+            return Ok(ApiResponse<object>.Ok(new { pedidoId }, "Pedido criado com sucesso"));
         }
 
         [HttpGet]
@@ -77,17 +68,11 @@ namespace TimDoLele.Controllers
         [HttpPut("{id}/status")]
         public async Task<IActionResult> AtualizarStatus(Guid id, [FromBody] StatusPedido status)
         {
-            try
-            {
-                await _pedidoService.AtualizarStatusAsync(id, status);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _pedidoService.AtualizarStatusAsync(id, status);
+            return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("dashboard")]
         public async Task<IActionResult> GetDashboard()
         {
@@ -102,9 +87,6 @@ namespace TimDoLele.Controllers
             var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
             var pedido = await _pedidoService.ObterPedidoPorIdAsync(id);
-
-            if (pedido == null)
-                return NotFound("Pedido não encontrado");
 
             if (!string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase))
             {
