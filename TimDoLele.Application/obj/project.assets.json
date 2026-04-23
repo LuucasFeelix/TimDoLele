@@ -4098,11 +4098,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projetos em desenvolvimento\\Projetos em C#\\TimDoLele\\TimDoLele.Application\\TimDoLele.Application.csproj",
+      "projectUniqueName": "D:\\Projetos em desenvolvimento\\Projetos\\TimDoLele\\TimDoLele.Application\\TimDoLele.Application.csproj",
       "projectName": "TimDoLele.Application",
-      "projectPath": "D:\\Projetos em desenvolvimento\\Projetos em C#\\TimDoLele\\TimDoLele.Application\\TimDoLele.Application.csproj",
+      "projectPath": "D:\\Projetos em desenvolvimento\\Projetos\\TimDoLele\\TimDoLele.Application\\TimDoLele.Application.csproj",
       "packagesPath": "C:\\Users\\Luuca\\.nuget\\packages\\",
-      "outputPath": "D:\\Projetos em desenvolvimento\\Projetos em C#\\TimDoLele\\TimDoLele.Application\\obj\\",
+      "outputPath": "D:\\Projetos em desenvolvimento\\Projetos\\TimDoLele\\TimDoLele.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4122,13 +4122,14 @@
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Projetos em desenvolvimento\\Projetos em C#\\TimDoLele\\Backend\\TimDolele.Core\\TimDolele.Core.csproj": {
-              "projectPath": "D:\\Projetos em desenvolvimento\\Projetos em C#\\TimDoLele\\Backend\\TimDolele.Core\\TimDolele.Core.csproj"
+            "D:\\Projetos em desenvolvimento\\Projetos\\TimDoLele\\Backend\\TimDolele.Core\\TimDolele.Core.csproj": {
+              "projectPath": "D:\\Projetos em desenvolvimento\\Projetos\\TimDoLele\\Backend\\TimDolele.Core\\TimDolele.Core.csproj"
             },
-            "D:\\Projetos em desenvolvimento\\Projetos em C#\\TimDoLele\\Backend\\TimDoLele.Infrastructure\\TimDoLele.Infrastructure.csproj": {
-              "projectPath": "D:\\Projetos em desenvolvimento\\Projetos em C#\\TimDoLele\\Backend\\TimDoLele.Infrastructure\\TimDoLele.Infrastructure.csproj"
+            "D:\\Projetos em desenvolvimento\\Projetos\\TimDoLele\\Backend\\TimDoLele.Infrastructure\\TimDoLele.Infrastructure.csproj": {
+              "projectPath": "D:\\Projetos em desenvolvimento\\Projetos\\TimDoLele\\Backend\\TimDoLele.Infrastructure\\TimDoLele.Infrastructure.csproj"
             }
           }
         }
@@ -4147,6 +4148,7 @@
     },
     "frameworks": {
       "net8.0": {
+        "framework": "net8.0",
         "targetAlias": "net8.0",
         "dependencies": {
           "BCrypt.Net-Next": {
@@ -4178,7 +4180,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gcg/ZmGbXhQ=",
+  "dgSpecHash": "3ncPbVUF8OE=",
   "success": true,
-  "projectFilePath": "D:\\Projetos em desenvolvimento\\Projetos em C#\\TimDoLele\\TimDoLele.Application\\TimDoLele.Application.csproj",
+  "projectFilePath": "D:\\Projetos em desenvolvimento\\Projetos\\TimDoLele\\TimDoLele.Application\\TimDoLele.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Luuca\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Luuca\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
