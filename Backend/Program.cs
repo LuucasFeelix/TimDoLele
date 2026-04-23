@@ -1,15 +1,15 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.Text;
 using TimDoLele.Application.Services;
-using TimDoLele.Infrastructure.Data;
-using Serilog;
-using TimDoLeLe.Middlewares;
-using FluentValidation;
-using FluentValidation.AspNetCore;
 using TimDoLele.Application.Validators;
+using TimDoLele.Infrastructure.Data;
+using TimDoLeLe.Middlewares;
 
 namespace TimDoLeLe
 {
@@ -36,7 +36,6 @@ namespace TimDoLeLe
                 builder.Services.AddValidatorsFromAssemblyContaining<CriarPedidoValidator>();
 
                 builder.Services.AddEndpointsApiExplorer();
-
                 builder.Services.AddSwaggerGen(options =>
                 {
                     options.SwaggerDoc("v1", new OpenApiInfo
@@ -49,11 +48,11 @@ namespace TimDoLeLe
                     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                     {
                         Name = "Authorization",
-                        Type = SecuritySchemeType.Http, 
-                        Scheme = "bearer",              
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "bearer",
                         BearerFormat = "JWT",
                         In = ParameterLocation.Header,
-                        Description = "Digite: seu token"
+                        Description = "Digite apenas o token"
                     });
 
                     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -70,6 +69,18 @@ namespace TimDoLeLe
                             new string[] {}
                         }
                     });
+                });
+
+                builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowAngular",
+                        policy =>
+                        {
+                            policy
+                                .WithOrigins("http://localhost:4200", "https://localhost:4200")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                        });
                 });
 
                 builder.Services.AddScoped<PedidoService>();
@@ -116,6 +127,8 @@ namespace TimDoLeLe
                         c.RoutePrefix = string.Empty;
                     });
                 }
+
+                app.UseCors("AllowAngular");
 
                 app.UseHttpsRedirection();
 
