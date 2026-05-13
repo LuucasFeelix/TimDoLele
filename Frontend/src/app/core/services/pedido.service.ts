@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class PedidoService {
 
   private api = 'https://localhost:57668/api/pedidos';
+  private cardapioApi = 'https://localhost:57668/api/cardapio';
 
   constructor(private http: HttpClient) {}
 
@@ -19,8 +20,10 @@ export class PedidoService {
   }
 
   criarPedido(dto: any) {
-
   return this.http.post<any>(this.api, dto);
+  }
 
+  getCardapio() {
+    return this.http.get<any>(this.cardapioApi);
   }
 }

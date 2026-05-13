@@ -13,6 +13,7 @@ namespace TimDolele.Core.Entities
         public string Email { get; private set; } = string.Empty;
         public string SenhaHash { get; private set; } = string.Empty;
         public string Role { get; private set; } = "User";
+        public Cliente? Cliente { get; private set; }
 
         public Usuarios(string email, string senhaHash, string role = "User")
         {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimDoLele.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TimDoLele.Infrastructure.Data;
 namespace TimDoLele.Infrastructure.Migrations
 {
     [DbContext(typeof(TimDoLeleDbContext))]
-    partial class TimDoLeleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260513041437_PedidoPublico")]
+    partial class PedidoPublico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,34 @@ namespace TimDoLele.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Cliente", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId")
+                        .IsUnique();
+
+                    b.ToTable("Clientes");
+                });
 
             modelBuilder.Entity("Pedido", b =>
                 {
@@ -53,11 +84,16 @@ namespace TimDoLele.Infrastructure.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("PagamentoId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Pedidos");
                 });
@@ -93,28 +129,6 @@ namespace TimDoLele.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categorias");
-                });
-
-            modelBuilder.Entity("TimDolele.Core.Entities.Cliente", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Observacao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("TimDolele.Core.Entities.ItemPedido", b =>
@@ -254,9 +268,6 @@ namespace TimDoLele.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ClienteId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -271,30 +282,17 @@ namespace TimDoLele.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClienteId");
-
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("Pedido", b =>
+            modelBuilder.Entity("Cliente", b =>
                 {
-                    b.HasOne("TimDolele.Core.Entities.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId")
+                    b.HasOne("TimDolele.Core.Entities.Usuarios", "Usuario")
+                        .WithOne("Cliente")
+                        .HasForeignKey("Cliente", "UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TimDolele.Core.Entities.Pagamento", "Pagamento")
-                        .WithMany()
-                        .HasForeignKey("PagamentoId");
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Pagamento");
-                });
-
-            modelBuilder.Entity("TimDolele.Core.Entities.Cliente", b =>
-                {
                     b.OwnsOne("TimDolele.Core.Entities.Endereco", "Endereco", b1 =>
                         {
                             b1.Property<Guid>("ClienteId")
@@ -333,6 +331,33 @@ namespace TimDoLele.Infrastructure.Migrations
 
                     b.Navigation("Endereco")
                         .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Pedido", b =>
+                {
+                    b.HasOne("Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TimDolele.Core.Entities.Pagamento", "Pagamento")
+                        .WithMany()
+                        .HasForeignKey("PagamentoId");
+
+                    b.HasOne("TimDolele.Core.Entities.Usuarios", "Usuarios")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Pagamento");
+
+                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("TimDolele.Core.Entities.ItemPedido", b =>
@@ -401,15 +426,6 @@ namespace TimDoLele.Infrastructure.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("TimDolele.Core.Entities.Usuarios", b =>
-                {
-                    b.HasOne("TimDolele.Core.Entities.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId");
-
-                    b.Navigation("Cliente");
-                });
-
             modelBuilder.Entity("Pedido", b =>
                 {
                     b.Navigation("Itens");
@@ -433,6 +449,11 @@ namespace TimDoLele.Infrastructure.Migrations
             modelBuilder.Entity("TimDolele.Core.Entities.Produto", b =>
                 {
                     b.Navigation("Adicionais");
+                });
+
+            modelBuilder.Entity("TimDolele.Core.Entities.Usuarios", b =>
+                {
+                    b.Navigation("Cliente");
                 });
 #pragma warning restore 612, 618
         }

@@ -14,7 +14,9 @@ namespace TimDoLeLe.Controllers
         private readonly AuthService _authService;
         private readonly TimDoLeleDbContext _context;
 
-        public AuthController(AuthService authService, TimDoLeleDbContext context)
+        public AuthController(
+            AuthService authService,
+            TimDoLeleDbContext context)
         {
             _authService = authService;
             _context = context;
@@ -23,32 +25,40 @@ namespace TimDoLeLe.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
         {
-            var token = await _authService.LoginAsync(dto.Email, dto.Senha);
+            var token = await _authService.LoginAsync(
+                dto.Email,
+                dto.Senha
+            );
 
             if (token == null)
                 return Unauthorized("Email ou senha inválidos");
 
-            return Ok(new { token });
+            return Ok(new
+            {
+                token
+            });
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(LoginDto dto)
         {
-            var existe = _context.Usuarios.Any(u => u.Email == dto.Email);
+            var existe = _context.Usuarios
+                .Any(u => u.Email == dto.Email);
+
             if (existe)
                 return BadRequest("Usuário já existe");
 
             var usuario = new Usuarios(
-            
                 dto.Email,
                 PasswordHelper.Hash(dto.Senha),
-                "Cliente"
+                "Admin"
             );
 
             _context.Usuarios.Add(usuario);
+
             await _context.SaveChangesAsync();
 
-            return Ok("Usuário criado com sucesso");
+            return Ok("Administrador criado com sucesso");
         }
     }
 }

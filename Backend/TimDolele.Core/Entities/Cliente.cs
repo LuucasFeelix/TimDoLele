@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TimDolele.Core.Entities
+﻿namespace TimDolele.Core.Entities
 {
     public class Cliente : BaseEntity
     {
@@ -13,7 +7,11 @@ namespace TimDolele.Core.Entities
         public Endereco Endereco { get; private set; }
         public string? Observacao { get; private set; }
 
-        private Cliente() { Nome = Telefone = string.Empty; }
+        private Cliente()
+        {
+            Nome = string.Empty;
+            Telefone = string.Empty;
+        }
 
         public Cliente(string nome, string telefone, Endereco endereco, string? observacao = null)
         {

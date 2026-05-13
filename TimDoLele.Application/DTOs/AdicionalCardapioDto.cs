@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace TimDoLele.Application.DTOs
 {
-    public class CriarPedidoDto
+    public class AdicionalCardapioDto
     {
+        public Guid Id { get; set; }
         public string Nome { get; set; }
-        public string Telefone { get; set; }
-        public string Endereco { get; set; }
-        public List<ItemPedidoDto> Itens { get; set; } = new();
+        public string Preco { get; set; }
     }
 }

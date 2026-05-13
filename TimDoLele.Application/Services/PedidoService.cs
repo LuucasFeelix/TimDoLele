@@ -17,15 +17,26 @@ namespace TimDoLele.Application.Services
             _context = context;
         }
 
-        public async Task<Guid> CriarPedidoAsync(CriarPedidoDto dto, Guid usuarioId)
+        public async Task<Guid> CriarPedidoAsync(CriarPedidoDto dto)
         {
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(c => c.Id == dto.ClienteId);
+            // cria cliente automaticamente
+            var cliente = new Cliente(
+                dto.Nome,
+                dto.Telefone,
+                new Endereco(
+                    dto.Endereco,
+                    "0",
+                    "",
+                    "",
+                    "",
+                    ""
+                )
+            );
 
-            if (cliente == null)
-                throw new NotFoundException("Cliente não encontrado");
+            await _context.Clientes.AddAsync(cliente);
+            await _context.SaveChangesAsync();
 
-            var pedido = new Pedido(cliente.Id, usuarioId);
+            var pedido = new Pedido(cliente.Id);
 
             foreach (var itemDto in dto.Itens)
             {
@@ -75,9 +86,6 @@ namespace TimDoLele.Application.Services
                     .ThenInclude(i => i.Adicionais)
                 .AsQueryable();
 
-            if (usuarioId.HasValue)
-                query = query.Where(p => p.UsuarioId == usuarioId.Value);
-
             if (clienteId.HasValue)
                 query = query.Where(p => p.ClienteId == clienteId.Value);
 
@@ -107,7 +115,6 @@ namespace TimDoLele.Application.Services
                 Delivery = p.Delivery,
                 Total = p.Total,
                 Status = p.Status.ToString(),
-                UsuarioId = p.UsuarioId,
 
                 Itens = p.Itens.Select(i => new ItemPedidoResponseDto
                 {
@@ -157,7 +164,6 @@ namespace TimDoLele.Application.Services
                 Delivery = pedido.Delivery,
                 Total = pedido.Total,
                 Status = pedido.Status.ToString(),
-                UsuarioId = pedido.UsuarioId,
 
                 Itens = pedido.Itens.Select(i => new ItemPedidoResponseDto
                 {

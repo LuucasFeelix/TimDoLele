@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimDoLele.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TimDoLele.Infrastructure.Data;
 namespace TimDoLele.Infrastructure.Migrations
 {
     [DbContext(typeof(TimDoLeleDbContext))]
-    partial class TimDoLeleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260513042407_RemoveUsuarioCliente")]
+    partial class RemoveUsuarioCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,11 +56,16 @@ namespace TimDoLele.Infrastructure.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("PagamentoId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Pedidos");
                 });
@@ -288,9 +296,17 @@ namespace TimDoLele.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("PagamentoId");
 
+                    b.HasOne("TimDolele.Core.Entities.Usuarios", "Usuarios")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Cliente");
 
                     b.Navigation("Pagamento");
+
+                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("TimDolele.Core.Entities.Cliente", b =>
