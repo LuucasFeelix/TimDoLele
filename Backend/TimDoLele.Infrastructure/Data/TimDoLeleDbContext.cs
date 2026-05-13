@@ -28,14 +28,17 @@ namespace TimDoLele.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Endereço embutido
             modelBuilder.Entity<Cliente>()
                 .OwnsOne(c => c.Endereco);
 
+            // Produto → Categoria
             modelBuilder.Entity<Produto>()
                 .HasOne(p => p.Categoria)
                 .WithMany(c => c.Produtos)
                 .HasForeignKey(p => p.CategoriaId);
 
+            // ProdutoAdicional
             modelBuilder.Entity<ProdutoAdicional>()
                 .HasOne(pa => pa.Produto)
                 .WithMany(p => p.Adicionais)
@@ -46,6 +49,7 @@ namespace TimDoLele.Infrastructure.Data
                 .WithMany(a => a.ProdutosAdicionais)
                 .HasForeignKey(pa => pa.AdicionalId);
 
+            // ItemPedidoAdicional
             modelBuilder.Entity<ItemPedidoAdicional>()
                 .HasOne(ipa => ipa.ItemPedido)
                 .WithMany(ip => ip.Adicionais)
@@ -55,12 +59,6 @@ namespace TimDoLele.Infrastructure.Data
                 .HasOne(ipa => ipa.Adicional)
                 .WithMany()
                 .HasForeignKey(ipa => ipa.AdicionalId);
-
-            modelBuilder.Entity<Pedido>()
-                .HasOne(p => p.Usuarios)
-                .WithMany()
-                .HasForeignKey(p => p.UsuarioId)
-                .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);
         }

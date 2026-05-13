@@ -36,7 +36,7 @@ namespace TimDoLeLe.Middlewares
 
                 context.Response.StatusCode = statusCode;
 
-                var response = ApiResponse<string>.Fail(ex.Message);
+                var response = ApiResponse<string>.Fail(ex.InnerException?.Message ?? ex.Message);
 
                 await context.Response.WriteAsync(
                     JsonSerializer.Serialize(response)

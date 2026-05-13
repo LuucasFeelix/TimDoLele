@@ -1528,3 +1528,46 @@ ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
 2026-04-23 01:55:59.371 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele) in 3.6658ms
 2026-04-23 01:55:59.372 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele)'
 2026-04-23 01:55:59.373 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/pedidos - 400 null application/problem+json; charset=utf-8 15.3559ms
+2026-04-23 15:37:05.624 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-23 15:37:06.145 -03:00 [INF] Now listening on: https://localhost:57668
+2026-04-23 15:37:06.147 -03:00 [INF] Now listening on: http://localhost:57669
+2026-04-23 15:37:06.274 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-23 15:37:06.275 -03:00 [INF] Hosting environment: Development
+2026-04-23 15:37:06.276 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-04-23 15:37:10.083 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-04-23 15:37:10.441 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 392.3158ms
+2026-04-23 15:37:10.454 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-23 15:37:10.452 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-04-23 15:37:10.456 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-04-23 15:37:10.472 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 17.9774ms
+2026-04-23 15:37:10.481 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 29.6124ms
+2026-04-23 15:37:10.584 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 128.1412ms
+2026-04-23 15:37:10.748 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-04-23 15:37:10.794 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 45.2214ms
+2026-04-23 15:39:15.166 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-04-23 15:39:15.194 -03:00 [INF] CORS policy execution successful.
+2026-04-23 15:39:15.198 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 32.2218ms
+2026-04-23 15:39:15.201 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/pedidos - application/json 22
+2026-04-23 15:39:15.206 -03:00 [INF] CORS policy execution successful.
+2026-04-23 15:39:17.614 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/04/2026 06:54:17', Current time (UTC): '23/04/2026 18:39:17'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-04-23 15:39:17.681 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/pedidos - application/json 22
+2026-04-23 15:39:17.711 -03:00 [INF] CORS policy execution successful.
+2026-04-23 15:39:17.713 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/04/2026 06:54:17', Current time (UTC): '23/04/2026 18:39:17'.
+2026-04-23 15:39:17.714 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/04/2026 06:54:17', Current time (UTC): '23/04/2026 18:39:17'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-04-23 15:39:17.718 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '23/04/2026 06:54:17', Current time (UTC): '23/04/2026 18:39:17'.
+2026-04-23 15:39:17.721 -03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-04-23 15:39:17.721 -03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-04-23 15:39:17.728 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-04-23 15:39:17.728 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-04-23 15:39:17.730 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/pedidos - 401 0 null 49.3845ms
+2026-04-23 15:39:17.730 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/pedidos - 401 0 null 2530.1558ms

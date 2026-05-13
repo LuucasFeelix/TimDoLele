@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TimDoLele.Application.DTOs;
 
 namespace TimDoLele.Application.Validators
@@ -13,10 +8,12 @@ namespace TimDoLele.Application.Validators
         public ItemPedidoValidator()
         {
             RuleFor(x => x.ProdutoId)
-                .NotEmpty().WithMessage("Produto é obrigatório");
+                .NotEmpty()
+                .WithMessage("Produto obrigatório.");
 
             RuleFor(x => x.Quantidade)
-                .GreaterThan(0).WithMessage("Quantidade deve ser maior que zero");
+                .GreaterThan(0)
+                .WithMessage("Quantidade deve ser maior que zero.");
         }
     }
 }
