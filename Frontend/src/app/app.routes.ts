@@ -1,20 +1,35 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { authGuard } from './core/guards/auth.guard';
+import { CardapioComponent } from './pages/cardapio/cardapio.component';
 import { CriarPedidoComponent } from './pedidos/criar/criar.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
-
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [authGuard]
+    path: '',
+    redirectTo: 'cardapio',
+    pathMatch: 'full',
   },
   {
-    path: 'criar-pedido',
+    path: 'cardapio',
+    component: CardapioComponent,
+  },
+  {
+    path: 'checkout',
     component: CriarPedidoComponent,
-    canActivate: [authGuard]
-  }
+  },
+  {
+    path: 'admin/login',
+    component: LoginComponent,
+  },
+  {
+    path: 'admin/dashboard',
+    component: DashboardComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: '**',
+    redirectTo: 'cardapio',
+  },
 ];
