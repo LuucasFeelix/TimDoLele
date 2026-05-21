@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { PedidoService } from '../../core/services/pedido.service';
 
 @Component({
@@ -8,123 +9,117 @@ import { PedidoService } from '../../core/services/pedido.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <h2>🍔 Criar Pedido</h2>
+    <h1>📦 Checkout</h1>
 
-    <label>Categoria:</label>
-    <select (change)="onCategoriaChange($event)">
-      <option value="">Selecione</option>
-      <option *ngFor="let c of cardapio" [value]="c.categoria">
-        {{ c.categoria }}
-      </option>
-    </select>
+    <div *ngFor="let item of carrinho">
 
-    <br><br>
+      <p>
+        {{ item.nome }}
+        -
+        Quantidade: {{ item.quantidade }}
+      </p>
 
-    <label>Produto:</label>
-    <select [(ngModel)]="produtoSelecionado">
-      <option *ngFor="let p of produtos" [ngValue]="p">
-        {{ p.nome }} - R$ {{ p.preco }}
-      </option>
-    </select>
-
-    <br><br>
-
-    <div *ngIf="produtoSelecionado">
-      <h4>Adicionais:</h4>
-
-      <div *ngFor="let a of produtoSelecionado.adicionais">
-        <input
-          type="checkbox"
-          (change)="toggleAdicional(a)"
-        />
-        {{ a.nome }} (+R$ {{ a.preco }})
-      </div>
     </div>
 
-    <br>
+    <hr>
 
-    <button (click)="criarPedido()">Finalizar Pedido</button>
+    <h2>👤 Dados do Cliente</h2>
+
+    <input
+      type="text"
+      [(ngModel)]="nome"
+      placeholder="Seu nome"
+    />
+
+    <br><br>
+
+    <input
+      type="text"
+      [(ngModel)]="telefone"
+      placeholder="Telefone"
+    />
+
+    <br><br>
+
+    <input
+      type="text"
+      [(ngModel)]="endereco"
+      placeholder="Endereço"
+    />
+
+    <br><br>
+
+    <button (click)="finalizarPedido()">
+      🚀 Confirmar Pedido
+    </button>
   `
 })
 export class CriarPedidoComponent implements OnInit {
 
-  cardapio: any[] = [];
-  produtos: any[] = [];
-  produtoSelecionado: any;
-  adicionaisSelecionados: any[] = [];
+  carrinho: any[] = [];
 
-  constructor(private pedidoService: PedidoService) {}
+  nome: string = '';
 
-  ngOnInit() {
-    this.pedidoService.getCardapio().subscribe({
-      next: (res) => {
-        console.log("Cardápio:", res);
-        this.cardapio = res;
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
-  }
+  telefone: string = '';
 
-  onCategoriaChange(event: any) {
-    const categoria = this.cardapio.find(
-      c => c.categoria === event.target.value
-    );
+  endereco: string = '';
 
-    this.produtos = categoria?.produtos || [];
-    this.produtoSelecionado = null;
-    this.adicionaisSelecionados = [];
-  }
+  constructor(
+    private pedidoService: PedidoService
+  ) {}
 
-  toggleAdicional(adicional: any) {
-    const existe = this.adicionaisSelecionados.find(
-      a => a.id === adicional.id
-    );
+  ngOnInit(): void {
 
-    if (existe) {
-      this.adicionaisSelecionados =
-        this.adicionaisSelecionados.filter(
-          a => a.id !== adicional.id
-        );
-    } else {
-      this.adicionaisSelecionados.push(adicional);
+    const carrinhoStorage =
+      localStorage.getItem('carrinho');
+
+    if (carrinhoStorage) {
+
+      this.carrinho =
+        JSON.parse(carrinhoStorage);
     }
   }
 
-  criarPedido() {
-
-    if (!this.produtoSelecionado) {
-      alert("Selecione um produto");
-      return;
-    }
+  finalizarPedido(): void {
 
     const dto = {
-      clienteId:'02F607EE-1B60-4443-9379-BF8538780947',
-      itens: [
-        {
-         produtoId: this.produtoSelecionado.id,
-          quantidade: 1,
-         adicionais: this.adicionaisSelecionados.map((a: any) => ({
-            adicionalId: a.id
-          }))
-        }
-      ]
+
+      nome: this.nome,
+
+      telefone: this.telefone,
+
+      endereco: this.endereco,
+
+      itens: this.carrinho.map(item => ({
+
+        produtoId: item.id,
+
+        quantidade: item.quantidade,
+
+        adicionais: []
+      }))
     };
 
-    console.log("Pedido enviado:", dto);
+    console.log(dto);
 
-    this.pedidoService.criarPedido(dto).subscribe({
-      next: (res) => {
-        console.log("Pedido criado:", res);
-        alert("Pedido criado com sucesso!");
-      },
-      error: (err) => {
-        console.error("Erro detalhado:", err);
-        console.log("Status:", err.status);
-        console.log("Resposta backend:", err.error);
-        alert("Erro ao criar pedido");
-      }
-    });
+    this.pedidoService.criarPedido(dto)
+      .subscribe({
+
+        next: () => {
+
+          alert('Pedido realizado com sucesso! 🎉');
+
+          localStorage.removeItem('carrinho');
+
+          window.location.href = '/cardapio';
+        },
+
+        error: (err) => {
+
+          console.error(err);
+
+          alert('Erro ao finalizar pedido');
+        }
+      });
   }
 }
