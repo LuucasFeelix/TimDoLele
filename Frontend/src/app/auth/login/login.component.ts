@@ -14,15 +14,24 @@ export class LoginComponent {
   email: string = '';
   senha: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-login() {
-  this.authService.login(this.email, this.senha).subscribe({
-    next: (response: any) => {
-      localStorage.setItem('token', response.token);
+  login() {
+    this.authService.login(this.email, this.senha).subscribe({
+      next: (response: any) => {
+        console.log('Login OK:', response);
 
-      this.router.navigate(['/dashboard']);
-    }
-  });
+        localStorage.setItem('token', response.token);
+
+        this.router.navigate(['/admin/dashboard']);
+      },
+      error: (err) => {
+        console.error('Erro no login:', err);
+        alert('Email ou senha inválidos');
+      }
+    });
   }
 }
