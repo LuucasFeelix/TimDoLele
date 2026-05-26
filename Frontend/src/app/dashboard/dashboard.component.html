@@ -4,29 +4,17 @@
   🔄 Atualizar pedidos
 </button>
 
-<p *ngIf="loading">
-  Carregando pedidos...
-</p>
+<p *ngIf="loading">Carregando pedidos...</p>
 
 <div *ngIf="!loading && pedidos.length === 0">
   Nenhum pedido encontrado.
 </div>
 
-<div
-  *ngFor="let pedido of pedidos"
-  style="
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin-top: 15px;
-    border-radius: 8px;
-  "
->
+<div *ngFor="let pedido of pedidos" style="border:1px solid #ccc; padding:15px; margin-top:15px; border-radius:8px;">
   <h2>Pedido #{{ pedido.codigo }}</h2>
 
   <p><b>Cliente:</b> {{ pedido.nomeCliente }}</p>
-
   <p><b>Status:</b> {{ pedido.status }}</p>
-
   <p><b>Total:</b> R$ {{ pedido.total }}</p>
 
   <h3>Itens</h3>
@@ -44,4 +32,24 @@
       </li>
     </ul>
   </div>
+
+  <hr>
+
+  <h3>Ações</h3>
+
+  <button *ngIf="isPendente(pedido)" (click)="alterarStatus(pedido.id, 1)">
+    👨‍🍳 Em preparo
+  </button>
+
+  <button *ngIf="isEmPreparo(pedido)" (click)="alterarStatus(pedido.id, 2)">
+    🛵 Saiu para entrega
+  </button>
+
+  <button *ngIf="isSaiuParaEntrega(pedido)" (click)="alterarStatus(pedido.id, 3)">
+    ✅ Entregue
+  </button>
+
+  <button *ngIf="podeCancelar(pedido)" (click)="alterarStatus(pedido.id, 4)">
+    ❌ Cancelar
+  </button>
 </div>
