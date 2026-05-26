@@ -1,1 +1,94 @@
-<p>cardapio works!</p>
+<h1>🍔 Cardápio</h1>
+
+<div *ngFor="let cat of cardapio">
+
+  <h2>{{ cat.categoria }}</h2>
+
+  <div
+    style="
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    "
+  >
+
+    <div
+      *ngFor="let p of cat.produtos"
+      style="
+        border:1px solid #ccc;
+        padding:10px;
+        width:250px;
+        border-radius:8px;
+      "
+    >
+
+      <h3>{{ p.nome }}</h3>
+
+      <p>💰 R$ {{ p.preco }}</p>
+
+      <button (click)="abrirProduto(p)">
+        ➕ Adicionar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<hr>
+
+<h2>🛒 Carrinho</h2>
+
+<div *ngFor="let item of carrinho">
+
+  <p>
+
+    <b>{{ item.nome }}</b>
+
+    x{{ item.quantidade }}
+
+  </p>
+
+  <div *ngIf="item.adicionais?.length > 0">
+
+    <small>Adicionais:</small>
+
+    <ul>
+
+      <li *ngFor="let adicional of item.adicionais">
+
+        {{ adicional.nome }}
+        (+R$ {{ adicional.preco }})
+
+      </li>
+
+    </ul>
+
+  </div>
+
+  <div *ngIf="item.observacao">
+
+    <small>
+
+      Obs:
+      {{ item.observacao }}
+
+    </small>
+
+  </div>
+
+  <hr>
+
+</div>
+
+<button (click)="irCheckout()">
+  🔥 Finalizar Pedido
+</button>
+
+<app-produto-modal
+  *ngIf="produtoSelecionado"
+  [produto]="produtoSelecionado"
+  (fechar)="fecharModal()"
+  (adicionar)="adicionarAoCarrinho($event)">
+</app-produto-modal>

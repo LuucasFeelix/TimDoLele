@@ -1,0 +1,59 @@
+<div
+  style="
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  "
+>
+  <div
+    style="
+      background: white;
+      padding: 20px;
+      width: 400px;
+      border-radius: 10px;
+    "
+  >
+    <h2>{{ produto.nome }}</h2>
+
+    <p>💰 R$ {{ produto.preco }}</p>
+
+    <label>
+      Quantidade:
+      <input type="number" min="1" [(ngModel)]="quantidade" />
+    </label>
+
+    <br><br>
+
+    <div *ngIf="produto.adicionais?.length > 0">
+      <p><b>Adicionais:</b></p>
+
+      <div *ngFor="let adicional of produto.adicionais">
+        <label>
+          <input type="checkbox" (change)="toggleAdicional(adicional)" />
+          {{ adicional.nome }} (+R$ {{ adicional.preco }})
+        </label>
+      </div>
+    </div>
+
+    <br>
+
+    <textarea
+      rows="3"
+      style="width:100%;"
+      [(ngModel)]="observacao"
+      placeholder="Observações">
+    </textarea>
+
+    <br><br>
+
+    <button (click)="confirmar()">✅ Adicionar</button>
+
+    <button style="margin-left:10px;" (click)="fechar.emit()">
+      ❌ Cancelar
+    </button>
+  </div>
+</div>
