@@ -1,0 +1,72 @@
+<h1>📦 Checkout</h1>
+
+<div *ngFor="let item of carrinho">
+
+  <p>
+
+    <b>{{ item.nome }}</b>
+
+    x{{ item.quantidade }}
+
+  </p>
+
+  <div *ngIf="item.adicionais?.length > 0">
+
+    <small>Adicionais:</small>
+
+    <ul>
+
+      <li *ngFor="let adicional of item.adicionais">
+
+        {{ adicional.nome }}
+
+      </li>
+
+    </ul>
+
+  </div>
+
+  <div *ngIf="item.observacao">
+
+    <small>
+
+      Obs:
+      {{ item.observacao }}
+
+    </small>
+
+  </div>
+
+  <hr>
+
+</div>
+
+<h2>👤 Dados do Cliente</h2>
+
+<input
+  type="text"
+  [(ngModel)]="nome"
+  placeholder="Seu nome"
+/>
+
+<br><br>
+
+<input
+  type="text"
+  [(ngModel)]="telefone"
+  placeholder="Telefone"
+/>
+
+<br><br>
+
+<input
+  type="text"
+  [(ngModel)]="endereco"
+  placeholder="Endereço"
+/>
+
+<br><br>
+
+<button (click)="finalizarPedido()">
+  🚀 Confirmar Pedido
+</button>

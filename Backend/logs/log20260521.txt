@@ -519,3 +519,33 @@ ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
 2026-05-21 14:42:27.832 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 23.0141ms
 2026-05-21 14:42:27.834 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
 2026-05-21 14:42:27.834 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 39.4412ms
+2026-05-21 14:57:07.112 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-05-21 14:57:07.123 -03:00 [INF] CORS policy execution successful.
+2026-05-21 14:57:07.124 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 12.2126ms
+2026-05-21 14:57:07.127 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-05-21 14:57:07.134 -03:00 [INF] CORS policy execution successful.
+2026-05-21 14:57:07.135 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '14/05/2026 22:57:27', Current time (UTC): '21/05/2026 17:57:07'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-05-21 14:57:07.140 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '14/05/2026 22:57:27', Current time (UTC): '21/05/2026 17:57:07'.
+2026-05-21 14:57:07.141 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-21 14:57:07.142 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-05-21 14:57:07.160 -03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-05-21 14:57:07.162 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-21 14:57:07.164 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 20.1841ms
+2026-05-21 14:57:07.165 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-21 14:57:07.166 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 39.5534ms

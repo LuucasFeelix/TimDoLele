@@ -1,77 +1,18 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PedidoService } from '../../core/services/pedido.service';
+import { ProdutoModalComponent } from '../produto-modal/produto-modal.component';
 
 @Component({
   selector: 'app-cardapio',
   standalone: true,
-  imports: [CommonModule, RouterModule],
-  template: `
-    <h1>🍔 Cardápio</h1>
-
-  <div *ngFor="let categoria of cardapio">
-
-    <h2>{{ categoria.categoria }}</h2>
-
-    <div
-      style="
-        display:flex;
-        gap:20px;
-        flex-wrap:wrap;
-      "
-    >
-
-      <div
-        *ngFor="let produto of categoria.produtos"
-        style="
-          border:1px solid #ccc;
-          border-radius:10px;
-          padding:15px;
-          width:250px;
-        "
-      >
-
-        <h3>{{ produto.nome }}</h3>
-
-        <p>
-          💰 R$ {{ produto.preco }}
-        </p>
-
-        <button
-          (click)="adicionarCarrinho(produto)"
-        >
-          ➕ Adicionar
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <hr>
-
-  <h2>🛒 Carrinho</h2>
-
-  <div *ngIf="carrinho.length === 0">
-    Nenhum item no carrinho
-  </div>
-
-  <div *ngFor="let item of carrinho">
-
-    <p>
-      {{ item.nome }}
-      -
-      Quantidade: {{ item.quantidade }}
-    </p>
-
-  </div>
-
-  <button (click)="irCheckout()">
-    🔥 Finalizar Pedido
-  </button>
-  `,
+  imports: [
+    CommonModule,
+    RouterModule,
+    ProdutoModalComponent
+  ],
+  templateUrl: './cardapio.component.html'
 })
 export class CardapioComponent implements OnInit {
 
@@ -79,57 +20,64 @@ export class CardapioComponent implements OnInit {
 
   carrinho: any[] = [];
 
+  produtoSelecionado: any = null;
+
   constructor(
     private pedidoService: PedidoService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-
     this.carregarCardapio();
   }
 
   carregarCardapio(): void {
 
-this.pedidoService.getCardapio().subscribe({
+    this.pedidoService.getCardapio().subscribe({
 
-    next: (res: any) => {
+      next: (res: any) => {
 
-      console.log('RESPOSTA API:', res);
+        console.log('RESPOSTA API:', res);
 
-      this.cardapio = [...res];
+        this.cardapio = [...res];
 
-      this.cdr.detectChanges();
+        this.cdr.detectChanges();
+      },
 
-      console.log('CARDAPIO:', this.cardapio);
-    },
-
-    error: (err: any) => {
-
-      console.error(err);
-    },
+      error: (err: any) => {
+        console.error(err);
+      }
     });
   }
 
-  adicionarCarrinho(produto: any): void {
+  abrirProduto(produto: any): void {
+    this.produtoSelecionado = produto;
+  }
+
+  fecharModal(): void {
+    this.produtoSelecionado = null;
+  }
+
+  adicionarAoCarrinho(item: any): void {
 
     const itemExistente = this.carrinho.find(
-      x => x.id === produto.id
+      x =>
+        x.produtoId === item.produtoId &&
+        JSON.stringify(x.adicionais)
+          === JSON.stringify(item.adicionais) &&
+        x.observacao === item.observacao
     );
 
     if (itemExistente) {
 
-      itemExistente.quantidade++;
+      itemExistente.quantidade += item.quantidade;
 
     } else {
 
-      this.carrinho.push({
-
-        ...produto,
-
-        quantidade: 1
-      });
+      this.carrinho.push(item);
     }
+
+    this.produtoSelecionado = null;
   }
 
   irCheckout(): void {
