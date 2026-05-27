@@ -1,0 +1,156 @@
+:root {
+
+  /* CORES */
+  --primary: #FFD428;
+  --primary-dark: #e6bc16;
+
+  --secondary: #E30613;
+
+  --success: #25D366;
+
+  --background: #F7F7F7;
+
+  --text: #1E1E1E;
+
+  --white: #FFFFFF;
+
+  --border: #ECECEC;
+
+  /* TIPOGRAFIA */
+  --font: 'Poppins', sans-serif;
+
+  /* RADIUS */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* SHADOW */
+  --shadow:
+    0 4px 12px rgba(0,0,0,.08);
+
+  /* ESPAÇAMENTOS */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+
+  background: var(--background);
+
+  color: var(--text);
+
+  font-family: var(--font);
+}
+
+button {
+
+  border: none;
+
+  cursor: pointer;
+
+  font-family: var(--font);
+}
+
+input,
+textarea,
+select {
+
+  width: 100%;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-sm);
+
+  padding: 12px;
+
+  outline: none;
+
+  font-size: 14px;
+}
+
+.card {
+
+  background: var(--white);
+
+  border-radius: var(--radius-md);
+
+  box-shadow: var(--shadow);
+}
+
+.primary-button {
+
+  background: var(--secondary);
+
+  color: white;
+
+  border-radius: var(--radius-sm);
+
+  padding: 14px 18px;
+
+  font-weight: 600;
+}
+
+.secondary-button {
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-sm);
+
+  padding: 14px 18px;
+}
+
+.status-pendente {
+
+  background: #FFE082;
+
+  color: #5F4B00;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.status-preparo {
+
+  background: #FF9800;
+
+  color: white;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.status-entregue {
+
+  background: #25D366;
+
+  color: white;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}

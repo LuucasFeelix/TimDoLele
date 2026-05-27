@@ -1,59 +1,86 @@
-<div
-  style="
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  "
->
-  <div
-    style="
-      background: white;
-      padding: 20px;
-      width: 400px;
-      border-radius: 10px;
-    "
-  >
-    <h2>{{ produto.nome }}</h2>
+<div class="overlay" (click)="fechar.emit()">
 
-    <p>💰 R$ {{ produto.preco }}</p>
+  <div class="modal card" (click)="$event.stopPropagation()">
 
-    <label>
-      Quantidade:
-      <input type="number" min="1" [(ngModel)]="quantidade" />
-    </label>
+    <div class="modal-header">
+      <h2>{{ produto?.nome }}</h2>
 
-    <br><br>
+      <button type="button" (click)="fechar.emit()">
+        ✕
+      </button>
+    </div>
 
-    <div *ngIf="produto.adicionais?.length > 0">
-      <p><b>Adicionais:</b></p>
+    <div class="produto-banner">
+      🍔
+    </div>
 
-      <div *ngFor="let adicional of produto.adicionais">
-        <label>
-          <input type="checkbox" (change)="toggleAdicional(adicional)" />
-          {{ adicional.nome }} (+R$ {{ adicional.preco }})
-        </label>
+    <p class="descricao">
+      Hambúrguer artesanal preparado com ingredientes selecionados.
+    </p>
+
+    <div
+      *ngIf="produto?.adicionais?.length > 0"
+      class="adicionais"
+    >
+      <h3>Adicionais</h3>
+
+      <div
+        *ngFor="let adicional of produto.adicionais"
+        class="adicional-item"
+      >
+        <div class="adicional-left">
+          <label>
+            <input
+              type="checkbox"
+              (change)="toggleAdicional(adicional)"
+            >
+
+            <span>{{ adicional.nome }}</span>
+          </label>
+        </div>
+
+        <strong>
+          +R$ {{ adicional.preco }}
+        </strong>
       </div>
     </div>
 
-    <br>
+    <div class="obs-area">
+      <h3>Observação</h3>
 
-    <textarea
-      rows="3"
-      style="width:100%;"
-      [(ngModel)]="observacao"
-      placeholder="Observações">
-    </textarea>
+      <textarea
+        [(ngModel)]="observacao"
+        placeholder="Ex: sem cebola..."
+      ></textarea>
+    </div>
 
-    <br><br>
+    <div class="quantidade-area">
+      <button type="button" (click)="diminuirQuantidade()">
+        -
+      </button>
 
-    <button (click)="confirmar()">✅ Adicionar</button>
+      <span>{{ quantidade }}</span>
 
-    <button style="margin-left:10px;" (click)="fechar.emit()">
-      ❌ Cancelar
-    </button>
+      <button type="button" (click)="aumentarQuantidade()">
+        +
+      </button>
+    </div>
+
+    <div class="footer">
+      <div class="total">
+        Total:
+        <strong>R$ {{ calcularTotal() }}</strong>
+      </div>
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="confirmar()"
+      >
+        Adicionar
+      </button>
+    </div>
+
   </div>
+
 </div>

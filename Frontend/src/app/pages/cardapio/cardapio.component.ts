@@ -1,7 +1,8 @@
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PedidoService } from '../../core/services/pedido.service';
+
 import { ProdutoModalComponent } from '../produto-modal/produto-modal.component';
 
 @Component({
@@ -12,7 +13,8 @@ import { ProdutoModalComponent } from '../produto-modal/produto-modal.component'
     RouterModule,
     ProdutoModalComponent
   ],
-  templateUrl: './cardapio.component.html'
+  templateUrl: './cardapio.component.html',
+  styleUrls: ['./cardapio.component.css']
 })
 export class CardapioComponent implements OnInit {
 
@@ -25,7 +27,7 @@ export class CardapioComponent implements OnInit {
   constructor(
     private pedidoService: PedidoService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.carregarCardapio();
@@ -64,7 +66,7 @@ export class CardapioComponent implements OnInit {
       x =>
         x.produtoId === item.produtoId &&
         JSON.stringify(x.adicionais)
-          === JSON.stringify(item.adicionais) &&
+        === JSON.stringify(item.adicionais) &&
         x.observacao === item.observacao
     );
 
@@ -95,5 +97,76 @@ export class CardapioComponent implements OnInit {
     );
 
     window.location.href = '/checkout';
+  }
+
+  aumentarQuantidade(item: any): void {
+
+    item.quantidade++;
+  }
+
+  diminuirQuantidade(item: any): void {
+
+    if (item.quantidade > 1) {
+
+      item.quantidade--;
+
+    } else {
+
+      this.removerItem(item);
+    }
+  }
+
+  removerItem(item: any): void {
+
+    this.carrinho =
+      this.carrinho.filter(x => x !== item);
+  }
+
+  calcularTotal(): string {
+
+    let total = 0;
+
+    this.carrinho.forEach(item => {
+
+      let subtotal =
+        Number(item.preco.replace(',', '.'));
+
+      item.adicionais?.forEach((a: any) => {
+
+        subtotal += Number(
+          a.preco.replace(',', '.')
+        );
+      });
+
+      total += subtotal * item.quantidade;
+    });
+
+    return total
+      .toFixed(2)
+      .replace('.', ',');
+  }
+
+  calcularItemTotal(item: any): string {
+    let total = Number(item.preco.replace(',', '.'));
+
+    item.adicionais?.forEach((a: any) => {
+      total += Number(a.preco.replace(',', '.'));
+    });
+
+    total *= item.quantidade;
+
+    return total
+      .toFixed(2)
+      .replace('.', ',');
+  }
+
+  calcularTotalComEntrega(): string {
+    const subtotal = Number(
+      this.calcularTotal().replace(',', '.')
+    );
+
+    return (subtotal + 5)
+      .toFixed(2)
+      .replace('.', ',');
   }
 }
