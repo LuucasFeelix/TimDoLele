@@ -1,0 +1,168 @@
+2026-05-27 00:09:47.832 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-05-27 00:09:47.852 -03:00 [INF] CORS policy execution successful.
+2026-05-27 00:09:47.877 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 45.4346ms
+2026-05-27 00:09:47.881 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-05-27 00:09:47.904 -03:00 [INF] CORS policy execution successful.
+2026-05-27 00:09:47.950 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 00:09:47.951 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-05-27 00:09:48.165 -03:00 [INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-05-27 00:09:48.171 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 00:09:48.172 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 216.7987ms
+2026-05-27 00:09:48.173 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 00:09:48.174 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 293.4796ms
+2026-05-27 00:10:07.285 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-05-27 00:10:07.291 -03:00 [INF] CORS policy execution successful.
+2026-05-27 00:10:07.292 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 6.831ms
+2026-05-27 00:47:56.963 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-05-27 00:47:56.971 -03:00 [INF] CORS policy execution successful.
+2026-05-27 00:47:56.972 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 9.1637ms
+2026-05-27 00:47:56.975 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-05-27 00:47:56.978 -03:00 [INF] CORS policy execution successful.
+2026-05-27 00:47:56.980 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 00:47:56.981 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-05-27 00:47:57.093 -03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-05-27 00:47:57.097 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 00:47:57.099 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 115.7008ms
+2026-05-27 00:47:57.100 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 00:47:57.101 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 126.218ms
+2026-05-27 00:48:13.967 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-05-27 00:48:13.977 -03:00 [INF] CORS policy execution successful.
+2026-05-27 00:48:13.979 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 11.9066ms
+2026-05-27 00:48:13.984 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-05-27 00:48:13.993 -03:00 [INF] CORS policy execution successful.
+2026-05-27 00:48:13.995 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 00:48:13.998 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-05-27 00:48:14.005 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-05-27 00:48:14.008 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 00:48:14.009 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 7.1957ms
+2026-05-27 00:48:14.010 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 00:48:14.012 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 27.2897ms
+2026-05-27 01:01:32.972 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-05-27 01:01:32.981 -03:00 [INF] CORS policy execution successful.
+2026-05-27 01:01:32.982 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 10.4132ms
+2026-05-27 01:01:32.989 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-05-27 01:01:32.997 -03:00 [INF] CORS policy execution successful.
+2026-05-27 01:01:32.999 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 01:01:33.000 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-05-27 01:01:33.117 -03:00 [INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-05-27 01:01:33.120 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 01:01:33.122 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 119.8064ms
+2026-05-27 01:01:33.124 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 01:01:33.126 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 136.9335ms
+2026-05-27 01:01:34.451 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-05-27 01:01:34.468 -03:00 [INF] CORS policy execution successful.
+2026-05-27 01:01:34.469 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 01:01:34.473 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-05-27 01:01:34.494 -03:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-05-27 01:01:34.497 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 01:01:34.499 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 22.9064ms
+2026-05-27 01:01:34.500 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 01:01:34.502 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 50.8527ms
+2026-05-27 01:01:48.333 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-05-27 01:01:48.344 -03:00 [INF] CORS policy execution successful.
+2026-05-27 01:01:48.346 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 13.6504ms
+2026-05-27 01:01:48.349 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-05-27 01:01:48.358 -03:00 [INF] CORS policy execution successful.
+2026-05-27 01:01:48.359 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 01:01:48.360 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-05-27 01:01:48.382 -03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-05-27 01:01:48.385 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 01:01:48.386 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 22.8902ms
+2026-05-27 01:01:48.387 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 01:01:48.388 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 39.4474ms
+2026-05-27 01:31:38.306 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-05-27 01:31:38.309 -03:00 [INF] CORS policy execution successful.
+2026-05-27 01:31:38.310 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 4.0382ms
+2026-05-27 01:31:38.316 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-05-27 01:31:38.319 -03:00 [INF] CORS policy execution successful.
+2026-05-27 01:31:38.322 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 01:31:38.327 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-05-27 01:31:38.453 -03:00 [INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-05-27 01:31:38.455 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-27 01:31:38.457 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 127.6289ms
+2026-05-27 01:31:38.459 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-05-27 01:31:38.460 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 144.4659ms
