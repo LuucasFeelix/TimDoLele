@@ -1,0 +1,46 @@
+<div class="confirmacao-page">
+
+  <div class="confirmacao-card card">
+
+    <div class="success-icon">
+      ✅
+    </div>
+
+    <h1>Pedido enviado com sucesso!</h1>
+
+    <p>
+      Seu pedido foi recebido e em breve será preparado.
+    </p>
+
+    <div class="info-box">
+      <span>Número do pedido</span>
+      <strong>#{{ pedido?.codigo }}</strong>
+    </div>
+
+    <div class="info-box">
+      <span>Previsão de entrega</span>
+      <strong>40 a 60 min</strong>
+    </div>
+
+    <div class="info-box">
+      <span>Total</span>
+      <strong>R$ {{ pedido?.total }}</strong>
+    </div>
+
+    <button
+      class="whatsapp-button"
+      (click)="falarWhatsapp()"
+    >
+      💬 Falar no WhatsApp
+    </button>
+
+    <button
+      class="secondary-button voltar-button"
+      (click)="voltarCardapio()"
+    >
+      Voltar para o cardápio
+    </button>
+
+  </div>
+
+</div>

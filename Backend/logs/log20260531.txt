@@ -1,0 +1,16 @@
+2026-05-31 02:30:52.281 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-31 02:30:52.990 -03:00 [INF] Now listening on: https://localhost:57668
+2026-05-31 02:30:53.032 -03:00 [INF] Now listening on: http://localhost:57669
+2026-05-31 02:30:53.261 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-31 02:30:53.294 -03:00 [INF] Hosting environment: Development
+2026-05-31 02:30:53.295 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-05-31 02:30:58.398 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-05-31 02:30:59.210 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 830.266ms
+2026-05-31 02:30:59.299 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-05-31 02:30:59.313 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-05-31 02:30:59.316 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-05-31 02:30:59.337 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 21.2125ms
+2026-05-31 02:30:59.395 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 96.0013ms
+2026-05-31 02:30:59.603 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 289.9259ms
+2026-05-31 02:30:59.766 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-05-31 02:30:59.832 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 66.6156ms
