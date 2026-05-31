@@ -1,0 +1,72 @@
+.confirmacao-page {
+  min-height: 100vh;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.confirmacao-card {
+  width: 420px;
+  max-width: 100%;
+  background: white;
+  padding: 32px;
+  text-align: center;
+  border-radius: var(--radius-lg);
+}
+
+.success-icon {
+  width: 110px;
+  height: 110px;
+  background: #fff6c7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 58px;
+}
+
+.confirmacao-card h1 {
+  color: var(--secondary);
+  margin-bottom: 12px;
+}
+
+.confirmacao-card p {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.info-box {
+  background: #fff8e1;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.info-box span {
+  display: block;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.info-box strong {
+  font-size: 22px;
+  color: var(--secondary);
+}
+
+.whatsapp-button {
+  width: 100%;
+  background: var(--success);
+  color: white;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.voltar-button {
+  width: 100%;
+  margin-top: 12px;
+}

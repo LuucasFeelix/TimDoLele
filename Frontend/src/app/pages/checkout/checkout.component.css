@@ -1,0 +1,133 @@
+.checkout-page {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.checkout-header {
+  background: var(--primary);
+  height: 90px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: var(--shadow);
+}
+
+.checkout-header h1 {
+  color: var(--secondary);
+  font-size: 26px;
+}
+
+.checkout-header p {
+  font-size: 14px;
+}
+
+.voltar-button {
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  font-weight: 600;
+}
+
+.checkout-content {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 24px;
+  padding: 32px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.pedido-card,
+.dados-card {
+  padding: 24px;
+}
+
+.pedido-card h2,
+.dados-card h2 {
+  margin-bottom: 20px;
+}
+
+.pedido-item {
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+}
+
+.pedido-item-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pedido-item-top div {
+  display: flex;
+  gap: 10px;
+}
+
+.item-price {
+  color: var(--secondary);
+}
+
+.pedido-item ul {
+  padding-left: 20px;
+  margin-top: 8px;
+  color: #666;
+}
+
+.pedido-item small {
+  display: block;
+  margin-top: 8px;
+  color: #777;
+}
+
+.resumo {
+  margin-top: 24px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.resumo div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.resumo .total {
+  font-size: 22px;
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.dados-card {
+  height: fit-content;
+}
+
+.dados-card label {
+  display: block;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.dados-card input {
+  margin-top: 8px;
+}
+
+.confirmar-button {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.empty {
+  color: #777;
+}
+
+@media (max-width: 900px) {
+  .checkout-content {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .checkout-header {
+    padding: 0 20px;
+  }
+}

@@ -1,72 +1,130 @@
-<h1>📦 Checkout</h1>
+<div class="checkout-page">
 
-<div *ngFor="let item of carrinho">
+  <header class="checkout-header">
 
-  <p>
+    <button
+      class="voltar-button"
+      (click)="voltarCardapio()"
+    >
+      ← Voltar
+    </button>
 
-    <b>{{ item.nome }}</b>
+    <div>
+      <h1>Finalizar Pedido</h1>
+      <p>Confira seu pedido e preencha seus dados</p>
+    </div>
 
-    x{{ item.quantidade }}
+  </header>
 
-  </p>
+  <main class="checkout-content">
 
-  <div *ngIf="item.adicionais?.length > 0">
+    <section class="pedido-card card">
 
-    <small>Adicionais:</small>
+      <h2>🛒 Seu pedido</h2>
 
-    <ul>
+      <div
+        *ngIf="carrinho.length === 0"
+        class="empty"
+      >
+        Seu carrinho está vazio.
+      </div>
 
-      <li *ngFor="let adicional of item.adicionais">
+      <div
+        *ngFor="let item of carrinho"
+        class="pedido-item"
+      >
 
-        {{ adicional.nome }}
+        <div class="pedido-item-top">
 
-      </li>
+          <div>
+            <strong>
+              {{ item.nome }}
+            </strong>
 
-    </ul>
+            <span>
+              x{{ item.quantidade }}
+            </span>
+          </div>
 
-  </div>
+          <strong class="item-price">
+            R$ {{ calcularItemTotal(item) }}
+          </strong>
 
-  <div *ngIf="item.observacao">
+        </div>
 
-    <small>
+        <ul *ngIf="item.adicionais?.length > 0">
+          <li *ngFor="let adicional of item.adicionais">
+            + {{ adicional.nome }}
+          </li>
+        </ul>
 
-      Obs:
-      {{ item.observacao }}
+        <small *ngIf="item.observacao">
+          Obs: {{ item.observacao }}
+        </small>
 
-    </small>
+      </div>
 
-  </div>
+      <div class="resumo">
 
-  <hr>
+        <div>
+          <span>Subtotal</span>
+          <strong>R$ {{ calcularSubtotal() }}</strong>
+        </div>
+
+        <div>
+          <span>Taxa de entrega</span>
+          <strong>R$ 5,00</strong>
+        </div>
+
+        <div class="total">
+          <span>Total</span>
+          <strong>R$ {{ calcularTotal() }}</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="dados-card card">
+
+      <h2>👤 Dados do cliente</h2>
+
+      <label>
+        Nome
+        <input
+          type="text"
+          [(ngModel)]="nome"
+          placeholder="Digite seu nome"
+        />
+      </label>
+
+      <label>
+        Telefone
+        <input
+          type="text"
+          [(ngModel)]="telefone"
+          placeholder="(16) 99999-9999"
+        />
+      </label>
+
+      <label>
+        Endereço
+        <input
+          type="text"
+          [(ngModel)]="endereco"
+          placeholder="Rua, número, bairro"
+        />
+      </label>
+
+      <button
+        class="primary-button confirmar-button"
+        (click)="finalizarPedido()"
+      >
+        🚀 Confirmar Pedido
+      </button>
+
+    </section>
+
+  </main>
 
 </div>
-
-<h2>👤 Dados do Cliente</h2>
-
-<input
-  type="text"
-  [(ngModel)]="nome"
-  placeholder="Seu nome"
-/>
-
-<br><br>
-
-<input
-  type="text"
-  [(ngModel)]="telefone"
-  placeholder="Telefone"
-/>
-
-<br><br>
-
-<input
-  type="text"
-  [(ngModel)]="endereco"
-  placeholder="Endereço"
-/>
-
-<br><br>
-
-<button (click)="finalizarPedido()">
-  🚀 Confirmar Pedido
-</button>
