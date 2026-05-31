@@ -1,0 +1,39 @@
+<div class="login-page">
+
+  <div class="login-card card">
+
+    <div class="brand">
+      <div class="logo">🍔</div>
+
+      <h1>TIM DO LELÊ</h1>
+      <p>Acesso exclusivo</p>
+    </div>
+
+    <label>
+      E-mail
+      <input
+        type="email"
+        [(ngModel)]="email"
+        placeholder="Digite seu e-mail"
+      />
+    </label>
+
+    <label>
+      Senha
+      <input
+        type="password"
+        [(ngModel)]="senha"
+        placeholder="Digite sua senha"
+      />
+    </label>
+
+    <button
+      class="primary-button login-button"
+      (click)="login()"
+    >
+      Entrar
+    </button>
+
+  </div>
+
+</div>

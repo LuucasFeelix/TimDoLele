@@ -1,0 +1,91 @@
+<div class="admin-page">
+
+  <header class="admin-header">
+    <div>
+      <h1>Categorias</h1>
+      <p>Gerencie as categorias do cardápio</p>
+    </div>
+
+    <button
+      class="secondary-button"
+      routerLink="/admin/dashboard"
+    >
+      Voltar
+    </button>
+  </header>
+
+  <section class="form-card card">
+
+    <h2>
+      {{ editandoId ? 'Editar categoria' : 'Nova categoria' }}
+    </h2>
+
+    <div class="form-row">
+      <input
+        type="text"
+        [(ngModel)]="nome"
+        placeholder="Nome da categoria"
+      />
+
+      <button
+        class="primary-button"
+        (click)="salvar()"
+      >
+        {{ editandoId ? 'Atualizar' : 'Cadastrar' }}
+      </button>
+
+      <button
+        *ngIf="editandoId"
+        class="secondary-button"
+        (click)="limparFormulario()"
+      >
+        Cancelar
+      </button>
+    </div>
+
+  </section>
+
+  <section class="list-card card">
+
+    <h2>Lista de categorias</h2>
+
+    <p *ngIf="loading">
+      Carregando...
+    </p>
+
+    <div
+      *ngIf="!loading && categorias.length === 0"
+      class="empty"
+    >
+      Nenhuma categoria cadastrada.
+    </div>
+
+    <div
+      *ngFor="let categoria of categorias"
+      class="categoria-item"
+    >
+      <div>
+        <strong>{{ categoria.nome }}</strong>
+        <small>{{ categoria.id }}</small>
+      </div>
+
+      <div class="actions">
+        <button
+          class="secondary-button"
+          (click)="editar(categoria)"
+        >
+          Editar
+        </button>
+
+        <button
+          class="danger-button"
+          (click)="excluir(categoria)"
+        >
+          Excluir
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+</div>
