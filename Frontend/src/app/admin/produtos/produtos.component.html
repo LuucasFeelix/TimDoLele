@@ -1,0 +1,141 @@
+<div class="admin-page">
+
+  <header class="admin-header">
+    <div>
+      <h1>Produtos</h1>
+      <p>Gerencie os produtos do cardápio</p>
+    </div>
+
+    <a
+      class="secondary-button"
+      routerLink="/admin/dashboard"
+    >
+      Voltar
+    </a>
+  </header>
+
+  <section class="form-card card">
+
+    <h2>
+      {{ editandoId ? 'Editar produto' : 'Novo produto' }}
+    </h2>
+
+    <div class="form-grid">
+
+      <input
+        type="text"
+        [(ngModel)]="nome"
+        placeholder="Nome do produto"
+      />
+
+      <input
+        type="number"
+        [(ngModel)]="preco"
+        placeholder="Preço"
+      />
+
+      <select [(ngModel)]="categoriaId">
+        <option value="">Selecione a categoria</option>
+
+        <option
+          *ngFor="let categoria of categorias"
+          [value]="categoria.id"
+        >
+          {{ categoria.nome }}
+        </option>
+      </select>
+
+      <input
+        type="text"
+        [(ngModel)]="descricao"
+        placeholder="Descrição"
+      />
+
+    </div>
+
+    <div class="form-actions">
+      <button
+        class="primary-button"
+        (click)="salvar()"
+      >
+        {{ editandoId ? 'Atualizar' : 'Cadastrar' }}
+      </button>
+
+      <button
+        *ngIf="editandoId"
+        class="secondary-button"
+        (click)="limparFormulario()"
+      >
+        Cancelar
+      </button>
+    </div>
+
+  </section>
+
+  <section class="list-card card">
+
+    <h2>Lista de produtos</h2>
+
+    <p *ngIf="loading">Carregando...</p>
+
+    <div
+      *ngIf="!loading && produtos.length === 0"
+      class="empty"
+    >
+      Nenhum produto cadastrado.
+    </div>
+
+    <div
+      *ngFor="let produto of produtos"
+      class="produto-item"
+    >
+      <div>
+        <strong>{{ produto.nome }}</strong>
+
+        <small>
+          {{ produto.categoria }} • R$ {{ produto.preco }}
+        </small>
+
+        <p *ngIf="produto.descricao">
+          {{ produto.descricao }}
+        </p>
+      </div>
+
+      <div class="produto-status">
+        <span
+          [class.ativo]="produto.ativo"
+          [class.inativo]="!produto.ativo"
+        >
+          {{ produto.ativo ? 'Ativo' : 'Inativo' }}
+        </span>
+      </div>
+
+      <div class="actions">
+        <button
+          class="secondary-button"
+          (click)="editar(produto)"
+        >
+          Editar
+        </button>
+
+        <button
+          *ngIf="produto.ativo"
+          class="danger-button"
+          (click)="desativar(produto)"
+        >
+          Desativar
+        </button>
+
+        <button
+          *ngIf="!produto.ativo"
+          class="primary-button"
+          (click)="ativar(produto)"
+        >
+          Ativar
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+</div>

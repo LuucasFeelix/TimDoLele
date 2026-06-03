@@ -6,6 +6,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { authGuard } from './core/guards/auth.guard';
 import { ConfirmacaoComponent } from './pages/confirmacao/confirmacao.component';
 import { CategoriasComponent } from './admin/categorias/categorias.component';
+import { ProdutosComponent } from './admin/produtos/produtos.component';
 
 export const routes: Routes = [
   {
@@ -30,13 +31,18 @@ export const routes: Routes = [
     component: Dashboard,
     canActivate: [authGuard],
   },
-    {
+  {
     path: 'confirmacao',
     component: ConfirmacaoComponent,
   },
   {
     path: 'admin/categorias',
     component: CategoriasComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'admin/produtos',
+    component: ProdutosComponent,
     canActivate: [authGuard],
   },
   {
