@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TimDolele.Core.Entities
 {
@@ -25,6 +23,19 @@ namespace TimDolele.Core.Entities
             CategoriaId = categoriaId;
             Descricao = descricao;
             Ativo = true;
+        }
+
+        public void AlterarDados(
+            string nome,
+            decimal preco,
+            Guid categoriaId,
+            string? descricao = null
+        )
+        {
+            Nome = nome;
+            Preco = preco;
+            CategoriaId = categoriaId;
+            Descricao = descricao;
         }
 
         public void AlterarPreco(decimal preco)
