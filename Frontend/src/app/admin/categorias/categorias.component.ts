@@ -2,13 +2,15 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoriaService } from '../../core/services/categoria.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-categorias',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   templateUrl: './categorias.component.html',
   styleUrls: ['./categorias.component.css']
@@ -41,7 +43,7 @@ export class CategoriasComponent implements OnInit {
         this.loading = false;
         this.cdr.detectChanges();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error(err);
         this.loading = false;
       }
@@ -66,7 +68,7 @@ export class CategoriasComponent implements OnInit {
             this.limparFormulario();
             this.carregarCategorias();
           },
-          error: (err) => {
+          error: (err: any) => {
             console.error(err);
             alert('Erro ao atualizar categoria.');
           }
@@ -82,7 +84,7 @@ export class CategoriasComponent implements OnInit {
           this.limparFormulario();
           this.carregarCategorias();
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
           alert('Erro ao criar categoria.');
         }
@@ -109,7 +111,7 @@ export class CategoriasComponent implements OnInit {
           alert('Categoria excluída!');
           this.carregarCategorias();
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
           alert('Erro ao excluir categoria. Verifique se ela possui produtos vinculados.');
         }
