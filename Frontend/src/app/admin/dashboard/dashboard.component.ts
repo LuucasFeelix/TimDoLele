@@ -1,11 +1,15 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { PedidoService } from '../../core/services/pedido.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    RouterModule
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
@@ -29,9 +33,6 @@ export class Dashboard implements OnInit {
     this.pedidoService.getPedidos().subscribe({
       next: (res: any) => {
         this.pedidos = res.data ?? res;
-
-        console.log('PEDIDOS:', this.pedidos);
-
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -69,7 +70,6 @@ export class Dashboard implements OnInit {
 
   podeCancelar(pedido: any): boolean {
     const status = String(pedido.status).trim();
-
     return status !== 'Entregue' && status !== 'Cancelado';
   }
 }

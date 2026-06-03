@@ -8,9 +8,9 @@
     </div>
 
     <nav>
-      <a class="active">📊 Dashboard</a>
-      <a href="/admin/categorias">📁 Categorias</a>
-      <a>🍔 Produtos</a>
+      <a routerLink="/admin/dashboard" class="active">📊 Dashboard</a>
+      <a routerLink="/admin/categorias">📁 Categorias</a>
+      <a routerLink="/admin/produtos">🍔 Produtos</a>
       <a>➕ Adicionais</a>
       <a>📋 Pedidos</a>
       <a>📈 Relatórios</a>
@@ -53,26 +53,18 @@
     </section>
 
     <section class="orders card">
-
       <h2>Pedidos recentes</h2>
 
       <p *ngIf="loading">Carregando pedidos...</p>
 
-      <div *ngIf="!loading && pedidos.length === 0" class="empty">
-        Nenhum pedido encontrado.
-      </div>
-
       <div *ngFor="let pedido of pedidos" class="order-item">
-
         <div class="order-header">
           <div>
             <h3>Pedido #{{ pedido.codigo }}</h3>
             <p>{{ pedido.nomeCliente }}</p>
           </div>
 
-          <span class="status">
-            {{ pedido.status }}
-          </span>
+          <span class="status">{{ pedido.status }}</span>
         </div>
 
         <div class="order-body">
@@ -102,9 +94,7 @@
             </button>
           </div>
         </div>
-
       </div>
-
     </section>
 
   </main>
