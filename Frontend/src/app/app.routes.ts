@@ -9,6 +9,7 @@ import { CategoriasComponent } from './admin/categorias/categorias.component';
 import { ProdutosComponent } from './admin/produtos/produtos.component';
 import { AdicionaisComponent } from './admin/adicionais/adicionais.component';
 import { PedidosComponent } from './admin/pedidos/pedidos.component';
+import { RelatoriosComponent } from './admin/relatorios/relatorios.component';
 
 
 export const routes: Routes = [
@@ -57,6 +58,11 @@ export const routes: Routes = [
     path: 'admin/pedidos',
     component: PedidosComponent,
     canActivate: [authGuard],
+  },
+  {
+    path: 'admin/relatorios',
+    component: RelatoriosComponent,
+    canActivate: [authGuard]
   },
   {
     path: '**',
