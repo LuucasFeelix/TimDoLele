@@ -1,0 +1,43 @@
+<div class="admin-layout">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="logo">🍔</div>
+      <h2>Tim do Lelê</h2>
+      <span>Admin</span>
+    </div>
+
+    <nav>
+      <a routerLink="/admin/dashboard" routerLinkActive="active">
+        📊 Dashboard
+      </a>
+
+      <a routerLink="/admin/categorias" routerLinkActive="active">
+        📁 Categorias
+      </a>
+
+      <a routerLink="/admin/produtos" routerLinkActive="active">
+        🍔 Produtos
+      </a>
+
+      <a routerLink="/admin/adicionais" routerLinkActive="active">
+        ➕ Adicionais
+      </a>
+
+      <a routerLink="/admin/pedidos" routerLinkActive="active">
+        📋 Pedidos
+      </a>
+
+      <a routerLink="/admin/relatorios" routerLinkActive="active">
+        📈 Relatórios
+      </a>
+    </nav>
+
+  </aside>
+
+  <main class="admin-content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

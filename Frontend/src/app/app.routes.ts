@@ -10,7 +10,7 @@ import { ProdutosComponent } from './admin/produtos/produtos.component';
 import { AdicionaisComponent } from './admin/adicionais/adicionais.component';
 import { PedidosComponent } from './admin/pedidos/pedidos.component';
 import { RelatoriosComponent } from './admin/relatorios/relatorios.component';
-
+import { AdminLayoutComponent } from './admin/layout/admin-layout/admin-layout.component';
 
 export const routes: Routes = [
   {
@@ -27,46 +27,51 @@ export const routes: Routes = [
     component: CheckoutComponent,
   },
   {
-    path: 'admin/login',
-    component: Login,
-  },
-  {
-    path: 'admin/dashboard',
-    component: Dashboard,
-    canActivate: [authGuard],
-  },
-  {
     path: 'confirmacao',
     component: ConfirmacaoComponent,
   },
   {
-    path: 'admin/categorias',
-    component: CategoriasComponent,
+    path: 'admin/login',
+    component: Login,
+  },
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
     canActivate: [authGuard],
-  },
-  {
-    path: 'admin/produtos',
-    component: ProdutosComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'admin/adicionais',
-    component: AdicionaisComponent,
-    canActivate: [authGuard]
-  },
-  {
-    path: 'admin/pedidos',
-    component: PedidosComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'admin/relatorios',
-    component: RelatoriosComponent,
-    canActivate: [authGuard]
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        component: Dashboard,
+      },
+      {
+        path: 'categorias',
+        component: CategoriasComponent,
+      },
+      {
+        path: 'produtos',
+        component: ProdutosComponent,
+      },
+      {
+        path: 'adicionais',
+        component: AdicionaisComponent,
+      },
+      {
+        path: 'pedidos',
+        component: PedidosComponent,
+      },
+      {
+        path: 'relatorios',
+        component: RelatoriosComponent,
+      },
+    ],
   },
   {
     path: '**',
     redirectTo: 'cardapio',
   },
-
 ];

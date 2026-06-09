@@ -1,102 +1,77 @@
-<div class="admin-layout">
+<header class="page-header">
+  <div>
+    <h1>Dashboard</h1>
+    <p>Controle os pedidos da lanchonete</p>
+  </div>
 
-  <aside class="sidebar">
-    <div class="brand">
-      <div class="logo">🍔</div>
-      <h2>Tim do Lelê</h2>
-      <span>Admin</span>
+  <button class="primary-button" (click)="carregarPedidos()">
+    🔄 Atualizar
+  </button>
+</header>
+
+<section class="cards">
+  <div class="stat-card card">
+    <span>Total de pedidos</span>
+    <strong>{{ pedidos.length }}</strong>
+  </div>
+
+  <div class="stat-card card">
+    <span>Pendentes</span>
+    <strong>{{ pedidos.filter(isPendente).length }}</strong>
+  </div>
+
+  <div class="stat-card card">
+    <span>Em preparo</span>
+    <strong>{{ pedidos.filter(isEmPreparo).length }}</strong>
+  </div>
+
+  <div class="stat-card card">
+    <span>Saiu entrega</span>
+    <strong>{{ pedidos.filter(isSaiuParaEntrega).length }}</strong>
+  </div>
+</section>
+
+<section class="orders card">
+  <h2>Pedidos recentes</h2>
+
+  <p *ngIf="loading">Carregando pedidos...</p>
+
+  <div *ngFor="let pedido of pedidos" class="order-item">
+    <div class="order-header">
+      <div>
+        <h3>Pedido #{{ pedido.codigo }}</h3>
+        <p>{{ pedido.nomeCliente }}</p>
+      </div>
+
+      <span class="status">{{ pedido.status }}</span>
     </div>
 
-    <nav>
-      <a routerLink="/admin/dashboard" class="active">📊 Dashboard</a>
-      <a routerLink="/admin/categorias">📁 Categorias</a>
-      <a routerLink="/admin/produtos">🍔 Produtos</a>
-      <a routerLink="/admin/adicionais">➕ Adicionais</a>
-      <a routerLink="/admin/pedidos">📋 Pedidos</a>
-      <a routerLink="/admin/relatorios">📈 Relatórios</a>
-    </nav>
-  </aside>
-
-  <main class="admin-content">
-
-    <header class="page-header">
-      <div>
-        <h1>Dashboard</h1>
-        <p>Controle os pedidos da lanchonete</p>
+    <div class="order-body">
+      <div *ngFor="let item of pedido.itens">
+        🍔 {{ item.quantidade }}x {{ item.produtoNome }}
       </div>
+    </div>
 
-      <button class="primary-button" (click)="carregarPedidos()">
-        🔄 Atualizar
-      </button>
-    </header>
+    <div class="order-footer">
+      <strong>R$ {{ pedido.total }}</strong>
 
-    <section class="cards">
-      <div class="stat-card card">
-        <span>Total de pedidos</span>
-        <strong>{{ pedidos.length }}</strong>
+      <div class="actions">
+        <button *ngIf="isPendente(pedido)" (click)="alterarStatus(pedido.id, 1)">
+          Em preparo
+        </button>
+
+        <button *ngIf="isEmPreparo(pedido)" (click)="alterarStatus(pedido.id, 2)">
+          Saiu entrega
+        </button>
+
+        <button *ngIf="isSaiuParaEntrega(pedido)" (click)="alterarStatus(pedido.id, 3)">
+          Entregue
+        </button>
+
+        <button *ngIf="podeCancelar(pedido)" class="danger" (click)="alterarStatus(pedido.id, 4)">
+          Cancelar
+        </button>
       </div>
-
-      <div class="stat-card card">
-        <span>Pendentes</span>
-        <strong>{{ pedidos.filter(isPendente).length }}</strong>
-      </div>
-
-      <div class="stat-card card">
-        <span>Em preparo</span>
-        <strong>{{ pedidos.filter(isEmPreparo).length }}</strong>
-      </div>
-
-      <div class="stat-card card">
-        <span>Saiu entrega</span>
-        <strong>{{ pedidos.filter(isSaiuParaEntrega).length }}</strong>
-      </div>
-    </section>
-
-    <section class="orders card">
-      <h2>Pedidos recentes</h2>
-
-      <p *ngIf="loading">Carregando pedidos...</p>
-
-      <div *ngFor="let pedido of pedidos" class="order-item">
-        <div class="order-header">
-          <div>
-            <h3>Pedido #{{ pedido.codigo }}</h3>
-            <p>{{ pedido.nomeCliente }}</p>
-          </div>
-
-          <span class="status">{{ pedido.status }}</span>
-        </div>
-
-        <div class="order-body">
-          <div *ngFor="let item of pedido.itens">
-            🍔 {{ item.quantidade }}x {{ item.produtoNome }}
-          </div>
-        </div>
-
-        <div class="order-footer">
-          <strong>R$ {{ pedido.total }}</strong>
-
-          <div class="actions">
-            <button *ngIf="isPendente(pedido)" (click)="alterarStatus(pedido.id, 1)">
-              Em preparo
-            </button>
-
-            <button *ngIf="isEmPreparo(pedido)" (click)="alterarStatus(pedido.id, 2)">
-              Saiu entrega
-            </button>
-
-            <button *ngIf="isSaiuParaEntrega(pedido)" (click)="alterarStatus(pedido.id, 3)">
-              Entregue
-            </button>
-
-            <button *ngIf="podeCancelar(pedido)" class="danger" (click)="alterarStatus(pedido.id, 4)">
-              Cancelar
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-</div>
+    </div>
+  </div>
+</section>

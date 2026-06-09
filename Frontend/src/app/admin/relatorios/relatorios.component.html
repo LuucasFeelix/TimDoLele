@@ -1,43 +1,39 @@
-<div class="admin-page">
+<header class="admin-header">
+  <div>
+    <h1>Relatórios</h1>
+    <p>Indicadores da lanchonete</p>
+  </div>
+</header>
 
-  <header class="admin-header">
-    <div>
-      <h1>Relatórios</h1>
-      <p>Indicadores da lanchonete</p>
-    </div>
-  </header>
+<section class="cards">
 
-  <section class="cards">
+  <div class="card">
+    <span>Total pedidos</span>
+    <strong>{{ totalPedidos }}</strong>
+  </div>
 
-    <div class="card">
-      <span>Total pedidos</span>
-      <strong>{{ totalPedidos }}</strong>
-    </div>
+  <div class="card">
+    <span>Entregues</span>
+    <strong>{{ totalEntregues }}</strong>
+  </div>
 
-    <div class="card">
-      <span>Entregues</span>
-      <strong>{{ totalEntregues }}</strong>
-    </div>
+  <div class="card">
+    <span>Cancelados</span>
+    <strong>{{ totalCancelados }}</strong>
+  </div>
 
-    <div class="card">
-      <span>Cancelados</span>
-      <strong>{{ totalCancelados }}</strong>
-    </div>
+  <div class="card">
+    <span>Faturamento</span>
+    <strong>
+      R$ {{ faturamento.toFixed(2) }}
+    </strong>
+  </div>
 
-    <div class="card">
-      <span>Faturamento</span>
-      <strong>
-        R$ {{ faturamento.toFixed(2) }}
-      </strong>
-    </div>
+  <div class="card">
+    <span>Ticket médio</span>
+    <strong>
+      R$ {{ ticketMedio.toFixed(2) }}
+    </strong>
+  </div>
 
-    <div class="card">
-      <span>Ticket médio</span>
-      <strong>
-        R$ {{ ticketMedio.toFixed(2) }}
-      </strong>
-    </div>
-
-  </section>
-
-</div>
+</section>
