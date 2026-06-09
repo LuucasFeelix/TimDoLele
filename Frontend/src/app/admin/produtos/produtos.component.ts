@@ -2,8 +2,9 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { produtoService } from '../../core/services/produto.service';
+import { ProdutoService } from '../../core/services/produto.service';
 import { CategoriaService } from '../../core/services/categoria.service';
+import { AdicionalService } from '../../core/services/adicional.service';
 
 @Component({
   selector: 'app-produtos',
@@ -16,6 +17,7 @@ export class ProdutosComponent implements OnInit {
 
   produtos: any[] = [];
   categorias: any[] = [];
+  adicionais: any[] = [];
 
   nome = '';
   descricao = '';
@@ -25,15 +27,21 @@ export class ProdutosComponent implements OnInit {
   editandoId: string | null = null;
   loading = false;
 
+  produtoSelecionado: any = null;
+  adicionaisProduto: any[] = [];
+  modalAdicionaisAberto = false;
+
   constructor(
-    private produtoService: produtoService,
+    private produtoService: ProdutoService,
     private categoriaService: CategoriaService,
+    private adicionalService: AdicionalService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.carregarCategorias();
     this.carregarProdutos();
+    this.carregarAdicionais();
   }
 
   carregarCategorias(): void {
@@ -59,6 +67,16 @@ export class ProdutosComponent implements OnInit {
         console.error(err);
         this.loading = false;
       }
+    });
+  }
+
+  carregarAdicionais(): void {
+    this.adicionalService.getAdicionais().subscribe({
+      next: (res: any[]) => {
+        this.adicionais = res;
+        this.cdr.detectChanges();
+      },
+      error: (err: any) => console.error(err)
     });
   }
 
@@ -124,6 +142,68 @@ export class ProdutosComponent implements OnInit {
       next: () => this.carregarProdutos(),
       error: (err: any) => console.error(err)
     });
+  }
+
+  abrirModalAdicionais(produto: any): void {
+    this.produtoSelecionado = produto;
+    this.modalAdicionaisAberto = true;
+
+    this.produtoService.getAdicionaisProduto(produto.id).subscribe({
+      next: (res: any[]) => {
+        this.adicionaisProduto = res;
+        this.cdr.detectChanges();
+      },
+      error: (err: any) => console.error(err)
+    });
+  }
+
+  fecharModalAdicionais(): void {
+    this.produtoSelecionado = null;
+    this.adicionaisProduto = [];
+    this.modalAdicionaisAberto = false;
+  }
+
+  adicionalEstaVinculado(adicional: any): boolean {
+    return this.adicionaisProduto.some(
+      a => a.id === adicional.id
+    );
+  }
+
+  toggleAdicional(adicional: any): void {
+    if (!this.produtoSelecionado) {
+      return;
+    }
+
+    if (this.adicionalEstaVinculado(adicional)) {
+      this.produtoService
+        .removerAdicional(this.produtoSelecionado.id, adicional.id)
+        .subscribe({
+          next: () => {
+            this.adicionaisProduto = this.adicionaisProduto.filter(
+              a => a.id !== adicional.id
+            );
+
+            this.cdr.detectChanges();
+          },
+          error: (err: any) => console.error(err)
+        });
+
+      return;
+    }
+
+    this.produtoService
+      .vincularAdicional(this.produtoSelecionado.id, adicional.id)
+      .subscribe({
+        next: () => {
+          this.adicionaisProduto = [
+            ...this.adicionaisProduto,
+            adicional
+          ];
+
+          this.cdr.detectChanges();
+        },
+        error: (err: any) => console.error(err)
+      });
   }
 
   limparFormulario(): void {
