@@ -1,0 +1,84 @@
+<div class="admin-page">
+
+  <header class="admin-header">
+
+    <div>
+      <h1>Adicionais</h1>
+      <p>Gerencie os adicionais</p>
+    </div>
+
+    <button
+      class="secondary-button"
+      routerLink="/admin/dashboard">
+      Voltar
+    </button>
+
+  </header>
+
+  <section class="form-card card">
+
+    <h2>
+      {{ editandoId ? 'Editar adicional' : 'Novo adicional' }}
+    </h2>
+
+    <div class="form-row">
+
+      <input
+        [(ngModel)]="nome"
+        placeholder="Nome do adicional"
+      />
+
+      <input
+        type="number"
+        [(ngModel)]="preco"
+        placeholder="Preço"
+      />
+
+      <button
+        class="primary-button"
+        (click)="salvar()"
+      >
+        {{ editandoId ? 'Atualizar' : 'Cadastrar' }}
+      </button>
+
+    </div>
+
+  </section>
+
+  <section class="list-card card">
+
+    <h2>Lista de adicionais</h2>
+
+    <div
+      *ngFor="let adicional of adicionais"
+      class="categoria-item"
+    >
+
+      <div>
+        <strong>{{ adicional.nome }}</strong>
+        <small>R$ {{ adicional.preco }}</small>
+      </div>
+
+      <div class="actions">
+
+        <button
+          class="secondary-button"
+          (click)="editar(adicional)"
+        >
+          Editar
+        </button>
+
+        <button
+          class="danger-button"
+          (click)="excluir(adicional)"
+        >
+          Excluir
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

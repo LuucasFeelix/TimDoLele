@@ -7,6 +7,8 @@ import { authGuard } from './core/guards/auth.guard';
 import { ConfirmacaoComponent } from './pages/confirmacao/confirmacao.component';
 import { CategoriasComponent } from './admin/categorias/categorias.component';
 import { ProdutosComponent } from './admin/produtos/produtos.component';
+import { AdicionaisComponent } from './admin/adicionais/adicionais.component';
+
 
 export const routes: Routes = [
   {
@@ -44,6 +46,11 @@ export const routes: Routes = [
     path: 'admin/produtos',
     component: ProdutosComponent,
     canActivate: [authGuard],
+  },
+  {
+    path: 'admin/adicionais',
+    component: AdicionaisComponent,
+    canActivate: [authGuard]
   },
   {
     path: '**',

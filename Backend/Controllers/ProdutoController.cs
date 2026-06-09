@@ -149,6 +149,85 @@ namespace TimDoLeLe.Controllers
 
             return Ok();
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("{id}/adicionais")]
+        public async Task<IActionResult> GetAdicionais(Guid id)
+        {
+            var produto = await _context.Produtos
+                .Include(p => p.Adicionais)
+                    .ThenInclude(pa => pa.Adicional)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (produto == null)
+                return NotFound("Produto não encontrado.");
+
+            var adicionais = produto.Adicionais
+                .Select(pa => new
+                {
+                    pa.Adicional.Id,
+                    pa.Adicional.Nome,
+                    pa.Adicional.Preco
+                })
+                .OrderBy(a => a.Nome)
+                .ToList();
+
+            return Ok(adicionais);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("{id}/adicionais/{adicionalId}")]
+        public async Task<IActionResult> VincularAdicional(Guid id, Guid adicionalId)
+        {
+            var produtoExiste = await _context.Produtos
+                .AnyAsync(p => p.Id == id);
+
+            if (!produtoExiste)
+                return NotFound("Produto não encontrado.");
+
+            var adicionalExiste = await _context.Adicionais
+                .AnyAsync(a => a.Id == adicionalId);
+
+            if (!adicionalExiste)
+                return NotFound("Adicional não encontrado.");
+
+            var jaExiste = await _context.ProdutosAdicionais
+                .AnyAsync(pa =>
+                    pa.ProdutoId == id &&
+                    pa.AdicionalId == adicionalId
+                );
+
+            if (jaExiste)
+                return BadRequest("Adicional já vinculado a este produto.");
+
+            var produtoAdicional = new ProdutoAdicional(id, adicionalId);
+
+            _context.ProdutosAdicionais.Add(produtoAdicional);
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}/adicionais/{adicionalId}")]
+        public async Task<IActionResult> RemoverAdicional(Guid id, Guid adicionalId)
+        {
+            var produtoAdicional = await _context.ProdutosAdicionais
+                .FirstOrDefaultAsync(pa =>
+                    pa.ProdutoId == id &&
+                    pa.AdicionalId == adicionalId
+                );
+
+            if (produtoAdicional == null)
+                return NotFound("Vínculo não encontrado.");
+
+            _context.ProdutosAdicionais.Remove(produtoAdicional);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 
     public class CriarProdutoDto

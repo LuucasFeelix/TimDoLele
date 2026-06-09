@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TimDolele.Core.Entities
 {
@@ -20,5 +17,10 @@ namespace TimDolele.Core.Entities
             Preco = preco;
         }
 
+        public void AlterarDados(string nome, decimal preco)
+        {
+            Nome = nome;
+            Preco = preco;
+        }
     }
 }

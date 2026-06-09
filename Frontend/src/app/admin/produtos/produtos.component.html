@@ -119,6 +119,13 @@
         </button>
 
         <button
+          class="secondary-button"
+          (click)="abrirModalAdicionais(produto)"
+        >
+          Adicionais
+        </button>
+
+        <button
           *ngIf="produto.ativo"
           class="danger-button"
           (click)="desativar(produto)"
@@ -138,4 +145,51 @@
 
   </section>
 
+</div>
+
+<div
+  class="modal-overlay"
+  *ngIf="modalAdicionaisAberto"
+>
+  <div class="modal-card card">
+
+    <header class="modal-header">
+      <div>
+        <h2>Adicionais</h2>
+        <p>{{ produtoSelecionado?.nome }}</p>
+      </div>
+
+      <button
+        class="secondary-button"
+        (click)="fecharModalAdicionais()"
+      >
+        Fechar
+      </button>
+    </header>
+
+    <div
+      *ngIf="adicionais.length === 0"
+      class="empty"
+    >
+      Nenhum adicional cadastrado.
+    </div>
+
+    <div
+      *ngFor="let adicional of adicionais"
+      class="adicional-check"
+    >
+      <label>
+        <input
+          type="checkbox"
+          [checked]="adicionalEstaVinculado(adicional)"
+          (change)="toggleAdicional(adicional)"
+        />
+
+        <span>
+          {{ adicional.nome }} - R$ {{ adicional.preco }}
+        </span>
+      </label>
+    </div>
+
+  </div>
 </div>
