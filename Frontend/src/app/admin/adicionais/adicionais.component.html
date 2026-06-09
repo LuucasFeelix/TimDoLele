@@ -1,84 +1,80 @@
-<div class="admin-page">
+<header class="admin-header">
+  <div>
+    <h1>Adicionais</h1>
+    <p>Gerencie os adicionais</p>
+  </div>
+</header>
 
-  <header class="admin-header">
+<section class="form-card card">
 
-    <div>
-      <h1>Adicionais</h1>
-      <p>Gerencie os adicionais</p>
-    </div>
+  <h2>
+    {{ editandoId ? 'Editar adicional' : 'Novo adicional' }}
+  </h2>
+
+  <div class="form-row">
+
+    <input
+      [(ngModel)]="nome"
+      placeholder="Nome do adicional"
+    />
+
+    <input
+      type="number"
+      [(ngModel)]="preco"
+      placeholder="Preço"
+    />
 
     <button
-      class="secondary-button"
-      routerLink="/admin/dashboard">
-      Voltar
+      class="primary-button"
+      (click)="salvar()"
+    >
+      {{ editandoId ? 'Atualizar' : 'Cadastrar' }}
     </button>
 
-  </header>
+    <button
+      *ngIf="editandoId"
+      class="secondary-button"
+      (click)="limparFormulario()"
+    >
+      Cancelar
+    </button>
 
-  <section class="form-card card">
+  </div>
 
-    <h2>
-      {{ editandoId ? 'Editar adicional' : 'Novo adicional' }}
-    </h2>
+</section>
 
-    <div class="form-row">
+<section class="list-card card">
 
-      <input
-        [(ngModel)]="nome"
-        placeholder="Nome do adicional"
-      />
+  <h2>Lista de adicionais</h2>
 
-      <input
-        type="number"
-        [(ngModel)]="preco"
-        placeholder="Preço"
-      />
+  <div
+    *ngFor="let adicional of adicionais"
+    class="categoria-item"
+  >
+
+    <div>
+      <strong>{{ adicional.nome }}</strong>
+      <small>R$ {{ adicional.preco }}</small>
+    </div>
+
+    <div class="actions">
 
       <button
-        class="primary-button"
-        (click)="salvar()"
+        class="secondary-button"
+        (click)="editar(adicional)"
       >
-        {{ editandoId ? 'Atualizar' : 'Cadastrar' }}
+        Editar
+      </button>
+
+      <button
+        class="danger-button"
+        (click)="excluir(adicional)"
+      >
+        Excluir
       </button>
 
     </div>
 
-  </section>
+  </div>
 
-  <section class="list-card card">
-
-    <h2>Lista de adicionais</h2>
-
-    <div
-      *ngFor="let adicional of adicionais"
-      class="categoria-item"
-    >
-
-      <div>
-        <strong>{{ adicional.nome }}</strong>
-        <small>R$ {{ adicional.preco }}</small>
-      </div>
-
-      <div class="actions">
-
-        <button
-          class="secondary-button"
-          (click)="editar(adicional)"
-        >
-          Editar
-        </button>
-
-        <button
-          class="danger-button"
-          (click)="excluir(adicional)"
-        >
-          Excluir
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-</div>
+</section>

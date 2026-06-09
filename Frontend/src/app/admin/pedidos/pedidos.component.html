@@ -1,208 +1,183 @@
-<div class="pedidos-page">
+<header class="page-header">
+  <div>
+    <h1>Pedidos</h1>
+    <p>Gerencie todos os pedidos da lanchonete</p>
+  </div>
 
-  <aside class="sidebar">
-    <div class="brand">
-      <div class="logo">🍔</div>
-      <h2>Tim do Lelê</h2>
-      <span>Admin</span>
+  <button
+    class="primary-button"
+    (click)="carregarPedidos()"
+  >
+    🔄 Atualizar
+  </button>
+</header>
+
+<section class="summary">
+  <div class="summary-card card">
+    <span>Pendentes</span>
+    <strong>{{ contar('Pendente') }}</strong>
+  </div>
+
+  <div class="summary-card card">
+    <span>Em preparo</span>
+    <strong>{{ contar('EmPreparo') }}</strong>
+  </div>
+
+  <div class="summary-card card">
+    <span>Saiu entrega</span>
+    <strong>{{ contar('SaiuParaEntrega') }}</strong>
+  </div>
+
+  <div class="summary-card card">
+    <span>Entregues</span>
+    <strong>{{ contar('Entregue') }}</strong>
+  </div>
+
+  <div class="summary-card card">
+    <span>Cancelados</span>
+    <strong>{{ contar('Cancelado') }}</strong>
+  </div>
+</section>
+
+<section class="filters card">
+  <button
+    *ngFor="let filtro of filtros"
+    [class.active]="filtroAtual === filtro"
+    (click)="aplicarFiltro(filtro)"
+  >
+    {{ filtro }}
+    <span>{{ contar(filtro) }}</span>
+  </button>
+</section>
+
+<section class="orders-layout">
+
+  <div class="orders-list card">
+
+    <h2>Lista de pedidos</h2>
+
+    <p *ngIf="loading">
+      Carregando pedidos...
+    </p>
+
+    <div
+      *ngIf="!loading && pedidosFiltrados.length === 0"
+      class="empty"
+    >
+      Nenhum pedido encontrado.
     </div>
 
-    <nav>
-      <a routerLink="/admin/dashboard">📊 Dashboard</a>
-      <a routerLink="/admin/categorias">📁 Categorias</a>
-      <a routerLink="/admin/produtos">🍔 Produtos</a>
-      <a routerLink="/admin/adicionais">➕ Adicionais</a>
-      <a routerLink="/admin/pedidos" class="active">📋 Pedidos</a>
-      <a routerLink="/admin/relatorios">📈 Relatórios</a>
-    </nav>
+    <div
+      *ngFor="let pedido of pedidosFiltrados"
+      class="order-row"
+      [class.selected]="pedidoSelecionado?.id === pedido.id"
+      (click)="selecionarPedido(pedido)"
+    >
+      <div>
+        <h3>Pedido #{{ pedido.codigo }}</h3>
+        <small>{{ pedido.nomeCliente }}</small>
+      </div>
+
+      <div>
+        <span>{{ pedido.itens?.length || 0 }} itens</span>
+        <strong>R$ {{ pedido.total }}</strong>
+      </div>
+
+      <span class="status status-{{ pedido.status }}">
+        {{ pedido.status }}
+      </span>
+
+      <button class="details-button">
+        Ver detalhes
+      </button>
+    </div>
+
+  </div>
+
+  <aside class="order-details card">
+
+    <div *ngIf="!pedidoSelecionado" class="empty">
+      Selecione um pedido para ver os detalhes.
+    </div>
+
+    <ng-container *ngIf="pedidoSelecionado">
+
+      <header class="details-header">
+        <div>
+          <h2>Pedido #{{ pedidoSelecionado.codigo }}</h2>
+          <p>{{ pedidoSelecionado.status }}</p>
+        </div>
+
+        <span class="status status-{{ pedidoSelecionado.status }}">
+          {{ pedidoSelecionado.status }}
+        </span>
+      </header>
+
+      <section class="customer-info">
+        <p><b>Cliente:</b> {{ pedidoSelecionado.nomeCliente }}</p>
+        <p><b>Total:</b> R$ {{ pedidoSelecionado.total }}</p>
+      </section>
+
+      <section class="items">
+        <h3>Itens do pedido</h3>
+
+        <div
+          *ngFor="let item of pedidoSelecionado.itens"
+          class="detail-item"
+        >
+          <div>
+            <strong>
+              {{ item.quantidade }}x {{ item.produtoNome }}
+            </strong>
+
+            <ul *ngIf="item.adicionais?.length > 0">
+              <li *ngFor="let adicional of item.adicionais">
+                + {{ adicional.nome || adicional.adicionalId }}
+                - R$ {{ adicional.preco }}
+              </li>
+            </ul>
+          </div>
+
+          <strong>R$ {{ item.valor }}</strong>
+        </div>
+      </section>
+
+      <section class="actions">
+        <button
+          *ngIf="isPendente(pedidoSelecionado)"
+          class="primary-button"
+          (click)="alterarStatus(pedidoSelecionado.id, 1)"
+        >
+          Iniciar preparo
+        </button>
+
+        <button
+          *ngIf="isEmPreparo(pedidoSelecionado)"
+          class="primary-button"
+          (click)="alterarStatus(pedidoSelecionado.id, 2)"
+        >
+          Saiu entrega
+        </button>
+
+        <button
+          *ngIf="isSaiuParaEntrega(pedidoSelecionado)"
+          class="primary-button"
+          (click)="alterarStatus(pedidoSelecionado.id, 3)"
+        >
+          Entregue
+        </button>
+
+        <button
+          *ngIf="podeCancelar(pedidoSelecionado)"
+          class="danger-button"
+          (click)="alterarStatus(pedidoSelecionado.id, 4)"
+        >
+          Cancelar pedido
+        </button>
+      </section>
+
+    </ng-container>
+
   </aside>
 
-  <main class="content">
-
-    <header class="page-header">
-      <div>
-        <h1>Pedidos</h1>
-        <p>Gerencie todos os pedidos da lanchonete</p>
-      </div>
-
-      <button
-        class="primary-button"
-        (click)="carregarPedidos()"
-      >
-        🔄 Atualizar
-      </button>
-    </header>
-
-    <section class="summary">
-      <div class="summary-card card">
-        <span>Pendentes</span>
-        <strong>{{ contar('Pendente') }}</strong>
-      </div>
-
-      <div class="summary-card card">
-        <span>Em preparo</span>
-        <strong>{{ contar('EmPreparo') }}</strong>
-      </div>
-
-      <div class="summary-card card">
-        <span>Saiu entrega</span>
-        <strong>{{ contar('SaiuParaEntrega') }}</strong>
-      </div>
-
-      <div class="summary-card card">
-        <span>Entregues</span>
-        <strong>{{ contar('Entregue') }}</strong>
-      </div>
-
-      <div class="summary-card card">
-        <span>Cancelados</span>
-        <strong>{{ contar('Cancelado') }}</strong>
-      </div>
-    </section>
-
-    <section class="filters card">
-      <button
-        *ngFor="let filtro of filtros"
-        [class.active]="filtroAtual === filtro"
-        (click)="aplicarFiltro(filtro)"
-      >
-        {{ filtro }}
-        <span>{{ contar(filtro) }}</span>
-      </button>
-    </section>
-
-    <section class="orders-layout">
-
-      <div class="orders-list card">
-
-        <h2>Lista de pedidos</h2>
-
-        <p *ngIf="loading">
-          Carregando pedidos...
-        </p>
-
-        <div
-          *ngIf="!loading && pedidosFiltrados.length === 0"
-          class="empty"
-        >
-          Nenhum pedido encontrado.
-        </div>
-
-        <div
-          *ngFor="let pedido of pedidosFiltrados"
-          class="order-row"
-          [class.selected]="pedidoSelecionado?.id === pedido.id"
-          (click)="selecionarPedido(pedido)"
-        >
-          <div>
-            <h3>Pedido #{{ pedido.codigo }}</h3>
-            <small>{{ pedido.nomeCliente }}</small>
-          </div>
-
-          <div>
-            <span>{{ pedido.itens?.length || 0 }} itens</span>
-            <strong>R$ {{ pedido.total }}</strong>
-          </div>
-
-          <span class="status status-{{ pedido.status }}">
-            {{ pedido.status }}
-          </span>
-
-          <button class="details-button">
-            Ver detalhes
-          </button>
-        </div>
-
-      </div>
-
-      <aside class="order-details card">
-
-        <div *ngIf="!pedidoSelecionado" class="empty">
-          Selecione um pedido para ver os detalhes.
-        </div>
-
-        <ng-container *ngIf="pedidoSelecionado">
-
-          <header class="details-header">
-            <div>
-              <h2>Pedido #{{ pedidoSelecionado.codigo }}</h2>
-              <p>{{ pedidoSelecionado.status }}</p>
-            </div>
-
-            <span class="status status-{{ pedidoSelecionado.status }}">
-              {{ pedidoSelecionado.status }}
-            </span>
-          </header>
-
-          <section class="customer-info">
-            <p><b>Cliente:</b> {{ pedidoSelecionado.nomeCliente }}</p>
-            <p><b>Total:</b> R$ {{ pedidoSelecionado.total }}</p>
-          </section>
-
-          <section class="items">
-            <h3>Itens do pedido</h3>
-
-            <div
-              *ngFor="let item of pedidoSelecionado.itens"
-              class="detail-item"
-            >
-              <div>
-                <strong>
-                  {{ item.quantidade }}x {{ item.produtoNome }}
-                </strong>
-
-                <ul *ngIf="item.adicionais?.length > 0">
-                  <li *ngFor="let adicional of item.adicionais">
-                    + {{ adicional.nome || adicional.adicionalId }}
-                    - R$ {{ adicional.preco }}
-                  </li>
-                </ul>
-              </div>
-
-              <strong>R$ {{ item.valor }}</strong>
-            </div>
-          </section>
-
-          <section class="actions">
-            <button
-              *ngIf="isPendente(pedidoSelecionado)"
-              class="primary-button"
-              (click)="alterarStatus(pedidoSelecionado.id, 1)"
-            >
-              Iniciar preparo
-            </button>
-
-            <button
-              *ngIf="isEmPreparo(pedidoSelecionado)"
-              class="primary-button"
-              (click)="alterarStatus(pedidoSelecionado.id, 2)"
-            >
-              Saiu entrega
-            </button>
-
-            <button
-              *ngIf="isSaiuParaEntrega(pedidoSelecionado)"
-              class="primary-button"
-              (click)="alterarStatus(pedidoSelecionado.id, 3)"
-            >
-              Entregue
-            </button>
-
-            <button
-              *ngIf="podeCancelar(pedidoSelecionado)"
-              class="danger-button"
-              (click)="alterarStatus(pedidoSelecionado.id, 4)"
-            >
-              Cancelar pedido
-            </button>
-          </section>
-
-        </ng-container>
-
-      </aside>
-
-    </section>
-
-  </main>
-
-</div>
+</section>
