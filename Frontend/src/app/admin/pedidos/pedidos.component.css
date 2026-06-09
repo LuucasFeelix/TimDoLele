@@ -1,0 +1,289 @@
+.pedidos-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  background: var(--background);
+}
+
+.sidebar {
+  background: var(--primary);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.logo {
+  width: 76px;
+  height: 76px;
+  background: white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 42px;
+  margin: 0 auto 12px;
+}
+
+.brand h2 {
+  color: var(--secondary);
+  margin-bottom: 4px;
+}
+
+.brand span {
+  font-weight: 700;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar a {
+  background: rgba(255,255,255,.45);
+  color: #222;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background: var(--secondary);
+  color: white;
+}
+
+.content {
+  padding: 32px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  color: var(--secondary);
+  font-size: 34px;
+}
+
+.page-header p {
+  color: #666;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  padding: 20px;
+}
+
+.summary-card span {
+  color: #666;
+  font-weight: 600;
+}
+
+.summary-card strong {
+  display: block;
+  color: var(--secondary);
+  font-size: 30px;
+  margin-top: 6px;
+}
+
+.filters {
+  padding: 16px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filters button {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+.filters button.active {
+  background: var(--secondary);
+  color: white;
+}
+
+.filters span {
+  margin-left: 6px;
+  background: rgba(0,0,0,.08);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.orders-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 20px;
+}
+
+.orders-list,
+.order-details {
+  padding: 22px;
+}
+
+.orders-list h2 {
+  margin-bottom: 16px;
+}
+
+.order-row {
+  display: grid;
+  grid-template-columns: 1fr 150px 150px 130px;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  background: white;
+}
+
+.order-row:hover,
+.order-row.selected {
+  border-color: var(--secondary);
+}
+
+.order-row h3 {
+  color: var(--secondary);
+}
+
+.order-row small {
+  color: #666;
+}
+
+.details-button {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+.status {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-align: center;
+  background: #fff4c2;
+  color: #5f4b00;
+}
+
+.status-Pendente {
+  background: #fff4c2;
+  color: #5f4b00;
+}
+
+.status-EmPreparo {
+  background: #ffe0b2;
+  color: #b85c00;
+}
+
+.status-SaiuParaEntrega {
+  background: #d7ecff;
+  color: #0b5cab;
+}
+
+.status-Entregue {
+  background: #d7ffe5;
+  color: #147a35;
+}
+
+.status-Cancelado {
+  background: #ffe1e1;
+  color: #b00020;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.details-header h2 {
+  color: var(--secondary);
+}
+
+.customer-info {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.customer-info p {
+  margin-bottom: 8px;
+}
+
+.items h3 {
+  margin-bottom: 12px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+
+.detail-item ul {
+  margin-top: 6px;
+  padding-left: 18px;
+  color: #666;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.danger-button {
+  background: var(--secondary);
+  color: white;
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-weight: 600;
+}
+
+.empty {
+  color: #777;
+}
+
+@media (max-width: 1000px) {
+  .pedidos-page {
+    grid-template-columns: 1fr;
+  }
+
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .orders-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .order-row {
+    grid-template-columns: 1fr;
+  }
+}
