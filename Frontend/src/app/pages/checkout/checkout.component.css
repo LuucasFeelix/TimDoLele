@@ -112,6 +112,55 @@
   margin-top: 8px;
 }
 
+.tipo-entrega-area {
+  margin-bottom: 22px;
+}
+
+.tipo-entrega-area h3 {
+  margin-bottom: 12px;
+}
+
+.tipo-entrega-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tipo-entrega-options button {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-align: left;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.tipo-entrega-options button small {
+  display: block;
+  margin-top: 6px;
+  color: #666;
+  font-weight: 500;
+}
+
+.tipo-entrega-options button.active {
+  border-color: var(--secondary);
+  background: #fff4c2;
+  color: var(--secondary);
+}
+
+.retirada-info {
+  background: #fff4c2;
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 16px;
+  color: #5f4b00;
+}
+
+.retirada-info p {
+  margin-top: 4px;
+}
+
 .confirmar-button {
   width: 100%;
   margin-top: 12px;
@@ -129,5 +178,11 @@
 
   .checkout-header {
     padding: 0 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .tipo-entrega-options {
+    grid-template-columns: 1fr;
   }
 }

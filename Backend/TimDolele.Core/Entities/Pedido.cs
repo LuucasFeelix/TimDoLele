@@ -23,17 +23,26 @@ public class Pedido : BaseEntity
 
     public decimal Delivery { get; private set; }
 
+    public TipoEntrega TipoEntrega { get; private set; }
+
     public decimal Total { get; private set; }
 
     private Pedido() { }
 
-    public Pedido(Guid clienteId, decimal delivery = 0)
+    public Pedido(
+        Guid clienteId,
+        TipoEntrega tipoEntrega,
+        decimal delivery = 0)
     {
         ClienteId = clienteId;
 
+        TipoEntrega = tipoEntrega;
+
         DataHora = DateTime.Now;
 
-        Delivery = delivery;
+        Delivery = tipoEntrega == TipoEntrega.Retirada
+            ? 0
+            : delivery;
 
         Status = StatusPedido.Pendente;
 

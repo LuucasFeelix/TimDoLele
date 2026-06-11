@@ -75,7 +75,11 @@
     >
       <div>
         <h3>Pedido #{{ pedido.codigo }}</h3>
-        <small>{{ pedido.nomeCliente }}</small>
+
+        <small>
+          {{ pedido.nomeCliente }} •
+          {{ pedido.tipoEntrega === 'Delivery' ? 'Delivery' : 'Retirada' }}
+        </small>
       </div>
 
       <div>
@@ -115,7 +119,21 @@
 
       <section class="customer-info">
         <p><b>Cliente:</b> {{ pedidoSelecionado.nomeCliente }}</p>
-        <p><b>Total:</b> R$ {{ pedidoSelecionado.total }}</p>
+
+        <p>
+          <b>Tipo de entrega:</b>
+          {{ pedidoSelecionado.tipoEntrega === 'Delivery' ? 'Delivery' : 'Retirada na loja' }}
+        </p>
+
+        <p>
+          <b>Taxa de entrega:</b>
+          R$ {{ pedidoSelecionado.delivery }}
+        </p>
+
+        <p>
+          <b>Total:</b>
+          R$ {{ pedidoSelecionado.total }}
+        </p>
       </section>
 
       <section class="items">

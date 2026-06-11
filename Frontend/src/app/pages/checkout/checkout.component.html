@@ -72,8 +72,13 @@
         </div>
 
         <div>
-          <span>Taxa de entrega</span>
-          <strong>R$ 5,00</strong>
+          <span>
+            {{ isDelivery() ? 'Taxa de entrega' : 'Retirada na loja' }}
+          </span>
+
+          <strong>
+            R$ {{ getTaxaEntrega().toFixed(2).replace('.', ',') }}
+          </strong>
         </div>
 
         <div class="total">
@@ -88,6 +93,34 @@
     <section class="dados-card card">
 
       <h2>👤 Dados do cliente</h2>
+
+      <div class="tipo-entrega-area">
+
+        <h3>Como deseja receber?</h3>
+
+        <div class="tipo-entrega-options">
+
+          <button
+            type="button"
+            [class.active]="tipoEntrega === 2"
+            (click)="selecionarTipoEntrega(2)"
+          >
+            🛵 Delivery
+            <small>Receber em casa</small>
+          </button>
+
+          <button
+            type="button"
+            [class.active]="tipoEntrega === 1"
+            (click)="selecionarTipoEntrega(1)"
+          >
+            🏪 Retirada
+            <small>Buscar na loja</small>
+          </button>
+
+        </div>
+
+      </div>
 
       <label>
         Nome
@@ -107,7 +140,7 @@
         />
       </label>
 
-      <label>
+      <label *ngIf="isDelivery()">
         Endereço
         <input
           type="text"
@@ -115,6 +148,14 @@
           placeholder="Rua, número, bairro"
         />
       </label>
+
+      <div
+        *ngIf="!isDelivery()"
+        class="retirada-info"
+      >
+        <strong>Retirada na loja</strong>
+        <p>Você não pagará taxa de entrega.</p>
+      </div>
 
       <button
         class="primary-button confirmar-button"
