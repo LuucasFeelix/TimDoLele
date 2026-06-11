@@ -1,165 +1,87 @@
-<div class="cardapio-page">
+<div class="cardapio-mobile">
 
-  <header class="cardapio-header">
-    <div class="logo-area">
-      <div class="logo-circle">🍔</div>
+  <header class="topbar">
+    <div class="back-icon">
+      ←
+    </div>
 
-      <div>
-        <h1>Tim do Lelê</h1>
-        <p>Os melhores lanches da cidade</p>
-      </div>
+    <div>
+      <h1>Nosso Cardápio</h1>
+      <p>Tim do Lelê Lanches</p>
     </div>
 
     <button
-      class="primary-button cart-button"
+      class="cart-icon"
       (click)="irCheckout()"
     >
-      🛒 {{ carrinho.length }}
+      🛒
+      <span>{{ quantidadeTotalCarrinho() }}</span>
     </button>
   </header>
 
-  <section class="categorias-area">
-    <button class="categoria-button active">
-      Hambúrgueres
-    </button>
-
-    <button class="categoria-button">
-      Porções
-    </button>
-
-    <button class="categoria-button">
-      Bebidas
+  <section class="categorias-scroll">
+    <button
+      *ngFor="let categoria of categorias"
+      [class.active]="categoriaSelecionada === categoria"
+      (click)="selecionarCategoria(categoria)"
+    >
+      {{ categoria }}
     </button>
   </section>
 
-  <main class="conteudo">
+  <main class="produtos-lista">
 
-    <section class="produtos">
+    <ng-container *ngFor="let cat of cardapioFiltrado">
 
-      <div *ngFor="let cat of cardapio">
-        <h2 class="categoria-title">
-          {{ cat.categoria }}
-        </h2>
-
-        <div class="produtos-grid">
-          <div
-            *ngFor="let p of cat.produtos"
-            class="produto-card card"
-          >
-            <div class="produto-imagem">
-              🍔
-            </div>
-
-            <div class="produto-info">
-              <h3>{{ p.nome }}</h3>
-
-              <p>
-                Hambúrguer artesanal preparado com ingredientes selecionados.
-              </p>
-
-              <div class="produto-footer">
-                <strong>
-                  R$ {{ p.preco }}
-                </strong>
-
-                <button
-                  class="add-button"
-                  (click)="abrirProduto(p)"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <aside class="carrinho card">
-
-      <h2>🛒 Carrinho</h2>
+      <h2 class="categoria-title">
+        {{ cat.categoria }}
+      </h2>
 
       <div
-        *ngIf="carrinho.length === 0"
-        class="carrinho-vazio"
+        *ngFor="let p of cat.produtos"
+        class="produto-card"
       >
-        Nenhum item no carrinho
-      </div>
-
-      <div
-        *ngFor="let item of carrinho"
-        class="carrinho-item"
-      >
-        <div class="item-topo">
-          <div>
-            <strong>{{ item.nome }}</strong>
-
-            <ul *ngIf="item.adicionais?.length > 0">
-              <li *ngFor="let adicional of item.adicionais">
-                + {{ adicional.nome }}
-              </li>
-            </ul>
-
-            <small *ngIf="item.observacao">
-              Obs: {{ item.observacao }}
-            </small>
-          </div>
-
-          <button
-            class="remove-button"
-            (click)="removerItem(item)"
-          >
-            🗑
-          </button>
+        <div class="produto-foto">
+          🍔
         </div>
 
-        <div class="item-footer">
-          <div class="quantidade-controle">
-            <button (click)="diminuirQuantidade(item)">
-              -
-            </button>
+        <div class="produto-info">
+          <h3>{{ p.nome }}</h3>
 
-            <span>{{ item.quantidade }}</span>
+          <p>
+            {{ p.descricao || 'Lanche artesanal preparado com ingredientes selecionados.' }}
+          </p>
 
-            <button (click)="aumentarQuantidade(item)">
-              +
-            </button>
-          </div>
-
-          <strong class="item-total">
-            R$ {{ calcularItemTotal(item) }}
+          <strong>
+            R$ {{ p.preco }}
           </strong>
         </div>
+
+        <button
+          class="add-button"
+          (click)="abrirProduto(p)"
+        >
+          +
+        </button>
       </div>
 
-      <div class="resumo">
-        <div>
-          <span>Subtotal</span>
-          <strong>R$ {{ calcularTotal() }}</strong>
-        </div>
-
-        <div>
-          <span>Taxa de entrega</span>
-          <strong>R$ 5,00</strong>
-        </div>
-
-        <div class="resumo-total">
-          <span>Total</span>
-          <strong>R$ {{ calcularTotalComEntrega() }}</strong>
-        </div>
-      </div>
-
-      <button
-        class="primary-button finalizar-button"
-        (click)="irCheckout()"
-      >
-        Finalizar Pedido
-      </button>
-
-    </aside>
+    </ng-container>
 
   </main>
+
+  <footer
+    class="cart-footer"
+    *ngIf="carrinho.length > 0"
+  >
+    <div>
+      <span>{{ quantidadeTotalCarrinho() }} item(ns)</span>
+      <strong>R$ {{ calcularTotal() }}</strong>
+    </div>
+
+    <button (click)="irCheckout()">
+      Ver carrinho
+    </button>
+  </footer>
 
 </div>
 
