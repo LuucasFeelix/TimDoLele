@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using TimDoLele.Application.DTOs;
+using TimDoLeLe.Application.DTOs;
 
 namespace TimDoLele.Application.Validators
 {

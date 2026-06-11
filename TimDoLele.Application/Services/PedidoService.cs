@@ -3,8 +3,9 @@ using TimDolele.Core.Entities;
 using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
 using TimDoLele.Application.DTOs.Common;
-using TimDoLele.Infrastructure.Data;
 using TimDoLele.Application.Exceptions;
+using TimDoLele.Infrastructure.Data;
+using TimDoLeLe.Application.DTOs;
 
 namespace TimDoLele.Application.Services
 {
@@ -19,7 +20,6 @@ namespace TimDoLele.Application.Services
 
         public async Task<Guid> CriarPedidoAsync(CriarPedidoDto dto)
         {
-            // cria cliente automaticamente
             var cliente = new Cliente(
                 dto.Nome,
                 dto.Telefone,
@@ -36,7 +36,16 @@ namespace TimDoLele.Application.Services
             await _context.Clientes.AddAsync(cliente);
             await _context.SaveChangesAsync();
 
-            var pedido = new Pedido(cliente.Id);
+            var taxaEntrega =
+                dto.TipoEntrega == TipoEntrega.Delivery
+                    ? 5
+                    : 0;
+
+            var pedido = new Pedido(
+                cliente.Id,
+                dto.TipoEntrega,
+                taxaEntrega
+            );
 
             foreach (var itemDto in dto.Itens)
             {
@@ -115,6 +124,7 @@ namespace TimDoLele.Application.Services
                 Delivery = p.Delivery,
                 Total = p.Total,
                 Status = p.Status.ToString(),
+                TipoEntrega = p.TipoEntrega.ToString(),
 
                 Itens = p.Itens.Select(i => new ItemPedidoResponseDto
                 {
@@ -164,6 +174,7 @@ namespace TimDoLele.Application.Services
                 Delivery = pedido.Delivery,
                 Total = pedido.Total,
                 Status = pedido.Status.ToString(),
+                TipoEntrega = pedido.TipoEntrega.ToString(),
 
                 Itens = pedido.Itens.Select(i => new ItemPedidoResponseDto
                 {

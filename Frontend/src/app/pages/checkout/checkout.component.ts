@@ -21,6 +21,8 @@ export class CheckoutComponent implements OnInit {
   telefone = '';
   endereco = '';
 
+  tipoEntrega = 2; // 1 = Retirada, 2 = Delivery
+
   taxaEntrega = 5;
 
   constructor(
@@ -33,6 +35,22 @@ export class CheckoutComponent implements OnInit {
     if (carrinhoStorage) {
       this.carrinho = JSON.parse(carrinhoStorage);
     }
+  }
+
+  selecionarTipoEntrega(tipo: number): void {
+    this.tipoEntrega = tipo;
+
+    if (this.tipoEntrega === 1) {
+      this.endereco = '';
+    }
+  }
+
+  isDelivery(): boolean {
+    return this.tipoEntrega === 2;
+  }
+
+  getTaxaEntrega(): number {
+    return this.isDelivery() ? this.taxaEntrega : 0;
   }
 
   calcularItemTotal(item: any): string {
@@ -80,7 +98,7 @@ export class CheckoutComponent implements OnInit {
       this.calcularSubtotal().replace(',', '.')
     );
 
-    return (subtotal + this.taxaEntrega)
+    return (subtotal + this.getTaxaEntrega())
       .toFixed(2)
       .replace('.', ',');
   }
@@ -90,8 +108,13 @@ export class CheckoutComponent implements OnInit {
   }
 
   finalizarPedido(): void {
-    if (!this.nome || !this.telefone || !this.endereco) {
-      alert('Preencha nome, telefone e endereço.');
+    if (!this.nome || !this.telefone) {
+      alert('Preencha nome e telefone.');
+      return;
+    }
+
+    if (this.isDelivery() && !this.endereco) {
+      alert('Informe o endereço para delivery.');
       return;
     }
 
@@ -103,7 +126,8 @@ export class CheckoutComponent implements OnInit {
     const dto = {
       nome: this.nome,
       telefone: this.telefone,
-      endereco: this.endereco,
+      endereco: this.isDelivery() ? this.endereco : '',
+      tipoEntrega: this.tipoEntrega,
 
       itens: this.carrinho.map(item => ({
         produtoId: item.produtoId,
@@ -129,7 +153,9 @@ export class CheckoutComponent implements OnInit {
             JSON.stringify({
               nome: this.nome,
               telefone: this.telefone,
-              endereco: this.endereco,
+              endereco: this.isDelivery() ? this.endereco : 'Retirada na loja',
+              tipoEntrega: this.isDelivery() ? 'Delivery' : 'Retirada',
+              taxaEntrega: this.getTaxaEntrega(),
               total: this.calcularTotal(),
               codigo:
                 res?.data?.codigo ??
@@ -146,7 +172,7 @@ export class CheckoutComponent implements OnInit {
 
           window.location.href = '/confirmacao';
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
 
           alert('Erro ao finalizar pedido');
