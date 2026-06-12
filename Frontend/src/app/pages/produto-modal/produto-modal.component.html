@@ -1,80 +1,106 @@
 <div class="overlay" (click)="fechar.emit()">
 
-  <div class="modal card" (click)="$event.stopPropagation()">
+  <div class="modal" (click)="$event.stopPropagation()">
 
-    <div class="modal-header">
-      <h2>{{ produto?.nome }}</h2>
-
-      <button type="button" (click)="fechar.emit()">
-        ✕
-      </button>
-    </div>
+    <button
+      type="button"
+      class="close-button"
+      (click)="fechar.emit()"
+    >
+      ✕
+    </button>
 
     <div class="produto-banner">
       🍔
     </div>
 
-    <p class="descricao">
-      Hambúrguer artesanal preparado com ingredientes selecionados.
-    </p>
+    <div class="produto-content">
 
-    <div
-      *ngIf="produto?.adicionais?.length > 0"
-      class="adicionais"
-    >
-      <h3>Adicionais</h3>
+      <div class="produto-title-area">
+        <div>
+          <h2>{{ produto?.nome }}</h2>
 
-      <div
-        *ngFor="let adicional of produto.adicionais"
-        class="adicional-item"
-      >
-        <div class="adicional-left">
-          <label>
-            <input
-              type="checkbox"
-              (change)="toggleAdicional(adicional)"
-            >
-
-            <span>{{ adicional.nome }}</span>
-          </label>
+          <p>
+            {{ produto?.descricao || 'Lanche artesanal preparado com ingredientes selecionados.' }}
+          </p>
         </div>
 
         <strong>
-          +R$ {{ adicional.preco }}
+          R$ {{ produto?.preco }}
         </strong>
       </div>
+
+      <div
+        *ngIf="produto?.adicionais?.length > 0"
+        class="section"
+      >
+        <div class="section-header">
+          <h3>Adicionais</h3>
+          <span>Escolha os extras</span>
+        </div>
+
+        <div
+          *ngFor="let adicional of produto.adicionais"
+          class="adicional-item"
+          [class.selected]="adicionalSelecionado(adicional)"
+          (click)="toggleAdicional(adicional)"
+        >
+          <div class="adicional-info">
+            <div class="check-box">
+              <span *ngIf="adicionalSelecionado(adicional)">✓</span>
+            </div>
+
+            <div>
+              <strong>{{ adicional.nome }}</strong>
+              <small>Adicionar ao lanche</small>
+            </div>
+          </div>
+
+          <strong class="adicional-preco">
+            + R$ {{ adicional.preco }}
+          </strong>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <h3>Observação</h3>
+          <span>Opcional</span>
+        </div>
+
+        <textarea
+          [(ngModel)]="observacao"
+          placeholder="Ex: sem cebola, pouco molho..."
+        ></textarea>
+      </div>
+
+      <div class="quantidade-card">
+        <span>Quantidade</span>
+
+        <div class="quantidade-area">
+          <button type="button" (click)="diminuirQuantidade()">
+            -
+          </button>
+
+          <strong>{{ quantidade }}</strong>
+
+          <button type="button" (click)="aumentarQuantidade()">
+            +
+          </button>
+        </div>
+      </div>
+
     </div>
 
-    <div class="obs-area">
-      <h3>Observação</h3>
-
-      <textarea
-        [(ngModel)]="observacao"
-        placeholder="Ex: sem cebola..."
-      ></textarea>
-    </div>
-
-    <div class="quantidade-area">
-      <button type="button" (click)="diminuirQuantidade()">
-        -
-      </button>
-
-      <span>{{ quantidade }}</span>
-
-      <button type="button" (click)="aumentarQuantidade()">
-        +
-      </button>
-    </div>
-
-    <div class="footer">
-      <div class="total">
-        Total:
+    <div class="modal-footer">
+      <div>
+        <span>Total</span>
         <strong>R$ {{ calcularTotal() }}</strong>
       </div>
 
       <button
         type="button"
-        class="primary-button"
+        class="add-cart-button"
         (click)="confirmar()"
       >
         Adicionar

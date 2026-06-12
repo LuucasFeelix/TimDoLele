@@ -20,13 +20,26 @@ export class ProdutoModalComponent {
   adicionaisSelecionados: any[] = [];
 
   toggleAdicional(adicional: any): void {
-    const existe = this.adicionaisSelecionados.find(a => a.id === adicional.id);
+    const existe = this.adicionaisSelecionados.find(
+      a => a.id === adicional.id
+    );
 
     if (existe) {
-      this.adicionaisSelecionados = this.adicionaisSelecionados.filter(a => a.id !== adicional.id);
-    } else {
-      this.adicionaisSelecionados.push(adicional);
+      this.adicionaisSelecionados =
+        this.adicionaisSelecionados.filter(
+          a => a.id !== adicional.id
+        );
+
+      return;
     }
+
+    this.adicionaisSelecionados.push(adicional);
+  }
+
+  adicionalSelecionado(adicional: any): boolean {
+    return this.adicionaisSelecionados.some(
+      a => a.id === adicional.id
+    );
   }
 
   aumentarQuantidade(): void {
@@ -40,15 +53,21 @@ export class ProdutoModalComponent {
   }
 
   calcularTotal(): string {
-    let total = Number(this.produto.preco.toString().replace(',', '.'));
+    let total = Number(
+      this.produto.preco.toString().replace(',', '.')
+    );
 
     this.adicionaisSelecionados.forEach(a => {
-      total += Number(a.preco.toString().replace(',', '.'));
+      total += Number(
+        a.preco.toString().replace(',', '.')
+      );
     });
 
     total *= this.quantidade;
 
-    return total.toFixed(2).replace('.', ',');
+    return total
+      .toFixed(2)
+      .replace('.', ',');
   }
 
   confirmar(): void {
