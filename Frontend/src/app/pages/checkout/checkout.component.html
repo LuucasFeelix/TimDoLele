@@ -1,186 +1,271 @@
-<div class="checkout-page">
+<div class="checkout-app">
 
-  <header class="checkout-header">
-
-    <button
-      class="voltar-button"
-      (click)="voltarCardapio()"
-    >
-      ← Voltar
+  <header class="checkout-topbar">
+    <button type="button" (click)="voltar()">
+      ←
     </button>
 
     <div>
-      <h1>Finalizar Pedido</h1>
-      <p>Confira seu pedido, entrega e pagamento</p>
+      <h1>
+        {{ etapa === 1 ? 'Meu Carrinho' : etapa === 2 ? 'Dados para entrega' : 'Pagamento' }}
+      </h1>
+      <p>Tim do Lelê Lanches</p>
     </div>
-
   </header>
 
-  <main class="checkout-content">
+  <section class="steps">
+    <div [class.active]="etapa === 1">
+      <span>3</span>
+      Carrinho
+    </div>
 
-    <section class="pedido-card card">
+    <div [class.active]="etapa === 2">
+      <span>4</span>
+      Dados
+    </div>
 
-      <h2>🛒 Seu pedido</h2>
+    <div [class.active]="etapa === 3">
+      <span>5</span>
+      Pagamento
+    </div>
+  </section>
 
-      <div
-        *ngIf="carrinho.length === 0"
-        class="empty"
-      >
-        Seu carrinho está vazio.
+  <!-- ETAPA 1 - CARRINHO -->
+  <main *ngIf="etapa === 1" class="screen">
+
+    <div *ngIf="carrinho.length === 0" class="empty-card">
+      Seu carrinho está vazio.
+    </div>
+
+    <section
+      *ngFor="let item of carrinho"
+      class="cart-item"
+    >
+      <div class="item-image">
+        🍔
       </div>
 
-      <div
-        *ngFor="let item of carrinho"
-        class="pedido-item"
-      >
+      <div class="item-info">
+        <h3>{{ item.nome }}</h3>
 
-        <div class="pedido-item-top">
-
-          <div>
-            <strong>
-              {{ item.nome }}
-            </strong>
-
-            <span>
-              x{{ item.quantidade }}
-            </span>
-          </div>
-
-          <strong class="item-price">
-            R$ {{ calcularItemTotal(item) }}
-          </strong>
-
-        </div>
-
-        <ul *ngIf="item.adicionais?.length > 0">
-          <li *ngFor="let adicional of item.adicionais">
+        <small *ngIf="item.adicionais?.length > 0">
+          <span *ngFor="let adicional of item.adicionais">
             + {{ adicional.nome }}
-          </li>
-        </ul>
+          </span>
+        </small>
 
         <small *ngIf="item.observacao">
           Obs: {{ item.observacao }}
         </small>
 
+        <div class="qty">
+          <button (click)="diminuirQuantidade(item)">-</button>
+          <span>{{ item.quantidade }}</span>
+          <button (click)="aumentarQuantidade(item)">+</button>
+        </div>
       </div>
 
-      <div class="resumo">
+      <div class="item-price-area">
+        <strong>R$ {{ calcularItemTotal(item) }}</strong>
 
-        <div>
-          <span>Subtotal</span>
-          <strong>R$ {{ calcularSubtotal() }}</strong>
-        </div>
-
-        <div>
-          <span>
-            {{ isDelivery() ? 'Taxa de entrega' : 'Retirada na loja' }}
-          </span>
-
-          <strong>
-            R$ {{ getTaxaEntrega().toFixed(2).replace('.', ',') }}
-          </strong>
-        </div>
-
-        <div>
-          <span>Pagamento</span>
-          <strong>{{ obterFormaPagamentoTexto() }}</strong>
-        </div>
-
-        <div
-          *ngIf="isDinheiro() && trocoPara"
+        <button
+          class="remove"
+          (click)="removerItem(item)"
         >
-          <span>Troco para</span>
-          <strong>R$ {{ trocoPara }}</strong>
-        </div>
-
-        <div class="total">
-          <span>Total</span>
-          <strong>R$ {{ calcularTotal() }}</strong>
-        </div>
-
+          ×
+        </button>
       </div>
-
     </section>
 
-    <section class="dados-card card">
+    <section class="coupon-card">
+      <input placeholder="Possui cupom de desconto?" />
+      <button>Aplicar</button>
+    </section>
 
-      <h2>👤 Dados do cliente</h2>
-
-      <div class="tipo-entrega-area">
-
-        <h3>Como deseja receber?</h3>
-
-        <div class="tipo-entrega-options">
-
-          <button
-            type="button"
-            [class.active]="tipoEntrega === 2"
-            (click)="selecionarTipoEntrega(2)"
-          >
-            🛵 Delivery
-            <small>Receber em casa</small>
-          </button>
-
-          <button
-            type="button"
-            [class.active]="tipoEntrega === 1"
-            (click)="selecionarTipoEntrega(1)"
-          >
-            🏪 Retirada
-            <small>Buscar na loja</small>
-          </button>
-
-        </div>
-
+    <section class="summary-card">
+      <div>
+        <span>Subtotal</span>
+        <strong>R$ {{ calcularSubtotal() }}</strong>
       </div>
 
-      <div class="forma-pagamento-area">
-
-        <h3>💳 Forma de pagamento</h3>
-
-        <div class="pagamento-options">
-
-          <button
-            type="button"
-            [class.active]="formaPagamento === 1"
-            (click)="selecionarFormaPagamento(1)"
-          >
-            PIX
-            <small>Pagamento rápido</small>
-          </button>
-
-          <button
-            type="button"
-            [class.active]="formaPagamento === 2"
-            (click)="selecionarFormaPagamento(2)"
-          >
-            Dinheiro
-            <small>Na entrega/retirada</small>
-          </button>
-
-          <button
-            type="button"
-            [class.active]="formaPagamento === 3"
-            (click)="selecionarFormaPagamento(3)"
-          >
-            Crédito
-            <small>Cartão crédito</small>
-          </button>
-
-          <button
-            type="button"
-            [class.active]="formaPagamento === 4"
-            (click)="selecionarFormaPagamento(4)"
-          >
-            Débito
-            <small>Cartão débito</small>
-          </button>
-
-        </div>
-
+      <div>
+        <span>Taxa de entrega</span>
+        <strong>R$ {{ getTaxaEntrega().toFixed(2).replace('.', ',') }}</strong>
       </div>
 
-      <label *ngIf="isDinheiro()">
+      <div class="summary-total">
+        <span>Total</span>
+        <strong>R$ {{ calcularTotal() }}</strong>
+      </div>
+    </section>
+
+    <button
+      class="bottom-button"
+      (click)="irParaEtapa(2)"
+    >
+      FINALIZAR PEDIDO
+    </button>
+
+  </main>
+
+  <!-- ETAPA 2 - DADOS -->
+  <main *ngIf="etapa === 2" class="screen">
+
+    <section class="choice-card">
+      <h2>Como deseja receber?</h2>
+
+      <div class="delivery-options">
+        <button
+          [class.active]="tipoEntrega === 2"
+          (click)="selecionarTipoEntrega(2)"
+        >
+          🛵
+          <strong>Delivery</strong>
+          <small>Receber em casa</small>
+        </button>
+
+        <button
+          [class.active]="tipoEntrega === 1"
+          (click)="selecionarTipoEntrega(1)"
+        >
+          🏪
+          <strong>Retirada</strong>
+          <small>Buscar no local</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="form-card">
+      <label>
+        Nome completo
+        <input
+          [(ngModel)]="nome"
+          placeholder="Digite seu nome"
+        />
+      </label>
+
+      <label>
+        WhatsApp
+        <input
+          [(ngModel)]="telefone"
+          placeholder="(16) 99999-9999"
+        />
+      </label>
+
+      <ng-container *ngIf="isDelivery()">
+        <label>
+          Endereço de entrega
+          <input
+            [(ngModel)]="endereco"
+            placeholder="Rua, número, complemento"
+          />
+        </label>
+
+        <label>
+          Bairro
+          <input
+            [(ngModel)]="bairro"
+            placeholder="Digite seu bairro"
+          />
+        </label>
+
+        <label>
+          Ponto de referência
+          <input
+            [(ngModel)]="referencia"
+            placeholder="Ex: próximo à padaria"
+          />
+        </label>
+      </ng-container>
+
+      <div
+        *ngIf="!isDelivery()"
+        class="pickup-box"
+      >
+        <strong>Retirada na loja</strong>
+        <p>Você não pagará taxa de entrega.</p>
+      </div>
+    </section>
+
+    <button
+      class="bottom-button"
+      (click)="irParaEtapa(3)"
+    >
+      CONTINUAR
+    </button>
+
+  </main>
+
+  <!-- ETAPA 3 - PAGAMENTO -->
+  <main *ngIf="etapa === 3" class="screen">
+
+    <section class="payment-summary">
+      <h2>Resumo do pedido</h2>
+
+      <div>
+        <span>{{ quantidadeTotal() }} itens</span>
+        <strong>R$ {{ calcularSubtotal() }}</strong>
+      </div>
+
+      <div>
+        <span>{{ isDelivery() ? 'Taxa de entrega' : 'Retirada' }}</span>
+        <strong>R$ {{ getTaxaEntrega().toFixed(2).replace('.', ',') }}</strong>
+      </div>
+
+      <div class="summary-total">
+        <span>Total</span>
+        <strong>R$ {{ calcularTotal() }}</strong>
+      </div>
+    </section>
+
+    <section class="payment-card">
+      <h2>Escolha a forma de pagamento</h2>
+
+      <button
+        [class.active]="formaPagamento === 1"
+        (click)="selecionarFormaPagamento(1)"
+      >
+        <span>💠</span>
+        <div>
+          <strong>Pix</strong>
+          <small>Aprovação imediata</small>
+        </div>
+      </button>
+
+      <button
+        [class.active]="formaPagamento === 3"
+        (click)="selecionarFormaPagamento(3)"
+      >
+        <span>💳</span>
+        <div>
+          <strong>Cartão de Crédito</strong>
+          <small>Na entrega/retirada</small>
+        </div>
+      </button>
+
+      <button
+        [class.active]="formaPagamento === 4"
+        (click)="selecionarFormaPagamento(4)"
+      >
+        <span>💳</span>
+        <div>
+          <strong>Cartão de Débito</strong>
+          <small>Na entrega/retirada</small>
+        </div>
+      </button>
+
+      <button
+        [class.active]="formaPagamento === 2"
+        (click)="selecionarFormaPagamento(2)"
+      >
+        <span>💵</span>
+        <div>
+          <strong>Dinheiro</strong>
+          <small>Pagamento na entrega</small>
+        </div>
+      </button>
+
+      <label *ngIf="isDinheiro()" class="troco-field">
         Troco para quanto?
         <input
           type="number"
@@ -188,50 +273,14 @@
           placeholder="Ex: 50"
         />
       </label>
-
-      <label>
-        Nome
-        <input
-          type="text"
-          [(ngModel)]="nome"
-          placeholder="Digite seu nome"
-        />
-      </label>
-
-      <label>
-        Telefone
-        <input
-          type="text"
-          [(ngModel)]="telefone"
-          placeholder="(16) 99999-9999"
-        />
-      </label>
-
-      <label *ngIf="isDelivery()">
-        Endereço
-        <input
-          type="text"
-          [(ngModel)]="endereco"
-          placeholder="Rua, número, bairro"
-        />
-      </label>
-
-      <div
-        *ngIf="!isDelivery()"
-        class="retirada-info"
-      >
-        <strong>Retirada na loja</strong>
-        <p>Você não pagará taxa de entrega.</p>
-      </div>
-
-      <button
-        class="primary-button confirmar-button"
-        (click)="finalizarPedido()"
-      >
-        🚀 Confirmar Pedido
-      </button>
-
     </section>
+
+    <button
+      class="bottom-button"
+      (click)="finalizarPedido()"
+    >
+      FINALIZAR PAGAMENTO
+    </button>
 
   </main>
 
