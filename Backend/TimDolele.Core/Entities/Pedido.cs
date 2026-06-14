@@ -25,6 +25,10 @@ public class Pedido : BaseEntity
 
     public TipoEntrega TipoEntrega { get; private set; }
 
+    public FormaPagamento FormaPagamento { get; private set; }
+
+    public decimal? TrocoPara { get; private set; }
+
     public decimal Total { get; private set; }
 
     private Pedido() { }
@@ -32,11 +36,19 @@ public class Pedido : BaseEntity
     public Pedido(
         Guid clienteId,
         TipoEntrega tipoEntrega,
-        decimal delivery = 0)
+        FormaPagamento formaPagamento,
+        decimal delivery = 0,
+        decimal? trocoPara = null)
     {
         ClienteId = clienteId;
 
         TipoEntrega = tipoEntrega;
+
+        FormaPagamento = formaPagamento;
+
+        TrocoPara = formaPagamento == FormaPagamento.Dinheiro
+            ? trocoPara
+            : null;
 
         DataHora = DateTime.Now;
 

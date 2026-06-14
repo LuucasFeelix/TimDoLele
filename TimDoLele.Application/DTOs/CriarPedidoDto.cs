@@ -13,6 +13,10 @@ namespace TimDoLeLe.Application.DTOs
 
         public TipoEntrega TipoEntrega { get; set; }
 
+        public FormaPagamento FormaPagamento { get; set; }
+
+        public decimal? TrocoPara { get; set; }
+
         public List<ItemPedidoDto> Itens { get; set; } = new();
     }
 }

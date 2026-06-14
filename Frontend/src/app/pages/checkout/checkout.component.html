@@ -11,7 +11,7 @@
 
     <div>
       <h1>Finalizar Pedido</h1>
-      <p>Confira seu pedido e preencha seus dados</p>
+      <p>Confira seu pedido, entrega e pagamento</p>
     </div>
 
   </header>
@@ -81,6 +81,18 @@
           </strong>
         </div>
 
+        <div>
+          <span>Pagamento</span>
+          <strong>{{ obterFormaPagamentoTexto() }}</strong>
+        </div>
+
+        <div
+          *ngIf="isDinheiro() && trocoPara"
+        >
+          <span>Troco para</span>
+          <strong>R$ {{ trocoPara }}</strong>
+        </div>
+
         <div class="total">
           <span>Total</span>
           <strong>R$ {{ calcularTotal() }}</strong>
@@ -121,6 +133,61 @@
         </div>
 
       </div>
+
+      <div class="forma-pagamento-area">
+
+        <h3>💳 Forma de pagamento</h3>
+
+        <div class="pagamento-options">
+
+          <button
+            type="button"
+            [class.active]="formaPagamento === 1"
+            (click)="selecionarFormaPagamento(1)"
+          >
+            PIX
+            <small>Pagamento rápido</small>
+          </button>
+
+          <button
+            type="button"
+            [class.active]="formaPagamento === 2"
+            (click)="selecionarFormaPagamento(2)"
+          >
+            Dinheiro
+            <small>Na entrega/retirada</small>
+          </button>
+
+          <button
+            type="button"
+            [class.active]="formaPagamento === 3"
+            (click)="selecionarFormaPagamento(3)"
+          >
+            Crédito
+            <small>Cartão crédito</small>
+          </button>
+
+          <button
+            type="button"
+            [class.active]="formaPagamento === 4"
+            (click)="selecionarFormaPagamento(4)"
+          >
+            Débito
+            <small>Cartão débito</small>
+          </button>
+
+        </div>
+
+      </div>
+
+      <label *ngIf="isDinheiro()">
+        Troco para quanto?
+        <input
+          type="number"
+          [(ngModel)]="trocoPara"
+          placeholder="Ex: 50"
+        />
+      </label>
 
       <label>
         Nome

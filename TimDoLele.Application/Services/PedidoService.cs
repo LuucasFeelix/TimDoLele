@@ -44,7 +44,9 @@ namespace TimDoLele.Application.Services
             var pedido = new Pedido(
                 cliente.Id,
                 dto.TipoEntrega,
-                taxaEntrega
+                dto.FormaPagamento,
+                taxaEntrega,
+                dto.TrocoPara
             );
 
             foreach (var itemDto in dto.Itens)
@@ -125,6 +127,8 @@ namespace TimDoLele.Application.Services
                 Total = p.Total,
                 Status = p.Status.ToString(),
                 TipoEntrega = p.TipoEntrega.ToString(),
+                FormaPagamento = p.FormaPagamento.ToString(),
+                TrocoPara = p.TrocoPara,
 
                 Itens = p.Itens.Select(i => new ItemPedidoResponseDto
                 {
@@ -175,6 +179,8 @@ namespace TimDoLele.Application.Services
                 Total = pedido.Total,
                 Status = pedido.Status.ToString(),
                 TipoEntrega = pedido.TipoEntrega.ToString(),
+                FormaPagamento = pedido.FormaPagamento.ToString(),
+                TrocoPara = pedido.TrocoPara,
 
                 Itens = pedido.Itens.Select(i => new ItemPedidoResponseDto
                 {

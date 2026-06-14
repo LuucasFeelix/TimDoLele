@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimDoLele.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TimDoLele.Infrastructure.Data;
 namespace TimDoLele.Infrastructure.Migrations
 {
     [DbContext(typeof(TimDoLeleDbContext))]
-    partial class TimDoLeleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260614184706_AdicionarFormaPagamentoPedido")]
+    partial class AdicionarFormaPagamentoPedido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +60,6 @@ namespace TimDoLele.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("TrocoPara")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
