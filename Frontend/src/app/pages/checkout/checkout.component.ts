@@ -22,12 +22,15 @@ export class CheckoutComponent implements OnInit {
   endereco = '';
 
   tipoEntrega = 2; // 1 = Retirada, 2 = Delivery
+  formaPagamento = 1; // 1 = Pix, 2 = Dinheiro, 3 = Crédito, 4 = Débito
+
+  trocoPara = '';
 
   taxaEntrega = 5;
 
   constructor(
     private pedidoService: PedidoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const carrinhoStorage = localStorage.getItem('carrinho');
@@ -45,12 +48,32 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  selecionarFormaPagamento(forma: number): void {
+    this.formaPagamento = forma;
+
+    if (forma !== 2) {
+      this.trocoPara = '';
+    }
+  }
+
   isDelivery(): boolean {
     return this.tipoEntrega === 2;
   }
 
+  isDinheiro(): boolean {
+    return this.formaPagamento === 2;
+  }
+
   getTaxaEntrega(): number {
     return this.isDelivery() ? this.taxaEntrega : 0;
+  }
+
+  obterFormaPagamentoTexto(): string {
+    if (this.formaPagamento === 1) return 'PIX';
+    if (this.formaPagamento === 2) return 'Dinheiro';
+    if (this.formaPagamento === 3) return 'Cartão Crédito';
+
+    return 'Cartão Débito';
   }
 
   calcularItemTotal(item: any): string {
@@ -128,6 +151,10 @@ export class CheckoutComponent implements OnInit {
       telefone: this.telefone,
       endereco: this.isDelivery() ? this.endereco : '',
       tipoEntrega: this.tipoEntrega,
+      formaPagamento: this.formaPagamento,
+      trocoPara: this.isDinheiro() && this.trocoPara
+        ? Number(this.trocoPara)
+        : null,
 
       itens: this.carrinho.map(item => ({
         produtoId: item.produtoId,
@@ -155,6 +182,8 @@ export class CheckoutComponent implements OnInit {
               telefone: this.telefone,
               endereco: this.isDelivery() ? this.endereco : 'Retirada na loja',
               tipoEntrega: this.isDelivery() ? 'Delivery' : 'Retirada',
+              formaPagamento: this.obterFormaPagamentoTexto(),
+              trocoPara: this.trocoPara,
               taxaEntrega: this.getTaxaEntrega(),
               total: this.calcularTotal(),
               codigo:
