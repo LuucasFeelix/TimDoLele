@@ -1,195 +1,301 @@
-.checkout-page {
+.checkout-app {
   min-height: 100vh;
-  background: var(--background);
+  max-width: 430px;
+  margin: 0 auto;
+  background: #f5f5f5;
+  padding-bottom: 90px;
+  box-shadow: 0 0 30px rgba(0,0,0,.08);
 }
 
-.checkout-header {
+.checkout-topbar {
+  height: 64px;
   background: var(--primary);
-  height: 90px;
-  padding: 0 32px;
   display: flex;
   align-items: center;
-  gap: 24px;
-  box-shadow: var(--shadow);
+  gap: 14px;
+  padding: 0 14px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.checkout-header h1 {
-  color: var(--secondary);
-  font-size: 26px;
+.checkout-topbar button {
+  background: transparent;
+  font-size: 24px;
+  font-weight: 900;
 }
 
-.checkout-header p {
-  font-size: 14px;
+.checkout-topbar h1 {
+  font-size: 17px;
+  color: #111;
 }
 
-.voltar-button {
-  background: white;
-  border-radius: var(--radius-sm);
-  padding: 12px 18px;
-  font-weight: 600;
+.checkout-topbar p {
+  font-size: 11px;
+  color: #333;
 }
 
-.checkout-content {
+.steps {
   display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 24px;
-  padding: 32px;
-  max-width: 1300px;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  background: white;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
 }
 
-.pedido-card,
-.dados-card {
-  padding: 24px;
+.steps div {
+  text-align: center;
+  font-size: 11px;
+  color: #777;
+  font-weight: 700;
 }
 
-.pedido-card h2,
-.dados-card h2 {
-  margin-bottom: 20px;
+.steps span {
+  width: 24px;
+  height: 24px;
+  margin: 0 auto 4px;
+  border-radius: 50%;
+  background: #ddd;
+  color: white;
+  display: grid;
+  place-items: center;
 }
 
-.pedido-item {
-  border-bottom: 1px solid var(--border);
-  padding: 16px 0;
-}
-
-.pedido-item-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.pedido-item-top div {
-  display: flex;
-  gap: 10px;
-}
-
-.item-price {
+.steps div.active {
   color: var(--secondary);
 }
 
-.pedido-item ul {
-  padding-left: 20px;
-  margin-top: 8px;
-  color: #666;
+.steps div.active span {
+  background: var(--secondary);
 }
 
-.pedido-item small {
+.screen {
+  padding: 14px;
+}
+
+.empty-card,
+.cart-item,
+.coupon-card,
+.summary-card,
+.choice-card,
+.form-card,
+.payment-summary,
+.payment-card {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.item-image {
+  width: 70px;
+  height: 70px;
+  background: #fff4c2;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+}
+
+.item-info h3 {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.item-info small {
   display: block;
+  color: #666;
+  font-size: 11px;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-top: 8px;
-  color: #777;
 }
 
-.resumo {
-  margin-top: 24px;
-  border-top: 1px solid var(--border);
-  padding-top: 16px;
+.qty button {
+  width: 26px;
+  height: 24px;
+  border-radius: 8px;
+  background: #eee;
+  font-weight: 900;
 }
 
-.resumo div {
+.item-price-area {
+  text-align: right;
+}
+
+.item-price-area strong {
+  color: var(--secondary);
+  font-size: 13px;
+}
+
+.remove {
+  display: block;
+  margin-left: auto;
+  margin-top: 8px;
+  color: var(--secondary);
+  background: transparent;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.coupon-card {
+  display: flex;
+  gap: 8px;
+}
+
+.coupon-card input {
+  flex: 1;
+}
+
+.coupon-card button {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-weight: 800;
+}
+
+.summary-card div,
+.payment-summary div {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.resumo .total {
-  font-size: 22px;
+.summary-total {
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.summary-total strong {
   color: var(--secondary);
-  font-weight: 700;
 }
 
-.dados-card {
-  height: fit-content;
-}
-
-.dados-card label {
-  display: block;
-  margin-bottom: 16px;
-  font-weight: 600;
-}
-
-.dados-card input {
-  margin-top: 8px;
-}
-
-.tipo-entrega-area,
-.forma-pagamento-area {
-  margin-bottom: 22px;
-}
-
-.tipo-entrega-area h3,
-.forma-pagamento-area h3 {
+.choice-card h2,
+.payment-summary h2,
+.payment-card h2 {
+  font-size: 17px;
   margin-bottom: 12px;
 }
 
-.tipo-entrega-options,
-.pagamento-options {
+.delivery-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
-.tipo-entrega-options button,
-.pagamento-options button {
+.delivery-options button {
   background: white;
-  border: 2px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 16px;
+  border: 2px solid #eee;
+  border-radius: 16px;
+  padding: 14px;
   text-align: left;
-  font-weight: 700;
-  transition: .2s;
 }
 
-.tipo-entrega-options button small,
-.pagamento-options button small {
-  display: block;
-  margin-top: 6px;
-  color: #666;
-  font-weight: 500;
-}
-
-.tipo-entrega-options button.active,
-.pagamento-options button.active {
+.delivery-options button.active {
   border-color: var(--secondary);
   background: #fff4c2;
-  color: var(--secondary);
 }
 
-.retirada-info {
+.delivery-options strong,
+.delivery-options small {
+  display: block;
+}
+
+.form-card label,
+.troco-field {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.form-card input,
+.troco-field input,
+.coupon-card input {
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  background: white;
+}
+
+.pickup-box {
   background: #fff4c2;
-  border-radius: var(--radius-md);
-  padding: 14px;
-  margin-bottom: 16px;
+  border-radius: 14px;
+  padding: 12px;
   color: #5f4b00;
 }
 
-.retirada-info p {
+.pickup-box p {
   margin-top: 4px;
+  font-size: 13px;
 }
 
-.confirmar-button {
+.payment-card button {
   width: 100%;
-  margin-top: 12px;
+  background: white;
+  border: 2px solid #eee;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
-.empty {
-  color: #777;
+.payment-card button.active {
+  border-color: var(--secondary);
+  background: #fff4c2;
 }
 
-@media (max-width: 900px) {
-  .checkout-content {
-    grid-template-columns: 1fr;
-    padding: 20px;
-  }
-
-  .checkout-header {
-    padding: 0 20px;
-  }
+.payment-card button span {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: #f5f5f5;
 }
 
-@media (max-width: 520px) {
-  .tipo-entrega-options,
-  .pagamento-options {
-    grid-template-columns: 1fr;
-  }
+.payment-card strong,
+.payment-card small {
+  display: block;
+}
+
+.payment-card small {
+  color: #666;
+  margin-top: 2px;
+}
+
+.bottom-button {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  width: calc(100% - 28px);
+  max-width: 402px;
+  background: var(--secondary);
+  color: white;
+  border-radius: 16px;
+  padding: 17px;
+  font-size: 15px;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(0,0,0,.22);
 }
