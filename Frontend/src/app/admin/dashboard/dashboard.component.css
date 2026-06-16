@@ -2,112 +2,219 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 
 .page-header h1 {
   color: var(--secondary);
   font-size: 34px;
+  font-weight: 800;
 }
 
 .page-header p {
   color: #666;
+  margin-top: 4px;
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 
 .stat-card {
-  padding: 22px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 120px;
+}
+
+.stat-card .icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+}
+
+.icon.yellow {
+  background: #fff4c2;
+}
+
+.icon.red {
+  background: #ffe4e6;
+}
+
+.icon.blue {
+  background: #dbeafe;
+}
+
+.icon.green {
+  background: #dcfce7;
 }
 
 .stat-card span {
-  color: #666;
-  font-weight: 600;
+  color: #555;
+  font-weight: 700;
 }
 
 .stat-card strong {
   display: block;
-  color: var(--secondary);
-  font-size: 34px;
   margin-top: 8px;
+  font-size: 34px;
+  color: #111;
+  font-weight: 800;
 }
 
-.orders {
-  padding: 24px;
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
 }
 
-.orders h2 {
-  margin-bottom: 18px;
+.dashboard-column {
+  padding: 0;
+  overflow: hidden;
 }
 
-.order-item {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 18px;
-  margin-bottom: 14px;
-  background: white;
-}
-
-.order-header,
-.order-footer {
+.column-header {
+  min-height: 110px;
+  padding: 24px 28px;
   display: flex;
   justify-content: space-between;
-  gap: 16px;
   align-items: center;
 }
 
-.order-header h3 {
-  color: var(--secondary);
+.retirada .column-header {
+  background: linear-gradient(90deg, #f0fff4, #ffffff);
 }
 
-.order-header p {
+.entrega .column-header {
+  background: linear-gradient(90deg, #eff6ff, #ffffff);
+}
+
+.column-header h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111;
+}
+
+.column-header p {
+  color: #555;
+  margin-top: 6px;
+}
+
+.column-header span {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: white;
+  font-size: 18px;
+}
+
+.retirada .column-header span {
+  background: #22c55e;
+}
+
+.entrega .column-header span {
+  background: #3b82f6;
+}
+
+.pedido-row {
+  display: grid;
+  grid-template-columns: 90px 1.2fr 110px 110px 110px;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 28px;
+  border-top: 1px solid #eee;
+  background: white;
+}
+
+.pedido-code {
+  color: var(--secondary);
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.pedido-cliente strong {
+  display: block;
+  color: #111;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.pedido-cliente small,
+.pedido-itens small {
+  display: block;
   color: #666;
+  font-size: 13px;
+}
+
+.pedido-itens {
+  color: #222;
+  font-weight: 600;
+}
+
+.pedido-total {
+  color: #111;
+  font-weight: 900;
+  font-size: 16px;
 }
 
 .status {
-  background: #fff4c2;
-  color: #5f4b00;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-weight: 700;
+  justify-self: end;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 900;
+  font-size: 13px;
 }
 
-.order-body {
-  margin: 16px 0;
-  color: #444;
+.status.pronto {
+  background: #dcfce7;
+  color: #15803d;
 }
 
-.actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+.status.rota {
+  background: #dbeafe;
+  color: #1d4ed8;
 }
 
-.actions button {
-  background: var(--primary);
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  font-weight: 700;
+.ver-todos {
+  display: block;
+  text-align: center;
+  padding: 22px;
+  text-decoration: none;
+  font-weight: 900;
+  border-top: 1px solid #eee;
+  background: white;
 }
 
-.actions .danger {
-  background: var(--secondary);
-  color: white;
+.ver-todos.verde {
+  color: #16a34a;
 }
 
-@media (max-width: 900px) {
+.ver-todos.azul {
+  color: #2563eb;
+}
+
+.empty {
+  padding: 28px;
+  color: #777;
+  border-top: 1px solid #eee;
+}
+
+@media (max-width: 1300px) {
   .cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .page-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+  .dashboard-grid {
+    grid-template-columns: 1fr;
   }
 }

@@ -3,40 +3,58 @@
   <aside class="sidebar">
 
     <div class="brand">
-      <div class="logo">🍔</div>
+      <div class="logo-box">
+        🍔
+      </div>
+
       <h2>Tim do Lelê</h2>
-      <span>Admin</span>
+      <span>Administração</span>
     </div>
 
-    <nav>
+    <nav class="menu">
+
       <a routerLink="/admin/dashboard" routerLinkActive="active">
-        📊 Dashboard
-      </a>
-
-      <a routerLink="/admin/categorias" routerLinkActive="active">
-        📁 Categorias
-      </a>
-
-      <a routerLink="/admin/produtos" routerLinkActive="active">
-        🍔 Produtos
-      </a>
-
-      <a routerLink="/admin/adicionais" routerLinkActive="active">
-        ➕ Adicionais
+        <span class="menu-icon">▦</span>
+        <span class="menu-text">Dashboard</span>
       </a>
 
       <a routerLink="/admin/pedidos" routerLinkActive="active">
-        📋 Pedidos
+        <span class="menu-icon">▤</span>
+        <span class="menu-text">Pedidos</span>
+      </a>
+
+      <a routerLink="/admin/produtos" routerLinkActive="active">
+        <span class="menu-icon">☰</span>
+        <span class="menu-text">Produtos</span>
+      </a>
+
+      <a routerLink="/admin/categorias" routerLinkActive="active">
+        <span class="menu-icon">□</span>
+        <span class="menu-text">Categorias</span>
+      </a>
+
+      <a routerLink="/admin/adicionais" routerLinkActive="active">
+        <span class="menu-icon">＋</span>
+        <span class="menu-text">Adicionais</span>
       </a>
 
       <a routerLink="/admin/relatorios" routerLinkActive="active">
-        📈 Relatórios
+        <span class="menu-icon">↗</span>
+        <span class="menu-text">Relatórios</span>
       </a>
+
     </nav>
+
+    <div class="sidebar-footer">
+      <a routerLink="/admin/login">
+        <span class="menu-icon">↩</span>
+        <span class="menu-text">Sair</span>
+      </a>
+    </div>
 
   </aside>
 
-  <main class="admin-content">
+  <main class="admin-main">
     <router-outlet></router-outlet>
   </main>
 

@@ -1,57 +1,102 @@
 .login-page {
   min-height: 100vh;
-  background: var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px;
+  background: #f6f6f6;
+  display: grid;
+  place-items: center;
+  padding: 40px;
 }
 
 .login-card {
-  width: 380px;
-  max-width: 100%;
+  width: 430px;
   background: white;
-  padding: 32px;
-  border-radius: var(--radius-lg);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .12);
 }
 
-.brand {
+.login-brand {
+  background: linear-gradient(180deg, #ffd21f 0%, #ffc400 100%);
   text-align: center;
-  margin-bottom: 28px;
+  padding: 34px 28px 28px;
 }
 
-.logo {
-  width: 90px;
-  height: 90px;
-  background: #fff4c2;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.logo-box {
+  width: 96px;
+  height: 96px;
+  background: white;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  font-size: 54px;
   margin: 0 auto 14px;
-  font-size: 48px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .12);
 }
 
-.brand h1 {
-  color: var(--secondary);
-  font-size: 28px;
+.login-brand h1 {
+  color: #e30613;
+  font-size: 30px;
+  line-height: 1;
+  margin: 0;
 }
 
-.brand p {
-  color: #555;
-}
-
-.login-card label {
+.login-brand strong {
+  color: #111;
+  font-size: 16px;
   display: block;
-  margin-bottom: 16px;
+  margin-top: 2px;
+}
+
+.login-brand p {
+  margin-top: 12px;
+  color: #333;
+  font-size: 14px;
   font-weight: 600;
 }
 
-.login-card input {
+.login-form {
+  padding: 30px;
+}
+
+.login-form label {
+  display: block;
+  color: #222;
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.login-form input {
+  width: 100%;
   margin-top: 8px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 14px;
+  outline: none;
+  font-size: 14px;
+}
+
+.login-form input:focus {
+  border-color: #e30613;
+  background: white;
 }
 
 .login-button {
   width: 100%;
-  margin-top: 10px;
+  background: #e30613;
+  color: white;
+  border-radius: 14px;
+  padding: 15px;
+  font-weight: 900;
+  font-size: 14px;
+  box-shadow: 0 8px 18px rgba(227, 6, 19, .25);
+}
+
+.forgot-button {
+  width: 100%;
+  margin-top: 14px;
+  background: transparent;
+  color: #e30613;
+  font-weight: 800;
+  font-size: 13px;
 }

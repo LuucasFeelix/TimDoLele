@@ -1,0 +1,812 @@
+2026-06-16 00:19:16.173 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 00:19:16.234 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:16.235 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 61.4608ms
+2026-06-16 00:19:16.274 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 00:19:16.277 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:16.282 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:16.284 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 00:19:18.298 -03:00 [INF] Executed DbCommand (115ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 00:19:18.484 -03:00 [INF] Executed DbCommand (67ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 00:19:19.437 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:19.745 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 3453.7429ms
+2026-06-16 00:19:19.903 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 00:19:20.119 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:20.126 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:20.127 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 3853.3404ms
+2026-06-16 00:19:20.128 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:20.131 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 00:19:20.152 -03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 00:19:20.194 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 00:19:20.216 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:20.223 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 90.049ms
+2026-06-16 00:19:20.224 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:20.225 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 322.4232ms
+2026-06-16 00:19:21.289 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/categorias - null null
+2026-06-16 00:19:21.328 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/produtos - null null
+2026-06-16 00:19:21.331 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/adicionais - null null
+2026-06-16 00:19:21.773 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:21.778 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:21.782 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/produtos - 204 null null 454.6157ms
+2026-06-16 00:19:21.781 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:21.785 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/categorias - null null
+2026-06-16 00:19:21.795 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/produtos - null null
+2026-06-16 00:19:21.795 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/adicionais - 204 null null 463.9704ms
+2026-06-16 00:19:21.781 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/categorias - 204 null null 492.1576ms
+2026-06-16 00:19:21.821 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:21.822 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:21.824 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/adicionais - null null
+2026-06-16 00:19:21.833 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:21.831 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ProdutoController.Get (TimDoLele)'
+2026-06-16 00:19:21.830 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele)'
+2026-06-16 00:19:21.834 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele)'
+2026-06-16 00:19:21.837 -03:00 [INF] Route matched with {action = "Get", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.ProdutoController (TimDoLele).
+2026-06-16 00:19:21.837 -03:00 [INF] Route matched with {action = "Get", controller = "Adicional"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.AdicionalController (TimDoLele).
+2026-06-16 00:19:21.837 -03:00 [INF] Route matched with {action = "Get", controller = "Categoria"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.CategoriaController (TimDoLele).
+2026-06-16 00:19:21.908 -03:00 [INF] Executed DbCommand (68ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Nome], [p].[Descricao], [p].[Preco], [p].[CategoriaId], [c].[Nome] AS [Categoria], [p].[Ativo]
+FROM [Produtos] AS [p]
+INNER JOIN [Categorias] AS [c] ON [p].[CategoriaId] = [c].[Id]
+ORDER BY [p].[Nome]
+2026-06-16 00:19:21.921 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType4`7[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:21.923 -03:00 [INF] Executed action TimDoLeLe.Controllers.ProdutoController.Get (TimDoLele) in 84.4023ms
+2026-06-16 00:19:21.925 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ProdutoController.Get (TimDoLele)'
+2026-06-16 00:19:21.926 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/produtos - 200 null application/json; charset=utf-8 131.1172ms
+2026-06-16 00:19:22.172 -03:00 [INF] Executed DbCommand (99ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Nome]
+FROM [Categorias] AS [c]
+ORDER BY [c].[Nome]
+2026-06-16 00:19:22.173 -03:00 [INF] Executed DbCommand (100ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[Nome], [a].[Preco]
+FROM [Adicionais] AS [a]
+ORDER BY [a].[Nome]
+2026-06-16 00:19:23.273 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType2`2[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:23.288 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType0`3[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:23.289 -03:00 [INF] Executed action TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele) in 1447.9179ms
+2026-06-16 00:19:23.291 -03:00 [INF] Executed action TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele) in 1451.5324ms
+2026-06-16 00:19:23.292 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele)'
+2026-06-16 00:19:23.294 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele)'
+2026-06-16 00:19:23.295 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/categorias - 200 null application/json; charset=utf-8 1509.8844ms
+2026-06-16 00:19:23.296 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/adicionais - 200 null application/json; charset=utf-8 1472.07ms
+2026-06-16 00:19:23.308 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/categorias - null null
+2026-06-16 00:19:23.308 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/adicionais - null null
+2026-06-16 00:19:23.372 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:23.373 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:23.374 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele)'
+2026-06-16 00:19:23.375 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele)'
+2026-06-16 00:19:23.376 -03:00 [INF] Route matched with {action = "Get", controller = "Categoria"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.CategoriaController (TimDoLele).
+2026-06-16 00:19:23.378 -03:00 [INF] Route matched with {action = "Get", controller = "Adicional"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.AdicionalController (TimDoLele).
+2026-06-16 00:19:23.383 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Nome]
+FROM [Categorias] AS [c]
+ORDER BY [c].[Nome]
+2026-06-16 00:19:23.386 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[Nome], [a].[Preco]
+FROM [Adicionais] AS [a]
+ORDER BY [a].[Nome]
+2026-06-16 00:19:23.392 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType0`3[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:23.393 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType2`2[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:23.394 -03:00 [INF] Executed action TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele) in 10.9863ms
+2026-06-16 00:19:23.395 -03:00 [INF] Executed action TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele) in 15.3534ms
+2026-06-16 00:19:23.396 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele)'
+2026-06-16 00:19:23.397 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele)'
+2026-06-16 00:19:23.398 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/adicionais - 200 null application/json; charset=utf-8 89.9629ms
+2026-06-16 00:19:23.399 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/categorias - 200 null application/json; charset=utf-8 91.623ms
+2026-06-16 00:19:24.183 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 00:19:24.256 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:24.262 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 78.8951ms
+2026-06-16 00:19:24.264 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 00:19:24.400 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:24.402 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:24.406 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 00:19:24.468 -03:00 [INF] Executed DbCommand (59ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 00:19:24.708 -03:00 [INF] Executed DbCommand (26ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 00:19:25.042 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:25.077 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 669.2477ms
+2026-06-16 00:19:25.080 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:25.081 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 817.4939ms
+2026-06-16 00:19:25.261 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/adicionais - null null
+2026-06-16 00:19:25.266 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:25.267 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele)'
+2026-06-16 00:19:25.268 -03:00 [INF] Route matched with {action = "Get", controller = "Adicional"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.AdicionalController (TimDoLele).
+2026-06-16 00:19:25.278 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[Nome], [a].[Preco]
+FROM [Adicionais] AS [a]
+ORDER BY [a].[Nome]
+2026-06-16 00:19:25.283 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType0`3[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:25.289 -03:00 [INF] Executed action TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele) in 14.0185ms
+2026-06-16 00:19:25.292 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele)'
+2026-06-16 00:19:25.295 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/adicionais - 200 null application/json; charset=utf-8 33.589ms
+2026-06-16 00:19:26.508 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/categorias - null null
+2026-06-16 00:19:26.537 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:26.543 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele)'
+2026-06-16 00:19:26.544 -03:00 [INF] Route matched with {action = "Get", controller = "Categoria"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.CategoriaController (TimDoLele).
+2026-06-16 00:19:26.549 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Nome]
+FROM [Categorias] AS [c]
+ORDER BY [c].[Nome]
+2026-06-16 00:19:26.559 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType2`2[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:26.568 -03:00 [INF] Executed action TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele) in 22.1231ms
+2026-06-16 00:19:26.571 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele)'
+2026-06-16 00:19:26.573 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/categorias - 200 null application/json; charset=utf-8 64.3255ms
+2026-06-16 00:19:27.240 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/categorias - null null
+2026-06-16 00:19:27.240 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/produtos - null null
+2026-06-16 00:19:27.280 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:27.276 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:27.282 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/categorias - 204 null null 42.0877ms
+2026-06-16 00:19:27.281 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/produtos - 204 null null 40.9988ms
+2026-06-16 00:19:27.240 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/adicionais - null null
+2026-06-16 00:19:27.293 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:27.294 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/adicionais - 204 null null 53.3999ms
+2026-06-16 00:19:27.288 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/categorias - null null
+2026-06-16 00:19:27.306 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:27.288 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/produtos - null null
+2026-06-16 00:19:27.307 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele)'
+2026-06-16 00:19:27.309 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:27.314 -03:00 [INF] Route matched with {action = "Get", controller = "Categoria"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.CategoriaController (TimDoLele).
+2026-06-16 00:19:27.314 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ProdutoController.Get (TimDoLele)'
+2026-06-16 00:19:27.317 -03:00 [INF] Route matched with {action = "Get", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.ProdutoController (TimDoLele).
+2026-06-16 00:19:27.348 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/adicionais - null null
+2026-06-16 00:19:27.355 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:27.356 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele)'
+2026-06-16 00:19:27.356 -03:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Nome]
+FROM [Categorias] AS [c]
+ORDER BY [c].[Nome]
+2026-06-16 00:19:27.357 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Nome], [p].[Descricao], [p].[Preco], [p].[CategoriaId], [c].[Nome] AS [Categoria], [p].[Ativo]
+FROM [Produtos] AS [p]
+INNER JOIN [Categorias] AS [c] ON [p].[CategoriaId] = [c].[Id]
+ORDER BY [p].[Nome]
+2026-06-16 00:19:27.357 -03:00 [INF] Route matched with {action = "Get", controller = "Adicional"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get() on controller TimDoLeLe.Controllers.AdicionalController (TimDoLele).
+2026-06-16 00:19:27.359 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType2`2[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:27.388 -03:00 [INF] Executed action TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele) in 71.809ms
+2026-06-16 00:19:27.389 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CategoriaController.Get (TimDoLele)'
+2026-06-16 00:19:27.390 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/categorias - 200 null application/json; charset=utf-8 101.6715ms
+2026-06-16 00:19:27.361 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType4`7[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:27.398 -03:00 [INF] Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[Nome], [a].[Preco]
+FROM [Adicionais] AS [a]
+ORDER BY [a].[Nome]
+2026-06-16 00:19:27.399 -03:00 [INF] Executed action TimDoLeLe.Controllers.ProdutoController.Get (TimDoLele) in 49.3487ms
+2026-06-16 00:19:27.401 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType0`3[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], TimDoLele, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:27.402 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ProdutoController.Get (TimDoLele)'
+2026-06-16 00:19:27.403 -03:00 [INF] Executed action TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele) in 40.5237ms
+2026-06-16 00:19:27.407 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AdicionalController.Get (TimDoLele)'
+2026-06-16 00:19:27.408 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/adicionais - 200 null application/json; charset=utf-8 59.6116ms
+2026-06-16 00:19:27.406 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/produtos - 200 null application/json; charset=utf-8 118.5894ms
+2026-06-16 00:19:28.475 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 00:19:28.732 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:28.733 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:28.736 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 00:19:28.783 -03:00 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 00:19:28.788 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 00:19:28.902 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:29.268 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 511.4143ms
+2026-06-16 00:19:29.454 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 00:19:29.557 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:29.559 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:19:29.561 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 1086.3742ms
+2026-06-16 00:19:29.562 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:29.569 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 00:19:29.587 -03:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 00:19:29.664 -03:00 [INF] Executed DbCommand (49ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 00:19:29.772 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:19:29.854 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 283.5708ms
+2026-06-16 00:19:29.868 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:19:29.869 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 415.2243ms
+2026-06-16 00:21:58.588 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 00:21:58.787 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:21:58.796 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 208.5182ms
+2026-06-16 00:21:58.808 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 00:21:58.820 -03:00 [INF] CORS policy execution successful.
+2026-06-16 00:21:58.821 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:21:58.822 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 00:21:58.838 -03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 00:21:58.862 -03:00 [INF] Executed DbCommand (21ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 00:21:58.868 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 00:21:58.870 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 45.5419ms
+2026-06-16 00:21:58.875 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 00:21:58.876 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 67.3229ms
+2026-06-16 01:13:13.574 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:13.576 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:13.577 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 3.5714ms
+2026-06-16 01:13:13.579 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:13.583 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:13.585 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:13.586 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:13.700 -03:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:13.737 -03:00 [INF] Executed DbCommand (31ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:13.745 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:13.749 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 160.7435ms
+2026-06-16 01:13:13.750 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:13.751 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 172.811ms
+2026-06-16 01:13:24.485 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:24.491 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:24.493 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 7.1968ms
+2026-06-16 01:13:24.495 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:24.500 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:24.501 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:24.502 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:24.510 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:24.515 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:24.523 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:24.526 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 19.9301ms
+2026-06-16 01:13:24.527 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:24.528 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 33.7039ms
+2026-06-16 01:13:25.480 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:25.483 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:25.484 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:25.485 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:25.489 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:25.495 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:25.501 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:25.504 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 18.1166ms
+2026-06-16 01:13:25.510 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:25.511 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 31.3664ms
+2026-06-16 01:13:32.094 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:32.106 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:32.107 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 13.2343ms
+2026-06-16 01:13:32.109 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:32.113 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:32.113 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:32.114 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:32.128 -03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:32.153 -03:00 [INF] Executed DbCommand (21ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:32.160 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:32.163 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 46.0408ms
+2026-06-16 01:13:32.168 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:32.169 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 59.8285ms
+2026-06-16 01:13:39.684 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/a7c8a7c6-11a7-44af-ac8c-f4dfe2a3ae76/status - null null
+2026-06-16 01:13:39.687 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:39.688 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/a7c8a7c6-11a7-44af-ac8c-f4dfe2a3ae76/status - 204 null null 3.7609ms
+2026-06-16 01:13:39.689 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/a7c8a7c6-11a7-44af-ac8c-f4dfe2a3ae76/status - application/json 1
+2026-06-16 01:13:39.693 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:39.695 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:39.700 -03:00 [INF] Route matched with {action = "AtualizarStatus", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarStatus(System.Guid, TimDolele.Core.Enums.StatusPedido) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:39.746 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__get_Item_0
+2026-06-16 01:13:39.876 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [Status] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-06-16 01:13:39.902 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-06-16 01:13:39.903 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele) in 200.3805ms
+2026-06-16 01:13:39.905 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:39.908 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/a7c8a7c6-11a7-44af-ac8c-f4dfe2a3ae76/status - 204 null null 218.6931ms
+2026-06-16 01:13:39.911 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:39.914 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:39.915 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 3.367ms
+2026-06-16 01:13:39.916 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:39.920 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:39.921 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:39.922 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:39.929 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:39.946 -03:00 [INF] Executed DbCommand (13ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:39.952 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:39.954 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 30.0344ms
+2026-06-16 01:13:39.955 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:39.958 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 42.3751ms
+2026-06-16 01:13:46.607 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/4f395190-753f-46a1-a66a-3cf28781fc1a/status - null null
+2026-06-16 01:13:46.610 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:46.612 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/4f395190-753f-46a1-a66a-3cf28781fc1a/status - 204 null null 4.8439ms
+2026-06-16 01:13:46.615 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/4f395190-753f-46a1-a66a-3cf28781fc1a/status - application/json 1
+2026-06-16 01:13:46.620 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:46.622 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:46.622 -03:00 [INF] Route matched with {action = "AtualizarStatus", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarStatus(System.Guid, TimDolele.Core.Enums.StatusPedido) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:46.629 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__get_Item_0
+2026-06-16 01:13:46.635 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [Status] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-06-16 01:13:46.638 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-06-16 01:13:46.640 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele) in 15.401ms
+2026-06-16 01:13:46.641 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:46.642 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/4f395190-753f-46a1-a66a-3cf28781fc1a/status - 204 null null 27.1371ms
+2026-06-16 01:13:46.645 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:46.651 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:46.651 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 6.1781ms
+2026-06-16 01:13:46.655 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:46.658 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:46.659 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:46.661 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:46.664 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:46.670 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:46.677 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:46.679 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 17.1409ms
+2026-06-16 01:13:46.681 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:46.682 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 27.5034ms
+2026-06-16 01:13:52.201 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/4f395190-753f-46a1-a66a-3cf28781fc1a/status - null null
+2026-06-16 01:13:52.204 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:52.205 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/4f395190-753f-46a1-a66a-3cf28781fc1a/status - 204 null null 3.5957ms
+2026-06-16 01:13:52.206 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/4f395190-753f-46a1-a66a-3cf28781fc1a/status - application/json 1
+2026-06-16 01:13:52.210 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:52.212 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:52.213 -03:00 [INF] Route matched with {action = "AtualizarStatus", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarStatus(System.Guid, TimDolele.Core.Enums.StatusPedido) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:52.218 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__get_Item_0
+2026-06-16 01:13:52.222 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [Status] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-06-16 01:13:52.225 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-06-16 01:13:52.226 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele) in 10.609ms
+2026-06-16 01:13:52.228 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:52.229 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/4f395190-753f-46a1-a66a-3cf28781fc1a/status - 204 null null 23.0283ms
+2026-06-16 01:13:52.233 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:52.240 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:52.241 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 7.5471ms
+2026-06-16 01:13:52.242 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:52.245 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:52.246 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:52.248 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:52.252 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:52.257 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:52.262 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:52.265 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 15.0753ms
+2026-06-16 01:13:52.267 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:52.268 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 26.0481ms
+2026-06-16 01:13:54.529 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/93910844-2ab5-41de-809f-5b5ca8a204e7/status - null null
+2026-06-16 01:13:54.532 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:54.534 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/93910844-2ab5-41de-809f-5b5ca8a204e7/status - 204 null null 4.929ms
+2026-06-16 01:13:54.535 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/93910844-2ab5-41de-809f-5b5ca8a204e7/status - application/json 1
+2026-06-16 01:13:54.541 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:54.542 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:54.543 -03:00 [INF] Route matched with {action = "AtualizarStatus", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarStatus(System.Guid, TimDolele.Core.Enums.StatusPedido) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:54.550 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__get_Item_0
+2026-06-16 01:13:54.555 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [Status] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-06-16 01:13:54.562 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-06-16 01:13:54.563 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele) in 18.0211ms
+2026-06-16 01:13:54.564 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:54.566 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/93910844-2ab5-41de-809f-5b5ca8a204e7/status - 204 null null 30.9432ms
+2026-06-16 01:13:54.571 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:54.575 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:54.578 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:54.581 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:54.589 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:54.594 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:54.603 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:54.614 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 28.5499ms
+2026-06-16 01:13:54.619 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:54.620 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 49.9368ms
+2026-06-16 01:13:56.263 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/93910844-2ab5-41de-809f-5b5ca8a204e7/status - application/json 1
+2026-06-16 01:13:56.267 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:56.268 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:56.269 -03:00 [INF] Route matched with {action = "AtualizarStatus", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarStatus(System.Guid, TimDolele.Core.Enums.StatusPedido) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:56.273 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__get_Item_0
+2026-06-16 01:13:56.277 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [Status] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-06-16 01:13:56.281 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-06-16 01:13:56.281 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele) in 10.4823ms
+2026-06-16 01:13:56.283 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:56.284 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/93910844-2ab5-41de-809f-5b5ca8a204e7/status - 204 null null 20.43ms
+2026-06-16 01:13:56.287 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:56.290 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:56.291 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:56.292 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:56.296 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:56.300 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:56.304 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:56.307 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 13.6658ms
+2026-06-16 01:13:56.309 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:56.310 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 22.8881ms
+2026-06-16 01:13:58.604 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/a7c8a7c6-11a7-44af-ac8c-f4dfe2a3ae76/status - null null
+2026-06-16 01:13:58.607 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:58.607 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/a7c8a7c6-11a7-44af-ac8c-f4dfe2a3ae76/status - 204 null null 3.245ms
+2026-06-16 01:13:58.608 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/a7c8a7c6-11a7-44af-ac8c-f4dfe2a3ae76/status - application/json 1
+2026-06-16 01:13:58.612 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:58.614 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:58.615 -03:00 [INF] Route matched with {action = "AtualizarStatus", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarStatus(System.Guid, TimDolele.Core.Enums.StatusPedido) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:58.619 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__get_Item_0
+2026-06-16 01:13:58.624 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [Status] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-06-16 01:13:58.628 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-06-16 01:13:58.629 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele) in 12.4481ms
+2026-06-16 01:13:58.631 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.AtualizarStatus (TimDoLele)'
+2026-06-16 01:13:58.632 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/a7c8a7c6-11a7-44af-ac8c-f4dfe2a3ae76/status - 204 null null 23.564ms
+2026-06-16 01:13:58.635 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:58.638 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:58.641 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 5.8895ms
+2026-06-16 01:13:58.650 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:13:58.667 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:13:58.669 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:58.670 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:13:58.680 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:13:58.685 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:13:58.694 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:13:58.697 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 19.7586ms
+2026-06-16 01:13:58.699 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:13:58.701 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 50.4028ms
+2026-06-16 01:14:00.183 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:14:00.189 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:14:00.191 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:14:00.192 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:14:00.195 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:14:00.204 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:14:00.208 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:14:00.210 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 16.7518ms
+2026-06-16 01:14:00.214 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:14:00.218 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 34.8204ms
+2026-06-16 01:26:37.255 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 01:26:37.262 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:26:37.263 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 7.5015ms
+2026-06-16 01:26:37.268 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:26:37.274 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:26:37.275 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:26:37.276 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:26:37.380 -03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:26:37.410 -03:00 [INF] Executed DbCommand (27ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:26:37.418 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:26:37.420 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 142.4456ms
+2026-06-16 01:26:37.421 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:26:37.422 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 154.66ms
+2026-06-16 01:27:39.941 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-06-16 01:27:39.949 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:27:39.950 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 8.667ms
+2026-06-16 01:27:39.962 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-06-16 01:27:39.964 -03:00 [INF] CORS policy execution successful.
+2026-06-16 01:27:39.968 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:27:39.969 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-06-16 01:27:39.990 -03:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-06-16 01:27:40.022 -03:00 [INF] Executed DbCommand (25ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[Subtotal], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[Subtotal], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [i0].[Id] AS [Id1], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco] AS [Preco0]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN [ItensPedidoAdicionais] AS [i0] ON [i].[Id] = [i0].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0]
+2026-06-16 01:27:40.028 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-06-16 01:27:40.031 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 58.5437ms
+2026-06-16 01:27:40.037 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-06-16 01:27:40.038 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 75.3921ms
