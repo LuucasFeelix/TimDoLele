@@ -1,7 +1,7 @@
 <header class="page-header">
   <div>
     <h1>Dashboard</h1>
-    <p>Controle os pedidos da lanchonete</p>
+    <p>Controle geral da lanchonete</p>
   </div>
 
   <button class="primary-button" (click)="carregarPedidos()">
@@ -11,67 +11,128 @@
 
 <section class="cards">
   <div class="stat-card card">
-    <span>Total de pedidos</span>
-    <strong>{{ pedidos.length }}</strong>
+    <div class="icon yellow">🛍️</div>
+    <div>
+      <span>Pedidos Hoje</span>
+      <strong>{{ pedidos.length }}</strong>
+    </div>
   </div>
 
   <div class="stat-card card">
-    <span>Pendentes</span>
-    <strong>{{ pedidos.filter(isPendente).length }}</strong>
+    <div class="icon red">⏰</div>
+    <div>
+      <span>Pendentes</span>
+      <strong>{{ pedidosPendentes.length }}</strong>
+    </div>
   </div>
 
   <div class="stat-card card">
-    <span>Em preparo</span>
-    <strong>{{ pedidos.filter(isEmPreparo).length }}</strong>
+    <div class="icon blue">👨‍🍳</div>
+    <div>
+      <span>Em preparo</span>
+      <strong>{{ pedidosEmPreparo.length }}</strong>
+    </div>
   </div>
 
   <div class="stat-card card">
-    <span>Saiu entrega</span>
-    <strong>{{ pedidos.filter(isSaiuParaEntrega).length }}</strong>
+    <div class="icon green">💰</div>
+    <div>
+      <span>Faturamento</span>
+      <strong>R$ {{ faturamentoHoje }}</strong>
+    </div>
   </div>
 </section>
 
-<section class="orders card">
-  <h2>Pedidos recentes</h2>
+<section class="dashboard-grid">
 
-  <p *ngIf="loading">Carregando pedidos...</p>
+  <div class="dashboard-column card retirada">
 
-  <div *ngFor="let pedido of pedidos" class="order-item">
-    <div class="order-header">
+    <header class="column-header">
       <div>
-        <h3>Pedido #{{ pedido.codigo }}</h3>
-        <p>{{ pedido.nomeCliente }}</p>
+        <h2>🛍️ Retirada pronta</h2>
+        <p>Pedidos que estão prontos para retirada</p>
       </div>
 
-      <span class="status">{{ pedido.status }}</span>
+      <span>{{ pedidosRetirada.length }}</span>
+    </header>
+
+    <div *ngIf="pedidosRetirada.length === 0" class="empty">
+      Nenhum pedido aguardando retirada.
     </div>
 
-    <div class="order-body">
-      <div *ngFor="let item of pedido.itens">
-        🍔 {{ item.quantidade }}x {{ item.produtoNome }}
+    <div *ngFor="let pedido of pedidosRetirada" class="pedido-row">
+      <div class="pedido-code">
+        #{{ pedido.codigo }}
       </div>
-    </div>
 
-    <div class="order-footer">
-      <strong>R$ {{ pedido.total }}</strong>
-
-      <div class="actions">
-        <button *ngIf="isPendente(pedido)" (click)="alterarStatus(pedido.id, 1)">
-          Em preparo
-        </button>
-
-        <button *ngIf="isEmPreparo(pedido)" (click)="alterarStatus(pedido.id, 2)">
-          Saiu entrega
-        </button>
-
-        <button *ngIf="isSaiuParaEntrega(pedido)" (click)="alterarStatus(pedido.id, 3)">
-          Entregue
-        </button>
-
-        <button *ngIf="podeCancelar(pedido)" class="danger" (click)="alterarStatus(pedido.id, 4)">
-          Cancelar
-        </button>
+      <div class="pedido-cliente">
+        <strong>{{ pedido.nomeCliente }}</strong>
+        <small>🛍️ Retirada</small>
       </div>
+
+      <div class="pedido-itens">
+        {{ pedido.itens?.length || 0 }} itens
+        <small>{{ formatarHora(pedido.dataHora) }}</small>
+      </div>
+
+      <div class="pedido-total">
+        R$ {{ pedido.total }}
+      </div>
+
+      <span class="status pronto">
+        PRONTO
+      </span>
     </div>
+
+    <a routerLink="/admin/pedidos" class="ver-todos verde">
+      Ver todos →
+    </a>
+
   </div>
+
+  <div class="dashboard-column card entrega">
+
+    <header class="column-header">
+      <div>
+        <h2>🛵 Saiu para entrega</h2>
+        <p>Pedidos a caminho do cliente</p>
+      </div>
+
+      <span>{{ pedidosEntrega.length }}</span>
+    </header>
+
+    <div *ngIf="pedidosEntrega.length === 0" class="empty">
+      Nenhum pedido em rota.
+    </div>
+
+    <div *ngFor="let pedido of pedidosEntrega" class="pedido-row">
+      <div class="pedido-code">
+        #{{ pedido.codigo }}
+      </div>
+
+      <div class="pedido-cliente">
+        <strong>{{ pedido.nomeCliente }}</strong>
+        <small>🛵 Delivery</small>
+      </div>
+
+      <div class="pedido-itens">
+        {{ pedido.itens?.length || 0 }} itens
+        <small>{{ formatarHora(pedido.dataHora) }}</small>
+      </div>
+
+      <div class="pedido-total">
+        R$ {{ pedido.total }}
+      </div>
+
+      <span class="status rota">
+        EM ROTA
+      </span>
+    </div>
+
+    <a routerLink="/admin/pedidos" class="ver-todos azul">
+      Ver todos →
+    </a>
+
+  </div>
+
 </section>

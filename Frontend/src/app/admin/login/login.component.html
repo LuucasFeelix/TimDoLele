@@ -1,39 +1,53 @@
 <div class="login-page">
 
-  <div class="login-card card">
+  <section class="login-card">
 
-    <div class="brand">
-      <div class="logo">🍔</div>
+    <div class="login-brand">
+      <div class="logo-box">
+        🍔
+      </div>
 
       <h1>TIM DO LELÊ</h1>
-      <p>Acesso exclusivo</p>
+      <strong>LANCHES</strong>
+      <p>Acesso exclusivo ao painel administrativo</p>
     </div>
 
-    <label>
-      E-mail
-      <input
-        type="email"
-        [(ngModel)]="email"
-        placeholder="Digite seu e-mail"
-      />
-    </label>
+    <div class="login-form">
 
-    <label>
-      Senha
-      <input
-        type="password"
-        [(ngModel)]="senha"
-        placeholder="Digite sua senha"
-      />
-    </label>
+      <label>
+        E-mail
+        <input
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Digite seu e-mail"
+        />
+      </label>
 
-    <button
-      class="primary-button login-button"
-      (click)="login()"
-    >
-      Entrar
-    </button>
+      <label>
+        Senha
+        <input
+          type="password"
+          [(ngModel)]="senha"
+          placeholder="Digite sua senha"
+        />
+      </label>
 
-  </div>
+      <button
+        class="login-button"
+        (click)="login()"
+      >
+        ENTRAR
+      </button>
+
+      <button
+        type="button"
+        class="forgot-button"
+      >
+        Esqueceu sua senha?
+      </button>
+
+    </div>
+
+  </section>
 
 </div>
