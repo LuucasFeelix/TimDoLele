@@ -65,14 +65,20 @@
         #{{ pedido.codigo }}
       </div>
 
-      <div class="pedido-cliente">
+      <div class="pedido-info">
         <strong>{{ pedido.nomeCliente }}</strong>
-        <small>🛍️ Retirada</small>
+
+        <small>
+          🛍️ Retirada • {{ pedido.formaPagamento }} • {{ formatarHora(pedido.dataHora) }}
+        </small>
+
+        <small *ngIf="pedido.trocoPara" class="troco">
+          💵 Troco para R$ {{ pedido.trocoPara }}
+        </small>
       </div>
 
       <div class="pedido-itens">
         {{ pedido.itens?.length || 0 }} itens
-        <small>{{ formatarHora(pedido.dataHora) }}</small>
       </div>
 
       <div class="pedido-total">
@@ -110,14 +116,20 @@
         #{{ pedido.codigo }}
       </div>
 
-      <div class="pedido-cliente">
+      <div class="pedido-info">
         <strong>{{ pedido.nomeCliente }}</strong>
-        <small>🛵 Delivery</small>
+
+        <small>
+          🛵 Delivery • {{ pedido.formaPagamento }} • {{ formatarHora(pedido.dataHora) }}
+        </small>
+
+        <small *ngIf="pedido.trocoPara" class="troco">
+          💵 Troco para R$ {{ pedido.trocoPara }}
+        </small>
       </div>
 
       <div class="pedido-itens">
         {{ pedido.itens?.length || 0 }} itens
-        <small>{{ formatarHora(pedido.dataHora) }}</small>
       </div>
 
       <div class="pedido-total">
