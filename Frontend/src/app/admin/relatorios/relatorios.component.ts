@@ -11,13 +11,17 @@ import { PedidoService } from '../../core/services/pedido.service';
 })
 export class RelatoriosComponent implements OnInit {
 
-  pedidos: any[] = [];
+  relatorio: any = null;
+  loading = false;
 
-  totalPedidos = 0;
-  totalEntregues = 0;
-  totalCancelados = 0;
-  faturamento = 0;
-  ticketMedio = 0;
+  periodoAtual = 'hoje';
+
+  periodos = [
+    { label: 'Hoje', value: 'hoje' },
+    { label: 'Ontem', value: 'ontem' },
+    { label: 'Esta semana', value: 'semana' },
+    { label: 'Este mês', value: 'mes' }
+  ];
 
   constructor(
     private pedidoService: PedidoService,
@@ -25,41 +29,73 @@ export class RelatoriosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.carregarDados();
+    setTimeout(() => {
+      this.carregarRelatorio('hoje');
+    });
   }
 
-  carregarDados(): void {
-    this.pedidoService.getPedidos().subscribe({
+  carregarRelatorio(periodo: string): void {
+    this.periodoAtual = periodo;
+    this.loading = true;
+    this.relatorio = null;
+
+    this.pedidoService.getRelatorio(periodo).subscribe({
       next: (res: any) => {
-        console.log('RELATORIOS PEDIDOS:', res);
-
-        this.pedidos = res.data ?? res;
-
-        this.totalPedidos = this.pedidos.length;
-
-        this.totalEntregues = this.pedidos.filter(
-          (p: any) => String(p.status).trim() === 'Entregue'
-        ).length;
-
-        this.totalCancelados = this.pedidos.filter(
-          (p: any) => String(p.status).trim() === 'Cancelado'
-        ).length;
-
-        this.faturamento = this.pedidos
-          .filter((p: any) => String(p.status).trim() !== 'Cancelado')
-          .reduce(
-            (soma: number, p: any) => soma + Number(p.total),
-            0
-          );
-
-        this.ticketMedio =
-          this.totalPedidos > 0
-            ? this.faturamento / this.totalPedidos
-            : 0;
-
+        this.relatorio = res;
+        this.loading = false;
         this.cdr.detectChanges();
       },
-      error: (err: any) => console.error(err)
+      error: (err: any) => {
+        console.error('Erro ao carregar relatório:', err);
+        this.loading = false;
+        this.cdr.detectChanges();
+      }
     });
+  }
+
+  formatarMoeda(valor: number): string {
+    return Number(valor || 0).toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    });
+  }
+
+  getDeliveryPercentual(): number {
+    return this.relatorio?.percentualDelivery ?? 0;
+  }
+
+  getRetiradaPercentual(): number {
+    return this.relatorio?.percentualRetirada ?? 0;
+  }
+
+  getPagamentoPercentual(item: any): number {
+    return item?.percentual ?? 0;
+  }
+
+  getDonutEntregaStyle(): string {
+    const entrega = this.getDeliveryPercentual();
+
+    return `conic-gradient(#f8b400 0% ${entrega}%, #22c55e ${entrega}% 100%)`;
+  }
+
+  getMaiorFormaPagamento(): any {
+    if (!this.relatorio?.formasPagamento?.length) {
+      return null;
+    }
+
+    return this.relatorio.formasPagamento[0];
+  }
+
+  traduzirPagamento(nome: string): string {
+    if (!nome) return '-';
+
+    const mapa: any = {
+      Pix: 'Pix',
+      Dinheiro: 'Dinheiro',
+      CartaoCredito: 'Crédito',
+      CartaoDebito: 'Débito'
+    };
+
+    return mapa[nome] ?? nome;
   }
 }

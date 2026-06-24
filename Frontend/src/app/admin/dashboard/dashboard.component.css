@@ -56,6 +56,10 @@
   background: #dcfce7;
 }
 
+.icon.purple {
+  background: #ede9fe;
+}
+
 .stat-card span {
   color: #555;
   font-weight: 700;
@@ -71,7 +75,7 @@
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
 }
 
@@ -88,6 +92,10 @@
   align-items: center;
 }
 
+.preparo .column-header {
+  background: linear-gradient(90deg, #fff7ed, #ffffff);
+}
+
 .retirada .column-header {
   background: linear-gradient(90deg, #f0fff4, #ffffff);
 }
@@ -97,7 +105,7 @@
 }
 
 .column-header h2 {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
   color: #111;
 }
@@ -105,6 +113,7 @@
 .column-header p {
   color: #555;
   margin-top: 6px;
+  font-size: 14px;
 }
 
 .column-header span {
@@ -118,6 +127,10 @@
   font-size: 18px;
 }
 
+.preparo .column-header span {
+  background: #f97316;
+}
+
 .retirada .column-header span {
   background: #22c55e;
 }
@@ -126,16 +139,11 @@
   background: #3b82f6;
 }
 
-/* ========================= */
-/* CARDS DE PEDIDOS */
-/* ========================= */
-
 .pedido-row {
   display: grid;
-  grid-template-columns: 110px 1fr 90px 90px 120px;
-  align-items: center;
-  gap: 16px;
-  padding: 18px 28px;
+  grid-template-columns: 95px 1fr;
+  gap: 14px;
+  padding: 18px 22px;
   border-top: 1px solid #eee;
   background: white;
 }
@@ -143,7 +151,7 @@
 .pedido-code {
   color: var(--secondary);
   font-weight: 900;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .pedido-info {
@@ -170,26 +178,32 @@
 }
 
 .pedido-itens {
+  grid-column: 1 / 2;
   color: #222;
   font-weight: 700;
   font-size: 14px;
-  text-align: center;
 }
 
 .pedido-total {
+  grid-column: 2 / 3;
   color: #111;
   font-weight: 900;
   font-size: 16px;
-  text-align: center;
 }
 
 .status {
-  justify-self: end;
+  grid-column: 1 / 3;
+  justify-self: start;
   border-radius: 10px;
-  padding: 10px 18px;
+  padding: 9px 16px;
   font-weight: 900;
-  font-size: 13px;
+  font-size: 12px;
   white-space: nowrap;
+}
+
+.status.preparo-status {
+  background: #ffedd5;
+  color: #c2410c;
 }
 
 .status.pronto {
@@ -212,6 +226,10 @@
   background: white;
 }
 
+.ver-todos.laranja {
+  color: #f97316;
+}
+
 .ver-todos.verde {
   color: #16a34a;
 }
@@ -226,32 +244,12 @@
   border-top: 1px solid #eee;
 }
 
-/* ========================= */
-/* RESPONSIVO */
-/* ========================= */
-
-@media (max-width: 1300px) {
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
+@media (max-width: 1400px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 900px) {
-  .pedido-row {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .pedido-itens,
-  .pedido-total {
-    text-align: left;
-  }
-
-  .status {
-    justify-self: start;
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -82,7 +82,7 @@
 
 .order-row {
   display: grid;
-  grid-template-columns: 1fr 150px 150px 130px;
+  grid-template-columns: 1fr 150px 170px 130px;
   gap: 14px;
   align-items: center;
   border: 1px solid var(--border);
@@ -121,6 +121,7 @@
   text-align: center;
   background: #fff4c2;
   color: #5f4b00;
+  font-size: 13px;
 }
 
 .status-Pendente {
@@ -192,6 +193,15 @@
   display: flex;
   gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.print-button {
+  background: #111;
+  color: white;
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-weight: 700;
 }
 
 .danger-button {

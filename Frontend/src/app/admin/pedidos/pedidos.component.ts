@@ -19,9 +19,7 @@ export class PedidosComponent implements OnInit {
   pedidosFiltrados: any[] = [];
 
   loading = false;
-
   filtroAtual = 'Todos';
-
   pedidoSelecionado: any = null;
 
   filtros = [
@@ -42,13 +40,24 @@ export class PedidosComponent implements OnInit {
     this.carregarPedidos();
   }
 
-  carregarPedidos(): void {
+  carregarPedidos(pedidoIdParaManter?: string): void {
     this.loading = true;
 
     this.pedidoService.getPedidos().subscribe({
       next: (res: any) => {
         this.pedidos = res.data ?? res;
+
         this.aplicarFiltro(this.filtroAtual);
+
+        if (pedidoIdParaManter) {
+          const pedidoAtualizado = this.pedidos.find(
+            p => p.id === pedidoIdParaManter
+          );
+
+          if (pedidoAtualizado) {
+            this.pedidoSelecionado = pedidoAtualizado;
+          }
+        }
 
         this.loading = false;
         this.cdr.detectChanges();
@@ -80,13 +89,86 @@ export class PedidosComponent implements OnInit {
   alterarStatus(pedidoId: string, status: number): void {
     this.pedidoService.atualizarStatus(pedidoId, status).subscribe({
       next: () => {
-        this.carregarPedidos();
+        this.carregarPedidos(pedidoId);
       },
       error: (err: any) => {
         console.error(err);
         alert('Erro ao atualizar status');
       }
     });
+  }
+
+  getStatusTexto(pedido: any): string {
+    if (
+      pedido?.tipoEntrega === 'Retirada' &&
+      pedido?.status === 'SaiuParaEntrega'
+    ) {
+      return 'Pronto para retirada';
+    }
+
+    if (pedido?.status === 'EmPreparo') {
+      return 'Em preparo';
+    }
+
+    if (pedido?.status === 'SaiuParaEntrega') {
+      return 'Saiu para entrega';
+    }
+
+    return pedido?.status ?? '';
+  }
+
+  getProximoTexto(pedido: any): string {
+    if (this.isPendente(pedido)) {
+      return 'Iniciar preparo';
+    }
+
+    if (this.isEmPreparo(pedido)) {
+      return pedido.tipoEntrega === 'Retirada'
+        ? 'Pronto para retirada'
+        : 'Saiu para entrega';
+    }
+
+    if (this.isSaiuParaEntrega(pedido)) {
+      return pedido.tipoEntrega === 'Retirada'
+        ? 'Entregue ao cliente'
+        : 'Entregue';
+    }
+
+    return '';
+  }
+
+  getProximoStatus(pedido: any): number | null {
+    if (this.isPendente(pedido)) {
+      return 1;
+    }
+
+    if (this.isEmPreparo(pedido)) {
+      return 2;
+    }
+
+    if (this.isSaiuParaEntrega(pedido)) {
+      return 3;
+    }
+
+    return null;
+  }
+
+  avancarStatus(pedido: any): void {
+    const proximoStatus = this.getProximoStatus(pedido);
+
+    if (proximoStatus === null) {
+      return;
+    }
+
+    this.alterarStatus(pedido.id, proximoStatus);
+  }
+
+  imprimirPedido(): void {
+    if (!this.pedidoSelecionado) {
+      return;
+    }
+
+    window.print();
   }
 
   isPendente(pedido: any): boolean {
