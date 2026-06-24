@@ -37,9 +37,7 @@ namespace TimDoLele.Application.Services
             await _context.SaveChangesAsync();
 
             var taxaEntrega =
-                dto.TipoEntrega == TipoEntrega.Delivery
-                    ? 5
-                    : 0;
+                dto.TipoEntrega == TipoEntrega.Delivery ? 5 : 0;
 
             var pedido = new Pedido(
                 cliente.Id,
@@ -95,6 +93,7 @@ namespace TimDoLele.Application.Services
                     .ThenInclude(i => i.Produto)
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Adicionais)
+                        .ThenInclude(a => a.Adicional)
                 .AsQueryable();
 
             if (clienteId.HasValue)
@@ -140,6 +139,7 @@ namespace TimDoLele.Application.Services
                     Adicionais = i.Adicionais.Select(a => new AdicionalResponseDto
                     {
                         AdicionalId = a.AdicionalId,
+                        Nome = a.Adicional != null ? a.Adicional.Nome : "",
                         Preco = a.Preco
                     }).ToList()
                 }).ToList()
@@ -163,6 +163,7 @@ namespace TimDoLele.Application.Services
                     .ThenInclude(i => i.Produto)
                 .Include(p => p.Itens)
                     .ThenInclude(i => i.Adicionais)
+                        .ThenInclude(a => a.Adicional)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (pedido == null)
@@ -192,6 +193,7 @@ namespace TimDoLele.Application.Services
                     Adicionais = i.Adicionais.Select(a => new AdicionalResponseDto
                     {
                         AdicionalId = a.AdicionalId,
+                        Nome = a.Adicional != null ? a.Adicional.Nome : "",
                         Preco = a.Preco
                     }).ToList()
                 }).ToList()
@@ -208,6 +210,124 @@ namespace TimDoLele.Application.Services
             pedido.AtualizarStatus(status);
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<RelatorioDto> ObterRelatorioAsync(
+            string periodo = "hoje",
+            DateTime? dataInicio = null,
+            DateTime? dataFim = null)
+        {
+            DateTime inicio;
+            DateTime fim;
+
+            var hoje = DateTime.Today;
+
+            switch (periodo.ToLower())
+            {
+                case "ontem":
+                    inicio = hoje.AddDays(-1);
+                    fim = hoje;
+                    break;
+
+                case "semana":
+                    inicio = hoje.AddDays(-7);
+                    fim = hoje.AddDays(1);
+                    break;
+
+                case "mes":
+                    inicio = new DateTime(hoje.Year, hoje.Month, 1);
+                    fim = inicio.AddMonths(1);
+                    break;
+
+                case "personalizado":
+                    inicio = dataInicio?.Date ?? hoje;
+                    fim = dataFim?.Date.AddDays(1) ?? hoje.AddDays(1);
+                    break;
+
+                default:
+                    inicio = hoje;
+                    fim = hoje.AddDays(1);
+                    break;
+            }
+
+            var pedidos = await _context.Pedidos
+                .Where(p => p.DataHora >= inicio && p.DataHora < fim)
+                .ToListAsync();
+
+            var totalPedidos = pedidos.Count;
+
+            var pedidosEntregues = pedidos
+                .Count(p => p.Status == StatusPedido.Entregue);
+
+            var pedidosCancelados = pedidos
+                .Count(p => p.Status == StatusPedido.Cancelado);
+
+            var faturamento = pedidos
+                .Where(p => p.Status == StatusPedido.Entregue)
+                .Sum(p => p.Total);
+
+            var delivery = pedidos
+                .Count(p => p.TipoEntrega == TipoEntrega.Delivery);
+
+            var retirada = pedidos
+                .Count(p => p.TipoEntrega == TipoEntrega.Retirada);
+
+            var clientesAtendidos = pedidos
+                .Select(p => p.ClienteId)
+                .Distinct()
+                .Count();
+
+            var taxaCancelamento = totalPedidos > 0
+                ? Math.Round((decimal)pedidosCancelados / totalPedidos * 100, 2)
+                : 0;
+
+            var percentualDelivery = totalPedidos > 0
+                ? Math.Round((decimal)delivery / totalPedidos * 100, 2)
+                : 0;
+
+            var percentualRetirada = totalPedidos > 0
+                ? Math.Round((decimal)retirada / totalPedidos * 100, 2)
+                : 0;
+
+            var pedidosValidosPagamento = pedidos
+                .Where(p => p.Status != StatusPedido.Cancelado)
+                .ToList();
+
+            var totalPagamento = pedidosValidosPagamento.Sum(p => p.Total);
+
+            var formasPagamento = pedidosValidosPagamento
+                .GroupBy(p => p.FormaPagamento)
+                .Select(g => new FormaPagamentoRelatorioDto
+                {
+                    Nome = g.Key.ToString(),
+                    Quantidade = g.Count(),
+                    Valor = g.Sum(p => p.Total),
+                    Percentual = totalPagamento > 0
+                        ? Math.Round(g.Sum(p => p.Total) / totalPagamento * 100, 2)
+                        : 0
+                })
+                .OrderByDescending(x => x.Valor)
+                .ToList();
+
+            return new RelatorioDto
+            {
+                Faturamento = faturamento,
+                Pedidos = totalPedidos,
+                Delivery = delivery,
+                Retirada = retirada,
+                PercentualDelivery = percentualDelivery,
+                PercentualRetirada = percentualRetirada,
+                FormasPagamento = formasPagamento,
+
+                Resumo = new ResumoRelatorioDto
+                {
+                    TotalPedidos = totalPedidos,
+                    PedidosEntregues = pedidosEntregues,
+                    PedidosCancelados = pedidosCancelados,
+                    TaxaCancelamento = taxaCancelamento,
+                    ClientesAtendidos = clientesAtendidos
+                }
+            };
         }
 
         public async Task<DashBoardPedidosDto> ObterDashboardAsync()

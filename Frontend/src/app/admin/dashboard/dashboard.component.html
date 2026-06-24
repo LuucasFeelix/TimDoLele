@@ -1,7 +1,7 @@
 <header class="page-header">
   <div>
     <h1>Dashboard</h1>
-    <p>Controle geral da lanchonete</p>
+    <p>Controle operacional da lanchonete</p>
   </div>
 
   <button class="primary-button" (click)="carregarPedidos()">
@@ -35,15 +35,68 @@
   </div>
 
   <div class="stat-card card">
-    <div class="icon green">💰</div>
+    <div class="icon purple">🛵</div>
     <div>
-      <span>Faturamento</span>
-      <strong>R$ {{ faturamentoHoje }}</strong>
+      <span>Saiu entrega</span>
+      <strong>{{ pedidosEntrega.length }}</strong>
     </div>
   </div>
 </section>
 
 <section class="dashboard-grid">
+
+  <div class="dashboard-column card preparo">
+
+    <header class="column-header">
+      <div>
+        <h2>👨‍🍳 Em preparo</h2>
+        <p>Pedidos que estão sendo preparados</p>
+      </div>
+
+      <span>{{ pedidosEmPreparo.length }}</span>
+    </header>
+
+    <div *ngIf="pedidosEmPreparo.length === 0" class="empty">
+      Nenhum pedido em preparo.
+    </div>
+
+    <div *ngFor="let pedido of pedidosEmPreparo" class="pedido-row">
+      <div class="pedido-code">
+        #{{ pedido.codigo }}
+      </div>
+
+      <div class="pedido-info">
+        <strong>{{ pedido.nomeCliente }}</strong>
+
+        <small>
+          {{ pedido.tipoEntrega === 'Delivery' ? '🛵 Delivery' : '🛍️ Retirada' }}
+          • {{ pedido.formaPagamento }}
+          • {{ formatarHora(pedido.dataHora) }}
+        </small>
+
+        <small *ngIf="pedido.trocoPara" class="troco">
+          💵 Troco para R$ {{ pedido.trocoPara }}
+        </small>
+      </div>
+
+      <div class="pedido-itens">
+        {{ pedido.itens?.length || 0 }} itens
+      </div>
+
+      <div class="pedido-total">
+        R$ {{ pedido.total }}
+      </div>
+
+      <span class="status preparo-status">
+        PREPARO
+      </span>
+    </div>
+
+    <a routerLink="/admin/pedidos" class="ver-todos laranja">
+      Ver todos →
+    </a>
+
+  </div>
 
   <div class="dashboard-column card retirada">
 

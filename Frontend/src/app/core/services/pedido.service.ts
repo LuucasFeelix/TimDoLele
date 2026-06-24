@@ -30,4 +30,8 @@ export class PedidoService {
   getCardapio() {
     return this.http.get<any>(this.cardapioApi);
   }
+
+  getRelatorio(periodo: string = 'hoje') {
+    return this.http.get<any>(`${this.api}/relatorios?periodo=${periodo}`);
+  }
 }

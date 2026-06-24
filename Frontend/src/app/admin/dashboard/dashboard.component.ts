@@ -30,7 +30,7 @@ export class Dashboard implements OnInit {
   constructor(
     private pedidoService: PedidoService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.carregarPedidos();
@@ -54,7 +54,7 @@ export class Dashboard implements OnInit {
         this.pedidosRetirada = this.pedidos.filter(
           (p: any) =>
             p.tipoEntrega === 'Retirada' &&
-            p.status === 'EmPreparo'
+            p.status === 'SaiuParaEntrega'
         );
 
         this.pedidosEntrega = this.pedidos.filter(

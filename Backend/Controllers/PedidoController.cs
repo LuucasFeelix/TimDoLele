@@ -70,10 +70,26 @@ namespace TimDoLeLe.Controllers
         [HttpGet("dashboard")]
         public async Task<IActionResult> GetDashboard()
         {
-            var dashboard =
-                await _pedidoService.ObterDashboardAsync();
+            var dashboard = await _pedidoService.ObterDashboardAsync();
 
             return Ok(dashboard);
+        }
+
+        // ADMIN
+        [Authorize(Roles = "Admin")]
+        [HttpGet("relatorios")]
+        public async Task<IActionResult> GetRelatorio(
+            [FromQuery] string periodo = "hoje",
+            [FromQuery] DateTime? dataInicio = null,
+            [FromQuery] DateTime? dataFim = null)
+        {
+            var relatorio = await _pedidoService.ObterRelatorioAsync(
+                periodo,
+                dataInicio,
+                dataFim
+            );
+
+            return Ok(relatorio);
         }
 
         // ADMIN
@@ -81,8 +97,7 @@ namespace TimDoLeLe.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var pedido =
-                await _pedidoService.ObterPedidoPorIdAsync(id);
+            var pedido = await _pedidoService.ObterPedidoPorIdAsync(id);
 
             return Ok(pedido);
         }

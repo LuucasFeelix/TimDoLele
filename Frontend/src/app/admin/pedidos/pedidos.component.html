@@ -21,7 +21,7 @@
   </div>
 
   <div class="summary-card card">
-    <span>Saiu entrega</span>
+    <span>Saiu entrega / Pronto retirada</span>
     <strong>{{ contar('SaiuParaEntrega') }}</strong>
   </div>
 
@@ -37,7 +37,11 @@
 </section>
 
 <section class="filters card">
-  <button *ngFor="let filtro of filtros" [class.active]="filtroAtual === filtro" (click)="aplicarFiltro(filtro)">
+  <button
+    *ngFor="let filtro of filtros"
+    [class.active]="filtroAtual === filtro"
+    (click)="aplicarFiltro(filtro)"
+  >
     {{ filtro }}
     <span>{{ contar(filtro) }}</span>
   </button>
@@ -53,19 +57,26 @@
       Carregando pedidos...
     </p>
 
-    <div *ngIf="!loading && pedidosFiltrados.length === 0" class="empty">
+    <div
+      *ngIf="!loading && pedidosFiltrados.length === 0"
+      class="empty"
+    >
       Nenhum pedido encontrado.
     </div>
 
-    <div *ngFor="let pedido of pedidosFiltrados" class="order-row"
-      [class.selected]="pedidoSelecionado?.id === pedido.id" (click)="selecionarPedido(pedido)">
+    <div
+      *ngFor="let pedido of pedidosFiltrados"
+      class="order-row"
+      [class.selected]="pedidoSelecionado?.id === pedido.id"
+      (click)="selecionarPedido(pedido)"
+    >
       <div>
         <h3>Pedido #{{ pedido.codigo }}</h3>
 
         <small>
           {{ pedido.nomeCliente }}
-          {{ pedido.tipoEntrega === 'Delivery' ? 'Delivery' : 'Retirada' }}
-          •{{ pedido.formaPagamento }}
+          • {{ pedido.tipoEntrega === 'Delivery' ? 'Delivery' : 'Retirada' }}
+          • {{ pedido.formaPagamento }}
         </small>
       </div>
 
@@ -75,7 +86,7 @@
       </div>
 
       <span class="status status-{{ pedido.status }}">
-        {{ pedido.status }}
+        {{ getStatusTexto(pedido) }}
       </span>
 
       <button class="details-button">
@@ -96,11 +107,11 @@
       <header class="details-header">
         <div>
           <h2>Pedido #{{ pedidoSelecionado.codigo }}</h2>
-          <p>{{ pedidoSelecionado.status }}</p>
+          <p>{{ getStatusTexto(pedidoSelecionado) }}</p>
         </div>
 
         <span class="status status-{{ pedidoSelecionado.status }}">
-          {{ pedidoSelecionado.status }}
+          {{ getStatusTexto(pedidoSelecionado) }}
         </span>
       </header>
 
@@ -136,7 +147,10 @@
       <section class="items">
         <h3>Itens do pedido</h3>
 
-        <div *ngFor="let item of pedidoSelecionado.itens" class="detail-item">
+        <div
+          *ngFor="let item of pedidoSelecionado.itens"
+          class="detail-item"
+        >
           <div>
             <strong>
               {{ item.quantidade }}x {{ item.produtoNome }}
@@ -155,25 +169,30 @@
       </section>
 
       <section class="actions">
-        <button *ngIf="isPendente(pedidoSelecionado)" class="primary-button"
-          (click)="alterarStatus(pedidoSelecionado.id, 1)">
-          Iniciar preparo
+
+        <button
+          class="print-button"
+          (click)="imprimirPedido()"
+        >
+          🖨️ Imprimir
         </button>
 
-        <button *ngIf="isEmPreparo(pedidoSelecionado)" class="primary-button"
-          (click)="alterarStatus(pedidoSelecionado.id, 2)">
-          Saiu entrega
+        <button
+          *ngIf="getProximoStatus(pedidoSelecionado) !== null"
+          class="primary-button"
+          (click)="avancarStatus(pedidoSelecionado)"
+        >
+          {{ getProximoTexto(pedidoSelecionado) }}
         </button>
 
-        <button *ngIf="isSaiuParaEntrega(pedidoSelecionado)" class="primary-button"
-          (click)="alterarStatus(pedidoSelecionado.id, 3)">
-          Entregue
-        </button>
-
-        <button *ngIf="podeCancelar(pedidoSelecionado)" class="danger-button"
-          (click)="alterarStatus(pedidoSelecionado.id, 4)">
+        <button
+          *ngIf="podeCancelar(pedidoSelecionado)"
+          class="danger-button"
+          (click)="alterarStatus(pedidoSelecionado.id, 4)"
+        >
           Cancelar pedido
         </button>
+
       </section>
 
     </ng-container>

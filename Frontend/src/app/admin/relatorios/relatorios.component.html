@@ -1,39 +1,193 @@
-<header class="admin-header">
-  <div>
-    <h1>Relatórios</h1>
-    <p>Indicadores da lanchonete</p>
+<header class="page-header">
+  <div class="title-area">
+    <div class="title-icon">📊</div>
+
+    <div>
+      <h1>Relatórios</h1>
+      <p>Acompanhe o desempenho do seu negócio</p>
+    </div>
+  </div>
+
+  <div class="periodos">
+    <button
+      *ngFor="let periodo of periodos"
+      [class.active]="periodoAtual === periodo.value"
+      (click)="carregarRelatorio(periodo.value)"
+    >
+      {{ periodo.label }}
+    </button>
   </div>
 </header>
 
-<section class="cards">
+<div *ngIf="loading" class="loading card">
+  Carregando relatório...
+</div>
 
-  <div class="card">
-    <span>Total pedidos</span>
-    <strong>{{ totalPedidos }}</strong>
-  </div>
+<ng-container *ngIf="!loading && relatorio">
 
-  <div class="card">
-    <span>Entregues</span>
-    <strong>{{ totalEntregues }}</strong>
-  </div>
+  <section class="cards">
 
-  <div class="card">
-    <span>Cancelados</span>
-    <strong>{{ totalCancelados }}</strong>
-  </div>
+    <div class="stat-card card">
+      <div class="icon money">💰</div>
 
-  <div class="card">
-    <span>Faturamento</span>
-    <strong>
-      R$ {{ faturamento.toFixed(2) }}
-    </strong>
-  </div>
+      <div>
+        <span>Faturamento</span>
+        <strong class="green-value">
+          {{ formatarMoeda(relatorio.faturamento) }}
+        </strong>
+      </div>
+    </div>
 
-  <div class="card">
-    <span>Ticket médio</span>
-    <strong>
-      R$ {{ ticketMedio.toFixed(2) }}
-    </strong>
-  </div>
+    <div class="stat-card card">
+      <div class="icon orders">📦</div>
 
-</section>
+      <div>
+        <span>Pedidos</span>
+        <strong>{{ relatorio.pedidos }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card card">
+      <div class="icon delivery">🛵</div>
+
+      <div>
+        <span>Entrega</span>
+        <strong>{{ relatorio.delivery }}</strong>
+        <small>{{ relatorio.percentualDelivery }}% do total</small>
+      </div>
+    </div>
+
+    <div class="stat-card card">
+      <div class="icon pickup">🛍️</div>
+
+      <div>
+        <span>Retirada</span>
+        <strong>{{ relatorio.retirada }}</strong>
+        <small>{{ relatorio.percentualRetirada }}% do total</small>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="main-grid">
+
+    <div class="chart-card card">
+      <header>
+        <h2>Entrega x Retirada</h2>
+      </header>
+
+      <div class="donut-area">
+        <div
+          class="donut"
+          [style.background]="getDonutEntregaStyle()"
+        >
+          <div>
+            <strong>{{ relatorio.pedidos }}</strong>
+            <span>pedidos</span>
+          </div>
+        </div>
+
+        <div class="legend">
+          <div>
+            <span class="dot yellow"></span>
+            <span>Entrega: {{ relatorio.delivery }} ({{ relatorio.percentualDelivery }}%)</span>
+          </div>
+
+          <div>
+            <span class="dot green"></span>
+            <span>Retirada: {{ relatorio.retirada }} ({{ relatorio.percentualRetirada }}%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card card">
+      <header>
+        <h2>Formas de pagamento</h2>
+      </header>
+
+      <div
+        *ngIf="relatorio.formasPagamento.length === 0"
+        class="empty"
+      >
+        Nenhum pagamento encontrado.
+      </div>
+
+      <div
+        *ngFor="let pagamento of relatorio.formasPagamento"
+        class="payment-row"
+      >
+        <div class="payment-name">
+          <strong>{{ traduzirPagamento(pagamento.nome) }}</strong>
+          <small>{{ pagamento.percentual }}%</small>
+        </div>
+
+        <div class="payment-values">
+          <strong>{{ formatarMoeda(pagamento.valor) }}</strong>
+        </div>
+
+        <div class="bar">
+          <div
+            class="bar-fill"
+            [style.width.%]="getPagamentoPercentual(pagamento)"
+          ></div>
+        </div>
+      </div>
+
+      <div class="payment-total">
+        Total:
+        <strong>{{ formatarMoeda(relatorio.faturamento) }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-card card">
+      <header>
+        <h2>Resumo geral</h2>
+      </header>
+
+      <div class="summary-list">
+        <div>
+          <span>Total de pedidos</span>
+          <strong>{{ relatorio.resumo.totalPedidos }}</strong>
+        </div>
+
+        <div>
+          <span>Pedidos entregues</span>
+          <strong>{{ relatorio.resumo.pedidosEntregues }}</strong>
+        </div>
+
+        <div>
+          <span>Pedidos cancelados</span>
+          <strong>{{ relatorio.resumo.pedidosCancelados }}</strong>
+        </div>
+
+        <div>
+          <span>Taxa de cancelamento</span>
+          <strong class="danger">{{ relatorio.resumo.taxaCancelamento }}%</strong>
+        </div>
+
+        <div>
+          <span>Clientes atendidos</span>
+          <strong>{{ relatorio.resumo.clientesAtendidos }}</strong>
+        </div>
+
+        <div>
+          <span>Pagamento mais usado</span>
+          <strong>{{ traduzirPagamento(getMaiorFormaPagamento()?.nome) }}</strong>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="report-footer card">
+    <div>
+      📅 Relatório referente ao período selecionado
+    </div>
+
+    <button>
+      ⬇ Exportar relatório
+    </button>
+  </footer>
+
+</ng-container>
