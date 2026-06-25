@@ -20,7 +20,16 @@ export class RelatoriosComponent implements OnInit {
     { label: 'Hoje', value: 'hoje' },
     { label: 'Ontem', value: 'ontem' },
     { label: 'Esta semana', value: 'semana' },
-    { label: 'Este mês', value: 'mes' }
+    { label: 'Este mês', value: 'mes' },
+    { label: 'Personalizado', value: 'personalizado' }
+  ];
+
+  coresPagamento = [
+    '#22c55e',
+    '#f8b400',
+    '#8b5cf6',
+    '#0ea5e9',
+    '#ef4444'
   ];
 
   constructor(
@@ -29,9 +38,7 @@ export class RelatoriosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.carregarRelatorio('hoje');
-    });
+    this.carregarRelatorio('hoje');
   }
 
   carregarRelatorio(periodo: string): void {
@@ -60,30 +67,38 @@ export class RelatoriosComponent implements OnInit {
     });
   }
 
-  getDeliveryPercentual(): number {
-    return this.relatorio?.percentualDelivery ?? 0;
-  }
-
-  getRetiradaPercentual(): number {
-    return this.relatorio?.percentualRetirada ?? 0;
-  }
-
-  getPagamentoPercentual(item: any): number {
-    return item?.percentual ?? 0;
-  }
-
   getDonutEntregaStyle(): string {
-    const entrega = this.getDeliveryPercentual();
+    const entrega = this.relatorio?.percentualDelivery ?? 0;
 
-    return `conic-gradient(#f8b400 0% ${entrega}%, #22c55e ${entrega}% 100%)`;
+    return `conic-gradient(
+      #f8b400 0% ${entrega}%,
+      #22c55e ${entrega}% 100%
+    )`;
   }
 
-  getMaiorFormaPagamento(): any {
+  getDonutPagamentoStyle(): string {
     if (!this.relatorio?.formasPagamento?.length) {
-      return null;
+      return 'conic-gradient(#e5e7eb 0% 100%)';
     }
 
-    return this.relatorio.formasPagamento[0];
+    let inicio = 0;
+
+    const partes = this.relatorio.formasPagamento.map((item: any, index: number) => {
+      const fim = inicio + Number(item.percentual || 0);
+      const cor = this.coresPagamento[index] || '#999';
+
+      const parte = `${cor} ${inicio}% ${fim}%`;
+
+      inicio = fim;
+
+      return parte;
+    });
+
+    return `conic-gradient(${partes.join(', ')})`;
+  }
+
+  getCorPagamento(index: number): string {
+    return this.coresPagamento[index] || '#999';
   }
 
   traduzirPagamento(nome: string): string {
@@ -97,5 +112,13 @@ export class RelatoriosComponent implements OnInit {
     };
 
     return mapa[nome] ?? nome;
+  }
+
+  getMaiorFormaPagamento(): any {
+    if (!this.relatorio?.formasPagamento?.length) {
+      return null;
+    }
+
+    return this.relatorio.formasPagamento[0];
   }
 }
