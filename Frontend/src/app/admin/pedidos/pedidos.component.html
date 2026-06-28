@@ -1,160 +1,217 @@
 <header class="page-header">
-  <div>
-    <h1>Pedidos</h1>
-    <p>Gerencie todos os pedidos da lanchonete</p>
+  <div class="page-title">
+    <div class="page-icon">📦</div>
+
+    <div>
+      <h1>Pedidos</h1>
+      <p>Gerencie todos os pedidos da lanchonete</p>
+    </div>
   </div>
 
-  <button class="primary-button" (click)="carregarPedidos()">
-    🔄 Atualizar
+  <button class="outline-button" (click)="carregarPedidos()">
+    🔄 Atualizar pedidos
   </button>
 </header>
 
 <section class="summary">
-  <div class="summary-card card">
-    <span>Pendentes</span>
-    <strong>{{ contar('Pendente') }}</strong>
+  <div class="summary-card card pendente">
+    <div class="summary-icon">📋</div>
+    <div>
+      <span>Pendentes</span>
+      <strong>{{ contarPendentes() }}</strong>
+      <small>Aguardando início</small>
+    </div>
   </div>
 
-  <div class="summary-card card">
-    <span>Em preparo</span>
-    <strong>{{ contar('EmPreparo') }}</strong>
+  <div class="summary-card card preparo">
+    <div class="summary-icon">👨‍🍳</div>
+    <div>
+      <span>Em preparo</span>
+      <strong>{{ contarEmPreparo() }}</strong>
+      <small>Na cozinha</small>
+    </div>
   </div>
 
-  <div class="summary-card card">
-    <span>Saiu entrega / Pronto retirada</span>
-    <strong>{{ contar('SaiuParaEntrega') }}</strong>
+  <div class="summary-card card entrega">
+    <div class="summary-icon">🛵</div>
+    <div>
+      <span>Entrega</span>
+      <strong>{{ contarEntrega() }}</strong>
+      <small>Em rota</small>
+    </div>
   </div>
 
-  <div class="summary-card card">
-    <span>Entregues</span>
-    <strong>{{ contar('Entregue') }}</strong>
+  <div class="summary-card card retirada">
+    <div class="summary-icon">🛍️</div>
+    <div>
+      <span>Retirada</span>
+      <strong>{{ contarRetirada() }}</strong>
+      <small>Aguardando cliente</small>
+    </div>
   </div>
 
-  <div class="summary-card card">
-    <span>Cancelados</span>
-    <strong>{{ contar('Cancelado') }}</strong>
+  <div class="summary-card card cancelado">
+    <div class="summary-icon">❌</div>
+    <div>
+      <span>Cancelados</span>
+      <strong>{{ contarCancelados() }}</strong>
+      <small>Pedidos cancelados</small>
+    </div>
   </div>
 </section>
 
 <section class="filters card">
   <button
     *ngFor="let filtro of filtros"
-    [class.active]="filtroAtual === filtro"
-    (click)="aplicarFiltro(filtro)"
+    [class.active]="filtroAtual === filtro.valor"
+    (click)="aplicarFiltro(filtro.valor)"
   >
-    {{ filtro }}
-    <span>{{ contar(filtro) }}</span>
+    {{ filtro.icone }} {{ filtro.label }}
+    <span>{{ contarFiltro(filtro.valor) }}</span>
   </button>
 </section>
 
 <section class="orders-layout">
+  <div class="orders-table-card card">
+    <div class="list-header">
+      <div>
+        <h2>Lista de pedidos</h2>
+        <p>Selecione um pedido para ver os detalhes</p>
+      </div>
 
-  <div class="orders-list card">
+      <strong>{{ pedidosFiltrados.length }} pedidos</strong>
+    </div>
 
-    <h2>Lista de pedidos</h2>
-
-    <p *ngIf="loading">
+    <p *ngIf="loading" class="loading-text">
       Carregando pedidos...
     </p>
 
-    <div
-      *ngIf="!loading && pedidosFiltrados.length === 0"
-      class="empty"
-    >
+    <div *ngIf="!loading && pedidosFiltrados.length === 0" class="empty">
       Nenhum pedido encontrado.
     </div>
 
-    <div
-      *ngFor="let pedido of pedidosFiltrados"
-      class="order-row"
-      [class.selected]="pedidoSelecionado?.id === pedido.id"
-      (click)="selecionarPedido(pedido)"
-    >
-      <div>
-        <h3>Pedido #{{ pedido.codigo }}</h3>
+    <div *ngIf="!loading && pedidosFiltrados.length > 0" class="table-wrapper">
+      <table class="orders-table">
+        <thead>
+          <tr>
+            <th>Código do pedido</th>
+            <th>Data do pedido</th>
+            <th>Entrega</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Ver Pedido</th>
+          </tr>
+        </thead>
 
-        <small>
-          {{ pedido.nomeCliente }}
-          • {{ pedido.tipoEntrega === 'Delivery' ? 'Delivery' : 'Retirada' }}
-          • {{ pedido.formaPagamento }}
-        </small>
-      </div>
+        <tbody>
+          <tr
+            *ngFor="let pedido of pedidosFiltrados"
+            class="order-line"
+            [class.selected]="pedidoSelecionado?.id === pedido.id"
+            (click)="selecionarPedido(pedido)"
+          >
+            <td class="pedido-code">
+              Pedido #{{ pedido.codigo }}
+            </td>
 
-      <div>
-        <span>{{ pedido.itens?.length || 0 }} itens</span>
-        <strong>R$ {{ pedido.total }}</strong>
-      </div>
+            <td>
+              {{ formatarData(pedido.dataHora) }}
+              <br />
+              <small>às {{ formatarHora(pedido.dataHora) }}</small>
+            </td>
 
-      <span class="status status-{{ pedido.status }}">
-        {{ getStatusTexto(pedido) }}
-      </span>
+            <td
+              class="delivery-column"
+              [class.delivery-yes]="pedido.tipoEntrega === 'Delivery'"
+              [class.delivery-no]="pedido.tipoEntrega !== 'Delivery'"
+            >
+              {{ pedido.tipoEntrega === 'Delivery' ? 'SIM' : 'NÃO' }}
+            </td>
 
-      <button class="details-button">
-        Ver detalhes
-      </button>
+            <td>
+              {{ pedido.nomeCliente }}
+            </td>
+
+            <td>
+              {{ pedido.telefone || '-' }}
+            </td>
+
+            <td class="total-column">
+              R$ {{ pedido.total }}
+            </td>
+
+            <td>
+              <span class="status" [ngClass]="getStatusClasse(pedido)">
+                {{ getStatusTexto(pedido) }}
+              </span>
+            </td>
+
+            <td>
+              <button class="view-button" (click)="selecionarPedido(pedido); $event.stopPropagation()">
+                👁️ Ver Pedido
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
   </div>
 
   <aside class="order-details card">
-
-    <div *ngIf="!pedidoSelecionado" class="empty">
+    <div *ngIf="!pedidoSelecionado" class="empty details-empty">
       Selecione um pedido para ver os detalhes.
     </div>
 
     <ng-container *ngIf="pedidoSelecionado">
-
       <header class="details-header">
         <div>
           <h2>Pedido #{{ pedidoSelecionado.codigo }}</h2>
-          <p>{{ getStatusTexto(pedidoSelecionado) }}</p>
+          <p>📅 {{ formatarData(pedidoSelecionado.dataHora) }} às {{ formatarHora(pedidoSelecionado.dataHora) }}</p>
         </div>
 
-        <span class="status status-{{ pedidoSelecionado.status }}">
+        <span class="status" [ngClass]="getStatusClasse(pedidoSelecionado)">
           {{ getStatusTexto(pedidoSelecionado) }}
         </span>
       </header>
 
-      <section class="customer-info">
-        <p><b>Cliente:</b> {{ pedidoSelecionado.nomeCliente }}</p>
+      <section class="detail-section">
+        <h3>👤 Informações do cliente</h3>
 
-        <p>
-          <b>Tipo de entrega:</b>
-          {{ pedidoSelecionado.tipoEntrega === 'Delivery' ? 'Delivery' : 'Retirada na loja' }}
-        </p>
+        <div class="info-grid">
+          <span>Cliente:</span>
+          <strong>{{ pedidoSelecionado.nomeCliente }}</strong>
 
-        <p>
-          <b>Taxa de entrega:</b>
-          R$ {{ pedidoSelecionado.delivery }}
-        </p>
+          <span>Telefone:</span>
+          <strong>{{ pedidoSelecionado.telefone || '-' }}</strong>
 
-        <p>
-          <b>Pagamento:</b>
-          {{ pedidoSelecionado.formaPagamento }}
-        </p>
+          <span>Tipo de entrega:</span>
+          <strong>{{ pedidoSelecionado.tipoEntrega === 'Delivery' ? '🛵 Entrega' : '🛍️ Retirada' }}</strong>
 
-        <p *ngIf="pedidoSelecionado.trocoPara">
-          <b>Troco para:</b>
-          R$ {{ pedidoSelecionado.trocoPara }}
-        </p>
+          <span>Pagamento:</span>
+          <strong>💳 {{ traduzirPagamento(pedidoSelecionado.formaPagamento) }}</strong>
 
-        <p>
-          <b>Total:</b>
-          R$ {{ pedidoSelecionado.total }}
-        </p>
+          <span *ngIf="pedidoSelecionado.trocoPara">Troco para:</span>
+          <strong *ngIf="pedidoSelecionado.trocoPara">R$ {{ pedidoSelecionado.trocoPara }}</strong>
+
+          <span>Taxa de entrega:</span>
+          <strong>R$ {{ pedidoSelecionado.delivery }}</strong>
+
+          <span>Total do pedido:</span>
+          <strong class="total-detail">R$ {{ pedidoSelecionado.total }}</strong>
+        </div>
       </section>
 
-      <section class="items">
-        <h3>Itens do pedido</h3>
+      <section class="detail-section">
+        <h3>🍔 Itens do pedido</h3>
 
-        <div
-          *ngFor="let item of pedidoSelecionado.itens"
-          class="detail-item"
-        >
+        <div *ngFor="let item of pedidoSelecionado.itens" class="detail-item">
           <div>
-            <strong>
-              {{ item.quantidade }}x {{ item.produtoNome }}
-            </strong>
+            <div class="item-title">
+              <span>{{ item.quantidade }}x</span>
+              <strong>{{ item.produtoNome }}</strong>
+            </div>
 
             <ul *ngIf="item.adicionais?.length > 0">
               <li *ngFor="let adicional of item.adicionais">
@@ -166,37 +223,37 @@
 
           <strong>R$ {{ item.valor }}</strong>
         </div>
+
+        <div class="items-total">
+          Total de itens: {{ pedidoSelecionado.itens?.length || 0 }} item(ns)
+        </div>
       </section>
 
-      <section class="actions">
+      <section class="detail-section actions-section">
+        <h3>⚙️ Ações</h3>
 
-        <button
-          class="print-button"
-          (click)="imprimirPedido()"
-        >
-          🖨️ Imprimir
-        </button>
+        <div class="actions">
+          <button class="print-button" (click)="imprimirPedido()">
+            🖨️ Imprimir pedido
+          </button>
 
-        <button
-          *ngIf="getProximoStatus(pedidoSelecionado) !== null"
-          class="primary-button"
-          (click)="avancarStatus(pedidoSelecionado)"
-        >
-          {{ getProximoTexto(pedidoSelecionado) }}
-        </button>
+          <button
+            *ngIf="getProximoStatus(pedidoSelecionado) !== null"
+            class="primary-button"
+            (click)="avancarStatus(pedidoSelecionado)"
+          >
+            {{ getProximoTexto(pedidoSelecionado) }}
+          </button>
 
-        <button
-          *ngIf="podeCancelar(pedidoSelecionado)"
-          class="danger-button"
-          (click)="alterarStatus(pedidoSelecionado.id, 4)"
-        >
-          Cancelar pedido
-        </button>
-
+          <button
+            *ngIf="podeCancelar(pedidoSelecionado)"
+            class="danger-button"
+            (click)="alterarStatus(pedidoSelecionado.id, 4)"
+          >
+            ❌ Cancelar pedido
+          </button>
+        </div>
       </section>
-
     </ng-container>
-
   </aside>
-
 </section>

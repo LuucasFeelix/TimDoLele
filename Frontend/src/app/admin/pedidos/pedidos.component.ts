@@ -23,12 +23,13 @@ export class PedidosComponent implements OnInit {
   pedidoSelecionado: any = null;
 
   filtros = [
-    'Todos',
-    'Pendente',
-    'EmPreparo',
-    'SaiuParaEntrega',
-    'Entregue',
-    'Cancelado'
+    { label: 'Todos', valor: 'Todos', icone: '☰' },
+    { label: 'Pendentes', valor: 'Pendente', icone: '📋' },
+    { label: 'Em preparo', valor: 'EmPreparo', icone: '👨‍🍳' },
+    { label: 'Entrega', valor: 'Entrega', icone: '🛵' },
+    { label: 'Retirada', valor: 'Retirada', icone: '🛍️' },
+    { label: 'Entregues', valor: 'Entregue', icone: '✅' },
+    { label: 'Cancelados', valor: 'Cancelado', icone: '❌' }
   ];
 
   constructor(
@@ -51,7 +52,7 @@ export class PedidosComponent implements OnInit {
 
         if (pedidoIdParaManter) {
           const pedidoAtualizado = this.pedidos.find(
-            p => p.id === pedidoIdParaManter
+            (p: any) => p.id === pedidoIdParaManter
           );
 
           if (pedidoAtualizado) {
@@ -65,6 +66,7 @@ export class PedidosComponent implements OnInit {
       error: (err: any) => {
         console.error(err);
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -77,8 +79,26 @@ export class PedidosComponent implements OnInit {
       return;
     }
 
+    if (filtro === 'Entrega') {
+      this.pedidosFiltrados = this.pedidos.filter(
+        (pedido: any) =>
+          pedido.tipoEntrega === 'Delivery' &&
+          pedido.status === 'SaiuParaEntrega'
+      );
+      return;
+    }
+
+    if (filtro === 'Retirada') {
+      this.pedidosFiltrados = this.pedidos.filter(
+        (pedido: any) =>
+          pedido.tipoEntrega === 'Retirada' &&
+          pedido.status === 'SaiuParaEntrega'
+      );
+      return;
+    }
+
     this.pedidosFiltrados = this.pedidos.filter(
-      pedido => String(pedido.status).trim() === filtro
+      (pedido: any) => String(pedido.status).trim() === filtro
     );
   }
 
@@ -98,40 +118,115 @@ export class PedidosComponent implements OnInit {
     });
   }
 
-  getStatusTexto(pedido: any): string {
-    if (
-      pedido?.tipoEntrega === 'Retirada' &&
-      pedido?.status === 'SaiuParaEntrega'
-    ) {
-      return 'Pronto para retirada';
+  avancarStatus(pedido: any): void {
+    const proximoStatus = this.getProximoStatus(pedido);
+
+    if (proximoStatus === null) {
+      return;
     }
 
-    if (pedido?.status === 'EmPreparo') {
+    this.alterarStatus(pedido.id, proximoStatus);
+  }
+
+  imprimirPedido(): void {
+    if (!this.pedidoSelecionado) {
+      return;
+    }
+
+    window.print();
+  }
+
+  getStatusTexto(pedido: any): string {
+    if (!pedido) {
+      return '';
+    }
+
+    if (
+      pedido.tipoEntrega === 'Retirada' &&
+      pedido.status === 'SaiuParaEntrega'
+    ) {
+      return 'Retirada';
+    }
+
+    if (
+      pedido.tipoEntrega === 'Delivery' &&
+      pedido.status === 'SaiuParaEntrega'
+    ) {
+      return 'Entrega';
+    }
+
+    if (pedido.status === 'Pendente') {
+      return 'Pendente';
+    }
+
+    if (pedido.status === 'EmPreparo') {
       return 'Em preparo';
     }
 
-    if (pedido?.status === 'SaiuParaEntrega') {
-      return 'Saiu para entrega';
+    if (pedido.status === 'Entregue') {
+      return 'Entregue';
     }
 
-    return pedido?.status ?? '';
+    if (pedido.status === 'Cancelado') {
+      return 'Cancelado';
+    }
+
+    return pedido.status ?? '';
+  }
+
+  getStatusClasse(pedido: any): string {
+    if (!pedido) {
+      return '';
+    }
+
+    if (pedido.status === 'Pendente') {
+      return 'status-pendente';
+    }
+
+    if (pedido.status === 'EmPreparo') {
+      return 'status-preparo';
+    }
+
+    if (
+      pedido.tipoEntrega === 'Delivery' &&
+      pedido.status === 'SaiuParaEntrega'
+    ) {
+      return 'status-entrega';
+    }
+
+    if (
+      pedido.tipoEntrega === 'Retirada' &&
+      pedido.status === 'SaiuParaEntrega'
+    ) {
+      return 'status-retirada';
+    }
+
+    if (pedido.status === 'Entregue') {
+      return 'status-entregue';
+    }
+
+    if (pedido.status === 'Cancelado') {
+      return 'status-cancelado';
+    }
+
+    return '';
   }
 
   getProximoTexto(pedido: any): string {
     if (this.isPendente(pedido)) {
-      return 'Iniciar preparo';
+      return '▶️ Iniciar preparo';
     }
 
     if (this.isEmPreparo(pedido)) {
       return pedido.tipoEntrega === 'Retirada'
-        ? 'Pronto para retirada'
-        : 'Saiu para entrega';
+        ? '🛍️ Retirada pronta'
+        : '🛵 Saiu para entrega';
     }
 
     if (this.isSaiuParaEntrega(pedido)) {
       return pedido.tipoEntrega === 'Retirada'
-        ? 'Entregue ao cliente'
-        : 'Entregue';
+        ? '✅ Entregue ao cliente'
+        : '✅ Entregue';
     }
 
     return '';
@@ -153,49 +248,123 @@ export class PedidosComponent implements OnInit {
     return null;
   }
 
-  avancarStatus(pedido: any): void {
-    const proximoStatus = this.getProximoStatus(pedido);
-
-    if (proximoStatus === null) {
-      return;
-    }
-
-    this.alterarStatus(pedido.id, proximoStatus);
-  }
-
-  imprimirPedido(): void {
-    if (!this.pedidoSelecionado) {
-      return;
-    }
-
-    window.print();
-  }
-
-  isPendente(pedido: any): boolean {
-    return String(pedido.status).trim() === 'Pendente';
-  }
-
-  isEmPreparo(pedido: any): boolean {
-    return String(pedido.status).trim() === 'EmPreparo';
-  }
-
-  isSaiuParaEntrega(pedido: any): boolean {
-    return String(pedido.status).trim() === 'SaiuParaEntrega';
-  }
-
   podeCancelar(pedido: any): boolean {
-    const status = String(pedido.status).trim();
+    const status = String(pedido?.status).trim();
 
     return status !== 'Entregue' && status !== 'Cancelado';
   }
 
-  contar(status: string): number {
-    if (status === 'Todos') {
+  isPendente(pedido: any): boolean {
+    return String(pedido?.status).trim() === 'Pendente';
+  }
+
+  isEmPreparo(pedido: any): boolean {
+    return String(pedido?.status).trim() === 'EmPreparo';
+  }
+
+  isSaiuParaEntrega(pedido: any): boolean {
+    return String(pedido?.status).trim() === 'SaiuParaEntrega';
+  }
+
+  contarPendentes(): number {
+    return this.pedidos.filter(
+      (pedido: any) => pedido.status === 'Pendente'
+    ).length;
+  }
+
+  contarEmPreparo(): number {
+    return this.pedidos.filter(
+      (pedido: any) => pedido.status === 'EmPreparo'
+    ).length;
+  }
+
+  contarEntrega(): number {
+    return this.pedidos.filter(
+      (pedido: any) =>
+        pedido.tipoEntrega === 'Delivery' &&
+        pedido.status === 'SaiuParaEntrega'
+    ).length;
+  }
+
+  contarRetirada(): number {
+    return this.pedidos.filter(
+      (pedido: any) =>
+        pedido.tipoEntrega === 'Retirada' &&
+        pedido.status === 'SaiuParaEntrega'
+    ).length;
+  }
+
+  contarCancelados(): number {
+    return this.pedidos.filter(
+      (pedido: any) => pedido.status === 'Cancelado'
+    ).length;
+  }
+
+  contarFiltro(filtro: string): number {
+    if (filtro === 'Todos') {
       return this.pedidos.length;
     }
 
+    if (filtro === 'Pendente') {
+      return this.contarPendentes();
+    }
+
+    if (filtro === 'EmPreparo') {
+      return this.contarEmPreparo();
+    }
+
+    if (filtro === 'Entrega') {
+      return this.contarEntrega();
+    }
+
+    if (filtro === 'Retirada') {
+      return this.contarRetirada();
+    }
+
+    if (filtro === 'Cancelado') {
+      return this.contarCancelados();
+    }
+
     return this.pedidos.filter(
-      pedido => String(pedido.status).trim() === status
+      (pedido: any) => String(pedido.status).trim() === filtro
     ).length;
+  }
+
+  traduzirPagamento(formaPagamento: string): string {
+    if (!formaPagamento) {
+      return '-';
+    }
+
+    const mapa: any = {
+      Pix: 'Pix',
+      Dinheiro: 'Dinheiro',
+      CartaoCredito: 'Crédito',
+      CartaoDebito: 'Débito'
+    };
+
+    return mapa[formaPagamento] ?? formaPagamento;
+  }
+
+  formatarHora(dataHora: string): string {
+    if (!dataHora) {
+      return '';
+    }
+
+    const data = new Date(dataHora);
+
+    return data.toLocaleTimeString('pt-BR', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  formatarData(dataHora: string): string {
+    if (!dataHora) {
+      return '';
+    }
+
+    const data = new Date(dataHora);
+
+    return data.toLocaleDateString('pt-BR');
   }
 }
