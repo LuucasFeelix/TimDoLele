@@ -3,6 +3,10 @@
   text-rendering: optimizeLegibility;
 }
 
+/* ========================= */
+/* CABEÇALHO */
+/* ========================= */
+
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -24,7 +28,7 @@
   display: grid;
   place-items: center;
   font-size: 32px;
-  box-shadow: 0 10px 22px rgba(248, 180, 0, .28);
+  box-shadow: 0 10px 22px rgba(248, 180, 0, 0.28);
 }
 
 .page-header h1 {
@@ -49,7 +53,18 @@
   border-radius: 10px;
   font-weight: 900;
   font-size: 15px;
+  cursor: pointer;
+  transition: 0.18s ease;
 }
+
+.outline-button:hover {
+  background: #fff4c2;
+  transform: translateY(-1px);
+}
+
+/* ========================= */
+/* CARDS DE RESUMO */
+/* ========================= */
 
 .summary {
   display: grid;
@@ -69,7 +84,7 @@
 }
 
 .summary-card::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -149,6 +164,10 @@
   background: #e30613;
 }
 
+/* ========================= */
+/* FILTROS */
+/* ========================= */
+
 .filters {
   padding: 18px;
   display: flex;
@@ -165,6 +184,13 @@
   font-weight: 900;
   color: #111;
   font-size: 15px;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.filters button:hover {
+  border-color: #f8b400;
+  background: #fffdf3;
 }
 
 .filters button.active {
@@ -175,11 +201,15 @@
 
 .filters span {
   margin-left: 8px;
-  background: rgba(0, 0, 0, .08);
+  background: rgba(0, 0, 0, 0.08);
   padding: 4px 10px;
   border-radius: 999px;
   font-size: 13px;
 }
+
+/* ========================= */
+/* LAYOUT PRINCIPAL */
+/* ========================= */
 
 .orders-layout {
   display: grid;
@@ -193,11 +223,26 @@
   padding: 28px;
 }
 
+/* ========================= */
+/* LISTA DE PEDIDOS */
+/* ========================= */
+
+.orders-table-card {
+  display: flex;
+  flex-direction: column;
+
+  /* Ocupa todo o espaço restante da tela */
+  height: calc(100vh - 315px);
+  min-height: 520px;
+  overflow: hidden;
+}
+
 .list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 22px;
+  flex-shrink: 0;
 }
 
 .list-header h2 {
@@ -223,11 +268,47 @@
   white-space: nowrap;
 }
 
+.loading-text,
+.empty {
+  color: #777;
+  font-weight: 600;
+}
+
 .table-wrapper {
+  flex: 1 1 auto;
+  min-height: 0;
   width: 100%;
+  overflow-y: auto;
   overflow-x: auto;
   padding-bottom: 4px;
+
+  scrollbar-width: thin;
+  scrollbar-color: #b9b9b9 #f3f3f3;
 }
+
+.table-wrapper::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #f3f3f3;
+  border-radius: 999px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #b9b9b9;
+  border-radius: 999px;
+  border: 2px solid #f3f3f3;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #8d8d8d;
+}
+
+/* ========================= */
+/* TABELA */
+/* ========================= */
 
 .orders-table {
   width: 100%;
@@ -240,6 +321,14 @@
   background: #f8f8f8;
   border-top: 1px solid #ddd;
   border-bottom: 2px solid #ddd;
+}
+
+.orders-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #f8f8f8;
+  box-shadow: 0 1px 0 #ddd;
 }
 
 .orders-table th {
@@ -261,6 +350,21 @@
   white-space: nowrap;
 }
 
+.orders-table td:nth-child(1),
+.orders-table th:nth-child(1) {
+  min-width: 180px;
+}
+
+.orders-table td:nth-child(2),
+.orders-table th:nth-child(2) {
+  min-width: 135px;
+}
+
+.orders-table td:nth-child(3),
+.orders-table th:nth-child(3) {
+  min-width: 90px;
+}
+
 .orders-table td:nth-child(4),
 .orders-table th:nth-child(4) {
   min-width: 140px;
@@ -269,6 +373,21 @@
 .orders-table td:nth-child(5),
 .orders-table th:nth-child(5) {
   min-width: 140px;
+}
+
+.orders-table td:nth-child(6),
+.orders-table th:nth-child(6) {
+  min-width: 100px;
+}
+
+.orders-table td:nth-child(7),
+.orders-table th:nth-child(7) {
+  min-width: 135px;
+}
+
+.orders-table td:nth-child(8),
+.orders-table th:nth-child(8) {
+  min-width: 135px;
 }
 
 .orders-table small {
@@ -283,10 +402,21 @@
   cursor: pointer;
 }
 
-.order-line:hover,
+.order-line:nth-child(even) {
+  background: #fcfcfc;
+}
+
+.order-line:hover {
+  background: #fffbee;
+}
+
 .order-line.selected {
   background: #fff7d6;
 }
+
+/* ========================= */
+/* COLUNAS ESPECIAIS */
+/* ========================= */
 
 .pedido-code {
   color: #640020 !important;
@@ -311,6 +441,10 @@
   white-space: nowrap;
 }
 
+/* ========================= */
+/* BOTÃO VER PEDIDO */
+/* ========================= */
+
 .view-button {
   background: white;
   border: 2px solid #2f80ed;
@@ -320,12 +454,18 @@
   font-weight: 900;
   font-size: 14px;
   white-space: nowrap;
+  cursor: pointer;
+  transition: 0.18s ease;
 }
 
 .view-button:hover {
   background: #2f80ed;
   color: white;
 }
+
+/* ========================= */
+/* STATUS */
+/* ========================= */
 
 .status {
   display: inline-block;
@@ -366,6 +506,41 @@
 .status-cancelado {
   background: #ffe1e1;
   color: #b00020;
+}
+
+/* ========================= */
+/* PAINEL DE DETALHES */
+/* ========================= */
+
+.order-details {
+  position: sticky;
+  top: 20px;
+
+  /* Mantém a mesma altura da lista de pedidos */
+  height: calc(100vh - 315px);
+  min-height: 520px;
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+  scrollbar-color: #b9b9b9 #f3f3f3;
+}
+
+.order-details::-webkit-scrollbar {
+  width: 8px;
+}
+
+.order-details::-webkit-scrollbar-track {
+  background: #f3f3f3;
+  border-radius: 999px;
+}
+
+.order-details::-webkit-scrollbar-thumb {
+  background: #b9b9b9;
+  border-radius: 999px;
+}
+
+.order-details::-webkit-scrollbar-thumb:hover {
+  background: #8d8d8d;
 }
 
 .details-header {
@@ -417,12 +592,17 @@
 .info-grid strong {
   color: #111;
   font-weight: 900;
+  overflow-wrap: anywhere;
 }
 
 .total-detail {
   color: var(--secondary) !important;
   font-size: 21px;
 }
+
+/* ========================= */
+/* ITENS DO PEDIDO */
+/* ========================= */
 
 .detail-item {
   display: flex;
@@ -460,6 +640,10 @@
   font-weight: 700;
 }
 
+/* ========================= */
+/* AÇÕES */
+/* ========================= */
+
 .actions-section {
   border-bottom: none;
 }
@@ -472,6 +656,7 @@
 
 .actions button {
   width: 100%;
+  cursor: pointer;
 }
 
 .print-button {
@@ -499,11 +684,6 @@
   font-weight: 900;
 }
 
-.empty,
-.loading-text {
-  color: #777;
-}
-
 .details-empty {
   min-height: 420px;
   display: grid;
@@ -511,9 +691,23 @@
   text-align: center;
 }
 
+/* ========================= */
+/* NOTEBOOK / DESKTOP MENOR */
+/* ========================= */
+
 @media (max-width: 1500px) {
   .orders-layout {
     grid-template-columns: minmax(0, 1fr) 360px;
+  }
+
+  .orders-table-card {
+    height: calc(100vh - 300px);
+    min-height: 500px;
+  }
+
+  .order-details {
+    height: calc(100vh - 300px);
+    min-height: 500px;
   }
 
   .orders-table {
@@ -525,7 +719,17 @@
     padding: 16px 12px;
     font-size: 14px;
   }
+
+  .status {
+    min-width: 105px;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
 }
+
+/* ========================= */
+/* TELAS MENORES */
+/* ========================= */
 
 @media (max-width: 1300px) {
   .summary {
@@ -536,7 +740,28 @@
     grid-template-columns: 1fr;
   }
 
+  .orders-table-card {
+    height: calc(100vh - 280px);
+    min-height: 480px;
+    overflow: hidden;
+  }
+
+  .table-wrapper {
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+    overflow-x: auto;
+  }
+
   .orders-table {
     min-width: 1000px;
+  }
+
+  .order-details {
+    position: static;
+    height: calc(100vh - 280px);
+    max-height: none;
+    min-height: 480px;
+    overflow-y: auto;
   }
 }

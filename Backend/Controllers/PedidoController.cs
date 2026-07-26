@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
 using TimDoLele.Application.DTOs.Common;
 using TimDoLele.Application.Services;
 using TimDoLeLe.Application.DTOs;
+using TimDoLeLe.Hubs;
 
 namespace TimDoLeLe.Controllers
 {
@@ -13,28 +15,43 @@ namespace TimDoLeLe.Controllers
     public class PedidoController : ControllerBase
     {
         private readonly PedidoService _pedidoService;
+        private readonly IHubContext<NotificacaoHub> _notificacaoHub;
 
-        public PedidoController(PedidoService service)
+        public PedidoController(
+            PedidoService pedidoService,
+            IHubContext<NotificacaoHub> notificacaoHub)
         {
-            _pedidoService = service;
+            _pedidoService = pedidoService;
+            _notificacaoHub = notificacaoHub;
         }
 
-        // PEDIDO PÚBLICO
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Criar([FromBody] CriarPedidoDto dto)
+        public async Task<IActionResult> Criar(
+            [FromBody] CriarPedidoDto dto)
         {
             var pedidoId = await _pedidoService.CriarPedidoAsync(dto);
 
+            await _notificacaoHub.Clients.All.SendAsync(
+                "PedidoCriado",
+                new
+                {
+                    pedidoId,
+                    criadoEm = DateTime.Now
+                });
+
             return Ok(
                 ApiResponse<object>.Ok(
-                    new { pedidoId },
+                    new
+                    {
+                        pedidoId
+                    },
                     "Pedido criado com sucesso"
                 )
             );
         }
 
-        // ADMIN
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Get(
@@ -53,7 +70,6 @@ namespace TimDoLeLe.Controllers
             return Ok(result);
         }
 
-        // ADMIN
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}/status")]
         public async Task<IActionResult> AtualizarStatus(
@@ -62,20 +78,29 @@ namespace TimDoLeLe.Controllers
         {
             await _pedidoService.AtualizarStatusAsync(id, status);
 
+            await _notificacaoHub.Clients.All.SendAsync(
+                "PedidoAtualizado",
+                new
+                {
+                    pedidoId = id,
+                    status = status.ToString(),
+                    atualizadoEm = DateTime.Now
+                });
+
             return NoContent();
         }
 
-        // ADMIN
         [Authorize(Roles = "Admin")]
         [HttpGet("dashboard")]
         public async Task<IActionResult> GetDashboard()
         {
-            var dashboard = await _pedidoService.ObterDashboardAsync();
+            var dashboard =
+                await _pedidoService.ObterDashboardAsync();
 
             return Ok(dashboard);
         }
 
-        // ADMIN
+
         [Authorize(Roles = "Admin")]
         [HttpGet("relatorios")]
         public async Task<IActionResult> GetRelatorio(
@@ -83,21 +108,23 @@ namespace TimDoLeLe.Controllers
             [FromQuery] DateTime? dataInicio = null,
             [FromQuery] DateTime? dataFim = null)
         {
-            var relatorio = await _pedidoService.ObterRelatorioAsync(
-                periodo,
-                dataInicio,
-                dataFim
-            );
+            var relatorio =
+                await _pedidoService.ObterRelatorioAsync(
+                    periodo,
+                    dataInicio,
+                    dataFim
+                );
 
             return Ok(relatorio);
         }
 
-        // ADMIN
+
         [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var pedido = await _pedidoService.ObterPedidoPorIdAsync(id);
+            var pedido =
+                await _pedidoService.ObterPedidoPorIdAsync(id);
 
             return Ok(pedido);
         }
