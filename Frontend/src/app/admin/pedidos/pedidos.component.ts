@@ -14,6 +14,7 @@ import {
 } from 'rxjs';
 
 import { PedidoService } from '../../core/services/pedido.service';
+import { ImpressaoPedidoService } from '../../core/services/impressao-pedido.service';
 
 import {
   DashboardAtualizadoSignalR,
@@ -44,6 +45,9 @@ export class PedidosComponent
 
   pedidoNovoId: string | null = null;
 
+  toastNovoPedidoVisivel = false;
+  toastNovoPedido: any = null;
+
   conexaoSignalRAtiva = false;
 
   private readonly destroy$ =
@@ -53,6 +57,9 @@ export class PedidosComponent
     null;
 
   private timeoutDestaque:
+    ReturnType<typeof setTimeout> | null = null;
+
+  private timeoutToast:
     ReturnType<typeof setTimeout> | null = null;
 
   filtros = [
@@ -97,6 +104,7 @@ export class PedidosComponent
     private pedidoService: PedidoService,
     private notificacaoSignalrService:
       NotificacaoSignalrService,
+    private impressaoPedidoService: ImpressaoPedidoService,
     private cdr: ChangeDetectorRef
   ) {
     this.prepararAudio();
@@ -117,7 +125,9 @@ export class PedidosComponent
       clearTimeout(this.timeoutDestaque);
     }
 
-
+    if (this.timeoutToast) {
+      clearTimeout(this.timeoutToast);
+    }
   }
 
   private async iniciarSignalR(): Promise<void> {
@@ -195,7 +205,11 @@ export class PedidosComponent
 
     this.tocarSomNovoPedido();
 
+    const pedidoSelecionadoId =
+      this.pedidoSelecionado?.id;
+
     this.carregarPedidos(
+      pedidoSelecionadoId,
       notificacao.pedidoId
     );
   }
@@ -232,10 +246,69 @@ export class PedidosComponent
       }, 10000);
   }
 
+  private exibirToastNovoPedido(pedido: any): void {
+    if (!pedido) {
+      return;
+    }
+
+    this.toastNovoPedido = pedido;
+    this.toastNovoPedidoVisivel = true;
+
+    if (this.timeoutToast) {
+      clearTimeout(this.timeoutToast);
+    }
+
+    this.timeoutToast = setTimeout(() => {
+      this.fecharToastNovoPedido();
+    }, 10000);
+
+    this.cdr.detectChanges();
+  }
+
+  fecharToastNovoPedido(): void {
+    this.toastNovoPedidoVisivel = false;
+
+    if (this.timeoutToast) {
+      clearTimeout(this.timeoutToast);
+      this.timeoutToast = null;
+    }
+
+    this.cdr.detectChanges();
+  }
+
+  abrirNovoPedido(): void {
+    if (!this.toastNovoPedido) {
+      return;
+    }
+
+    this.aplicarFiltro('Todos');
+
+    const pedido = this.pedidos.find(
+      (item: any) => item.id === this.toastNovoPedido.id
+    );
+
+    if (pedido) {
+      this.pedidoSelecionado = pedido;
+    }
+
+    this.fecharToastNovoPedido();
+
+    setTimeout(() => {
+      const linhaPedido = document.querySelector(
+        `[data-pedido-id="${this.pedidoNovoId}"]`
+      );
+
+      linhaPedido?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }, 50);
+  }
+
   private prepararAudio(): void {
     this.audioNovoPedido =
       new Audio(
-        'sounds/novo-pedido.mp3'
+        '/sounds/novo-pedido.mp3'
       );
 
     this.audioNovoPedido.preload = 'auto';
@@ -257,7 +330,8 @@ export class PedidosComponent
   }
 
   carregarPedidos(
-    pedidoIdParaManter?: string
+    pedidoIdParaManter?: string,
+    novoPedidoId?: string
   ): void {
     this.loading = true;
 
@@ -283,6 +357,24 @@ export class PedidosComponent
             if (pedidoAtualizado) {
               this.pedidoSelecionado =
                 pedidoAtualizado;
+            }
+          }
+
+          if (novoPedidoId) {
+            const novoPedido =
+              this.pedidos.find(
+                (pedido: any) =>
+                  pedido.id === novoPedidoId
+              );
+
+            if (novoPedido) {
+              this.exibirToastNovoPedido(
+                novoPedido
+              );
+
+              this.impressaoPedidoService.adicionarNaFila(
+                novoPedido
+              );
             }
           }
 
