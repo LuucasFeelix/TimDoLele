@@ -25,20 +25,35 @@ namespace TimDoLeLe.Controllers
             _notificacaoHub = notificacaoHub;
         }
 
+
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Criar(
             [FromBody] CriarPedidoDto dto)
         {
-            var pedidoId = await _pedidoService.CriarPedidoAsync(dto);
+            var pedidoId =
+                await _pedidoService.CriarPedidoAsync(dto);
+
+            var dataEvento = DateTime.Now;
 
             await _notificacaoHub.Clients.All.SendAsync(
                 "PedidoCriado",
                 new
                 {
                     pedidoId,
-                    criadoEm = DateTime.Now
-                });
+                    criadoEm = dataEvento
+                }
+            );
+
+            await _notificacaoHub.Clients.All.SendAsync(
+                "DashboardAtualizado",
+                new
+                {
+                    motivo = "PedidoCriado",
+                    pedidoId,
+                    atualizadoEm = dataEvento
+                }
+            );
 
             return Ok(
                 ApiResponse<object>.Ok(
@@ -60,15 +75,17 @@ namespace TimDoLeLe.Controllers
             [FromQuery] int page = 1,
             [FromQuery] int pageSize = 10)
         {
-            var result = await _pedidoService.ObterPedidosAsync(
-                clienteId,
-                status,
-                page,
-                pageSize
-            );
+            var result =
+                await _pedidoService.ObterPedidosAsync(
+                    clienteId,
+                    status,
+                    page,
+                    pageSize
+                );
 
             return Ok(result);
         }
+
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}/status")]
@@ -76,7 +93,12 @@ namespace TimDoLeLe.Controllers
             Guid id,
             [FromBody] StatusPedido status)
         {
-            await _pedidoService.AtualizarStatusAsync(id, status);
+            await _pedidoService.AtualizarStatusAsync(
+                id,
+                status
+            );
+
+            var dataEvento = DateTime.Now;
 
             await _notificacaoHub.Clients.All.SendAsync(
                 "PedidoAtualizado",
@@ -84,11 +106,24 @@ namespace TimDoLeLe.Controllers
                 {
                     pedidoId = id,
                     status = status.ToString(),
-                    atualizadoEm = DateTime.Now
-                });
+                    atualizadoEm = dataEvento
+                }
+            );
+
+            await _notificacaoHub.Clients.All.SendAsync(
+                "DashboardAtualizado",
+                new
+                {
+                    motivo = "StatusPedidoAtualizado",
+                    pedidoId = id,
+                    status = status.ToString(),
+                    atualizadoEm = dataEvento
+                }
+            );
 
             return NoContent();
         }
+
 
         [Authorize(Roles = "Admin")]
         [HttpGet("dashboard")]
