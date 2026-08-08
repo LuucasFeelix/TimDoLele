@@ -765,3 +765,160 @@
     overflow-y: auto;
   }
 }
+
+
+/* ========================= */
+/* NOVO PEDIDO - TEMPO REAL */
+/* ========================= */
+
+.novo-pedido-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 3000;
+  width: min(390px, calc(100vw - 48px));
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 16px;
+  padding: 20px 22px;
+  background: #111;
+  color: white;
+  border: 3px solid #f8b400;
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+  animation: toastEntrada 0.32s ease-out;
+}
+
+.toast-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #f8b400;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+}
+
+.toast-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.toast-content > strong {
+  color: #f8b400;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.toast-content > span {
+  color: white;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.toast-content > small {
+  color: #e5e7eb;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.toast-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+  color: #fff;
+  border: 0;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.toast-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.toast-view-button {
+  align-self: flex-start;
+  margin-top: 7px;
+  padding: 9px 14px;
+  background: #f8b400;
+  color: #111;
+  border: 0;
+  border-radius: 8px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.toast-view-button:hover {
+  background: #ffc21a;
+}
+
+/*
+ * O pedido recém-chegado fica destacado durante 10 segundos.
+ * A animação é discreta para chamar atenção sem atrapalhar a operação.
+ */
+.order-line.new-order {
+  position: relative;
+  background: #fff4c2 !important;
+  box-shadow: inset 5px 0 0 #f8b400;
+  animation: novoPedidoPulse 1.15s ease-in-out 3;
+}
+
+.order-line.new-order:hover {
+  background: #ffefad !important;
+}
+
+.new-order-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 9px;
+  padding: 4px 8px;
+  background: #e30613;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
+@keyframes toastEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) translateX(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes novoPedidoPulse {
+  0%,
+  100% {
+    background: #fff4c2;
+  }
+
+  50% {
+    background: #ffe477;
+  }
+}
+
+@media (max-width: 700px) {
+  .novo-pedido-toast {
+    top: 14px;
+    right: 14px;
+    width: calc(100vw - 28px);
+  }
+}
