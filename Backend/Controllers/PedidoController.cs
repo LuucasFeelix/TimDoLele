@@ -15,14 +15,20 @@ namespace TimDoLeLe.Controllers
     public class PedidoController : ControllerBase
     {
         private readonly PedidoService _pedidoService;
-        private readonly IHubContext<NotificacaoHub> _notificacaoHub;
+
+        private readonly
+            IHubContext<NotificacaoHub>
+            _notificacaoHub;
 
         public PedidoController(
             PedidoService pedidoService,
             IHubContext<NotificacaoHub> notificacaoHub)
         {
-            _pedidoService = pedidoService;
-            _notificacaoHub = notificacaoHub;
+            _pedidoService =
+                pedidoService;
+
+            _notificacaoHub =
+                notificacaoHub;
         }
 
 
@@ -32,28 +38,42 @@ namespace TimDoLeLe.Controllers
             [FromBody] CriarPedidoDto dto)
         {
             var pedidoId =
-                await _pedidoService.CriarPedidoAsync(dto);
+                await _pedidoService
+                    .CriarPedidoAsync(dto);
 
-            var dataEvento = DateTime.Now;
+            var dataEvento =
+                DateTime.Now;
 
-            await _notificacaoHub.Clients.All.SendAsync(
-                "PedidoCriado",
-                new
-                {
-                    pedidoId,
-                    criadoEm = dataEvento
-                }
-            );
+            await _notificacaoHub
+                .Clients
+                .All
+                .SendAsync(
+                    "PedidoCriado",
+                    new
+                    {
+                        pedidoId,
 
-            await _notificacaoHub.Clients.All.SendAsync(
-                "DashboardAtualizado",
-                new
-                {
-                    motivo = "PedidoCriado",
-                    pedidoId,
-                    atualizadoEm = dataEvento
-                }
-            );
+                        criadoEm =
+                            dataEvento
+                    }
+                );
+
+            await _notificacaoHub
+                .Clients
+                .All
+                .SendAsync(
+                    "DashboardAtualizado",
+                    new
+                    {
+                        motivo =
+                            "PedidoCriado",
+
+                        pedidoId,
+
+                        atualizadoEm =
+                            dataEvento
+                    }
+                );
 
             return Ok(
                 ApiResponse<object>.Ok(
@@ -76,12 +96,13 @@ namespace TimDoLeLe.Controllers
             [FromQuery] int pageSize = 10)
         {
             var result =
-                await _pedidoService.ObterPedidosAsync(
-                    clienteId,
-                    status,
-                    page,
-                    pageSize
-                );
+                await _pedidoService
+                    .ObterPedidosAsync(
+                        clienteId,
+                        status,
+                        page,
+                        pageSize
+                    );
 
             return Ok(result);
         }
@@ -89,77 +110,177 @@ namespace TimDoLeLe.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}/status")]
-        public async Task<IActionResult> AtualizarStatus(
-            Guid id,
-            [FromBody] StatusPedido status)
+        public async Task<IActionResult>
+            AtualizarStatus(
+                Guid id,
+                [FromBody] StatusPedido status)
         {
-            await _pedidoService.AtualizarStatusAsync(
-                id,
-                status
-            );
+            await _pedidoService
+                .AtualizarStatusAsync(
+                    id,
+                    status
+                );
 
-            var dataEvento = DateTime.Now;
+            var dataEvento =
+                DateTime.Now;
 
-            await _notificacaoHub.Clients.All.SendAsync(
-                "PedidoAtualizado",
-                new
-                {
-                    pedidoId = id,
-                    status = status.ToString(),
-                    atualizadoEm = dataEvento
-                }
-            );
+            await _notificacaoHub
+                .Clients
+                .All
+                .SendAsync(
+                    "PedidoAtualizado",
+                    new
+                    {
+                        pedidoId = id,
 
-            await _notificacaoHub.Clients.All.SendAsync(
-                "DashboardAtualizado",
-                new
-                {
-                    motivo = "StatusPedidoAtualizado",
-                    pedidoId = id,
-                    status = status.ToString(),
-                    atualizadoEm = dataEvento
-                }
-            );
+                        status =
+                            status.ToString(),
+
+                        atualizadoEm =
+                            dataEvento
+                    }
+                );
+
+            await _notificacaoHub
+                .Clients
+                .All
+                .SendAsync(
+                    "DashboardAtualizado",
+                    new
+                    {
+                        motivo =
+                            "StatusPedidoAtualizado",
+
+                        pedidoId =
+                            id,
+
+                        status =
+                            status.ToString(),
+
+                        atualizadoEm =
+                            dataEvento
+                    }
+                );
 
             return NoContent();
         }
 
 
         [Authorize(Roles = "Admin")]
+        [HttpPut("{id}/impressao/fila")]
+        public async Task<IActionResult>
+            ColocarNaFilaImpressao(Guid id)
+        {
+            await _pedidoService
+                .ColocarNaFilaImpressaoAsync(id);
+
+            return NoContent();
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id}/impressao/iniciar")]
+        public async Task<IActionResult>
+            IniciarImpressao(Guid id)
+        {
+            await _pedidoService
+                .IniciarImpressaoAsync(id);
+
+            return NoContent();
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id}/impressao/concluir")]
+        public async Task<IActionResult>
+            ConcluirImpressao(Guid id)
+        {
+            await _pedidoService
+                .ConcluirImpressaoAsync(id);
+
+            return NoContent();
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id}/impressao/erro")]
+        public async Task<IActionResult>
+            ErroImpressao(Guid id)
+        {
+            await _pedidoService
+                .MarcarErroImpressaoAsync(id);
+
+            return NoContent();
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id}/impressao/reimprimir")]
+        public async Task<IActionResult>
+            Reimprimir(Guid id)
+        {
+            await _pedidoService
+                .PrepararReimpressaoAsync(id);
+
+            return NoContent();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("impressao/pendentes")]
+        public async Task<IActionResult>
+            GetPedidosPendentesImpressao()
+        {
+            var pedidos =
+                await _pedidoService
+                    .ObterPedidosPendentesImpressaoAsync();
+
+            return Ok(pedidos);
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet("dashboard")]
-        public async Task<IActionResult> GetDashboard()
+        public async Task<IActionResult>
+            GetDashboard()
         {
             var dashboard =
-                await _pedidoService.ObterDashboardAsync();
+                await _pedidoService
+                    .ObterDashboardAsync();
 
             return Ok(dashboard);
         }
 
-
         [Authorize(Roles = "Admin")]
         [HttpGet("relatorios")]
-        public async Task<IActionResult> GetRelatorio(
-            [FromQuery] string periodo = "hoje",
-            [FromQuery] DateTime? dataInicio = null,
-            [FromQuery] DateTime? dataFim = null)
+        public async Task<IActionResult>
+            GetRelatorio(
+                [FromQuery]
+                string periodo = "hoje",
+
+                [FromQuery]
+                DateTime? dataInicio = null,
+
+                [FromQuery]
+                DateTime? dataFim = null)
         {
             var relatorio =
-                await _pedidoService.ObterRelatorioAsync(
-                    periodo,
-                    dataInicio,
-                    dataFim
-                );
+                await _pedidoService
+                    .ObterRelatorioAsync(
+                        periodo,
+                        dataInicio,
+                        dataFim
+                    );
 
             return Ok(relatorio);
         }
 
-
         [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult>
+            GetById(Guid id)
         {
             var pedido =
-                await _pedidoService.ObterPedidoPorIdAsync(id);
+                await _pedidoService
+                    .ObterPedidoPorIdAsync(id);
 
             return Ok(pedido);
         }

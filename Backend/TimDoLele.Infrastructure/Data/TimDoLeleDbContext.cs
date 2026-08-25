@@ -10,7 +10,8 @@ namespace TimDoLele.Infrastructure.Data
 {
     public class TimDoLeleDbContext : DbContext
     {
-        public TimDoLeleDbContext(DbContextOptions<TimDoLeleDbContext> options)
+        public TimDoLeleDbContext(
+            DbContextOptions<TimDoLeleDbContext> options)
             : base(options)
         {
         }
@@ -22,23 +23,27 @@ namespace TimDoLele.Infrastructure.Data
         public DbSet<Pagamento> Pagamentos => Set<Pagamento>();
         public DbSet<Categoria> Categorias => Set<Categoria>();
         public DbSet<Produto> Produtos => Set<Produto>();
-        public DbSet<ProdutoAdicional> ProdutosAdicionais => Set<ProdutoAdicional>();
-        public DbSet<ItemPedidoAdicional> ItensPedidoAdicionais => Set<ItemPedidoAdicional>();
+
+        public DbSet<ProdutoAdicional> ProdutosAdicionais =>
+            Set<ProdutoAdicional>();
+
+        public DbSet<ItemPedidoAdicional> ItensPedidoAdicionais =>
+            Set<ItemPedidoAdicional>();
+
         public DbSet<Usuarios> Usuarios { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(
+            ModelBuilder modelBuilder)
         {
-            // Endereço embutido
+
             modelBuilder.Entity<Cliente>()
                 .OwnsOne(c => c.Endereco);
 
-            // Produto → Categoria
             modelBuilder.Entity<Produto>()
                 .HasOne(p => p.Categoria)
                 .WithMany(c => c.Produtos)
                 .HasForeignKey(p => p.CategoriaId);
 
-            // ProdutoAdicional
             modelBuilder.Entity<ProdutoAdicional>()
                 .HasOne(pa => pa.Produto)
                 .WithMany(p => p.Adicionais)
@@ -49,7 +54,7 @@ namespace TimDoLele.Infrastructure.Data
                 .WithMany(a => a.ProdutosAdicionais)
                 .HasForeignKey(pa => pa.AdicionalId);
 
-            // ItemPedidoAdicional
+
             modelBuilder.Entity<ItemPedidoAdicional>()
                 .HasOne(ipa => ipa.ItemPedido)
                 .WithMany(ip => ip.Adicionais)
@@ -59,6 +64,10 @@ namespace TimDoLele.Infrastructure.Data
                 .HasOne(ipa => ipa.Adicional)
                 .WithMany()
                 .HasForeignKey(ipa => ipa.AdicionalId);
+
+            modelBuilder.Entity<Pedido>()
+                .Property(p => p.StatusImpressao)
+                .HasConversion<int>();
 
             base.OnModelCreating(modelBuilder);
         }

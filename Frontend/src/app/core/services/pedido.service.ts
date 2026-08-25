@@ -11,27 +11,77 @@ export class PedidoService {
 
   constructor(private http: HttpClient) { }
 
+
   getPedidos() {
     return this.http.get<any>(this.api);
-  }
-
-  atualizarStatus(id: string, status: number) {
-    return this.http.put(`${this.api}/${id}/status`, status);
-  }
-
-  getDashboard() {
-    return this.http.get<any>(`${this.api}/dashboard`);
   }
 
   criarPedido(dto: any) {
     return this.http.post<any>(this.api, dto);
   }
 
-  getCardapio() {
-    return this.http.get<any>(this.cardapioApi);
+  atualizarStatus(id: string, status: number) {
+    return this.http.put(`${this.api}/${id}/status`, status);
+  }
+
+
+  colocarNaFila(id: string) {
+    return this.http.put(
+      `${this.api}/${id}/impressao/fila`,
+      {}
+    );
+  }
+
+  iniciarImpressao(id: string) {
+    return this.http.put(
+      `${this.api}/${id}/impressao/iniciar`,
+      {}
+    );
+  }
+
+  concluirImpressao(id: string) {
+    return this.http.put(
+      `${this.api}/${id}/impressao/concluir`,
+      {}
+    );
+  }
+
+  erroImpressao(id: string) {
+    return this.http.put(
+      `${this.api}/${id}/impressao/erro`,
+      {}
+    );
+  }
+
+  reimprimir(id: string) {
+    return this.http.put(
+      `${this.api}/${id}/impressao/reimprimir`,
+      {}
+    );
+  }
+
+  getPendentesImpressao() {
+    return this.http.get<any>(
+      `${this.api}/impressao/pendentes`
+    );
+  }
+
+
+  getDashboard() {
+    return this.http.get<any>(
+      `${this.api}/dashboard`
+    );
   }
 
   getRelatorio(periodo: string = 'hoje') {
-    return this.http.get<any>(`${this.api}/relatorios?periodo=${periodo}`);
+    return this.http.get<any>(
+      `${this.api}/relatorios?periodo=${periodo}`
+    );
+  }
+
+  getCardapio() {
+    return this.http.get<any>(
+      this.cardapioApi
+    );
   }
 }
