@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import {
+  BehaviorSubject,
+  firstValueFrom
+} from 'rxjs';
+
 import { PedidoService } from './pedido.service';
 
 export type StatusImpressao =
@@ -21,7 +25,10 @@ export interface ItemFilaImpressao {
 export class ImpressaoPedidoService {
 
   private fila: ItemFilaImpressao[] = [];
+
   private processando = false;
+
+  private recuperandoPendentes = false;
 
   private pedidosConhecidos = new Set<string>();
 
@@ -35,27 +42,93 @@ export class ImpressaoPedidoService {
     private pedidoService: PedidoService
   ) { }
 
-
-  async adicionarNaFila(pedido: any): Promise<void> {
+  async adicionarNaFila(
+    pedido: any
+  ): Promise<void> {
 
     if (!pedido?.id) {
-      console.warn('Pedido inválido.');
+      console.warn(
+        'Pedido inválido recebido para impressão.',
+        pedido
+      );
+
       return;
     }
 
-    if (this.pedidosConhecidos.has(pedido.id)) {
+    if (
+      this.pedidosConhecidos.has(pedido.id)
+    ) {
       console.log(
         `Pedido #${pedido.codigo} já está na fila.`
       );
+
       return;
     }
 
-    this.pedidosConhecidos.add(pedido.id);
+    try {
 
-    await firstValueFrom(
-      this.pedidoService.colocarNaFila(
-        pedido.id
-      )
+      await firstValueFrom(
+        this.pedidoService.colocarNaFila(
+          pedido.id
+        )
+      );
+
+      this.adicionarPedidoNaFilaLocal(
+        pedido
+      );
+
+    } catch (erro) {
+
+      console.error(
+        `Erro ao colocar o pedido #${pedido.codigo} na fila.`,
+        erro
+      );
+
+    }
+  }
+
+  private async adicionarPedidoRecuperado(
+    pedido: any
+  ): Promise<void> {
+
+    if (!pedido?.id) {
+      return;
+    }
+
+    if (
+      this.pedidosConhecidos.has(pedido.id)
+    ) {
+      return;
+    }
+
+    try {
+
+      await firstValueFrom(
+        this.pedidoService.colocarNaFila(
+          pedido.id
+        )
+      );
+
+      this.adicionarPedidoNaFilaLocal(
+        pedido
+      );
+
+    } catch (erro) {
+
+      console.error(
+        `Erro ao recuperar o pedido #${pedido.codigo} para a fila.`,
+        erro
+      );
+
+    }
+  }
+
+  private adicionarPedidoNaFilaLocal(
+    pedido: any
+  ): void {
+
+    this.pedidosConhecidos.add(
+      pedido.id
     );
 
     this.fila.push({
@@ -66,7 +139,7 @@ export class ImpressaoPedidoService {
     });
 
     console.log(
-      `📥 Pedido #${pedido.codigo} entrou na fila.`
+      `📥 Pedido #${pedido.codigo} entrou na fila de impressão.`
     );
 
     this.emitirFila();
@@ -74,8 +147,93 @@ export class ImpressaoPedidoService {
     void this.processarFila();
   }
 
+  async recuperarPedidosPendentes():
+    Promise<void> {
 
-  private async processarFila(): Promise<void> {
+    if (this.recuperandoPendentes) {
+      return;
+    }
+
+    this.recuperandoPendentes = true;
+
+    try {
+
+      console.log(
+        '🔎 Procurando pedidos pendentes de impressão...'
+      );
+
+      const ids =
+        await firstValueFrom(
+          this.pedidoService
+            .getPendentesImpressao()
+        );
+
+      if (
+        !ids ||
+        ids.length === 0
+      ) {
+
+        console.log(
+          '✅ Nenhum pedido pendente de impressão.'
+        );
+
+        return;
+      }
+
+      console.log(
+        `🧾 ${ids.length} pedido(s) pendente(s) encontrado(s).`
+      );
+
+      for (const pedidoId of ids) {
+
+        if (
+          this.pedidosConhecidos.has(
+            pedidoId
+          )
+        ) {
+          continue;
+        }
+
+        try {
+
+          const pedido =
+            await firstValueFrom(
+              this.pedidoService
+                .getPedidoPorId(
+                  pedidoId
+                )
+            );
+
+          await this.adicionarPedidoRecuperado(
+            pedido
+          );
+
+        } catch (erro) {
+
+          console.error(
+            `Erro ao recuperar o pedido ${pedidoId}.`,
+            erro
+          );
+
+        }
+      }
+
+    } catch (erro) {
+
+      console.error(
+        'Erro ao consultar pedidos pendentes de impressão.',
+        erro
+      );
+
+    } finally {
+
+      this.recuperandoPendentes = false;
+
+    }
+  }
+
+  private async processarFila():
+    Promise<void> {
 
     if (this.processando) {
       return;
@@ -85,11 +243,16 @@ export class ImpressaoPedidoService {
 
     try {
 
-      while (this.fila.length > 0) {
+      while (
+        this.fila.length > 0
+      ) {
 
-        const item = this.fila[0];
+        const item =
+          this.fila[0];
 
-        item.status = 'Imprimindo';
+        item.status =
+          'Imprimindo';
+
         item.tentativas++;
 
         this.emitirFila();
@@ -97,9 +260,10 @@ export class ImpressaoPedidoService {
         try {
 
           await firstValueFrom(
-            this.pedidoService.iniciarImpressao(
-              item.pedido.id
-            )
+            this.pedidoService
+              .iniciarImpressao(
+                item.pedido.id
+              )
           );
 
           await this.imprimirPedido(
@@ -107,12 +271,14 @@ export class ImpressaoPedidoService {
           );
 
           await firstValueFrom(
-            this.pedidoService.concluirImpressao(
-              item.pedido.id
-            )
+            this.pedidoService
+              .concluirImpressao(
+                item.pedido.id
+              )
           );
 
-          item.status = 'Impresso';
+          item.status =
+            'Impresso';
 
           console.log(
             `✅ Pedido #${item.pedido.codigo} impresso.`
@@ -120,7 +286,10 @@ export class ImpressaoPedidoService {
 
           this.emitirFila();
 
-          await this.aguardar(500);
+          await this.aguardar(
+            500
+          );
+
 
           this.fila.shift();
 
@@ -128,20 +297,36 @@ export class ImpressaoPedidoService {
 
         } catch (erro) {
 
-          item.status = 'Erro';
 
-          await firstValueFrom(
-            this.pedidoService.erroImpressao(
-              item.pedido.id
-            )
-          );
+          item.status =
+            'Erro';
 
           console.error(
-            `❌ Erro ao imprimir ${item.pedido.codigo}`,
+            `❌ Erro ao imprimir o pedido #${item.pedido.codigo}.`,
             erro
           );
 
+
+          try {
+
+            await firstValueFrom(
+              this.pedidoService
+                .erroImpressao(
+                  item.pedido.id
+                )
+            );
+
+          } catch (erroBackend) {
+
+            console.error(
+              'Não foi possível registrar o erro de impressão no backend.',
+              erroBackend
+            );
+
+          }
+
           this.emitirFila();
+
 
           this.fila.shift();
 
@@ -151,45 +336,70 @@ export class ImpressaoPedidoService {
 
     } finally {
 
-      this.processando = false;
+      this.processando =
+        false;
 
     }
   }
-
 
   private async imprimirPedido(
     pedido: any
   ): Promise<void> {
 
     console.log(
-      `🖨️ Iniciando impressão #${pedido.codigo}`
+      `🖨️ Iniciando impressão do pedido #${pedido.codigo}...`
     );
 
-    console.table({
-      Código: pedido.codigo,
-      Cliente: pedido.nomeCliente,
-      Total: pedido.total
-    });
+    console.log(
+      'Pedido enviado para impressão:',
+      {
+        id:
+          pedido.id,
 
-    await this.aguardar(2000);
+        codigo:
+          pedido.codigo,
+
+        cliente:
+          pedido.nomeCliente,
+
+        total:
+          pedido.total,
+
+        itens:
+          pedido.itens
+      }
+    );
+
+    await this.aguardar(
+      2000
+    );
 
     console.log(
-      `🧾 Impressão concluída #${pedido.codigo}`
+      `🧾 Impressão simulada concluída: #${pedido.codigo}`
     );
   }
 
 
-  async reimprimir(pedido: any): Promise<void> {
+  async reimprimir(
+    pedido: any
+  ): Promise<void> {
+
+    if (!pedido?.id) {
+      return;
+    }
+
 
     this.pedidosConhecidos.delete(
       pedido.id
     );
+
 
     await firstValueFrom(
       this.pedidoService.reimprimir(
         pedido.id
       )
     );
+
 
     await this.adicionarNaFila(
       pedido
@@ -200,15 +410,25 @@ export class ImpressaoPedidoService {
   private emitirFila(): void {
 
     this.filaSubject.next(
-      this.fila.map(item => ({ ...item }))
+      this.fila.map(
+        item => ({
+          ...item
+        })
+      )
     );
 
   }
 
-  private aguardar(ms: number): Promise<void> {
+  private aguardar(
+    milissegundos: number
+  ): Promise<void> {
 
-    return new Promise(resolve =>
-      setTimeout(resolve, ms)
+    return new Promise(
+      resolve =>
+        setTimeout(
+          resolve,
+          milissegundos
+        )
     );
 
   }
