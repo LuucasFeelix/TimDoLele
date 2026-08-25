@@ -1,0 +1,47 @@
+2026-08-23 17:17:59.944 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-23 17:18:00.511 -03:00 [INF] Now listening on: https://localhost:57668
+2026-08-23 17:18:00.514 -03:00 [INF] Now listening on: http://localhost:57669
+2026-08-23 17:18:00.656 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-23 17:18:00.657 -03:00 [INF] Hosting environment: Development
+2026-08-23 17:18:00.658 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-08-23 17:18:01.295 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-08-23 17:18:01.353 -03:00 [INF] CORS policy execution successful.
+2026-08-23 17:18:01.391 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 110.3535ms
+2026-08-23 17:18:01.403 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-08-23 17:18:01.415 -03:00 [INF] CORS policy execution successful.
+2026-08-23 17:18:02.864 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-08-23 17:18:02.926 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-08-23 17:18:02.927 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 1523.8804ms
+2026-08-23 17:18:02.959 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=Y56CYf45-R8kfwCAw8mflA - null null
+2026-08-23 17:18:02.962 -03:00 [INF] CORS policy execution successful.
+2026-08-23 17:18:02.964 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-08-23 17:18:05.512 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-08-23 17:18:06.013 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 501.4321ms
+2026-08-23 17:18:06.082 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-08-23 17:18:06.083 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-23 17:18:06.131 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 49.4541ms
+2026-08-23 17:18:06.171 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-08-23 17:18:06.174 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 91.4348ms
+2026-08-23 17:18:06.301 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 129.9595ms
+2026-08-23 17:18:06.621 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-08-23 17:18:06.652 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 30.6681ms
+2026-08-23 17:30:47.444 -03:00 [FTL] Erro fatal ao iniciar a aplicação
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at System.Diagnostics.DiagnosticSource.Write[T](String name, T value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at TimDoLeLe.Program.Main(String[] args) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Program.cs:line 159
+2026-08-23 17:33:50.269 -03:00 [FTL] Erro fatal ao iniciar a aplicação
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at System.Diagnostics.DiagnosticSource.Write[T](String name, T value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at TimDoLeLe.Program.Main(String[] args) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Program.cs:line 159

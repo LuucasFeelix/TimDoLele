@@ -31,7 +31,15 @@ public class Pedido : BaseEntity
 
     public decimal Total { get; private set; }
 
-    private Pedido() { }
+    public StatusImpressao StatusImpressao { get; private set; }
+
+    public DateTime? DataImpressao { get; private set; }
+
+    public int TentativasImpressao { get; private set; }
+
+    private Pedido()
+    {
+    }
 
     public Pedido(
         Guid clienteId,
@@ -57,6 +65,12 @@ public class Pedido : BaseEntity
             : delivery;
 
         Status = StatusPedido.Pendente;
+
+        StatusImpressao = StatusImpressao.NaoImpresso;
+
+        DataImpressao = null;
+
+        TentativasImpressao = 0;
 
         Codigo = Guid.NewGuid()
             .ToString()
@@ -86,20 +100,93 @@ public class Pedido : BaseEntity
     public void AtualizarStatus(StatusPedido novoStatus)
     {
         if (Status == StatusPedido.Entregue)
-            throw new Exception("Pedido já foi entregue e não pode ser alterado.");
+        {
+            throw new Exception(
+                "Pedido já foi entregue e não pode ser alterado.");
+        }
 
         if (Status == StatusPedido.Cancelado)
-            throw new Exception("Pedido já foi cancelado.");
+        {
+            throw new Exception(
+                "Pedido já foi cancelado.");
+        }
 
         if (novoStatus == StatusPedido.Cancelado)
         {
             Status = novoStatus;
+
             return;
         }
 
         if ((int)novoStatus != (int)Status + 1)
-            throw new Exception($"Transição inválida: {Status} → {novoStatus}");
+        {
+            throw new Exception(
+                $"Transição inválida: {Status} → {novoStatus}");
+        }
 
         Status = novoStatus;
+    }
+
+
+    public void ColocarNaFilaImpressao()
+    {
+
+        if (StatusImpressao == StatusImpressao.Impresso)
+        {
+            throw new Exception(
+                "Este pedido já foi impresso.");
+        }
+
+        StatusImpressao =
+            StatusImpressao.NaFila;
+    }
+
+    public void IniciarImpressao()
+    {
+        
+        if (
+            StatusImpressao != StatusImpressao.NaFila &&
+            StatusImpressao != StatusImpressao.Erro)
+        {
+            throw new Exception(
+                $"Não é possível iniciar a impressão com status {StatusImpressao}.");
+        }
+
+        StatusImpressao =
+            StatusImpressao.Imprimindo;
+
+        TentativasImpressao++;
+    }
+
+    public void MarcarComoImpresso()
+    {
+        if (
+            StatusImpressao !=
+            StatusImpressao.Imprimindo)
+        {
+            throw new Exception(
+                "O pedido precisa estar sendo impresso antes de ser finalizado.");
+        }
+
+        StatusImpressao =
+            StatusImpressao.Impresso;
+
+        DataImpressao =
+            DateTime.Now;
+    }
+
+    public void MarcarErroImpressao()
+    {
+        StatusImpressao =
+            StatusImpressao.Erro;
+    }
+
+    public void PrepararReimpressao()
+    {
+
+        StatusImpressao =
+            StatusImpressao.NaFila;
+
+        DataImpressao = null;
     }
 }

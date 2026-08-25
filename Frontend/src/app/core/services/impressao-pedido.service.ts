@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { PedidoService } from './pedido.service';
 
 export type StatusImpressao =
   | 'Aguardando'
@@ -21,25 +22,41 @@ export class ImpressaoPedidoService {
 
   private fila: ItemFilaImpressao[] = [];
   private processando = false;
+
   private pedidosConhecidos = new Set<string>();
 
   private readonly filaSubject =
     new BehaviorSubject<ItemFilaImpressao[]>([]);
 
-  readonly fila$ = this.filaSubject.asObservable();
+  readonly fila$ =
+    this.filaSubject.asObservable();
 
-  adicionarNaFila(pedido: any): void {
+  constructor(
+    private pedidoService: PedidoService
+  ) { }
+
+
+  async adicionarNaFila(pedido: any): Promise<void> {
+
     if (!pedido?.id) {
-      console.warn('Pedido inválido recebido para impressão.', pedido);
+      console.warn('Pedido inválido.');
       return;
     }
 
     if (this.pedidosConhecidos.has(pedido.id)) {
-      console.log(`🖨️ Pedido #${pedido.codigo} já está ou já esteve na fila.`);
+      console.log(
+        `Pedido #${pedido.codigo} já está na fila.`
+      );
       return;
     }
 
     this.pedidosConhecidos.add(pedido.id);
+
+    await firstValueFrom(
+      this.pedidoService.colocarNaFila(
+        pedido.id
+      )
+    );
 
     this.fila.push({
       pedido,
@@ -48,12 +65,18 @@ export class ImpressaoPedidoService {
       tentativas: 0
     });
 
-    console.log(`📥 Pedido #${pedido.codigo} entrou na fila de impressão.`);
+    console.log(
+      `📥 Pedido #${pedido.codigo} entrou na fila.`
+    );
+
     this.emitirFila();
+
     void this.processarFila();
   }
 
+
   private async processarFila(): Promise<void> {
+
     if (this.processando) {
       return;
     }
@@ -61,75 +84,132 @@ export class ImpressaoPedidoService {
     this.processando = true;
 
     try {
+
       while (this.fila.length > 0) {
+
         const item = this.fila[0];
 
         item.status = 'Imprimindo';
         item.tentativas++;
+
         this.emitirFila();
 
         try {
-          await this.imprimirPedido(item.pedido);
+
+          await firstValueFrom(
+            this.pedidoService.iniciarImpressao(
+              item.pedido.id
+            )
+          );
+
+          await this.imprimirPedido(
+            item.pedido
+          );
+
+          await firstValueFrom(
+            this.pedidoService.concluirImpressao(
+              item.pedido.id
+            )
+          );
 
           item.status = 'Impresso';
-          console.log(`✅ Pedido #${item.pedido.codigo} finalizado na fila.`);
+
+          console.log(
+            `✅ Pedido #${item.pedido.codigo} impresso.`
+          );
+
           this.emitirFila();
 
-          await this.aguardar(300);
+          await this.aguardar(500);
 
           this.fila.shift();
+
           this.emitirFila();
+
         } catch (erro) {
+
           item.status = 'Erro';
+
+          await firstValueFrom(
+            this.pedidoService.erroImpressao(
+              item.pedido.id
+            )
+          );
+
           console.error(
-            `❌ Erro ao imprimir o pedido #${item.pedido.codigo}.`,
+            `❌ Erro ao imprimir ${item.pedido.codigo}`,
             erro
           );
 
           this.emitirFila();
+
           this.fila.shift();
+
           this.emitirFila();
         }
       }
+
     } finally {
+
       this.processando = false;
+
     }
   }
 
-  private async imprimirPedido(pedido: any): Promise<void> {
-    console.log(`🖨️ Iniciando impressão do pedido #${pedido.codigo}...`);
 
-    console.log('Pedido enviado para impressão:', {
-      id: pedido.id,
-      codigo: pedido.codigo,
-      cliente: pedido.nomeCliente,
-      total: pedido.total,
-      itens: pedido.itens
+  private async imprimirPedido(
+    pedido: any
+  ): Promise<void> {
+
+    console.log(
+      `🖨️ Iniciando impressão #${pedido.codigo}`
+    );
+
+    console.table({
+      Código: pedido.codigo,
+      Cliente: pedido.nomeCliente,
+      Total: pedido.total
     });
 
     await this.aguardar(2000);
 
-    console.log(`🧾 Impressão simulada concluída: #${pedido.codigo}`);
+    console.log(
+      `🧾 Impressão concluída #${pedido.codigo}`
+    );
   }
 
+
+  async reimprimir(pedido: any): Promise<void> {
+
+    this.pedidosConhecidos.delete(
+      pedido.id
+    );
+
+    await firstValueFrom(
+      this.pedidoService.reimprimir(
+        pedido.id
+      )
+    );
+
+    await this.adicionarNaFila(
+      pedido
+    );
+  }
+
+
   private emitirFila(): void {
+
     this.filaSubject.next(
       this.fila.map(item => ({ ...item }))
     );
+
   }
 
-  private aguardar(milissegundos: number): Promise<void> {
+  private aguardar(ms: number): Promise<void> {
+
     return new Promise(resolve =>
-      setTimeout(resolve, milissegundos)
+      setTimeout(resolve, ms)
     );
-  }
 
-  reimprimir(pedido: any): void {
-    if (!pedido?.id) {
-      return;
-    }
-
-    this.pedidosConhecidos.delete(pedido.id);
-    this.adicionarNaFila(pedido);
   }
 }

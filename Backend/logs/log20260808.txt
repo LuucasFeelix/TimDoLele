@@ -3022,3 +3022,5 @@ ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
 2026-08-08 15:44:56.512 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 37.3023ms
 2026-08-08 15:44:56.521 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
 2026-08-08 15:44:56.524 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 69.5904ms
+2026-08-08 15:51:26.498 -03:00 [INF] Executed endpoint '/hubs/notificacoes'
+2026-08-08 15:51:26.502 -03:00 [INF] Request finished HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=fZXR0rCOvJBDldlK3GxTjg - 200 null null 614207.3475ms
