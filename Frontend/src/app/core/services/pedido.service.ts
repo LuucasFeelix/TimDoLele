@@ -16,12 +16,24 @@ export class PedidoService {
     return this.http.get<any>(this.api);
   }
 
+  getPedidoPorId(id: string) {
+    return this.http.get<any>(
+      `${this.api}/${id}`
+    );
+  }
+
   criarPedido(dto: any) {
-    return this.http.post<any>(this.api, dto);
+    return this.http.post<any>(
+      this.api,
+      dto
+    );
   }
 
   atualizarStatus(id: string, status: number) {
-    return this.http.put(`${this.api}/${id}/status`, status);
+    return this.http.put(
+      `${this.api}/${id}/status`,
+      status
+    );
   }
 
 
@@ -61,7 +73,7 @@ export class PedidoService {
   }
 
   getPendentesImpressao() {
-    return this.http.get<any>(
+    return this.http.get<string[]>(
       `${this.api}/impressao/pendentes`
     );
   }
