@@ -1,0 +1,1529 @@
+2026-08-26 13:32:14.834 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-26 13:32:15.429 -03:00 [INF] Now listening on: https://localhost:57668
+2026-08-26 13:32:15.460 -03:00 [INF] Now listening on: http://localhost:57669
+2026-08-26 13:32:15.670 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-26 13:32:15.950 -03:00 [INF] Hosting environment: Development
+2026-08-26 13:32:15.952 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-08-26 13:32:20.995 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-08-26 13:32:21.422 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 454.3433ms
+2026-08-26 13:32:21.458 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-08-26 13:32:21.458 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-26 13:32:21.459 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-08-26 13:32:21.493 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 34.8509ms
+2026-08-26 13:32:21.517 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 58.3989ms
+2026-08-26 13:32:21.635 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 177.3259ms
+2026-08-26 13:32:21.726 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-08-26 13:32:21.809 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 82.8595ms
+2026-08-26 13:33:11.263 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-08-26 13:33:11.292 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:11.296 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 33.0025ms
+2026-08-26 13:33:11.342 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-08-26 13:33:11.353 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:12.967 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '25/08/2026 19:32:17', Current time (UTC): '26/08/2026 16:33:12'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-08-26 13:33:13.028 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '25/08/2026 19:32:17', Current time (UTC): '26/08/2026 16:33:12'.
+2026-08-26 13:33:13.035 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:33:13.065 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-08-26 13:33:15.239 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.241 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.242 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.247 -03:00 [WRN] No store type was specified for the decimal property 'TrocoPara' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.248 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Adicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.250 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.251 -03:00 [WRN] No store type was specified for the decimal property 'ValorUnitario' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.252 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'ItemPedidoAdicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.254 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.255 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.259 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:15.260 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:33:16.427 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-26 13:33:17.540 -03:00 [INF] Executed DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-08-26 13:33:17.593 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:33:17.615 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 4544.1647ms
+2026-08-26 13:33:17.620 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:33:17.628 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 6286.34ms
+2026-08-26 13:33:28.852 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/login - null null
+2026-08-26 13:33:28.856 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:28.861 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/login - 204 null null 9.6442ms
+2026-08-26 13:33:28.863 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 43
+2026-08-26 13:33:28.869 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:28.873 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '25/08/2026 19:32:17', Current time (UTC): '26/08/2026 16:33:28'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-08-26 13:33:28.877 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '25/08/2026 19:32:17', Current time (UTC): '26/08/2026 16:33:28'.
+2026-08-26 13:33:28.878 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-08-26 13:33:28.895 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-08-26 13:33:29.447 -03:00 [INF] Executed DbCommand (211ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-08-26 13:33:30.200 -03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-26 13:33:30.207 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 1309.2275ms
+2026-08-26 13:33:30.210 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-08-26 13:33:30.212 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 1348.7281ms
+2026-08-26 13:33:30.295 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-08-26 13:33:30.300 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:30.301 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 5.6173ms
+2026-08-26 13:33:30.302 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:33:30.312 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-08-26 13:33:30.314 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:30.316 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:30.316 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 14.6633ms
+2026-08-26 13:33:30.320 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-08-26 13:33:30.320 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-08-26 13:33:30.321 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:30.340 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:33:30.345 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-08-26 13:33:30.346 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 34.7061ms
+2026-08-26 13:33:30.351 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:33:30.355 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=v89N8lsxKrjAaxwKQBGkBg - null null
+2026-08-26 13:33:30.359 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:30.360 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-08-26 13:33:30.403 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-08-26 13:33:30.433 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:30.433 -03:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-08-26 13:33:30.434 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - 204 null null 30.7523ms
+2026-08-26 13:33:30.439 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-08-26 13:33:30.443 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:33:30.450 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-08-26 13:33:30.454 -03:00 [INF] Route matched with {action = "GetPedidosPendentesImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPedidosPendentesImpressao() on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:33:30.497 -03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id]
+FROM [Pedidos] AS [p]
+WHERE [p].[StatusImpressao] IN (0, 1)
+ORDER BY [p].[DataHora]
+2026-08-26 13:33:30.521 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-26 13:33:30.527 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele) in 70.88ms
+2026-08-26 13:33:30.530 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-08-26 13:33:30.531 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 200 null application/json; charset=utf-8 92.2238ms
+2026-08-26 13:33:30.544 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-26 13:33:30.583 -03:00 [INF] Executed DbCommand (23ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:33:30.732 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:33:30.771 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 414.2091ms
+2026-08-26 13:33:30.772 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:33:30.774 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 454.1149ms
+2026-08-26 13:34:25.335 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:34:25.338 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:34:25.339 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 3.5083ms
+2026-08-26 13:34:25.340 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/pedidos - application/json 220
+2026-08-26 13:34:25.348 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:34:25.349 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele)'
+2026-08-26 13:34:25.353 -03:00 [INF] Route matched with {action = "Criar", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Criar(TimDoLeLe.Application.DTOs.CriarPedidoDto) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:34:25.672 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Clientes] ([Id], [Nome], [Observacao], [Telefone], [Endereco_Bairro], [Endereco_Cidade], [Endereco_Complemento], [Endereco_Estado], [Endereco_Numero], [Endereco_Rua])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+2026-08-26 13:34:25.699 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__itemDto_ProdutoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Ativo], [p].[CategoriaId], [p].[Descricao], [p].[Nome], [p].[Preco]
+FROM [Produtos] AS [p]
+WHERE [p].[Id] = @__itemDto_ProdutoId_0
+2026-08-26 13:34:25.797 -03:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (DbType = DateTime2), @p5='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p6='?' (DbType = Int32), @p7='?' (DbType = Guid), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p15='?' (DbType = Guid), @p16='?' (Size = 4000), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (DbType = Int32), @p20='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p21='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Pedidos] ([Id], [ClienteId], [Codigo], [DataHora], [DataImpressao], [Delivery], [FormaPagamento], [PagamentoId], [Status], [StatusImpressao], [Subtotal], [TentativasImpressao], [TipoEntrega], [Total], [TrocoPara])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+INSERT INTO [ItensPedido] ([Id], [Observacao], [PedidoId], [ProdutoId], [Quantidade], [Valor], [ValorUnitario])
+VALUES (@p15, @p16, @p17, @p18, @p19, @p20, @p21);
+2026-08-26 13:34:25.828 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-26 13:34:25.837 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele) in 481.0456ms
+2026-08-26 13:34:25.841 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele)'
+2026-08-26 13:34:25.843 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 503.099ms
+2026-08-26 13:34:54.620 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-08-26 13:34:54.632 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:34:54.632 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 11.7997ms
+2026-08-26 13:34:54.634 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-08-26 13:34:54.638 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:34:54.644 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:34:54.645 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-08-26 13:34:54.672 -03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-08-26 13:34:54.675 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:34:54.677 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 30.1693ms
+2026-08-26 13:34:54.678 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:34:54.683 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 49.5712ms
+2026-08-26 13:34:56.234 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:34:56.274 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:34:56.276 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 41.6206ms
+2026-08-26 13:34:56.283 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-08-26 13:34:56.297 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:34:56.300 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:34:56.301 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:34:56.316 -03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-08-26 13:34:56.357 -03:00 [INF] Executed DbCommand (30ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:34:56.368 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:34:56.380 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 77.8831ms
+2026-08-26 13:34:56.381 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:34:56.383 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 100.2845ms
+2026-08-26 13:35:03.862 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-08-26 13:35:03.875 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:03.879 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 16.4557ms
+2026-08-26 13:35:03.888 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-08-26 13:35:03.891 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:03.895 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:35:03.897 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-08-26 13:35:03.915 -03:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-08-26 13:35:03.918 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:35:03.922 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 23.3342ms
+2026-08-26 13:35:03.923 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:35:03.924 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 36.0669ms
+2026-08-26 13:35:29.145 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:35:29.150 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:29.151 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 6.2627ms
+2026-08-26 13:35:29.153 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/pedidos - application/json 219
+2026-08-26 13:35:29.157 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:29.158 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele)'
+2026-08-26 13:35:29.158 -03:00 [INF] Route matched with {action = "Criar", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Criar(TimDoLeLe.Application.DTOs.CriarPedidoDto) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:35:29.170 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Clientes] ([Id], [Nome], [Observacao], [Telefone], [Endereco_Bairro], [Endereco_Cidade], [Endereco_Complemento], [Endereco_Estado], [Endereco_Numero], [Endereco_Rua])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+2026-08-26 13:35:29.179 -03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__itemDto_ProdutoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Ativo], [p].[CategoriaId], [p].[Descricao], [p].[Nome], [p].[Preco]
+FROM [Produtos] AS [p]
+WHERE [p].[Id] = @__itemDto_ProdutoId_0
+2026-08-26 13:35:29.190 -03:00 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (DbType = DateTime2), @p5='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p6='?' (DbType = Int32), @p7='?' (DbType = Guid), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p15='?' (DbType = Guid), @p16='?' (Size = 4000), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (DbType = Int32), @p20='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p21='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Pedidos] ([Id], [ClienteId], [Codigo], [DataHora], [DataImpressao], [Delivery], [FormaPagamento], [PagamentoId], [Status], [StatusImpressao], [Subtotal], [TentativasImpressao], [TipoEntrega], [Total], [TrocoPara])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+INSERT INTO [ItensPedido] ([Id], [Observacao], [PedidoId], [ProdutoId], [Quantidade], [Valor], [ValorUnitario])
+VALUES (@p15, @p16, @p17, @p18, @p19, @p20, @p21);
+2026-08-26 13:35:29.195 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-26 13:35:29.197 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele) in 37.2916ms
+2026-08-26 13:35:29.200 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele)'
+2026-08-26 13:35:29.202 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 49.2191ms
+2026-08-26 13:35:29.226 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-08-26 13:35:29.238 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:29.239 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:35:29.241 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:35:29.262 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-08-26 13:35:29.359 -03:00 [INF] Executed DbCommand (77ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:35:29.387 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:35:29.489 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 237.4187ms
+2026-08-26 13:35:29.503 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:35:29.505 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 278.7989ms
+2026-08-26 13:35:29.516 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - null null
+2026-08-26 13:35:29.528 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:29.529 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - 204 null null 13.4647ms
+2026-08-26 13:35:29.534 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - application/json 2
+2026-08-26 13:35:29.544 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:29.546 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:35:29.554 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:35:29.583 -03:00 [INF] Executed DbCommand (10ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:35:29.609 -03:00 [INF] Executed DbCommand (9ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:35:29.621 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:35:29.622 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 63.2617ms
+2026-08-26 13:35:29.623 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:35:29.624 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - 204 null null 90.2974ms
+2026-08-26 13:35:29.633 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - null null
+2026-08-26 13:35:29.636 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:29.637 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - 204 null null 3.9417ms
+2026-08-26 13:35:29.639 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - application/json 2
+2026-08-26 13:35:29.651 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:29.652 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:35:29.659 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:35:29.664 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:35:29.675 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:35:29.678 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:35:29.679 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 18.1066ms
+2026-08-26 13:35:29.680 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:35:29.683 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - 204 null null 44.2624ms
+2026-08-26 13:35:34.718 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - null null
+2026-08-26 13:35:34.730 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:34.734 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - 204 null null 16.2001ms
+2026-08-26 13:35:34.744 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - application/json 2
+2026-08-26 13:35:34.755 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:34.756 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:35:34.758 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:35:34.767 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:35:34.771 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:35:34.774 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:35:34.774 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 14.7078ms
+2026-08-26 13:35:34.780 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:35:34.781 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - 204 null null 37.7526ms
+2026-08-26 13:35:34.786 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - null null
+2026-08-26 13:35:34.788 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:34.790 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - 204 null null 4.2624ms
+2026-08-26 13:35:34.792 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - application/json 2
+2026-08-26 13:35:34.795 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:34.796 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:35:34.797 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:35:34.801 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:35:34.806 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:35:34.808 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:35:34.809 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 10.4383ms
+2026-08-26 13:35:34.810 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:35:34.811 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - 204 null null 19.4886ms
+2026-08-26 13:35:41.844 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - null null
+2026-08-26 13:35:41.850 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:41.851 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - 204 null null 7.0577ms
+2026-08-26 13:35:41.854 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - application/json 2
+2026-08-26 13:35:41.864 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:41.865 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:35:41.866 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:35:41.871 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:35:41.925 -03:00 [INF] Executed DbCommand (50ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:35:41.928 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:35:41.929 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 61.3994ms
+2026-08-26 13:35:41.930 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:35:41.931 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/fila - 204 null null 77.6141ms
+2026-08-26 13:35:41.936 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - null null
+2026-08-26 13:35:41.939 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:41.939 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - 204 null null 3.4269ms
+2026-08-26 13:35:41.941 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - application/json 2
+2026-08-26 13:35:41.944 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:41.945 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:35:41.946 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:35:41.952 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:35:41.956 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:35:41.958 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:35:41.959 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 11.2189ms
+2026-08-26 13:35:41.960 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:35:41.961 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/iniciar - 204 null null 20.4858ms
+2026-08-26 13:35:43.970 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/erro - null null
+2026-08-26 13:35:43.973 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:43.975 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/erro - 204 null null 4.6188ms
+2026-08-26 13:35:43.979 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/erro - application/json 2
+2026-08-26 13:35:43.985 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:35:43.986 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:35:43.993 -03:00 [INF] Route matched with {action = "ErroImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ErroImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:35:43.999 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:35:44.007 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:35:44.009 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:35:44.010 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele) in 14.5959ms
+2026-08-26 13:35:44.012 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:35:44.014 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/18bdb004-786d-4553-a976-41ff84a9e6fa/impressao/erro - 204 null null 34.6408ms
+2026-08-26 13:43:27.454 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:43:27.462 -03:00 [INF] Executed endpoint '/hubs/notificacoes'
+2026-08-26 13:43:27.455 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-08-26 13:43:27.464 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-08-26 13:43:27.488 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:27.490 -03:00 [INF] Request finished HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=v89N8lsxKrjAaxwKQBGkBg - 200 null null 597134.8702ms
+2026-08-26 13:43:27.495 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 41.4874ms
+2026-08-26 13:43:27.504 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-08-26 13:43:27.493 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:27.495 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:27.508 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:27.508 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 53.263ms
+2026-08-26 13:43:27.509 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - 204 null null 45.2399ms
+2026-08-26 13:43:27.512 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:43:27.519 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:27.523 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-08-26 13:43:27.523 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-08-26 13:43:27.539 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:27.543 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:27.543 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-08-26 13:43:27.544 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-08-26 13:43:27.545 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-08-26 13:43:27.546 -03:00 [INF] Route matched with {action = "GetPedidosPendentesImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPedidosPendentesImpressao() on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:27.547 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 25.0398ms
+2026-08-26 13:43:27.558 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=XGPhoor2XLXLXLLYxEntGQ - null null
+2026-08-26 13:43:27.571 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:27.574 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-08-26 13:43:27.880 -03:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-08-26 13:43:27.881 -03:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id]
+FROM [Pedidos] AS [p]
+WHERE [p].[StatusImpressao] IN (0, 1)
+ORDER BY [p].[DataHora]
+2026-08-26 13:43:27.887 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-26 13:43:27.890 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele) in 340.4137ms
+2026-08-26 13:43:27.891 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-08-26 13:43:27.895 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 200 null application/json; charset=utf-8 372.4547ms
+2026-08-26 13:43:27.906 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8 - null null
+2026-08-26 13:43:27.909 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:27.911 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8 - 204 null null 5.0902ms
+2026-08-26 13:43:27.914 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8 - null null
+2026-08-26 13:43:27.919 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:27.920 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetById (TimDoLele)'
+2026-08-26 13:43:27.927 -03:00 [INF] Route matched with {action = "GetById", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:27.930 -03:00 [INF] Executed DbCommand (43ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:43:27.936 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:43:27.939 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 416.7609ms
+2026-08-26 13:43:27.941 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:43:27.943 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 438.9501ms
+2026-08-26 13:43:27.954 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-26 13:43:27.995 -03:00 [INF] Executed DbCommand (21ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [t].[Id0], [t].[Nome], [t].[Observacao], [t].[Telefone], [t].[Endereco_Bairro], [t].[Endereco_Cidade], [t].[Endereco_Complemento], [t].[Endereco_Estado], [t].[Endereco_Numero], [t].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara], [c].[Id] AS [Id0], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua]
+    FROM [Pedidos] AS [p]
+    INNER JOIN [Clientes] AS [c] ON [p].[ClienteId] = [c].[Id]
+    WHERE [p].[Id] = @__id_0
+) AS [t]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[Id], [t].[Id0], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:43:28.001 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.PedidoResponseDto'.
+2026-08-26 13:43:28.002 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetById (TimDoLele) in 73.267ms
+2026-08-26 13:43:28.009 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetById (TimDoLele)'
+2026-08-26 13:43:28.010 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8 - 200 null application/json; charset=utf-8 96.1799ms
+2026-08-26 13:43:28.014 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - null null
+2026-08-26 13:43:28.023 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:28.023 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - 204 null null 9.2477ms
+2026-08-26 13:43:28.028 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - application/json 2
+2026-08-26 13:43:28.032 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:28.034 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:43:28.035 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:28.042 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:43:28.052 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:43:28.055 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:43:28.060 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 21.5665ms
+2026-08-26 13:43:28.061 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:43:28.063 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - 204 null null 35.2554ms
+2026-08-26 13:43:28.070 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - null null
+2026-08-26 13:43:28.081 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:28.082 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - 204 null null 12.0858ms
+2026-08-26 13:43:28.086 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - application/json 2
+2026-08-26 13:43:28.089 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:28.090 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:43:28.091 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:28.095 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:43:28.107 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:43:28.112 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:43:28.114 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 20.648ms
+2026-08-26 13:43:28.116 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:43:28.117 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - 204 null null 31.689ms
+2026-08-26 13:43:33.342 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - null null
+2026-08-26 13:43:33.346 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:33.347 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - 204 null null 4.413ms
+2026-08-26 13:43:33.354 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - application/json 2
+2026-08-26 13:43:33.360 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:33.361 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:43:33.364 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:33.372 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:43:33.376 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:43:33.379 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:43:33.380 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 12.4125ms
+2026-08-26 13:43:33.381 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:43:33.382 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - 204 null null 28.2411ms
+2026-08-26 13:43:33.391 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - null null
+2026-08-26 13:43:33.397 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:33.397 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - 204 null null 6.8397ms
+2026-08-26 13:43:33.402 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - application/json 2
+2026-08-26 13:43:33.405 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:33.407 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:43:33.408 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:33.412 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:43:33.418 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:43:33.420 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:43:33.421 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 11.064ms
+2026-08-26 13:43:33.422 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:43:33.424 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - 204 null null 21.5279ms
+2026-08-26 13:43:40.454 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - null null
+2026-08-26 13:43:40.467 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:40.468 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - 204 null null 14.1304ms
+2026-08-26 13:43:40.470 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - application/json 2
+2026-08-26 13:43:40.476 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:40.477 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:43:40.478 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:40.482 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:43:40.488 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:43:40.490 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:43:40.492 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 11.5471ms
+2026-08-26 13:43:40.493 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:43:40.494 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/fila - 204 null null 23.7521ms
+2026-08-26 13:43:40.499 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - null null
+2026-08-26 13:43:40.503 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:40.503 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - 204 null null 4.7043ms
+2026-08-26 13:43:40.505 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - application/json 2
+2026-08-26 13:43:40.509 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:40.510 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:43:40.512 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:40.516 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:43:40.519 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:43:40.522 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:43:40.522 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 8.5031ms
+2026-08-26 13:43:40.523 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:43:40.524 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/iniciar - 204 null null 19.7286ms
+2026-08-26 13:43:42.556 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/erro - null null
+2026-08-26 13:43:42.559 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:42.560 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/erro - 204 null null 4.329ms
+2026-08-26 13:43:42.562 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/erro - application/json 2
+2026-08-26 13:43:42.571 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:43:42.573 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:43:42.575 -03:00 [INF] Route matched with {action = "ErroImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ErroImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:43:42.583 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:43:42.590 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:43:42.597 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:43:42.598 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele) in 20.8765ms
+2026-08-26 13:43:42.599 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:43:42.601 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/ea9605bd-15ef-4935-aec0-3d61795f6da8/impressao/erro - 204 null null 39.1893ms
+2026-08-26 13:45:10.928 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-08-26 13:45:11.210 -03:00 [INF] Now listening on: https://localhost:57668
+2026-08-26 13:45:11.212 -03:00 [INF] Now listening on: http://localhost:57669
+2026-08-26 13:45:11.328 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-26 13:45:11.330 -03:00 [INF] Hosting environment: Development
+2026-08-26 13:45:11.331 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-08-26 13:45:12.251 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-08-26 13:45:12.484 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 246.2176ms
+2026-08-26 13:45:12.516 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-08-26 13:45:12.516 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-08-26 13:45:12.522 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 6.6135ms
+2026-08-26 13:45:12.526 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-08-26 13:45:12.538 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 23.0517ms
+2026-08-26 13:45:12.576 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 50.3366ms
+2026-08-26 13:45:12.649 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-08-26 13:45:12.677 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 28.5192ms
+2026-08-26 13:45:50.174 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:45:50.187 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-08-26 13:45:50.174 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-08-26 13:45:50.281 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:45:50.291 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:45:50.294 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:45:50.296 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 122.1245ms
+2026-08-26 13:45:50.297 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 122.2624ms
+2026-08-26 13:45:50.296 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - 204 null null 111.0687ms
+2026-08-26 13:45:50.507 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-08-26 13:45:50.546 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-08-26 13:45:50.532 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-08-26 13:45:50.558 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:45:50.561 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:45:50.561 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:45:52.135 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-08-26 13:45:52.156 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-08-26 13:45:52.158 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 1611.8931ms
+2026-08-26 13:45:52.167 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=UVhlzA2e3VDJzIobBfXxHg - null null
+2026-08-26 13:45:52.170 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:45:52.174 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-08-26 13:45:52.267 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:45:52.267 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-08-26 13:45:52.289 -03:00 [INF] Route matched with {action = "GetPedidosPendentesImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPedidosPendentesImpressao() on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:45:52.291 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:45:53.715 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.717 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.718 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.720 -03:00 [WRN] No store type was specified for the decimal property 'TrocoPara' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.722 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Adicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.724 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.725 -03:00 [WRN] No store type was specified for the decimal property 'ValorUnitario' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.727 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'ItemPedidoAdicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.729 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.730 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.732 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:53.733 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-08-26 13:45:55.343 -03:00 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-08-26 13:45:55.343 -03:00 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id]
+FROM [Pedidos] AS [p]
+WHERE [p].[StatusImpressao] IN (0, 1)
+ORDER BY [p].[DataHora]
+2026-08-26 13:45:55.378 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-26 13:45:55.389 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele) in 3093.5338ms
+2026-08-26 13:45:55.392 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-08-26 13:45:55.408 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 200 null application/json; charset=utf-8 4901.1093ms
+2026-08-26 13:45:55.528 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-26 13:45:55.677 -03:00 [INF] Executed DbCommand (124ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:45:55.878 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:45:55.908 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 3614.1152ms
+2026-08-26 13:45:55.909 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:45:55.910 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 5378.371ms
+2026-08-26 13:48:22.393 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:48:22.397 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:22.398 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 5.1763ms
+2026-08-26 13:48:22.404 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-08-26 13:48:22.410 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:22.414 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:48:22.415 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:48:22.530 -03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-08-26 13:48:22.567 -03:00 [INF] Executed DbCommand (32ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:48:22.582 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:48:22.594 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 172.4231ms
+2026-08-26 13:48:22.596 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:48:22.597 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 192.7914ms
+2026-08-26 13:48:24.782 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-08-26 13:48:24.788 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:24.789 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 7.7693ms
+2026-08-26 13:48:24.793 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-08-26 13:48:24.799 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:24.799 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:48:24.803 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-08-26 13:48:24.858 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-26 13:48:24.882 -03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-08-26 13:48:24.893 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:48:24.901 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 93.8177ms
+2026-08-26 13:48:24.902 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:48:24.903 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 110.2154ms
+2026-08-26 13:48:55.930 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:48:55.933 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:55.934 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 3.9864ms
+2026-08-26 13:48:55.935 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/pedidos - application/json 229
+2026-08-26 13:48:55.940 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:55.941 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele)'
+2026-08-26 13:48:55.946 -03:00 [INF] Route matched with {action = "Criar", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Criar(TimDoLeLe.Application.DTOs.CriarPedidoDto) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:48:56.191 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Clientes] ([Id], [Nome], [Observacao], [Telefone], [Endereco_Bairro], [Endereco_Cidade], [Endereco_Complemento], [Endereco_Estado], [Endereco_Numero], [Endereco_Rua])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+2026-08-26 13:48:56.217 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__itemDto_ProdutoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Ativo], [p].[CategoriaId], [p].[Descricao], [p].[Nome], [p].[Preco]
+FROM [Produtos] AS [p]
+WHERE [p].[Id] = @__itemDto_ProdutoId_0
+2026-08-26 13:48:56.304 -03:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (DbType = DateTime2), @p5='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p6='?' (DbType = Int32), @p7='?' (DbType = Guid), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p15='?' (DbType = Guid), @p16='?' (Size = 4000), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (DbType = Int32), @p20='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p21='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Pedidos] ([Id], [ClienteId], [Codigo], [DataHora], [DataImpressao], [Delivery], [FormaPagamento], [PagamentoId], [Status], [StatusImpressao], [Subtotal], [TentativasImpressao], [TipoEntrega], [Total], [TrocoPara])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+INSERT INTO [ItensPedido] ([Id], [Observacao], [PedidoId], [ProdutoId], [Quantidade], [Valor], [ValorUnitario])
+VALUES (@p15, @p16, @p17, @p18, @p19, @p20, @p21);
+2026-08-26 13:48:56.329 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65 - null null
+2026-08-26 13:48:56.332 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-26 13:48:56.333 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:56.336 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65 - 204 null null 6.8415ms
+2026-08-26 13:48:56.339 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65 - null null
+2026-08-26 13:48:56.341 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele) in 390.6867ms
+2026-08-26 13:48:56.346 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele)'
+2026-08-26 13:48:56.347 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:56.348 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 412.1074ms
+2026-08-26 13:48:56.354 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetById (TimDoLele)'
+2026-08-26 13:48:56.363 -03:00 [INF] Route matched with {action = "GetById", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:48:56.417 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-08-26 13:48:56.477 -03:00 [INF] Executed DbCommand (15ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [t].[Id0], [t].[Nome], [t].[Observacao], [t].[Telefone], [t].[Endereco_Bairro], [t].[Endereco_Cidade], [t].[Endereco_Complemento], [t].[Endereco_Estado], [t].[Endereco_Numero], [t].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara], [c].[Id] AS [Id0], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua]
+    FROM [Pedidos] AS [p]
+    INNER JOIN [Clientes] AS [c] ON [p].[ClienteId] = [c].[Id]
+    WHERE [p].[Id] = @__id_0
+) AS [t]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[Id], [t].[Id0], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:48:56.495 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.PedidoResponseDto'.
+2026-08-26 13:48:56.498 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetById (TimDoLele) in 133.0464ms
+2026-08-26 13:48:56.505 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetById (TimDoLele)'
+2026-08-26 13:48:56.508 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65 - 200 null application/json; charset=utf-8 169.3063ms
+2026-08-26 13:48:56.525 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - null null
+2026-08-26 13:48:56.536 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:56.536 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 10.9523ms
+2026-08-26 13:48:56.538 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - application/json 2
+2026-08-26 13:48:56.545 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:56.546 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:48:56.550 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:48:56.563 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:48:56.577 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:48:56.592 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:48:56.595 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 43.3838ms
+2026-08-26 13:48:56.596 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:48:56.597 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 58.9465ms
+2026-08-26 13:48:56.603 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - null null
+2026-08-26 13:48:56.614 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:56.615 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 11.6165ms
+2026-08-26 13:48:56.617 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - application/json 2
+2026-08-26 13:48:56.622 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:48:56.623 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:48:56.628 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:48:56.635 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:48:56.641 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:48:56.644 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:48:56.645 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 14.5772ms
+2026-08-26 13:48:56.646 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:48:56.648 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 30.6795ms
+2026-08-26 13:49:01.676 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - null null
+2026-08-26 13:49:01.684 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:01.688 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 12.0529ms
+2026-08-26 13:49:01.694 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - application/json 2
+2026-08-26 13:49:01.704 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:01.705 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:49:01.706 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:49:01.710 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:49:01.715 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:49:01.717 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:49:01.718 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 10.3855ms
+2026-08-26 13:49:01.719 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:49:01.720 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 26.6901ms
+2026-08-26 13:49:01.725 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - null null
+2026-08-26 13:49:01.727 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:01.728 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 3.2139ms
+2026-08-26 13:49:01.729 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - application/json 2
+2026-08-26 13:49:01.735 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:01.736 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:49:01.736 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:49:01.742 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:49:01.746 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:49:01.749 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:49:01.750 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 11.7436ms
+2026-08-26 13:49:01.752 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:49:01.753 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 23.4718ms
+2026-08-26 13:49:08.774 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - null null
+2026-08-26 13:49:08.777 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:08.778 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 4.0052ms
+2026-08-26 13:49:08.783 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - application/json 2
+2026-08-26 13:49:08.796 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:08.797 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:49:08.797 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:49:08.802 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:49:08.806 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:49:08.808 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:49:08.809 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 9.8599ms
+2026-08-26 13:49:08.810 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:49:08.811 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 28.292ms
+2026-08-26 13:49:08.816 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - null null
+2026-08-26 13:49:08.818 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:08.818 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 2.8907ms
+2026-08-26 13:49:08.820 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - application/json 2
+2026-08-26 13:49:08.823 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:08.824 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:49:08.825 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:49:08.829 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:49:08.832 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:49:08.835 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:49:08.835 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 8.926ms
+2026-08-26 13:49:08.836 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:49:08.837 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 18.0746ms
+2026-08-26 13:49:10.856 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/erro - null null
+2026-08-26 13:49:10.862 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:10.864 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/erro - 204 null null 8.5148ms
+2026-08-26 13:49:10.868 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/erro - application/json 2
+2026-08-26 13:49:10.873 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:10.875 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:49:10.879 -03:00 [INF] Route matched with {action = "ErroImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ErroImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:49:10.889 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:49:10.897 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:49:10.903 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:49:10.903 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele) in 21.053ms
+2026-08-26 13:49:10.904 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:49:10.905 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/erro - 204 null null 37.292ms
+2026-08-26 13:49:58.868 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-08-26 13:49:58.873 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:58.874 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 6.6773ms
+2026-08-26 13:49:58.878 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-08-26 13:49:58.887 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:49:58.891 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:49:58.894 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-08-26 13:49:58.918 -03:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-08-26 13:49:58.922 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:49:58.924 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 25.583ms
+2026-08-26 13:49:58.925 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:49:58.926 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 48.5993ms
+2026-08-26 13:50:27.198 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:50:27.211 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:27.212 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 13.8713ms
+2026-08-26 13:50:27.217 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-08-26 13:50:27.220 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:27.221 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:50:27.222 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:50:27.233 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-08-26 13:50:27.265 -03:00 [INF] Executed DbCommand (28ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:50:27.276 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:50:27.279 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 54.928ms
+2026-08-26 13:50:27.285 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:50:27.286 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 73.0854ms
+2026-08-26 13:50:32.300 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/reimprimir - null null
+2026-08-26 13:50:32.306 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:32.309 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/reimprimir - 204 null null 9.1037ms
+2026-08-26 13:50:32.312 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/reimprimir - application/json 2
+2026-08-26 13:50:32.318 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:32.320 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Reimprimir (TimDoLele)'
+2026-08-26 13:50:32.329 -03:00 [INF] Route matched with {action = "Reimprimir", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Reimprimir(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:50:32.341 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:50:32.350 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:50:32.354 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:50:32.355 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Reimprimir (TimDoLele) in 22.2417ms
+2026-08-26 13:50:32.356 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Reimprimir (TimDoLele)'
+2026-08-26 13:50:32.357 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/reimprimir - 204 null null 45.4447ms
+2026-08-26 13:50:32.363 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - null null
+2026-08-26 13:50:32.366 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:32.367 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 4.7173ms
+2026-08-26 13:50:32.369 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - application/json 2
+2026-08-26 13:50:32.372 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:32.373 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:50:32.374 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:50:32.380 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:50:32.383 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:50:32.383 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 5.7869ms
+2026-08-26 13:50:32.384 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:50:32.385 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 16.7293ms
+2026-08-26 13:50:32.392 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - null null
+2026-08-26 13:50:32.395 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:32.396 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 4.6453ms
+2026-08-26 13:50:32.398 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - application/json 2
+2026-08-26 13:50:32.404 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:32.405 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:50:32.406 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:50:32.410 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:50:32.417 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:50:32.420 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:50:32.421 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 13.5088ms
+2026-08-26 13:50:32.422 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:50:32.423 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 25.5758ms
+2026-08-26 13:50:37.447 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - null null
+2026-08-26 13:50:37.452 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:37.453 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 6.5134ms
+2026-08-26 13:50:37.458 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - application/json 2
+2026-08-26 13:50:37.465 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:37.467 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:50:37.468 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:50:37.476 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:50:37.481 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:50:37.484 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:50:37.485 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 13.6826ms
+2026-08-26 13:50:37.486 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:50:37.487 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 29.4699ms
+2026-08-26 13:50:37.491 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - null null
+2026-08-26 13:50:37.493 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:37.494 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 2.8129ms
+2026-08-26 13:50:37.496 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - application/json 2
+2026-08-26 13:50:37.499 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:37.500 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:50:37.501 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:50:37.505 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:50:37.509 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:50:37.512 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:50:37.513 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 9.7915ms
+2026-08-26 13:50:37.514 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:50:37.515 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 19.4544ms
+2026-08-26 13:50:44.592 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - null null
+2026-08-26 13:50:44.596 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:44.597 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 4.7445ms
+2026-08-26 13:50:44.602 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - application/json 2
+2026-08-26 13:50:44.607 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:44.608 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:50:44.609 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:50:44.619 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:50:44.626 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:50:44.670 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:50:44.671 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 57.3504ms
+2026-08-26 13:50:44.673 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:50:44.674 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/fila - 204 null null 72.4829ms
+2026-08-26 13:50:44.679 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - null null
+2026-08-26 13:50:44.684 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:44.684 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 5.7578ms
+2026-08-26 13:50:44.687 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - application/json 2
+2026-08-26 13:50:44.689 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:44.690 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:50:44.692 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:50:44.696 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:50:44.702 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:50:44.704 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:50:44.705 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 11.6036ms
+2026-08-26 13:50:44.706 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:50:44.707 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/iniciar - 204 null null 20.5225ms
+2026-08-26 13:50:46.724 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/erro - null null
+2026-08-26 13:50:46.730 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:46.733 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/erro - 204 null null 9.2291ms
+2026-08-26 13:50:46.735 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/erro - application/json 2
+2026-08-26 13:50:46.739 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:50:46.740 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:50:46.743 -03:00 [INF] Route matched with {action = "ErroImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ErroImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:50:46.754 -03:00 [INF] Executed DbCommand (7ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:50:46.763 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:50:46.770 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:50:46.772 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele) in 26.9025ms
+2026-08-26 13:50:46.774 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:50:46.775 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/c19784b7-50f5-4f03-a229-dcd8e1287d65/impressao/erro - 204 null null 40.4852ms
+2026-08-26 13:55:05.810 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:55:05.818 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:05.819 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 14.0346ms
+2026-08-26 13:55:05.821 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-08-26 13:55:05.825 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:05.830 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:55:05.832 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:05.838 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-08-26 13:55:05.864 -03:00 [INF] Executed DbCommand (20ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:55:05.871 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:55:05.874 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 39.6285ms
+2026-08-26 13:55:05.875 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-08-26 13:55:05.876 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 55.6348ms
+2026-08-26 13:55:44.966 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-08-26 13:55:44.968 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:44.969 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 3.3463ms
+2026-08-26 13:55:44.970 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/pedidos - application/json 218
+2026-08-26 13:55:44.975 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:44.976 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele)'
+2026-08-26 13:55:44.977 -03:00 [INF] Route matched with {action = "Criar", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Criar(TimDoLeLe.Application.DTOs.CriarPedidoDto) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:45.042 -03:00 [INF] Executed DbCommand (58ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Clientes] ([Id], [Nome], [Observacao], [Telefone], [Endereco_Bairro], [Endereco_Cidade], [Endereco_Complemento], [Endereco_Estado], [Endereco_Numero], [Endereco_Rua])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+2026-08-26 13:55:45.047 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__itemDto_ProdutoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Ativo], [p].[CategoriaId], [p].[Descricao], [p].[Nome], [p].[Preco]
+FROM [Produtos] AS [p]
+WHERE [p].[Id] = @__itemDto_ProdutoId_0
+2026-08-26 13:55:45.060 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (DbType = DateTime2), @p5='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p6='?' (DbType = Int32), @p7='?' (DbType = Guid), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p14='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p15='?' (DbType = Guid), @p16='?' (Size = 4000), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (DbType = Int32), @p20='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p21='?' (Precision = 18) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Pedidos] ([Id], [ClienteId], [Codigo], [DataHora], [DataImpressao], [Delivery], [FormaPagamento], [PagamentoId], [Status], [StatusImpressao], [Subtotal], [TentativasImpressao], [TipoEntrega], [Total], [TrocoPara])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+INSERT INTO [ItensPedido] ([Id], [Observacao], [PedidoId], [ProdutoId], [Quantidade], [Valor], [ValorUnitario])
+VALUES (@p15, @p16, @p17, @p18, @p19, @p20, @p21);
+2026-08-26 13:55:45.066 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-08-26 13:55:45.068 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele) in 88.5391ms
+2026-08-26 13:55:45.070 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Criar (TimDoLele)'
+2026-08-26 13:55:45.072 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8 - null null
+2026-08-26 13:55:45.073 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 103.1656ms
+2026-08-26 13:55:45.076 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:45.081 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8 - 204 null null 9.6397ms
+2026-08-26 13:55:45.087 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8 - null null
+2026-08-26 13:55:45.092 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:45.094 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetById (TimDoLele)'
+2026-08-26 13:55:45.099 -03:00 [INF] Route matched with {action = "GetById", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:45.134 -03:00 [INF] Executed DbCommand (23ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [t].[Id0], [t].[Nome], [t].[Observacao], [t].[Telefone], [t].[Endereco_Bairro], [t].[Endereco_Cidade], [t].[Endereco_Complemento], [t].[Endereco_Estado], [t].[Endereco_Numero], [t].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara], [c].[Id] AS [Id0], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua]
+    FROM [Pedidos] AS [p]
+    INNER JOIN [Clientes] AS [c] ON [p].[ClienteId] = [c].[Id]
+    WHERE [p].[Id] = @__id_0
+) AS [t]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[Id], [t].[Id0], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-08-26 13:55:45.146 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.PedidoResponseDto'.
+2026-08-26 13:55:45.152 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetById (TimDoLele) in 46.8971ms
+2026-08-26 13:55:45.159 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetById (TimDoLele)'
+2026-08-26 13:55:45.160 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8 - 200 null application/json; charset=utf-8 73.1086ms
+2026-08-26 13:55:45.181 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - null null
+2026-08-26 13:55:45.196 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:45.196 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - 204 null null 15.3478ms
+2026-08-26 13:55:45.198 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - application/json 2
+2026-08-26 13:55:45.206 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:45.207 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:55:45.208 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:45.214 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:55:45.233 -03:00 [INF] Executed DbCommand (13ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:55:45.238 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:55:45.240 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 29.9929ms
+2026-08-26 13:55:45.242 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:55:45.245 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - 204 null null 46.9397ms
+2026-08-26 13:55:45.316 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - null null
+2026-08-26 13:55:45.321 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:45.325 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - 204 null null 9.1246ms
+2026-08-26 13:55:45.327 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - application/json 2
+2026-08-26 13:55:45.332 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:45.338 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:55:45.342 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:45.349 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:55:45.359 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:55:45.370 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:55:45.371 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 25.5315ms
+2026-08-26 13:55:45.372 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:55:45.373 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - 204 null null 46.5223ms
+2026-08-26 13:55:47.099 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/cardapio - null null
+2026-08-26 13:55:47.105 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:47.106 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/cardapio - 204 null null 6.5423ms
+2026-08-26 13:55:47.108 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/cardapio - null null
+2026-08-26 13:55:47.119 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:47.120 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:55:47.121 -03:00 [INF] Route matched with {action = "Get", controller = "Cardapio"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get() on controller TimDoLeLe.Controllers.CardapioController (TimDoLele).
+2026-08-26 13:55:47.142 -03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Nome], [c].[Id], [t0].[Id], [t0].[Nome], [t0].[Preco], [t0].[Id0], [t0].[Nome0], [t0].[Preco0], [t0].[Id00]
+FROM [Categorias] AS [c]
+LEFT JOIN (
+    SELECT [p].[Id], [p].[Nome], [p].[Preco], [t].[Id] AS [Id0], [t].[Nome] AS [Nome0], [t].[Preco] AS [Preco0], [t].[Id0] AS [Id00], [p].[CategoriaId]
+    FROM [Produtos] AS [p]
+    LEFT JOIN (
+        SELECT [a].[Id], [a].[Nome], [a].[Preco], [p0].[Id] AS [Id0], [p0].[ProdutoId]
+        FROM [ProdutosAdicionais] AS [p0]
+        INNER JOIN [Adicionais] AS [a] ON [p0].[AdicionalId] = [a].[Id]
+    ) AS [t] ON [p].[Id] = [t].[ProdutoId]
+) AS [t0] ON [c].[Id] = [t0].[CategoriaId]
+ORDER BY [c].[Id], [t0].[Id], [t0].[Id00]
+2026-08-26 13:55:47.146 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLele.Application.DTOs.CardapioDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-08-26 13:55:47.147 -03:00 [INF] Executed action TimDoLeLe.Controllers.CardapioController.Get (TimDoLele) in 20.7935ms
+2026-08-26 13:55:47.148 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.CardapioController.Get (TimDoLele)'
+2026-08-26 13:55:47.151 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/cardapio - 200 null application/json; charset=utf-8 42.8567ms
+2026-08-26 13:55:50.383 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - null null
+2026-08-26 13:55:50.386 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:50.387 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - 204 null null 4.1625ms
+2026-08-26 13:55:50.388 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - application/json 2
+2026-08-26 13:55:50.393 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:50.395 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:55:50.396 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:50.402 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:55:50.411 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:55:50.414 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:55:50.415 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 15.1113ms
+2026-08-26 13:55:50.416 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:55:50.418 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - 204 null null 29.4274ms
+2026-08-26 13:55:50.422 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - null null
+2026-08-26 13:55:50.427 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:50.428 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - 204 null null 6.0803ms
+2026-08-26 13:55:50.430 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - application/json 2
+2026-08-26 13:55:50.433 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:50.434 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:55:50.435 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:50.440 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:55:50.445 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:55:50.447 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:55:50.448 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 10.6329ms
+2026-08-26 13:55:50.449 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:55:50.450 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - 204 null null 21.1665ms
+2026-08-26 13:55:57.484 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - null null
+2026-08-26 13:55:57.487 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:57.488 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - 204 null null 5.271ms
+2026-08-26 13:55:57.490 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - application/json 2
+2026-08-26 13:55:57.494 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:57.496 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:55:57.497 -03:00 [INF] Route matched with {action = "ColocarNaFilaImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ColocarNaFilaImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:57.502 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:55:57.507 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:55:57.511 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:55:57.513 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele) in 13.6011ms
+2026-08-26 13:55:57.514 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ColocarNaFilaImpressao (TimDoLele)'
+2026-08-26 13:55:57.515 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/fila - 204 null null 25.3105ms
+2026-08-26 13:55:57.519 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - null null
+2026-08-26 13:55:57.524 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:57.525 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - 204 null null 6.0313ms
+2026-08-26 13:55:57.527 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - application/json 2
+2026-08-26 13:55:57.531 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:57.532 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:55:57.534 -03:00 [INF] Route matched with {action = "IniciarImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IniciarImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:57.541 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:55:57.592 -03:00 [INF] Executed DbCommand (46ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0, [TentativasImpressao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-08-26 13:55:57.598 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:55:57.599 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele) in 61.6423ms
+2026-08-26 13:55:57.600 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.IniciarImpressao (TimDoLele)'
+2026-08-26 13:55:57.602 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/iniciar - 204 null null 75.9888ms
+2026-08-26 13:55:59.612 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/erro - null null
+2026-08-26 13:55:59.620 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:59.621 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/erro - 204 null null 9.8969ms
+2026-08-26 13:55:59.623 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/erro - application/json 2
+2026-08-26 13:55:59.627 -03:00 [INF] CORS policy execution successful.
+2026-08-26 13:55:59.628 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:55:59.629 -03:00 [INF] Route matched with {action = "ErroImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ErroImpressao(System.Guid) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-08-26 13:55:59.634 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__pedidoId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+FROM [Pedidos] AS [p]
+WHERE [p].[Id] = @__pedidoId_0
+2026-08-26 13:55:59.695 -03:00 [INF] Executed DbCommand (57ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Pedidos] SET [StatusImpressao] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-08-26 13:55:59.699 -03:00 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2026-08-26 13:55:59.700 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele) in 68.3277ms
+2026-08-26 13:55:59.701 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.ErroImpressao (TimDoLele)'
+2026-08-26 13:55:59.703 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/pedidos/9e04eb70-3c40-43d1-8a97-cd9994ddd2c8/impressao/erro - 204 null null 79.801ms

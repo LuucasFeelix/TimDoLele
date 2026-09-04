@@ -3,59 +3,291 @@
   <aside class="sidebar">
 
     <div class="brand">
+
       <div class="logo-box">
         🍔
       </div>
 
-      <h2>Tim do Lelê</h2>
-      <span>Administração</span>
+      <h2>
+        Tim do Lelê
+      </h2>
+
+      <span>
+        Administração
+      </span>
+
     </div>
 
     <nav class="menu">
 
-      <a routerLink="/admin/dashboard" routerLinkActive="active">
-        <span class="menu-icon">▦</span>
-        <span class="menu-text">Dashboard</span>
+      <a
+        routerLink="/admin/dashboard"
+        routerLinkActive="active"
+      >
+
+        <span class="menu-icon">
+          ▦
+        </span>
+
+        <span class="menu-text">
+          Dashboard
+        </span>
+
       </a>
 
-      <a routerLink="/admin/pedidos" routerLinkActive="active">
-        <span class="menu-icon">▤</span>
-        <span class="menu-text">Pedidos</span>
+      <a
+        routerLink="/admin/pedidos"
+        routerLinkActive="active"
+      >
+
+        <span class="menu-icon">
+          ▤
+        </span>
+
+        <span class="menu-text">
+          Pedidos
+        </span>
+
       </a>
 
-      <a routerLink="/admin/produtos" routerLinkActive="active">
-        <span class="menu-icon">☰</span>
-        <span class="menu-text">Produtos</span>
+      <a
+        routerLink="/admin/produtos"
+        routerLinkActive="active"
+      >
+
+        <span class="menu-icon">
+          ☰
+        </span>
+
+        <span class="menu-text">
+          Produtos
+        </span>
+
       </a>
 
-      <a routerLink="/admin/categorias" routerLinkActive="active">
-        <span class="menu-icon">□</span>
-        <span class="menu-text">Categorias</span>
+      <a
+        routerLink="/admin/categorias"
+        routerLinkActive="active"
+      >
+
+        <span class="menu-icon">
+          □
+        </span>
+
+        <span class="menu-text">
+          Categorias
+        </span>
+
       </a>
 
-      <a routerLink="/admin/adicionais" routerLinkActive="active">
-        <span class="menu-icon">＋</span>
-        <span class="menu-text">Adicionais</span>
+      <a
+        routerLink="/admin/adicionais"
+        routerLinkActive="active"
+      >
+
+        <span class="menu-icon">
+          ＋
+        </span>
+
+        <span class="menu-text">
+          Adicionais
+        </span>
+
       </a>
 
-      <a routerLink="/admin/relatorios" routerLinkActive="active">
-        <span class="menu-icon">↗</span>
-        <span class="menu-text">Relatórios</span>
+      <a
+        routerLink="/admin/relatorios"
+        routerLinkActive="active"
+      >
+
+        <span class="menu-icon">
+          ↗
+        </span>
+
+        <span class="menu-text">
+          Relatórios
+        </span>
+
       </a>
 
     </nav>
 
     <div class="sidebar-footer">
+
       <a routerLink="/admin/login">
-        <span class="menu-icon">↩</span>
-        <span class="menu-text">Sair</span>
+
+        <span class="menu-icon">
+          ↩
+        </span>
+
+        <span class="menu-text">
+          Sair
+        </span>
+
       </a>
+
     </div>
 
   </aside>
 
+
   <main class="admin-main">
-    <router-outlet></router-outlet>
+
+    <div
+      *ngIf="pedidosComErro.length > 0"
+      class="printing-error-summary"
+    >
+
+      <span class="printing-error-summary-icon">
+        ⚠️
+      </span>
+
+      <div>
+
+        <strong>
+          {{ pedidosComErro.length }}
+          erro(s) de impressão
+        </strong>
+
+        <span>
+          Existem pedidos que precisam de atenção.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      *ngFor="let erro of pedidosComErro"
+      class="printing-error-alert"
+    >
+
+      <div class="printing-error-icon">
+        ⚠️
+      </div>
+
+      <div class="printing-error-content">
+
+        <div class="printing-error-header">
+
+          <div>
+
+            <span class="printing-error-label">
+              ERRO DE IMPRESSÃO
+            </span>
+
+            <h3>
+              Pedido #{{ erro.pedido.codigo }}
+            </h3>
+
+          </div>
+
+          <button
+            type="button"
+            class="printing-error-close"
+            (click)="removerAviso(erro)"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <div class="printing-error-info">
+
+          <div>
+
+            <span>
+              Cliente
+            </span>
+
+            <strong>
+              {{ erro.pedido.nomeCliente }}
+            </strong>
+
+          </div>
+
+          <div>
+
+            <span>
+              Tipo
+            </span>
+
+            <strong>
+              {{ getTipoEntrega(erro.pedido) }}
+            </strong>
+
+          </div>
+
+          <div>
+
+            <span>
+              Total
+            </span>
+
+            <strong>
+              {{ formatarMoeda(erro.pedido.total) }}
+            </strong>
+
+          </div>
+
+          <div>
+
+            <span>
+              Tentativas
+            </span>
+
+            <strong class="printing-error-attempts">
+              {{ erro.tentativas }}/3
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="printing-error-message">
+
+          Não foi possível realizar a impressão
+          automaticamente após 3 tentativas.
+
+          <strong>
+            Realize a impressão manualmente
+            ou tente novamente.
+          </strong>
+
+        </div>
+
+
+        <div class="printing-error-actions">
+
+          <button
+            type="button"
+            class="printing-error-view"
+            (click)="verPedido(erro)"
+          >
+            👁️ Ver pedido
+          </button>
+
+          <button
+            type="button"
+            class="printing-error-retry"
+            (click)="tentarNovamente(erro)"
+          >
+            🖨️ Tentar novamente
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <router-outlet>
+    </router-outlet>
+
   </main>
 
 </div>

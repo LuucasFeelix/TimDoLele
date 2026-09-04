@@ -19,10 +19,18 @@ export interface ItemFilaImpressao {
   tentativas: number;
 }
 
+export interface PedidoComErroImpressao {
+  pedido: any;
+  tentativas: number;
+  dataErro: Date;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ImpressaoPedidoService {
+
+  private readonly MAX_TENTATIVAS = 3;
 
   private fila: ItemFilaImpressao[] = [];
 
@@ -30,13 +38,25 @@ export class ImpressaoPedidoService {
 
   private recuperandoPendentes = false;
 
-  private pedidosConhecidos = new Set<string>();
+  private simularErroImpressao = false;
+
+  private pedidosConhecidos =
+    new Set<string>();
+
+  private pedidosComErro:
+    PedidoComErroImpressao[] = [];
 
   private readonly filaSubject =
     new BehaviorSubject<ItemFilaImpressao[]>([]);
 
   readonly fila$ =
     this.filaSubject.asObservable();
+
+  private readonly pedidosComErroSubject =
+    new BehaviorSubject<PedidoComErroImpressao[]>([]);
+
+  readonly pedidosComErro$ =
+    this.pedidosComErroSubject.asObservable();
 
   constructor(
     private pedidoService: PedidoService
@@ -250,38 +270,18 @@ export class ImpressaoPedidoService {
         const item =
           this.fila[0];
 
-        item.status =
-          'Imprimindo';
-
-        item.tentativas++;
-
-        this.emitirFila();
-
-        try {
-
-          await firstValueFrom(
-            this.pedidoService
-              .iniciarImpressao(
-                item.pedido.id
-              )
+        const impresso =
+          await this.processarPedido(
+            item
           );
 
-          await this.imprimirPedido(
-            item.pedido
-          );
-
-          await firstValueFrom(
-            this.pedidoService
-              .concluirImpressao(
-                item.pedido.id
-              )
-          );
+        if (impresso) {
 
           item.status =
             'Impresso';
 
           console.log(
-            `✅ Pedido #${item.pedido.codigo} impresso.`
+            `✅ Pedido #${item.pedido.codigo} impresso com sucesso na tentativa ${item.tentativas}/${this.MAX_TENTATIVAS}.`
           );
 
           this.emitirFila();
@@ -290,22 +290,14 @@ export class ImpressaoPedidoService {
             500
           );
 
-
-          this.fila.shift();
-
-          this.emitirFila();
-
-        } catch (erro) {
-
+        } else {
 
           item.status =
             'Erro';
 
           console.error(
-            `❌ Erro ao imprimir o pedido #${item.pedido.codigo}.`,
-            erro
+            `🚨 Pedido #${item.pedido.codigo} não pôde ser impresso após ${this.MAX_TENTATIVAS} tentativas. Impressão manual necessária.`
           );
-
 
           try {
 
@@ -319,19 +311,22 @@ export class ImpressaoPedidoService {
           } catch (erroBackend) {
 
             console.error(
-              'Não foi possível registrar o erro de impressão no backend.',
+              `Não foi possível registrar o erro de impressão do pedido #${item.pedido.codigo} no backend.`,
               erroBackend
             );
 
           }
 
-          this.emitirFila();
-
-
-          this.fila.shift();
+          this.adicionarPedidoComErro(
+            item
+          );
 
           this.emitirFila();
         }
+
+        this.fila.shift();
+
+        this.emitirFila();
       }
 
     } finally {
@@ -340,6 +335,96 @@ export class ImpressaoPedidoService {
         false;
 
     }
+  }
+
+  private async processarPedido(
+    item: ItemFilaImpressao
+  ): Promise<boolean> {
+
+    while (
+      item.tentativas <
+      this.MAX_TENTATIVAS
+    ) {
+
+      item.tentativas++;
+
+      item.status =
+        'Imprimindo';
+
+      this.emitirFila();
+
+      console.log(
+        `🖨️ Tentativa ${item.tentativas}/${this.MAX_TENTATIVAS} - Pedido #${item.pedido.codigo}`
+      );
+
+      try {
+
+        if (
+          item.tentativas > 1
+        ) {
+
+          await firstValueFrom(
+            this.pedidoService
+              .colocarNaFila(
+                item.pedido.id
+              )
+          );
+        }
+
+        await firstValueFrom(
+          this.pedidoService
+            .iniciarImpressao(
+              item.pedido.id
+            )
+        );
+
+        await this.imprimirPedido(
+          item.pedido
+        );
+
+        await firstValueFrom(
+          this.pedidoService
+            .concluirImpressao(
+              item.pedido.id
+            )
+        );
+
+        return true;
+
+      } catch (erro) {
+
+        console.error(
+          `❌ Tentativa ${item.tentativas}/${this.MAX_TENTATIVAS} falhou para o pedido #${item.pedido.codigo}.`,
+          erro
+        );
+
+        if (
+          item.tentativas <
+          this.MAX_TENTATIVAS
+        ) {
+
+          item.status =
+            'Aguardando';
+
+          this.emitirFila();
+
+          const tempoEspera =
+            item.tentativas === 1
+              ? 3000
+              : 5000;
+
+          console.warn(
+            `⏳ Nova tentativa do pedido #${item.pedido.codigo} em ${tempoEspera / 1000} segundos.`
+          );
+
+          await this.aguardar(
+            tempoEspera
+          );
+        }
+      }
+    }
+
+    return false;
   }
 
   private async imprimirPedido(
@@ -374,11 +459,48 @@ export class ImpressaoPedidoService {
       2000
     );
 
+    if (
+      this.simularErroImpressao
+    ) {
+
+      throw new Error(
+        `Falha simulada na impressão do pedido #${pedido.codigo}`
+      );
+    }
+
     console.log(
       `🧾 Impressão simulada concluída: #${pedido.codigo}`
     );
   }
 
+  private adicionarPedidoComErro(
+    item: ItemFilaImpressao
+  ): void {
+
+    const existe =
+      this.pedidosComErro.some(
+        x =>
+          x.pedido.id ===
+          item.pedido.id
+      );
+
+    if (existe) {
+      return;
+    }
+
+    this.pedidosComErro.push({
+      pedido:
+        item.pedido,
+
+      tentativas:
+        item.tentativas,
+
+      dataErro:
+        new Date()
+    });
+
+    this.emitirPedidosComErro();
+  }
 
   async reimprimir(
     pedido: any
@@ -388,11 +510,13 @@ export class ImpressaoPedidoService {
       return;
     }
 
-
     this.pedidosConhecidos.delete(
       pedido.id
     );
 
+    this.removerPedidoComErro(
+      pedido.id
+    );
 
     await firstValueFrom(
       this.pedidoService.reimprimir(
@@ -400,12 +524,24 @@ export class ImpressaoPedidoService {
       )
     );
 
-
     await this.adicionarNaFila(
       pedido
     );
   }
 
+  removerPedidoComErro(
+    pedidoId: string
+  ): void {
+
+    this.pedidosComErro =
+      this.pedidosComErro.filter(
+        item =>
+          item.pedido.id !==
+          pedidoId
+      );
+
+    this.emitirPedidosComErro();
+  }
 
   private emitirFila(): void {
 
@@ -416,7 +552,18 @@ export class ImpressaoPedidoService {
         })
       )
     );
+  }
 
+  private emitirPedidosComErro():
+    void {
+
+    this.pedidosComErroSubject.next(
+      this.pedidosComErro.map(
+        item => ({
+          ...item
+        })
+      )
+    );
   }
 
   private aguardar(
@@ -430,6 +577,5 @@ export class ImpressaoPedidoService {
           milissegundos
         )
     );
-
   }
 }

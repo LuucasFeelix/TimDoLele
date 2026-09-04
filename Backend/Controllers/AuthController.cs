@@ -23,42 +23,82 @@ namespace TimDoLeLe.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto dto)
+        public async Task<IActionResult> Login(
+            LoginDto dto)
         {
-            var token = await _authService.LoginAsync(
-                dto.Email,
-                dto.Senha
-            );
+            var resultado =
+                await _authService.LoginAsync(
+                    dto.Email,
+                    dto.Senha
+                );
 
-            if (token == null)
-                return Unauthorized("Email ou senha inválidos");
+            return Ok(resultado);
+        }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh(
+            RefreshTokenDto dto)
+        {
+            var resultado =
+                await _authService.RenovarTokenAsync(
+                    dto.RefreshToken
+                );
+
+            return Ok(resultado);
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout(
+            RefreshTokenDto dto)
+        {
+            await _authService.LogoutAsync(
+                dto.RefreshToken
+            );
 
             return Ok(new
             {
-                token
+                mensagem =
+                    "Logout realizado com sucesso"
             });
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(LoginDto dto)
+        public async Task<IActionResult> Register(
+            LoginDto dto)
         {
-            var existe = _context.Usuarios
-                .Any(u => u.Email == dto.Email);
+            var existe =
+                _context.Usuarios
+                    .Any(
+                        u =>
+                            u.Email ==
+                            dto.Email
+                    );
 
             if (existe)
-                return BadRequest("Usuário já existe");
+            {
+                return BadRequest(
+                    "Usuário já existe"
+                );
+            }
 
-            var usuario = new Usuarios(
-                dto.Email,
-                PasswordHelper.Hash(dto.Senha),
-                "Admin"
+            var usuario =
+                new Usuarios(
+                    dto.Email,
+                    PasswordHelper.Hash(
+                        dto.Senha
+                    ),
+                    "Admin"
+                );
+
+            _context.Usuarios.Add(
+                usuario
             );
-
-            _context.Usuarios.Add(usuario);
 
             await _context.SaveChangesAsync();
 
-            return Ok("Administrador criado com sucesso");
+            return Ok(
+                "Administrador criado com sucesso"
+            );
         }
     }
 }

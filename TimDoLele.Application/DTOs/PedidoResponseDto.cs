@@ -26,6 +26,12 @@
 
         public decimal? TrocoPara { get; set; }
 
+        public string StatusImpressao { get; set; } = string.Empty;
+
+        public int TentativasImpressao { get; set; }
+
+        public DateTime? DataImpressao { get; set; }
+
         public List<ItemPedidoResponseDto> Itens { get; set; } = new();
     }
 }
