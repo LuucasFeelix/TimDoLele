@@ -270,3 +270,388 @@ TimDoLele.Application.Exceptions.BadRequestException: Refresh token inválido
    at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
    at TimDoLeLe.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Middlewares\ErrorHandlingMiddleware.cs:line 22
 2026-09-04 00:31:29.361 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/refresh - 400 null application/json 163.4864ms
+2026-09-04 01:05:08.150 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/relatorios?periodo=hoje - null null
+2026-09-04 01:05:08.150 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-09-04 01:05:08.155 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:08.158 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:08.161 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 10.6357ms
+2026-09-04 01:05:08.162 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/relatorios?periodo=hoje - 204 null null 12.306ms
+2026-09-04 01:05:08.170 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/relatorios?periodo=hoje - null null
+2026-09-04 01:05:08.178 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-09-04 01:05:08.180 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:08.181 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:08.182 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-09-04 01:05:08.186 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '28/08/2026 19:10:42', Current time (UTC): '04/09/2026 04:05:08'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-04 01:05:08.191 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '28/08/2026 19:10:42', Current time (UTC): '04/09/2026 04:05:08'.
+2026-09-04 01:05:08.196 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-04 01:05:08.196 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-09-04 01:05:08.198 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 20.3397ms
+2026-09-04 01:05:08.205 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-04 01:05:08.207 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/relatorios?periodo=hoje - 401 0 null 36.6608ms
+2026-09-04 01:05:08.459 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=bINslErd9A0mtAJsmm9EKQ - null null
+2026-09-04 01:05:08.462 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:08.463 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-09-04 01:05:08.512 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-04 01:05:08.515 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:08.516 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-04 01:05:08.518 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-04 01:05:08.518 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 401 0 null 6.4086ms
+2026-09-04 01:05:12.431 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-09-04 01:05:12.435 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:12.436 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 4.7608ms
+2026-09-04 01:05:12.438 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-09-04 01:05:12.447 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:12.448 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-09-04 01:05:12.449 -03:00 [INF] Executed endpoint '/hubs/notificacoes'
+2026-09-04 01:05:12.449 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-09-04 01:05:12.450 -03:00 [INF] Request finished HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=bINslErd9A0mtAJsmm9EKQ - 200 null null 3990.9449ms
+2026-09-04 01:05:12.452 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 14.1512ms
+2026-09-04 01:05:12.458 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=Rvh-yU2PIugjRgwQh8Anpg - null null
+2026-09-04 01:05:12.465 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:12.465 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-09-04 01:05:27.242 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/login - null null
+2026-09-04 01:05:27.245 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:27.246 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/login - 204 null null 4.1773ms
+2026-09-04 01:05:27.247 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 43
+2026-09-04 01:05:27.251 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:27.252 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 01:05:27.253 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 01:05:27.268 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-04 01:05:27.499 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 01:05:27.501 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-04 01:05:27.503 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 248.5573ms
+2026-09-04 01:05:27.506 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 01:05:27.508 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 260.2499ms
+2026-09-04 01:05:27.540 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-04 01:05:27.540 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-09-04 01:05:27.547 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:27.549 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:27.556 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 15.6184ms
+2026-09-04 01:05:27.555 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - 204 null null 15.1114ms
+2026-09-04 01:05:27.558 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-09-04 01:05:27.558 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-04 01:05:27.564 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:27.567 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:27.568 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 01:05:27.568 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-04 01:05:27.569 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-04 01:05:27.573 -03:00 [INF] Route matched with {action = "GetPedidosPendentesImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPedidosPendentesImpressao() on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-04 01:05:27.583 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-09-04 01:05:27.614 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-04 01:05:27.629 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id]
+FROM [Pedidos] AS [p]
+WHERE [p].[StatusImpressao] IN (0, 1)
+ORDER BY [p].[DataHora]
+2026-09-04 01:05:27.640 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-04 01:05:27.645 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele) in 70.1861ms
+2026-09-04 01:05:27.648 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-04 01:05:27.650 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 200 null application/json; charset=utf-8 91.5919ms
+2026-09-04 01:05:27.678 -03:00 [INF] Executed DbCommand (40ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-09-04 01:05:27.692 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-04 01:05:27.694 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 122.1206ms
+2026-09-04 01:05:27.696 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 01:05:27.700 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 141.8386ms
+2026-09-04 01:05:32.006 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/logout - null null
+2026-09-04 01:05:32.010 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:32.011 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/logout - 204 null null 4.6012ms
+2026-09-04 01:05:32.013 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/logout - application/json 107
+2026-09-04 01:05:32.022 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:32.023 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Logout (TimDoLele)'
+2026-09-04 01:05:32.028 -03:00 [INF] Route matched with {action = "Logout", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Logout(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 01:05:32.038 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-04 01:05:32.043 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 01:05:32.048 -03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-04 01:05:32.053 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Logout (TimDoLele) in 20.8512ms
+2026-09-04 01:05:32.056 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Logout (TimDoLele)'
+2026-09-04 01:05:32.063 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/logout - 200 null application/json; charset=utf-8 50.1419ms
+2026-09-04 01:05:32.068 -03:00 [INF] Executed endpoint '/hubs/notificacoes'
+2026-09-04 01:05:32.073 -03:00 [INF] Request finished HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=Rvh-yU2PIugjRgwQh8Anpg - 200 null null 19614.9522ms
+2026-09-04 01:05:32.079 -03:00 [INF] Connection id "0HNOA68K27AG6", Request id "0HNOA68K27AG6:00000007": the application completed without reading the entire request body.
+2026-09-04 01:05:35.944 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/login - null null
+2026-09-04 01:05:35.947 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:35.947 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/login - 204 null null 3.9335ms
+2026-09-04 01:05:35.949 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 43
+2026-09-04 01:05:35.953 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:35.954 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 01:05:35.955 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 01:05:35.959 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-04 01:05:36.160 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 01:05:36.165 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-04 01:05:36.167 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 210.0879ms
+2026-09-04 01:05:36.168 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 01:05:36.170 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 221.1538ms
+2026-09-04 01:05:36.196 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-09-04 01:05:36.196 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-09-04 01:05:36.203 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:36.207 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:36.208 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 12.2645ms
+2026-09-04 01:05:36.211 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-09-04 01:05:36.209 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 12.5458ms
+2026-09-04 01:05:36.212 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-09-04 01:05:36.214 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:36.222 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:36.223 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 01:05:36.224 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-09-04 01:05:36.226 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-04 01:05:36.226 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-09-04 01:05:36.229 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 17.9247ms
+2026-09-04 01:05:36.236 -03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-09-04 01:05:36.237 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=M6_N6ecJXBSutWDs6EOSDA - null null
+2026-09-04 01:05:36.242 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:36.243 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-09-04 01:05:36.249 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-09-04 01:05:36.251 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-04 01:05:36.255 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-04 01:05:36.256 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:36.262 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 33.5108ms
+2026-09-04 01:05:36.262 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - 204 null null 10.7705ms
+2026-09-04 01:05:36.263 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 01:05:36.264 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-04 01:05:36.267 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 55.54ms
+2026-09-04 01:05:36.269 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:05:36.278 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-04 01:05:36.279 -03:00 [INF] Route matched with {action = "GetPedidosPendentesImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPedidosPendentesImpressao() on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-04 01:05:36.282 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id]
+FROM [Pedidos] AS [p]
+WHERE [p].[StatusImpressao] IN (0, 1)
+ORDER BY [p].[DataHora]
+2026-09-04 01:05:36.287 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-04 01:05:36.288 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele) in 7.7747ms
+2026-09-04 01:05:36.290 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-04 01:05:36.290 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 200 null application/json; charset=utf-8 26.6479ms
+2026-09-04 01:10:15.504 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/login - null null
+2026-09-04 01:10:15.506 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:10:15.507 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/login - 204 null null 3.3718ms
+2026-09-04 01:10:15.512 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 43
+2026-09-04 01:10:15.517 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:10:15.518 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 01:10:15.519 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 01:10:15.528 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-04 01:10:15.732 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 01:10:15.734 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-04 01:10:15.737 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 213.9199ms
+2026-09-04 01:10:15.739 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 01:10:15.740 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 227.6262ms
+2026-09-04 01:10:15.763 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-09-04 01:10:15.764 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-04 01:10:15.768 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:10:15.770 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 7.0312ms
+2026-09-04 01:10:15.769 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:10:15.774 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - 204 null null 10.1255ms
+2026-09-04 01:10:15.774 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-09-04 01:10:15.781 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-04 01:10:15.784 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:10:15.786 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:10:15.787 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 01:10:15.790 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-04 01:10:15.791 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-04 01:10:15.792 -03:00 [INF] Route matched with {action = "GetPedidosPendentesImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPedidosPendentesImpressao() on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-04 01:10:15.799 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-09-04 01:10:15.800 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id]
+FROM [Pedidos] AS [p]
+WHERE [p].[StatusImpressao] IN (0, 1)
+ORDER BY [p].[DataHora]
+2026-09-04 01:10:15.808 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-04 01:10:15.810 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele) in 13.0459ms
+2026-09-04 01:10:15.811 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-04 01:10:15.812 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 200 null application/json; charset=utf-8 31.628ms
+2026-09-04 01:10:15.832 -03:00 [INF] Executed DbCommand (29ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-09-04 01:10:15.838 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-04 01:10:15.840 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 46.0569ms
+2026-09-04 01:10:15.846 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 01:10:15.847 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 73.483ms
+2026-09-04 01:12:25.699 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-09-04 01:12:25.710 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:12:25.711 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 12.4537ms
+2026-09-04 01:12:25.714 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-09-04 01:12:25.755 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:12:25.756 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '04/09/2026 04:11:15', Current time (UTC): '04/09/2026 04:12:25'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-04 01:12:25.766 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '04/09/2026 04:11:15', Current time (UTC): '04/09/2026 04:12:25'.
+2026-09-04 01:12:25.769 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-04 01:12:25.771 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-04 01:12:25.772 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 401 0 null 58.7431ms
+2026-09-04 01:12:25.786 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/refresh - null null
+2026-09-04 01:12:25.806 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:12:25.812 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/refresh - 204 null null 26.0492ms
+2026-09-04 01:12:25.825 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/refresh - application/json 107
+2026-09-04 01:12:25.838 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:12:25.839 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 01:12:25.839 -03:00 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 01:12:25.852 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-04 01:12:25.901 -03:00 [INF] Executed DbCommand (40ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 01:12:25.905 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-04 01:12:25.913 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele) in 68.1993ms
+2026-09-04 01:12:25.914 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 01:12:25.917 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/refresh - 200 null application/json; charset=utf-8 92.1841ms
+2026-09-04 01:12:25.929 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-09-04 01:12:25.943 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:12:25.944 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 01:12:25.945 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-04 01:12:26.020 -03:00 [INF] Executed DbCommand (68ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-09-04 01:12:26.064 -03:00 [INF] Executed DbCommand (25ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-09-04 01:12:26.073 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-04 01:12:26.075 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 124.566ms
+2026-09-04 01:12:26.079 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 01:12:26.083 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 155.092ms
+2026-09-04 01:12:59.381 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/logout - null null
+2026-09-04 01:12:59.394 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:12:59.396 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/logout - 204 null null 15.5225ms
+2026-09-04 01:12:59.451 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/logout - application/json 107
+2026-09-04 01:12:59.487 -03:00 [INF] CORS policy execution successful.
+2026-09-04 01:12:59.488 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Logout (TimDoLele)'
+2026-09-04 01:12:59.489 -03:00 [INF] Route matched with {action = "Logout", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Logout(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 01:12:59.495 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-04 01:12:59.507 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 01:12:59.516 -03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-04 01:12:59.518 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Logout (TimDoLele) in 27.0964ms
+2026-09-04 01:12:59.520 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Logout (TimDoLele)'
+2026-09-04 01:12:59.522 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/logout - 200 null application/json; charset=utf-8 71.0485ms
+2026-09-04 01:12:59.534 -03:00 [INF] Executed endpoint '/hubs/notificacoes'
+2026-09-04 01:12:59.558 -03:00 [INF] Request finished HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=M6_N6ecJXBSutWDs6EOSDA - 200 null null 443321.7024ms
+2026-09-04 01:12:59.569 -03:00 [INF] Connection id "0HNOA68K27AG6", Request id "0HNOA68K27AG6:0000000B": the application completed without reading the entire request body.

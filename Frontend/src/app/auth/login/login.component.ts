@@ -1,37 +1,100 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router';
+import {
+  Component
+} from '@angular/core';
+
+import {
+  FormsModule
+} from '@angular/forms';
+
+import {
+  Router
+} from '@angular/router';
+
+import {
+  AuthService
+} from '../../core/services/auth.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-admin-login',
+
   standalone: true,
-  imports: [FormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+
+  imports: [
+    FormsModule
+  ],
+
+  templateUrl:
+    './login.component.html',
+
+  styleUrls: [
+    './login.component.css'
+  ]
 })
-export class LoginComponent {
-  email: string = '';
-  senha: string = '';
+export class Login {
+
+  email = '';
+
+  senha = '';
+
+  carregando =
+    false;
 
   constructor(
-    private authService: AuthService,
-    private router: Router
+    private authService:
+      AuthService,
+
+    private router:
+      Router
   ) {}
 
-  login() {
-    this.authService.login(this.email, this.senha).subscribe({
-      next: (response: any) => {
-        console.log('Login OK:', response);
+  login(): void {
 
-        localStorage.setItem('token', response.token);
+    if (
+      !this.email ||
+      !this.senha
+    ) {
 
-        this.router.navigate(['/admin/dashboard']);
-      },
-      error: (err) => {
-        console.error('Erro no login:', err);
-        alert('Email ou senha inválidos');
-      }
-    });
+      alert(
+        'Informe email e senha.'
+      );
+
+      return;
+    }
+
+    this.carregando =
+      true;
+
+    this.authService
+      .login(
+        this.email,
+        this.senha
+      )
+      .subscribe({
+
+        next: () => {
+
+          this.carregando =
+            false;
+
+          this.router.navigate(
+            ['/admin/dashboard']
+          );
+        },
+
+        error: (erro: any) => {
+
+          this.carregando =
+            false;
+
+          console.error(
+            'Erro ao realizar login:',
+            erro
+          );
+
+          alert(
+            'Email ou senha inválidos'
+          );
+        }
+      });
   }
 }

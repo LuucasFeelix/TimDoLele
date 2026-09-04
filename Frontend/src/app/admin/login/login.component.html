@@ -3,41 +3,77 @@
   <section class="login-card">
 
     <div class="login-brand">
+
       <div class="logo-box">
         🍔
       </div>
 
-      <h1>TIM DO LELÊ</h1>
-      <strong>LANCHES</strong>
-      <p>Acesso exclusivo ao painel administrativo</p>
+      <h1>
+        TIM DO LELÊ
+      </h1>
+
+      <strong>
+        LANCHES
+      </strong>
+
+      <p>
+        Acesso exclusivo ao painel administrativo
+      </p>
+
     </div>
 
-    <div class="login-form">
+
+    <form
+      class="login-form"
+      (ngSubmit)="login()"
+    >
 
       <label>
+
         E-mail
+
         <input
           type="email"
+          name="email"
           [(ngModel)]="email"
           placeholder="Digite seu e-mail"
+          autocomplete="username"
+          required
         />
+
       </label>
+
 
       <label>
+
         Senha
+
         <input
           type="password"
+          name="senha"
           [(ngModel)]="senha"
           placeholder="Digite sua senha"
+          autocomplete="current-password"
+          required
         />
+
       </label>
 
+
       <button
+        type="submit"
         class="login-button"
-        (click)="login()"
+        [disabled]="carregando"
       >
-        ENTRAR
+
+        {{
+          carregando
+            ? 'ENTRANDO...'
+            : 'ENTRAR'
+        }}
+
       </button>
+
 
       <button
         type="button"
@@ -46,7 +82,7 @@
         Esqueceu sua senha?
       </button>
 
-    </div>
+    </form>
 
   </section>
 

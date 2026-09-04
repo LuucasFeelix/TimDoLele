@@ -32,23 +32,39 @@ import {
   PedidoService
 } from '../../../core/services/pedido.service';
 
+import {
+  AuthService
+} from '../../../core/services/auth.service';
+
+
 @Component({
   selector: 'app-admin-layout',
+
   standalone: true,
+
   imports: [
     CommonModule,
     RouterModule
   ],
-  templateUrl: './admin-layout.component.html',
-  styleUrls: ['./admin-layout.component.css']
+
+  templateUrl:
+    './admin-layout.component.html',
+
+  styleUrls: [
+    './admin-layout.component.css'
+  ]
 })
 export class AdminLayoutComponent
   implements OnInit, OnDestroy {
 
-  pedidosComErro: PedidoComErroImpressao[] = [];
+  pedidosComErro:
+    PedidoComErroImpressao[] = [];
+
+  saindo = false;
 
   private readonly destroy$ =
     new Subject<void>();
+
 
   constructor(
     private impressaoPedidoService:
@@ -60,6 +76,9 @@ export class AdminLayoutComponent
     private pedidoService:
       PedidoService,
 
+    private authService:
+      AuthService,
+
     private router:
       Router,
 
@@ -70,7 +89,9 @@ export class AdminLayoutComponent
       ChangeDetectorRef
   ) {}
 
-  async ngOnInit(): Promise<void> {
+
+  async ngOnInit():
+    Promise<void> {
 
     console.log(
       '🚀 Ambiente administrativo iniciado.'
@@ -80,12 +101,15 @@ export class AdminLayoutComponent
 
     this.escutarNovosPedidos();
 
-    await this.notificacaoSignalrService
+    await this
+      .notificacaoSignalrService
       .iniciarConexao();
 
-    await this.impressaoPedidoService
+    await this
+      .impressaoPedidoService
       .recuperarPedidosPendentes();
   }
+
 
   ngOnDestroy(): void {
 
@@ -94,36 +118,41 @@ export class AdminLayoutComponent
     this.destroy$.complete();
   }
 
-  private escutarNovosPedidos(): void {
+
+  private escutarNovosPedidos():
+    void {
 
     this.notificacaoSignalrService
       .pedidoCriado$
       .pipe(
-        takeUntil(this.destroy$)
+        takeUntil(
+          this.destroy$
+        )
       )
       .subscribe({
 
         next: (
-          notificacao: PedidoCriadoSignalR
+          notificacao:
+            PedidoCriadoSignalR
         ) => {
 
-          this.ngZone.run(() => {
+          this.ngZone.run(
+            () => {
 
-            console.log(
-              '🖨️ Admin recebeu pedido para impressão global:',
-              notificacao
-            );
+              console.log(
+                '🖨️ Admin recebeu pedido para impressão global:',
+                notificacao
+              );
 
-            this.buscarPedidoEImprimir(
-              notificacao.pedidoId
-            );
-
-          });
-
+              this.buscarPedidoEImprimir(
+                notificacao.pedidoId
+              );
+            }
+          );
         }
-
       });
   }
+
 
   private buscarPedidoEImprimir(
     pedidoId: string
@@ -141,11 +170,11 @@ export class AdminLayoutComponent
             `📦 Pedido #${pedido.codigo} carregado para impressão global.`
           );
 
-          await this.impressaoPedidoService
+          await this
+            .impressaoPedidoService
             .adicionarNaFila(
               pedido
             );
-
         },
 
         error: (erro) => {
@@ -154,51 +183,55 @@ export class AdminLayoutComponent
             `❌ Erro ao carregar o pedido ${pedidoId} para impressão.`,
             erro
           );
-
         }
-
       });
   }
 
-  private escutarErrosImpressao(): void {
+
+  private escutarErrosImpressao():
+    void {
 
     this.impressaoPedidoService
       .pedidosComErro$
       .pipe(
-        takeUntil(this.destroy$)
+        takeUntil(
+          this.destroy$
+        )
       )
       .subscribe({
 
         next: (pedidos) => {
 
-          this.ngZone.run(() => {
+          this.ngZone.run(
+            () => {
 
-            this.pedidosComErro =
-              [...pedidos];
+              this.pedidosComErro =
+                [...pedidos];
 
-            console.log(
-              '🚨 Pedidos com erro de impressão:',
-              this.pedidosComErro
-            );
+              console.log(
+                '🚨 Pedidos com erro de impressão:',
+                this.pedidosComErro
+              );
 
-            this.cdr.detectChanges();
-
-          });
-
+              this.cdr.detectChanges();
+            }
+          );
         }
-
       });
   }
+
 
   async tentarNovamente(
     erro: PedidoComErroImpressao
   ): Promise<void> {
 
-    await this.impressaoPedidoService
+    await this
+      .impressaoPedidoService
       .reimprimir(
         erro.pedido
       );
   }
+
 
   verPedido(
     erro: PedidoComErroImpressao
@@ -215,6 +248,7 @@ export class AdminLayoutComponent
     );
   }
 
+
   removerAviso(
     erro: PedidoComErroImpressao
   ): void {
@@ -224,6 +258,7 @@ export class AdminLayoutComponent
         erro.pedido.id
       );
   }
+
 
   formatarMoeda(
     valor: number
@@ -240,6 +275,7 @@ export class AdminLayoutComponent
     );
   }
 
+
   getTipoEntrega(
     pedido: any
   ): string {
@@ -248,5 +284,65 @@ export class AdminLayoutComponent
       'Delivery'
       ? 'Entrega'
       : 'Retirada';
+  }
+
+
+  sair(): void {
+
+    if (this.saindo) {
+      return;
+    }
+
+    this.saindo = true;
+
+    this.authService
+      .logout()
+      .subscribe({
+
+        next: async () => {
+
+          await this
+            .finalizarSessao();
+        },
+
+        error: async (erro) => {
+
+          console.warn(
+            'Não foi possível registrar o logout no backend.',
+            erro
+          );
+
+          await this
+            .finalizarSessao();
+        }
+      });
+  }
+
+
+  private async finalizarSessao():
+    Promise<void> {
+
+    try {
+
+      await this
+        .notificacaoSignalrService
+        .pararConexao();
+
+    } catch (erro) {
+
+      console.warn(
+        'Erro ao encerrar SignalR.',
+        erro
+      );
+    }
+
+    this.authService
+      .limparSessao();
+
+    this.saindo = false;
+
+    await this.router.navigate(
+      ['/admin/login']
+    );
   }
 }
