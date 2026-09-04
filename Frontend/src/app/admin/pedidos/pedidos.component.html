@@ -20,7 +20,10 @@
   </div>
 
   <div class="toast-content">
-    <strong>Novo pedido recebido!</strong>
+
+    <strong>
+      Novo pedido recebido!
+    </strong>
 
     <span>
       Pedido #{{ toastNovoPedido.codigo }}
@@ -29,7 +32,11 @@
     <small>
       {{ toastNovoPedido.nomeCliente }}
       •
-      {{ toastNovoPedido.tipoEntrega === 'Delivery' ? 'Entrega' : 'Retirada' }}
+      {{
+        toastNovoPedido.tipoEntrega === 'Delivery'
+          ? 'Entrega'
+          : 'Retirada'
+      }}
       •
       R$ {{ toastNovoPedido.total }}
     </small>
@@ -41,7 +48,9 @@
     >
       Ver pedido →
     </button>
+
   </div>
+
 </div>
 
 
@@ -58,15 +67,18 @@
     </div>
 
     <div>
-      <h1>Pedidos</h1>
+
+      <h1>
+        Pedidos
+      </h1>
 
       <p>
         Gerencie todos os pedidos da lanchonete
       </p>
+
     </div>
 
   </div>
-
 
   <button
     class="outline-button"
@@ -83,9 +95,6 @@
 <!-- ========================================= -->
 
 <section class="summary">
-
-
-  <!-- PENDENTES -->
 
   <div class="summary-card card pendente">
 
@@ -112,8 +121,6 @@
   </div>
 
 
-  <!-- EM PREPARO -->
-
   <div class="summary-card card preparo">
 
     <div class="summary-icon">
@@ -138,8 +145,6 @@
 
   </div>
 
-
-  <!-- ENTREGA -->
 
   <div class="summary-card card entrega">
 
@@ -166,8 +171,6 @@
   </div>
 
 
-  <!-- RETIRADA -->
-
   <div class="summary-card card retirada">
 
     <div class="summary-icon">
@@ -192,8 +195,6 @@
 
   </div>
 
-
-  <!-- CANCELADOS -->
 
   <div class="summary-card card cancelado">
 
@@ -259,9 +260,6 @@
 
   <div class="orders-table-card card">
 
-
-    <!-- CABEÇALHO DA LISTA -->
-
     <div class="list-header">
 
       <div>
@@ -276,15 +274,12 @@
 
       </div>
 
-
       <strong>
         {{ pedidosFiltrados.length }} pedidos
       </strong>
 
     </div>
 
-
-    <!-- CARREGANDO -->
 
     <p
       *ngIf="loading"
@@ -294,8 +289,6 @@
     </p>
 
 
-    <!-- LISTA VAZIA -->
-
     <div
       *ngIf="!loading && pedidosFiltrados.length === 0"
       class="empty"
@@ -304,19 +297,12 @@
     </div>
 
 
-    <!-- ========================================= -->
-    <!-- TABELA -->
-    <!-- ========================================= -->
-
     <div
       *ngIf="!loading && pedidosFiltrados.length > 0"
       class="table-wrapper"
     >
 
       <table class="orders-table">
-
-
-        <!-- CABEÇALHO DA TABELA -->
 
         <thead>
 
@@ -359,8 +345,6 @@
         </thead>
 
 
-        <!-- PEDIDOS -->
-
         <tbody>
 
           <tr
@@ -375,32 +359,45 @@
               pedido.id === pedidoNovoId
             "
 
+            [class.print-error]="
+              temErroImpressao(pedido)
+            "
+
+            [class.url-highlight]="
+              pedido.id === pedidoIdDaUrl
+            "
+
             [attr.data-pedido-id]="pedido.id"
 
             (click)="selecionarPedido(pedido)"
           >
 
-
-            <!-- CÓDIGO -->
-
             <td class="pedido-code">
 
-              Pedido #{{ pedido.codigo }}
+              <div class="pedido-code-content">
 
+                <span>
+                  Pedido #{{ pedido.codigo }}
+                </span>
 
-              <!-- ETIQUETA NOVO -->
+                <span
+                  *ngIf="pedido.id === pedidoNovoId"
+                  class="new-order-badge"
+                >
+                  NOVO
+                </span>
 
-              <span
-                *ngIf="pedido.id === pedidoNovoId"
-                class="new-order-badge"
-              >
-                NOVO
-              </span>
+                <span
+                  *ngIf="temErroImpressao(pedido)"
+                  class="print-error-badge"
+                >
+                  ⚠ FALHA IMPRESSÃO
+                </span>
+
+              </div>
 
             </td>
 
-
-            <!-- DATA -->
 
             <td>
 
@@ -414,8 +411,6 @@
 
             </td>
 
-
-            <!-- ENTREGA -->
 
             <td
               class="delivery-column"
@@ -438,21 +433,15 @@
             </td>
 
 
-            <!-- CLIENTE -->
-
             <td>
               {{ pedido.nomeCliente }}
             </td>
 
 
-            <!-- TELEFONE -->
-
             <td>
               {{ pedido.telefone || '-' }}
             </td>
 
-
-            <!-- TOTAL -->
 
             <td class="total-column">
 
@@ -461,23 +450,30 @@
             </td>
 
 
-            <!-- STATUS -->
-
             <td>
 
-              <span
-                class="status"
-                [ngClass]="getStatusClasse(pedido)"
-              >
+              <div class="status-column-content">
 
-                {{ getStatusTexto(pedido) }}
+                <span
+                  class="status"
+                  [ngClass]="getStatusClasse(pedido)"
+                >
 
-              </span>
+                  {{ getStatusTexto(pedido) }}
+
+                </span>
+
+                <span
+                  *ngIf="temErroImpressao(pedido)"
+                  class="print-status-small"
+                >
+                  🖨 Não impresso
+                </span>
+
+              </div>
 
             </td>
 
-
-            <!-- VER PEDIDO -->
 
             <td>
 
@@ -489,9 +485,7 @@
                   $event.stopPropagation()
                 "
               >
-
                 👁️ Ver Pedido
-
               </button>
 
             </td>
@@ -514,8 +508,6 @@
   <aside class="order-details card">
 
 
-    <!-- NENHUM PEDIDO SELECIONADO -->
-
     <div
       *ngIf="!pedidoSelecionado"
       class="empty details-empty"
@@ -526,13 +518,11 @@
     </div>
 
 
-    <!-- PEDIDO SELECIONADO -->
-
     <ng-container *ngIf="pedidoSelecionado">
 
 
       <!-- ========================================= -->
-      <!-- CABEÇALHO DO PEDIDO -->
+      <!-- CABEÇALHO -->
       <!-- ========================================= -->
 
       <header class="details-header">
@@ -571,7 +561,103 @@
 
 
       <!-- ========================================= -->
-      <!-- INFORMAÇÕES DO CLIENTE -->
+      <!-- ERRO DE IMPRESSÃO -->
+      <!-- ========================================= -->
+
+      <section
+        *ngIf="temErroImpressao(pedidoSelecionado)"
+        class="print-error-panel"
+      >
+
+        <div class="print-error-panel-header">
+
+          <div class="print-error-icon">
+            ⚠️
+          </div>
+
+          <div>
+
+            <strong>
+              IMPRESSÃO AUTOMÁTICA FALHOU
+            </strong>
+
+            <span>
+              Este pedido ainda precisa ser impresso.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="print-error-info">
+
+          <div>
+
+            <span>
+              Status
+            </span>
+
+            <strong>
+              {{ getStatusImpressaoTexto(pedidoSelecionado) }}
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Tentativas
+            </span>
+
+            <strong>
+              {{ pedidoSelecionado.tentativasImpressao || 0 }}/3
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="print-error-message">
+
+          Não foi possível realizar a impressão automaticamente
+          após 3 tentativas.
+
+          <br>
+
+          Realize a impressão manualmente ou tente novamente.
+
+        </div>
+
+
+        <div class="print-error-actions">
+
+          <button
+            type="button"
+            class="manual-print-button"
+            (click)="imprimirPedido()"
+          >
+            🖨️ Imprimir manualmente
+          </button>
+
+
+          <button
+            type="button"
+            class="retry-print-button"
+            (click)="tentarNovamenteImpressao(pedidoSelecionado)"
+          >
+            🔄 Tentar novamente
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- ========================================= -->
+      <!-- CLIENTE -->
       <!-- ========================================= -->
 
       <section class="detail-section">
@@ -583,9 +669,6 @@
 
         <div class="info-grid">
 
-
-          <!-- CLIENTE -->
-
           <span>
             Cliente:
           </span>
@@ -595,8 +678,6 @@
           </strong>
 
 
-          <!-- TELEFONE -->
-
           <span>
             Telefone:
           </span>
@@ -605,8 +686,6 @@
             {{ pedidoSelecionado.telefone || '-' }}
           </strong>
 
-
-          <!-- TIPO DE ENTREGA -->
 
           <span>
             Tipo de entrega:
@@ -622,8 +701,6 @@
 
           </strong>
 
-
-          <!-- PAGAMENTO -->
 
           <span>
             Pagamento:
@@ -642,8 +719,6 @@
           </strong>
 
 
-          <!-- TROCO -->
-
           <span
             *ngIf="pedidoSelecionado.trocoPara"
           >
@@ -659,8 +734,6 @@
           </strong>
 
 
-          <!-- TAXA -->
-
           <span>
             Taxa de entrega:
           </span>
@@ -671,8 +744,6 @@
 
           </strong>
 
-
-          <!-- TOTAL -->
 
           <span>
             Total do pedido:
@@ -690,7 +761,7 @@
 
 
       <!-- ========================================= -->
-      <!-- ITENS DO PEDIDO -->
+      <!-- ITENS -->
       <!-- ========================================= -->
 
       <section class="detail-section">
@@ -707,9 +778,6 @@
 
           <div>
 
-
-            <!-- PRODUTO -->
-
             <div class="item-title">
 
               <span>
@@ -722,8 +790,6 @@
 
             </div>
 
-
-            <!-- ADICIONAIS -->
 
             <ul
               *ngIf="item.adicionais?.length > 0"
@@ -750,8 +816,6 @@
           </div>
 
 
-          <!-- VALOR DO ITEM -->
-
           <strong>
 
             R$ {{ item.valor }}
@@ -760,8 +824,6 @@
 
         </div>
 
-
-        <!-- TOTAL DE ITENS -->
 
         <div class="items-total">
 
@@ -793,23 +855,15 @@
 
         <div class="actions">
 
-
-          <!-- IMPRIMIR -->
-
           <button
             class="print-button"
             (click)="imprimirPedido()"
           >
-
             🖨️ Imprimir pedido
-
           </button>
 
 
-          <!-- AVANÇAR STATUS -->
-
           <button
-
             *ngIf="
               getProximoStatus(
                 pedidoSelecionado
@@ -834,10 +888,7 @@
           </button>
 
 
-          <!-- CANCELAR -->
-
           <button
-
             *ngIf="
               podeCancelar(
                 pedidoSelecionado
@@ -853,9 +904,7 @@
               )
             "
           >
-
             ❌ Cancelar pedido
-
           </button>
 
         </div>

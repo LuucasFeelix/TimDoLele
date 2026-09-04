@@ -6,15 +6,24 @@ import {
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+
+import {
+  ActivatedRoute,
+  RouterModule
+} from '@angular/router';
 
 import {
   Subject,
   takeUntil
 } from 'rxjs';
 
-import { PedidoService } from '../../core/services/pedido.service';
-import { ImpressaoPedidoService } from '../../core/services/impressao-pedido.service';
+import {
+  PedidoService
+} from '../../core/services/pedido.service';
+
+import {
+  ImpressaoPedidoService
+} from '../../core/services/impressao-pedido.service';
 
 import {
   DashboardAtualizadoSignalR,
@@ -23,44 +32,63 @@ import {
   PedidoCriadoSignalR
 } from '../../core/services/notificacao-signalr.service';
 
+
 @Component({
   selector: 'app-pedidos',
+
   standalone: true,
+
   imports: [
     CommonModule,
     RouterModule
   ],
-  templateUrl: './pedidos.component.html',
-  styleUrls: ['./pedidos.component.css']
+
+  templateUrl:
+    './pedidos.component.html',
+
+  styleUrls: [
+    './pedidos.component.css'
+  ]
 })
 export class PedidosComponent
   implements OnInit, OnDestroy {
 
   pedidos: any[] = [];
+
   pedidosFiltrados: any[] = [];
 
   loading = false;
+
   filtroAtual = 'Todos';
+
   pedidoSelecionado: any = null;
 
   pedidoNovoId: string | null = null;
 
+  pedidoIdDaUrl: string | null = null;
+
   toastNovoPedidoVisivel = false;
+
   toastNovoPedido: any = null;
 
   conexaoSignalRAtiva = false;
 
+
   private readonly destroy$ =
     new Subject<void>();
 
-  private audioNovoPedido: HTMLAudioElement | null =
-    null;
+
+  private audioNovoPedido:
+    HTMLAudioElement | null = null;
+
 
   private timeoutDestaque:
     ReturnType<typeof setTimeout> | null = null;
 
+
   private timeoutToast:
     ReturnType<typeof setTimeout> | null = null;
+
 
   filtros = [
     {
@@ -100,89 +128,356 @@ export class PedidosComponent
     }
   ];
 
+
   constructor(
-    private pedidoService: PedidoService,
+    private pedidoService:
+      PedidoService,
+
     private notificacaoSignalrService:
       NotificacaoSignalrService,
-    private impressaoPedidoService: ImpressaoPedidoService,
-    private cdr: ChangeDetectorRef
+
+    private impressaoPedidoService:
+      ImpressaoPedidoService,
+
+    private route:
+      ActivatedRoute,
+
+    private cdr:
+      ChangeDetectorRef
   ) {
     this.prepararAudio();
   }
 
+
   ngOnInit(): void {
+
+    this.lerPedidoDaUrl();
+
     this.carregarPedidos();
+
     this.escutarEventosSignalR();
 
     void this.iniciarSignalR();
   }
 
+
   ngOnDestroy(): void {
+
     this.destroy$.next();
+
     this.destroy$.complete();
 
+
     if (this.timeoutDestaque) {
-      clearTimeout(this.timeoutDestaque);
+
+      clearTimeout(
+        this.timeoutDestaque
+      );
     }
 
+
     if (this.timeoutToast) {
-      clearTimeout(this.timeoutToast);
+
+      clearTimeout(
+        this.timeoutToast
+      );
     }
   }
 
-  private async iniciarSignalR(): Promise<void> {
-    await this.notificacaoSignalrService
+
+  // =========================================
+  // QUERY PARAM - PEDIDO VINDO DA URL
+  // =========================================
+
+  private lerPedidoDaUrl(): void {
+
+    this.route
+      .queryParamMap
+      .pipe(
+        takeUntil(
+          this.destroy$
+        )
+      )
+      .subscribe(
+        params => {
+
+          const pedidoId =
+            params.get(
+              'pedidoId'
+            );
+
+
+          if (!pedidoId) {
+
+            this.pedidoIdDaUrl =
+              null;
+
+            return;
+          }
+
+
+          this.pedidoIdDaUrl =
+            pedidoId;
+
+
+          if (
+            this.pedidos.length > 0
+          ) {
+
+            this.abrirPedidoPorId(
+              pedidoId
+            );
+          }
+        }
+      );
+  }
+
+
+  private abrirPedidoPorId(
+    pedidoId: string
+  ): void {
+
+    this.aplicarFiltro(
+      'Todos'
+    );
+
+
+    const pedidoNaLista =
+      this.pedidos.find(
+        (pedido: any) =>
+          pedido.id ===
+          pedidoId
+      );
+
+
+    if (pedidoNaLista) {
+
+      this.pedidoSelecionado =
+        pedidoNaLista;
+
+      this.pedidoIdDaUrl =
+        pedidoId;
+
+      this.cdr.detectChanges();
+
+
+      this.rolarAtePedido(
+        pedidoId
+      );
+
+
+      this.rolarDetalhesParaTopo();
+
+      return;
+    }
+
+
+    this.pedidoService
+      .getPedidoPorId(
+        pedidoId
+      )
+      .subscribe({
+
+        next: (res: any) => {
+
+          const pedido =
+            res?.data ?? res;
+
+
+          if (!pedido) {
+            return;
+          }
+
+
+          const jaExiste =
+            this.pedidos.some(
+              (item: any) =>
+                item.id ===
+                pedido.id
+            );
+
+
+          if (!jaExiste) {
+
+            this.pedidos = [
+              pedido,
+              ...this.pedidos
+            ];
+          }
+
+
+          this.aplicarFiltro(
+            'Todos'
+          );
+
+
+          this.pedidoSelecionado =
+            pedido;
+
+
+          this.pedidoIdDaUrl =
+            pedido.id;
+
+
+          this.cdr.detectChanges();
+
+
+          this.rolarAtePedido(
+            pedido.id
+          );
+
+
+          this.rolarDetalhesParaTopo();
+        },
+
+
+        error: (erro: any) => {
+
+          console.error(
+            'Erro ao localizar pedido da URL:',
+            erro
+          );
+        }
+      });
+  }
+
+
+  private rolarAtePedido(
+    pedidoId: string
+  ): void {
+
+    setTimeout(
+      () => {
+
+        const linhaPedido =
+          document.querySelector(
+            `[data-pedido-id="${pedidoId}"]`
+          );
+
+
+        linhaPedido
+          ?.scrollIntoView({
+            behavior:
+              'smooth',
+
+            block:
+              'center'
+          });
+
+      },
+      150
+    );
+  }
+
+
+  private rolarDetalhesParaTopo():
+    void {
+
+    setTimeout(
+      () => {
+
+        const painel =
+          document.querySelector(
+            '.order-details'
+          );
+
+
+        painel?.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+
+      },
+      150
+    );
+  }
+
+
+  // =========================================
+  // SIGNALR
+  // =========================================
+
+  private async iniciarSignalR():
+    Promise<void> {
+
+    await this
+      .notificacaoSignalrService
       .iniciarConexao();
 
+
     this.conexaoSignalRAtiva =
-      this.notificacaoSignalrService
+      this
+        .notificacaoSignalrService
         .estaConectado();
+
 
     this.cdr.detectChanges();
   }
 
-  private escutarEventosSignalR(): void {
-    this.notificacaoSignalrService
+
+  private escutarEventosSignalR():
+    void {
+
+    this
+      .notificacaoSignalrService
       .pedidoCriado$
       .pipe(
-        takeUntil(this.destroy$)
+        takeUntil(
+          this.destroy$
+        )
       )
       .subscribe({
+
         next: (
-          notificacao: PedidoCriadoSignalR
+          notificacao:
+            PedidoCriadoSignalR
         ) => {
+
           this.aoReceberNovoPedido(
             notificacao
           );
         }
       });
 
-    this.notificacaoSignalrService
+
+    this
+      .notificacaoSignalrService
       .pedidoAtualizado$
       .pipe(
-        takeUntil(this.destroy$)
+        takeUntil(
+          this.destroy$
+        )
       )
       .subscribe({
+
         next: (
           notificacao:
             PedidoAtualizadoSignalR
         ) => {
-          this.aoReceberPedidoAtualizado(
-            notificacao
-          );
+
+          this
+            .aoReceberPedidoAtualizado(
+              notificacao
+            );
         }
       });
 
-    this.notificacaoSignalrService
+
+    this
+      .notificacaoSignalrService
       .dashboardAtualizado$
       .pipe(
-        takeUntil(this.destroy$)
+        takeUntil(
+          this.destroy$
+        )
       )
       .subscribe({
+
         next: (
           notificacao:
             DashboardAtualizadoSignalR
         ) => {
+
           console.log(
             'Dashboard deverá ser atualizado:',
             notificacao
@@ -191,22 +486,29 @@ export class PedidosComponent
       });
   }
 
+
   private aoReceberNovoPedido(
-    notificacao: PedidoCriadoSignalR
+    notificacao:
+      PedidoCriadoSignalR
   ): void {
+
     console.log(
       'Novo pedido recebido em tempo real:',
       notificacao
     );
 
+
     this.destacarNovoPedido(
       notificacao.pedidoId
     );
 
+
     this.tocarSomNovoPedido();
+
 
     const pedidoSelecionadoId =
       this.pedidoSelecionado?.id;
+
 
     this.carregarPedidos(
       pedidoSelecionadoId,
@@ -214,139 +516,250 @@ export class PedidosComponent
     );
   }
 
+
   private aoReceberPedidoAtualizado(
-    notificacao: PedidoAtualizadoSignalR
+    notificacao:
+      PedidoAtualizadoSignalR
   ): void {
+
     console.log(
       'Pedido atualizado em tempo real:',
       notificacao
     );
 
+
     const pedidoSelecionadoId =
       this.pedidoSelecionado?.id;
+
 
     this.carregarPedidos(
       pedidoSelecionadoId
     );
   }
 
+
+  // =========================================
+  // DESTAQUE DE NOVO PEDIDO
+  // =========================================
+
   private destacarNovoPedido(
     pedidoId: string
   ): void {
-    this.pedidoNovoId = pedidoId;
+
+    this.pedidoNovoId =
+      pedidoId;
+
 
     if (this.timeoutDestaque) {
-      clearTimeout(this.timeoutDestaque);
+
+      clearTimeout(
+        this.timeoutDestaque
+      );
     }
 
+
     this.timeoutDestaque =
-      setTimeout(() => {
-        this.pedidoNovoId = null;
-        this.cdr.detectChanges();
-      }, 10000);
+      setTimeout(
+        () => {
+
+          this.pedidoNovoId =
+            null;
+
+
+          this.cdr.detectChanges();
+
+        },
+        10000
+      );
   }
 
-  private exibirToastNovoPedido(pedido: any): void {
+
+  // =========================================
+  // TOAST DE NOVO PEDIDO
+  // =========================================
+
+  private exibirToastNovoPedido(
+    pedido: any
+  ): void {
+
     if (!pedido) {
       return;
     }
 
-    this.toastNovoPedido = pedido;
-    this.toastNovoPedidoVisivel = true;
+
+    this.toastNovoPedido =
+      pedido;
+
+
+    this.toastNovoPedidoVisivel =
+      true;
+
 
     if (this.timeoutToast) {
-      clearTimeout(this.timeoutToast);
+
+      clearTimeout(
+        this.timeoutToast
+      );
     }
 
-    this.timeoutToast = setTimeout(() => {
-      this.fecharToastNovoPedido();
-    }, 10000);
+
+    this.timeoutToast =
+      setTimeout(
+        () => {
+
+          this.fecharToastNovoPedido();
+
+        },
+        10000
+      );
+
 
     this.cdr.detectChanges();
   }
 
-  fecharToastNovoPedido(): void {
-    this.toastNovoPedidoVisivel = false;
+
+  fecharToastNovoPedido():
+    void {
+
+    this.toastNovoPedidoVisivel =
+      false;
+
 
     if (this.timeoutToast) {
-      clearTimeout(this.timeoutToast);
-      this.timeoutToast = null;
+
+      clearTimeout(
+        this.timeoutToast
+      );
+
+
+      this.timeoutToast =
+        null;
     }
+
 
     this.cdr.detectChanges();
   }
+
 
   abrirNovoPedido(): void {
+
     if (!this.toastNovoPedido) {
       return;
     }
 
-    this.aplicarFiltro('Todos');
 
-    const pedido = this.pedidos.find(
-      (item: any) => item.id === this.toastNovoPedido.id
+    const pedidoId =
+      this.toastNovoPedido.id;
+
+
+    this.aplicarFiltro(
+      'Todos'
     );
 
+
+    const pedido =
+      this.pedidos.find(
+        (item: any) =>
+          item.id ===
+          pedidoId
+      );
+
+
     if (pedido) {
-      this.pedidoSelecionado = pedido;
+
+      this.pedidoSelecionado =
+        pedido;
     }
+
 
     this.fecharToastNovoPedido();
 
-    setTimeout(() => {
-      const linhaPedido = document.querySelector(
-        `[data-pedido-id="${this.pedidoNovoId}"]`
-      );
 
-      linhaPedido?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-    }, 50);
+    this.rolarAtePedido(
+      pedidoId
+    );
+
+
+    this.rolarDetalhesParaTopo();
   }
 
-  private prepararAudio(): void {
+
+  // =========================================
+  // SOM
+  // =========================================
+
+  private prepararAudio():
+    void {
+
     this.audioNovoPedido =
       new Audio(
         '/sounds/novo-pedido.mp3'
       );
 
-    this.audioNovoPedido.preload = 'auto';
+
+    this.audioNovoPedido.preload =
+      'auto';
   }
 
-  private tocarSomNovoPedido(): void {
+
+  private tocarSomNovoPedido():
+    void {
+
     if (!this.audioNovoPedido) {
       return;
     }
 
-    this.audioNovoPedido.currentTime = 0;
 
-    this.audioNovoPedido.play().catch((erro) => {
-      console.warn(
-        'O navegador bloqueou o som da notificação. Clique na página pelo menos uma vez.',
-        erro
+    this.audioNovoPedido.currentTime =
+      0;
+
+
+    this.audioNovoPedido
+      .play()
+      .catch(
+        (erro) => {
+
+          console.warn(
+            'O navegador bloqueou o som da notificação. Clique na página pelo menos uma vez.',
+            erro
+          );
+        }
       );
-    });
   }
+
+
+  // =========================================
+  // CARREGAMENTO DOS PEDIDOS
+  // =========================================
 
   carregarPedidos(
     pedidoIdParaManter?: string,
     novoPedidoId?: string
   ): void {
-    this.loading = true;
+
+    this.loading =
+      true;
+
 
     this.pedidoService
       .getPedidos()
       .subscribe({
+
         next: (res: any) => {
+
           this.pedidos =
             res.data ?? res;
+
 
           this.aplicarFiltro(
             this.filtroAtual
           );
 
-          if (pedidoIdParaManter) {
+
+          if (
+            pedidoIdParaManter
+          ) {
+
             const pedidoAtualizado =
               this.pedidos.find(
                 (pedido: any) =>
@@ -354,112 +767,317 @@ export class PedidosComponent
                   pedidoIdParaManter
               );
 
-            if (pedidoAtualizado) {
+
+            if (
+              pedidoAtualizado
+            ) {
+
               this.pedidoSelecionado =
                 pedidoAtualizado;
             }
           }
 
-          if (novoPedidoId) {
+
+          if (
+            novoPedidoId
+          ) {
+
             const novoPedido =
               this.pedidos.find(
                 (pedido: any) =>
-                  pedido.id === novoPedidoId
+                  pedido.id ===
+                  novoPedidoId
               );
 
-            if (novoPedido) {
+
+            if (
+              novoPedido
+            ) {
+
               this.exibirToastNovoPedido(
-                novoPedido
-              );
-
-              this.impressaoPedidoService.adicionarNaFila(
                 novoPedido
               );
             }
           }
 
-          this.loading = false;
+
+          this.loading =
+            false;
+
+
           this.cdr.detectChanges();
+
+
+          if (
+            this.pedidoIdDaUrl
+          ) {
+
+            this.abrirPedidoPorId(
+              this.pedidoIdDaUrl
+            );
+          }
         },
+
+
         error: (erro: any) => {
+
           console.error(
             'Erro ao carregar pedidos:',
             erro
           );
 
-          this.loading = false;
+
+          this.loading =
+            false;
+
+
           this.cdr.detectChanges();
         }
       });
   }
 
-  aplicarFiltro(filtro: string): void {
-    this.filtroAtual = filtro;
 
-    if (filtro === 'Todos') {
+  // =========================================
+  // FILTROS
+  // =========================================
+
+  aplicarFiltro(
+    filtro: string
+  ): void {
+
+    this.filtroAtual =
+      filtro;
+
+
+    if (
+      filtro === 'Todos'
+    ) {
+
       this.pedidosFiltrados =
         this.pedidos;
 
       return;
     }
 
-    if (filtro === 'Entrega') {
+
+    if (
+      filtro === 'Entrega'
+    ) {
+
       this.pedidosFiltrados =
         this.pedidos.filter(
           (pedido: any) =>
             pedido.tipoEntrega ===
-            'Delivery' &&
+              'Delivery' &&
             pedido.status ===
-            'SaiuParaEntrega'
+              'SaiuParaEntrega'
         );
 
       return;
     }
 
-    if (filtro === 'Retirada') {
+
+    if (
+      filtro === 'Retirada'
+    ) {
+
       this.pedidosFiltrados =
         this.pedidos.filter(
           (pedido: any) =>
             pedido.tipoEntrega ===
-            'Retirada' &&
+              'Retirada' &&
             pedido.status ===
-            'SaiuParaEntrega'
+              'SaiuParaEntrega'
         );
 
       return;
     }
+
 
     this.pedidosFiltrados =
       this.pedidos.filter(
         (pedido: any) =>
-          String(pedido.status).trim() ===
+          String(
+            pedido.status
+          ).trim() ===
           filtro
       );
   }
 
-  selecionarPedido(pedido: any): void {
-    this.pedidoSelecionado = pedido;
+
+  // =========================================
+  // SELECIONAR PEDIDO
+  // =========================================
+
+  selecionarPedido(
+    pedido: any
+  ): void {
+
+    this.pedidoSelecionado =
+      pedido;
+
+
+    this.rolarDetalhesParaTopo();
   }
+
+
+  // =========================================
+  // IMPRESSÃO
+  // =========================================
+
+  temErroImpressao(
+    pedido: any
+  ): boolean {
+
+    if (!pedido) {
+      return false;
+    }
+
+
+    const status =
+      String(
+        pedido.statusImpressao ?? ''
+      )
+        .trim()
+        .toLowerCase();
+
+
+    return status === 'erro';
+  }
+
+
+  getStatusImpressaoTexto(
+    pedido: any
+  ): string {
+
+    if (!pedido) {
+      return '';
+    }
+
+
+    const status =
+      String(
+        pedido.statusImpressao ?? ''
+      ).trim();
+
+
+    if (
+      status ===
+      'NaoImpresso'
+    ) {
+
+      return 'Não impresso';
+    }
+
+
+    if (
+      status ===
+      'NaFila'
+    ) {
+
+      return 'Na fila';
+    }
+
+
+    if (
+      status ===
+      'Imprimindo'
+    ) {
+
+      return 'Imprimindo';
+    }
+
+
+    if (
+      status ===
+      'Impresso'
+    ) {
+
+      return 'Impresso';
+    }
+
+
+    if (
+      status ===
+      'Erro'
+    ) {
+
+      return 'Erro de impressão';
+    }
+
+
+    return status;
+  }
+
+
+  tentarNovamenteImpressao(
+    pedido: any
+  ): void {
+
+    if (!pedido) {
+      return;
+    }
+
+
+    console.log(
+      'Solicitando nova tentativa de impressão:',
+      pedido.codigo
+    );
+
+
+    void this
+      .impressaoPedidoService
+      .reimprimir(
+        pedido
+      );
+  }
+
+
+  imprimirPedido(): void {
+
+    if (
+      !this.pedidoSelecionado
+    ) {
+
+      return;
+    }
+
+
+    window.print();
+  }
+
+
+  // =========================================
+  // ALTERAÇÃO DE STATUS
+  // =========================================
 
   alterarStatus(
     pedidoId: string,
     status: number
   ): void {
+
     this.pedidoService
       .atualizarStatus(
         pedidoId,
         status
       )
       .subscribe({
+
         next: () => {
 
-          this.carregarPedidos(pedidoId);
+          this.carregarPedidos(
+            pedidoId
+          );
         },
+
+
         error: (erro: any) => {
+
           console.error(
             'Erro ao atualizar status:',
             erro
           );
+
 
           alert(
             'Erro ao atualizar status'
@@ -468,13 +1086,24 @@ export class PedidosComponent
       });
   }
 
-  avancarStatus(pedido: any): void {
-    const proximoStatus =
-      this.getProximoStatus(pedido);
 
-    if (proximoStatus === null) {
+  avancarStatus(
+    pedido: any
+  ): void {
+
+    const proximoStatus =
+      this.getProximoStatus(
+        pedido
+      );
+
+
+    if (
+      proximoStatus === null
+    ) {
+
       return;
     }
+
 
     this.alterarStatus(
       pedido.id,
@@ -482,149 +1111,260 @@ export class PedidosComponent
     );
   }
 
-  imprimirPedido(): void {
-    if (!this.pedidoSelecionado) {
-      return;
-    }
 
-    window.print();
-  }
+  // =========================================
+  // TEXTO DO STATUS
+  // =========================================
 
-  getStatusTexto(pedido: any): string {
+  getStatusTexto(
+    pedido: any
+  ): string {
+
     if (!pedido) {
       return '';
     }
 
+
     if (
       pedido.tipoEntrega ===
-      'Retirada' &&
+        'Retirada' &&
       pedido.status ===
-      'SaiuParaEntrega'
+        'SaiuParaEntrega'
     ) {
+
       return 'Retirada';
     }
 
+
     if (
       pedido.tipoEntrega ===
-      'Delivery' &&
+        'Delivery' &&
       pedido.status ===
-      'SaiuParaEntrega'
+        'SaiuParaEntrega'
     ) {
+
       return 'Entrega';
     }
 
-    if (pedido.status === 'Pendente') {
+
+    if (
+      pedido.status ===
+      'Pendente'
+    ) {
+
       return 'Pendente';
     }
 
-    if (pedido.status === 'EmPreparo') {
+
+    if (
+      pedido.status ===
+      'EmPreparo'
+    ) {
+
       return 'Em preparo';
     }
 
-    if (pedido.status === 'Entregue') {
+
+    if (
+      pedido.status ===
+      'Entregue'
+    ) {
+
       return 'Entregue';
     }
 
-    if (pedido.status === 'Cancelado') {
+
+    if (
+      pedido.status ===
+      'Cancelado'
+    ) {
+
       return 'Cancelado';
     }
+
 
     return pedido.status ?? '';
   }
 
-  getStatusClasse(pedido: any): string {
+
+  // =========================================
+  // CLASSE DO STATUS
+  // =========================================
+
+  getStatusClasse(
+    pedido: any
+  ): string {
+
     if (!pedido) {
       return '';
     }
 
-    if (pedido.status === 'Pendente') {
+
+    if (
+      pedido.status ===
+      'Pendente'
+    ) {
+
       return 'status-pendente';
     }
 
+
     if (
-      pedido.status === 'EmPreparo'
+      pedido.status ===
+      'EmPreparo'
     ) {
+
       return 'status-preparo';
     }
 
+
     if (
       pedido.tipoEntrega ===
-      'Delivery' &&
+        'Delivery' &&
       pedido.status ===
-      'SaiuParaEntrega'
+        'SaiuParaEntrega'
     ) {
+
       return 'status-entrega';
     }
 
+
     if (
       pedido.tipoEntrega ===
-      'Retirada' &&
+        'Retirada' &&
       pedido.status ===
-      'SaiuParaEntrega'
+        'SaiuParaEntrega'
     ) {
+
       return 'status-retirada';
     }
 
-    if (pedido.status === 'Entregue') {
+
+    if (
+      pedido.status ===
+      'Entregue'
+    ) {
+
       return 'status-entregue';
     }
 
-    if (pedido.status === 'Cancelado') {
+
+    if (
+      pedido.status ===
+      'Cancelado'
+    ) {
+
       return 'status-cancelado';
     }
 
+
     return '';
   }
 
-  getProximoTexto(pedido: any): string {
-    if (this.isPendente(pedido)) {
+
+  // =========================================
+  // PRÓXIMO STATUS
+  // =========================================
+
+  getProximoTexto(
+    pedido: any
+  ): string {
+
+    if (
+      this.isPendente(
+        pedido
+      )
+    ) {
+
       return '▶️ Iniciar preparo';
     }
 
-    if (this.isEmPreparo(pedido)) {
+
+    if (
+      this.isEmPreparo(
+        pedido
+      )
+    ) {
+
       return pedido.tipoEntrega ===
         'Retirada'
+
         ? '🛍️ Retirada pronta'
+
         : '🛵 Saiu para entrega';
     }
 
+
     if (
-      this.isSaiuParaEntrega(pedido)
+      this.isSaiuParaEntrega(
+        pedido
+      )
     ) {
+
       return pedido.tipoEntrega ===
         'Retirada'
+
         ? '✅ Entregue ao cliente'
+
         : '✅ Entregue';
     }
 
+
     return '';
   }
+
 
   getProximoStatus(
     pedido: any
   ): number | null {
-    if (this.isPendente(pedido)) {
+
+    if (
+      this.isPendente(
+        pedido
+      )
+    ) {
+
       return 1;
     }
 
-    if (this.isEmPreparo(pedido)) {
+
+    if (
+      this.isEmPreparo(
+        pedido
+      )
+    ) {
+
       return 2;
     }
 
+
     if (
-      this.isSaiuParaEntrega(pedido)
+      this.isSaiuParaEntrega(
+        pedido
+      )
     ) {
+
       return 3;
     }
+
 
     return null;
   }
 
-  podeCancelar(pedido: any): boolean {
+
+  // =========================================
+  // CANCELAMENTO
+  // =========================================
+
+  podeCancelar(
+    pedido: any
+  ): boolean {
+
     const status =
       String(
         pedido?.status
       ).trim();
+
 
     return (
       status !== 'Entregue' &&
@@ -632,25 +1372,41 @@ export class PedidosComponent
     );
   }
 
-  isPendente(pedido: any): boolean {
+
+  // =========================================
+  // VERIFICAÇÕES DE STATUS
+  // =========================================
+
+  isPendente(
+    pedido: any
+  ): boolean {
+
     return (
       String(
         pedido?.status
-      ).trim() === 'Pendente'
+      ).trim() ===
+      'Pendente'
     );
   }
 
-  isEmPreparo(pedido: any): boolean {
+
+  isEmPreparo(
+    pedido: any
+  ): boolean {
+
     return (
       String(
         pedido?.status
-      ).trim() === 'EmPreparo'
+      ).trim() ===
+      'EmPreparo'
     );
   }
+
 
   isSaiuParaEntrega(
     pedido: any
   ): boolean {
+
     return (
       String(
         pedido?.status
@@ -659,41 +1415,62 @@ export class PedidosComponent
     );
   }
 
-  contarPendentes(): number {
+
+  // =========================================
+  // CONTADORES
+  // =========================================
+
+  contarPendentes():
+    number {
+
     return this.pedidos.filter(
       (pedido: any) =>
-        pedido.status === 'Pendente'
+        pedido.status ===
+        'Pendente'
     ).length;
   }
 
-  contarEmPreparo(): number {
+
+  contarEmPreparo():
+    number {
+
     return this.pedidos.filter(
       (pedido: any) =>
-        pedido.status === 'EmPreparo'
+        pedido.status ===
+        'EmPreparo'
     ).length;
   }
 
-  contarEntrega(): number {
+
+  contarEntrega():
+    number {
+
     return this.pedidos.filter(
       (pedido: any) =>
         pedido.tipoEntrega ===
-        'Delivery' &&
+          'Delivery' &&
         pedido.status ===
-        'SaiuParaEntrega'
+          'SaiuParaEntrega'
     ).length;
   }
 
-  contarRetirada(): number {
+
+  contarRetirada():
+    number {
+
     return this.pedidos.filter(
       (pedido: any) =>
         pedido.tipoEntrega ===
-        'Retirada' &&
+          'Retirada' &&
         pedido.status ===
-        'SaiuParaEntrega'
+          'SaiuParaEntrega'
     ).length;
   }
 
-  contarCancelados(): number {
+
+  contarCancelados():
+    number {
+
     return this.pedidos.filter(
       (pedido: any) =>
         pedido.status ===
@@ -701,55 +1478,103 @@ export class PedidosComponent
     ).length;
   }
 
-  contarFiltro(filtro: string): number {
-    if (filtro === 'Todos') {
+
+  contarFiltro(
+    filtro: string
+  ): number {
+
+    if (
+      filtro === 'Todos'
+    ) {
+
       return this.pedidos.length;
     }
 
-    if (filtro === 'Pendente') {
-      return this.contarPendentes();
+
+    if (
+      filtro === 'Pendente'
+    ) {
+
+      return this
+        .contarPendentes();
     }
 
-    if (filtro === 'EmPreparo') {
-      return this.contarEmPreparo();
+
+    if (
+      filtro === 'EmPreparo'
+    ) {
+
+      return this
+        .contarEmPreparo();
     }
 
-    if (filtro === 'Entrega') {
-      return this.contarEntrega();
+
+    if (
+      filtro === 'Entrega'
+    ) {
+
+      return this
+        .contarEntrega();
     }
 
-    if (filtro === 'Retirada') {
-      return this.contarRetirada();
+
+    if (
+      filtro === 'Retirada'
+    ) {
+
+      return this
+        .contarRetirada();
     }
 
-    if (filtro === 'Cancelado') {
-      return this.contarCancelados();
+
+    if (
+      filtro === 'Cancelado'
+    ) {
+
+      return this
+        .contarCancelados();
     }
+
 
     return this.pedidos.filter(
       (pedido: any) =>
         String(
           pedido.status
-        ).trim() === filtro
+        ).trim() ===
+        filtro
     ).length;
   }
+
+
+  // =========================================
+  // PAGAMENTO
+  // =========================================
 
   traduzirPagamento(
     formaPagamento: string
   ): string {
+
     if (!formaPagamento) {
       return '-';
     }
 
-    const mapa: Record<
-      string,
-      string
-    > = {
-      Pix: 'Pix',
-      Dinheiro: 'Dinheiro',
-      CartaoCredito: 'Crédito',
-      CartaoDebito: 'Débito'
+
+    const mapa:
+      Record<string, string> = {
+
+      Pix:
+        'Pix',
+
+      Dinheiro:
+        'Dinheiro',
+
+      CartaoCredito:
+        'Crédito',
+
+      CartaoDebito:
+        'Débito'
     };
+
 
     return (
       mapa[formaPagamento] ??
@@ -757,37 +1582,62 @@ export class PedidosComponent
     );
   }
 
+
+  // =========================================
+  // FORMATAÇÃO DE HORA
+  // =========================================
+
   formatarHora(
     dataHora: string
   ): string {
+
     if (!dataHora) {
       return '';
     }
 
-    const data =
-      new Date(dataHora);
 
-    return data.toLocaleTimeString(
-      'pt-BR',
-      {
-        hour: '2-digit',
-        minute: '2-digit'
-      }
-    );
+    const data =
+      new Date(
+        dataHora
+      );
+
+
+    return data
+      .toLocaleTimeString(
+        'pt-BR',
+        {
+          hour:
+            '2-digit',
+
+          minute:
+            '2-digit'
+        }
+      );
   }
+
+
+  // =========================================
+  // FORMATAÇÃO DE DATA
+  // =========================================
 
   formatarData(
     dataHora: string
   ): string {
+
     if (!dataHora) {
       return '';
     }
 
-    const data =
-      new Date(dataHora);
 
-    return data.toLocaleDateString(
-      'pt-BR'
-    );
+    const data =
+      new Date(
+        dataHora
+      );
+
+
+    return data
+      .toLocaleDateString(
+        'pt-BR'
+      );
   }
 }

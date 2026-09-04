@@ -1,0 +1,272 @@
+2026-09-04 00:11:03.971 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-04 00:11:04.539 -03:00 [INF] Now listening on: https://localhost:57668
+2026-09-04 00:11:04.541 -03:00 [INF] Now listening on: http://localhost:57669
+2026-09-04 00:11:05.021 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-04 00:11:05.026 -03:00 [INF] Hosting environment: Development
+2026-09-04 00:11:05.027 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-09-04 00:11:10.759 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-04 00:11:11.185 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 460.4239ms
+2026-09-04 00:11:11.206 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-04 00:11:11.206 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-04 00:11:11.206 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-04 00:11:11.250 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 44.2206ms
+2026-09-04 00:11:11.253 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 47.2913ms
+2026-09-04 00:11:11.318 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 112.1169ms
+2026-09-04 00:11:11.493 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-04 00:11:11.568 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 74.7386ms
+2026-09-04 00:12:14.534 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 52
+2026-09-04 00:12:14.544 -03:00 [INF] CORS policy execution failed.
+2026-09-04 00:12:14.545 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-04 00:12:15.762 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 00:12:15.798 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 00:12:16.965 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.968 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.969 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.971 -03:00 [WRN] No store type was specified for the decimal property 'TrocoPara' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.973 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Adicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.975 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.976 -03:00 [WRN] No store type was specified for the decimal property 'ValorUnitario' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.977 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'ItemPedidoAdicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.979 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.980 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.982 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:16.983 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-04 00:12:18.149 -03:00 [INF] Executed DbCommand (168ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-04 00:12:19.047 -03:00 [INF] Executed DbCommand (27ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 00:12:19.075 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-04 00:12:19.085 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 3280.0479ms
+2026-09-04 00:12:19.087 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 00:12:19.097 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 4565.7108ms
+2026-09-04 00:19:07.957 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos?status=0&page=1&pageSize=10 - null null
+2026-09-04 00:19:08.482 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 00:19:08.494 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-04 00:19:08.667 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__status_Value_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+WHERE [p].[Status] = @__status_Value_0
+2026-09-04 00:19:08.815 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-04 00:19:08.863 -03:00 [INF] Executed DbCommand (35ms) [Parameters=[@__status_Value_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    WHERE [p].[Status] = @__status_Value_0
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-09-04 00:19:09.012 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-04 00:19:09.066 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 569.7285ms
+2026-09-04 00:19:09.069 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 00:19:09.071 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos?status=0&page=1&pageSize=10 - 200 null application/json; charset=utf-8 1113.2596ms
+2026-09-04 00:20:07.361 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/refresh - application/json 112
+2026-09-04 00:20:07.371 -03:00 [INF] CORS policy execution failed.
+2026-09-04 00:20:07.372 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-04 00:20:07.376 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:20:07.382 -03:00 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 00:20:07.474 -03:00 [INF] Executed DbCommand (12ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-04 00:20:07.483 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 00:20:07.487 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-04 00:20:07.489 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele) in 104.8501ms
+2026-09-04 00:20:07.491 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:20:07.494 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/refresh - 200 null application/json; charset=utf-8 132.4839ms
+2026-09-04 00:23:19.880 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos?status=0&page=1&pageSize=10 - null null
+2026-09-04 00:23:19.887 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 00:23:19.890 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-04 00:23:19.907 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__status_Value_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+WHERE [p].[Status] = @__status_Value_0
+2026-09-04 00:23:19.945 -03:00 [INF] Executed DbCommand (33ms) [Parameters=[@__status_Value_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    WHERE [p].[Status] = @__status_Value_0
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-09-04 00:23:19.955 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-04 00:23:19.964 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 68.7892ms
+2026-09-04 00:23:19.967 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-04 00:23:19.968 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos?status=0&page=1&pageSize=10 - 200 null application/json; charset=utf-8 88.5805ms
+2026-09-04 00:23:34.661 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/refresh - application/json 112
+2026-09-04 00:23:34.664 -03:00 [INF] CORS policy execution failed.
+2026-09-04 00:23:34.665 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-04 00:23:34.667 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:23:34.669 -03:00 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 00:23:34.706 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-04 00:23:34.887 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele) in 189.7503ms
+2026-09-04 00:23:34.892 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:23:35.010 -03:00 [ERR] Erro capturado pelo middleware
+TimDoLele.Application.Exceptions.BadRequestException: Refresh token inválido
+   at TimDoLele.Application.Services.AuthService.RenovarTokenAsync(String refreshToken) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\TimDoLele.Application\Services\AuthService.cs:line 103
+   at TimDoLeLe.Controllers.AuthController.Refresh(RefreshTokenDto dto) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Controllers\AuthController.cs:line 42
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at TimDoLeLe.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Middlewares\ErrorHandlingMiddleware.cs:line 22
+2026-09-04 00:23:35.066 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/refresh - 400 null application/json 404.6699ms
+2026-09-04 00:23:57.489 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/refresh - application/json 112
+2026-09-04 00:23:57.492 -03:00 [INF] CORS policy execution failed.
+2026-09-04 00:23:57.493 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-04 00:23:57.494 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:23:57.498 -03:00 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 00:23:57.511 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-04 00:23:57.563 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele) in 58.1718ms
+2026-09-04 00:23:57.565 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:23:57.615 -03:00 [ERR] Erro capturado pelo middleware
+TimDoLele.Application.Exceptions.BadRequestException: Refresh token inválido
+   at TimDoLele.Application.Services.AuthService.RenovarTokenAsync(String refreshToken) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\TimDoLele.Application\Services\AuthService.cs:line 103
+   at TimDoLeLe.Controllers.AuthController.Refresh(RefreshTokenDto dto) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Controllers\AuthController.cs:line 42
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at TimDoLeLe.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Middlewares\ErrorHandlingMiddleware.cs:line 22
+2026-09-04 00:23:57.632 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/refresh - 400 null application/json 143.1463ms
+2026-09-04 00:28:25.490 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-04 00:28:25.503 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 12.5602ms
+2026-09-04 00:28:25.519 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-04 00:28:25.519 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-04 00:28:25.519 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-04 00:28:25.538 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 18.5569ms
+2026-09-04 00:28:25.533 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 14.3417ms
+2026-09-04 00:28:25.556 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 36.7391ms
+2026-09-04 00:28:25.751 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-04 00:28:25.825 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 73.8326ms
+2026-09-04 00:28:45.414 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 52
+2026-09-04 00:28:45.419 -03:00 [INF] CORS policy execution failed.
+2026-09-04 00:28:45.427 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-04 00:28:45.429 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 00:28:45.431 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 00:28:45.442 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-04 00:28:45.680 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 00:28:45.685 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-04 00:28:45.687 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 250.9778ms
+2026-09-04 00:28:45.692 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-04 00:28:45.693 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 279.582ms
+2026-09-04 00:29:14.816 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/refresh - application/json 112
+2026-09-04 00:29:14.820 -03:00 [INF] CORS policy execution failed.
+2026-09-04 00:29:14.821 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-04 00:29:14.826 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:29:14.828 -03:00 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 00:29:14.836 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-04 00:29:14.845 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-04 00:29:14.847 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-04 00:29:14.848 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele) in 17.9236ms
+2026-09-04 00:29:14.852 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:29:14.855 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/refresh - 200 null application/json; charset=utf-8 38.5864ms
+2026-09-04 00:31:29.198 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/refresh - application/json 112
+2026-09-04 00:31:29.204 -03:00 [INF] CORS policy execution failed.
+2026-09-04 00:31:29.224 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-04 00:31:29.225 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:31:29.232 -03:00 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-04 00:31:29.243 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-04 00:31:29.295 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele) in 59.986ms
+2026-09-04 00:31:29.297 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-04 00:31:29.349 -03:00 [ERR] Erro capturado pelo middleware
+TimDoLele.Application.Exceptions.BadRequestException: Refresh token inválido
+   at TimDoLele.Application.Services.AuthService.RenovarTokenAsync(String refreshToken) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\TimDoLele.Application\Services\AuthService.cs:line 103
+   at TimDoLeLe.Controllers.AuthController.Refresh(RefreshTokenDto dto) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Controllers\AuthController.cs:line 42
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at TimDoLeLe.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Middlewares\ErrorHandlingMiddleware.cs:line 22
+2026-09-04 00:31:29.361 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/refresh - 400 null application/json 163.4864ms

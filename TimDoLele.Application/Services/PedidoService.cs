@@ -18,7 +18,6 @@ namespace TimDoLele.Application.Services
             _context = context;
         }
 
-
         public async Task<Guid> CriarPedidoAsync(CriarPedidoDto dto)
         {
             var cliente = new Cliente(
@@ -106,7 +105,6 @@ namespace TimDoLele.Application.Services
             return pedido.Id;
         }
 
-
         public async Task<PagedResult<PedidoResponseDto>>
             ObterPedidosAsync(
                 Guid? clienteId,
@@ -142,13 +140,19 @@ namespace TimDoLele.Application.Services
                 .OrderByDescending(p => p.DataHora);
 
             if (page <= 0)
+            {
                 page = 1;
+            }
 
             if (pageSize <= 0)
+            {
                 pageSize = 10;
+            }
 
             if (pageSize > 50)
+            {
                 pageSize = 50;
+            }
 
             var total =
                 await query.CountAsync();
@@ -162,17 +166,36 @@ namespace TimDoLele.Application.Services
                 .Select(p => new PedidoResponseDto
                 {
                     Id = p.Id,
+
                     Codigo = p.Codigo,
+
                     DataHora = p.DataHora,
+
                     NomeCliente = p.Cliente!.Nome,
+
                     SubTotal = p.Subtotal,
+
                     Delivery = p.Delivery,
+
                     Total = p.Total,
+
                     Status = p.Status.ToString(),
+
                     TipoEntrega = p.TipoEntrega.ToString(),
+
                     FormaPagamento =
                         p.FormaPagamento.ToString(),
+
                     TrocoPara = p.TrocoPara,
+
+                    StatusImpressao =
+                        p.StatusImpressao.ToString(),
+
+                    TentativasImpressao =
+                        p.TentativasImpressao,
+
+                    DataImpressao =
+                        p.DataImpressao,
 
                     Itens = p.Itens
                         .Select(i =>
@@ -215,7 +238,9 @@ namespace TimDoLele.Application.Services
             return new PagedResult<PedidoResponseDto>
             {
                 Page = page,
+
                 PageSize = pageSize,
+
                 Total = total,
 
                 TotalPages =
@@ -226,7 +251,6 @@ namespace TimDoLele.Application.Services
                 Data = data
             };
         }
-
 
         public async Task<PedidoResponseDto?>
             ObterPedidoPorIdAsync(Guid id)
@@ -252,24 +276,43 @@ namespace TimDoLele.Application.Services
             return new PedidoResponseDto
             {
                 Id = pedido.Id,
+
                 Codigo = pedido.Codigo,
+
                 DataHora = pedido.DataHora,
+
                 NomeCliente =
                     pedido.Cliente!.Nome,
+
                 SubTotal =
                     pedido.Subtotal,
+
                 Delivery =
                     pedido.Delivery,
+
                 Total =
                     pedido.Total,
+
                 Status =
                     pedido.Status.ToString(),
+
                 TipoEntrega =
                     pedido.TipoEntrega.ToString(),
+
                 FormaPagamento =
                     pedido.FormaPagamento.ToString(),
+
                 TrocoPara =
                     pedido.TrocoPara,
+
+                StatusImpressao =
+                    pedido.StatusImpressao.ToString(),
+
+                TentativasImpressao =
+                    pedido.TentativasImpressao,
+
+                DataImpressao =
+                    pedido.DataImpressao,
 
                 Itens = pedido.Itens
                     .Select(i =>
@@ -329,60 +372,65 @@ namespace TimDoLele.Application.Services
             await _context.SaveChangesAsync();
         }
 
-
         public async Task ColocarNaFilaImpressaoAsync(
             Guid pedidoId)
         {
             var pedido =
-                await ObterPedidoEntidadeAsync(pedidoId);
+                await ObterPedidoEntidadeAsync(
+                    pedidoId
+                );
 
             pedido.ColocarNaFilaImpressao();
 
             await _context.SaveChangesAsync();
         }
 
-
         public async Task IniciarImpressaoAsync(
             Guid pedidoId)
         {
             var pedido =
-                await ObterPedidoEntidadeAsync(pedidoId);
+                await ObterPedidoEntidadeAsync(
+                    pedidoId
+                );
 
             pedido.IniciarImpressao();
 
             await _context.SaveChangesAsync();
         }
 
-
         public async Task ConcluirImpressaoAsync(
             Guid pedidoId)
         {
             var pedido =
-                await ObterPedidoEntidadeAsync(pedidoId);
+                await ObterPedidoEntidadeAsync(
+                    pedidoId
+                );
 
             pedido.MarcarComoImpresso();
 
             await _context.SaveChangesAsync();
         }
 
-
         public async Task MarcarErroImpressaoAsync(
             Guid pedidoId)
         {
             var pedido =
-                await ObterPedidoEntidadeAsync(pedidoId);
+                await ObterPedidoEntidadeAsync(
+                    pedidoId
+                );
 
             pedido.MarcarErroImpressao();
 
             await _context.SaveChangesAsync();
         }
 
-
         public async Task PrepararReimpressaoAsync(
             Guid pedidoId)
         {
             var pedido =
-                await ObterPedidoEntidadeAsync(pedidoId);
+                await ObterPedidoEntidadeAsync(
+                    pedidoId
+                );
 
             pedido.PrepararReimpressao();
 
@@ -406,7 +454,6 @@ namespace TimDoLele.Application.Services
                 .ToListAsync();
         }
 
-
         private async Task<Pedido>
             ObterPedidoEntidadeAsync(
                 Guid pedidoId)
@@ -426,7 +473,6 @@ namespace TimDoLele.Application.Services
 
             return pedido;
         }
-
 
         public async Task<RelatorioDto>
             ObterRelatorioAsync(
@@ -686,7 +732,6 @@ namespace TimDoLele.Application.Services
                     }
             };
         }
-
 
         public async Task<DashBoardPedidosDto>
             ObterDashboardAsync()
