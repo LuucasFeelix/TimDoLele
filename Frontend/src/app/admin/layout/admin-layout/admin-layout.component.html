@@ -18,13 +18,13 @@
 
     </div>
 
+
     <nav class="menu">
 
       <a
         routerLink="/admin/dashboard"
         routerLinkActive="active"
       >
-
         <span class="menu-icon">
           ▦
         </span>
@@ -32,14 +32,13 @@
         <span class="menu-text">
           Dashboard
         </span>
-
       </a>
+
 
       <a
         routerLink="/admin/pedidos"
         routerLinkActive="active"
       >
-
         <span class="menu-icon">
           ▤
         </span>
@@ -47,14 +46,13 @@
         <span class="menu-text">
           Pedidos
         </span>
-
       </a>
+
 
       <a
         routerLink="/admin/produtos"
         routerLinkActive="active"
       >
-
         <span class="menu-icon">
           ☰
         </span>
@@ -62,14 +60,13 @@
         <span class="menu-text">
           Produtos
         </span>
-
       </a>
+
 
       <a
         routerLink="/admin/categorias"
         routerLinkActive="active"
       >
-
         <span class="menu-icon">
           □
         </span>
@@ -77,14 +74,13 @@
         <span class="menu-text">
           Categorias
         </span>
-
       </a>
+
 
       <a
         routerLink="/admin/adicionais"
         routerLinkActive="active"
       >
-
         <span class="menu-icon">
           ＋
         </span>
@@ -92,14 +88,13 @@
         <span class="menu-text">
           Adicionais
         </span>
-
       </a>
+
 
       <a
         routerLink="/admin/relatorios"
         routerLinkActive="active"
       >
-
         <span class="menu-icon">
           ↗
         </span>
@@ -107,24 +102,33 @@
         <span class="menu-text">
           Relatórios
         </span>
-
       </a>
 
     </nav>
 
+
     <div class="sidebar-footer">
 
-      <a routerLink="/admin/login">
+      <button
+        type="button"
+        class="logout-button"
+        [disabled]="saindo"
+        (click)="sair()"
+      >
 
         <span class="menu-icon">
           ↩
         </span>
 
         <span class="menu-text">
-          Sair
+          {{
+            saindo
+              ? 'Saindo...'
+              : 'Sair'
+          }}
         </span>
 
-      </a>
+      </button>
 
     </div>
 
@@ -167,6 +171,7 @@
         ⚠️
       </div>
 
+
       <div class="printing-error-content">
 
         <div class="printing-error-header">
@@ -182,6 +187,7 @@
             </h3>
 
           </div>
+
 
           <button
             type="button"
@@ -208,6 +214,7 @@
 
           </div>
 
+
           <div>
 
             <span>
@@ -220,6 +227,7 @@
 
           </div>
 
+
           <div>
 
             <span>
@@ -231,6 +239,7 @@
             </strong>
 
           </div>
+
 
           <div>
 
@@ -269,6 +278,7 @@
           >
             👁️ Ver pedido
           </button>
+
 
           <button
             type="button"
