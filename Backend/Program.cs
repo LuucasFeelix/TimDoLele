@@ -8,8 +8,8 @@ using Serilog;
 using System.Text;
 using TimDoLele.Application.Services;
 using TimDoLele.Application.Validators;
-using TimDoLeLe.Hubs;
 using TimDoLele.Infrastructure.Data;
+using TimDoLeLe.Hubs;
 using TimDoLeLe.Middlewares;
 
 namespace TimDoLeLe
@@ -22,172 +22,291 @@ namespace TimDoLeLe
                 .WriteTo.Console()
                 .WriteTo.File(
                     "logs/log.txt",
-                    rollingInterval: RollingInterval.Day)
+                    rollingInterval: RollingInterval.Day
+                )
                 .CreateLogger();
 
             try
             {
-                var builder = WebApplication.CreateBuilder(args);
+                var builder =
+                    WebApplication.CreateBuilder(args);
 
                 builder.Host.UseSerilog();
 
-                var jwtKey = builder.Configuration["Jwt:Key"];
+                var jwtKey =
+                    builder.Configuration["Jwt:Key"];
 
-                if (string.IsNullOrWhiteSpace(jwtKey))
+                if (
+                    string.IsNullOrWhiteSpace(
+                        jwtKey
+                    )
+                )
                 {
                     throw new InvalidOperationException(
-                        "A configuração Jwt:Key não foi encontrada no appsettings.json.");
+                        "A configuração Jwt:Key não foi encontrada no appsettings.json."
+                    );
                 }
 
-                var key = Encoding.UTF8.GetBytes(jwtKey);
+                var key =
+                    Encoding.UTF8.GetBytes(
+                        jwtKey
+                    );
 
-
-                builder.Services.AddControllers();
-
- 
-                builder.Services.AddSignalR();
-
-   
-                builder.Services.AddFluentValidationAutoValidation();
-
-                builder.Services.AddValidatorsFromAssemblyContaining<
-                    CriarPedidoValidator>();
-
-                builder.Services.AddEndpointsApiExplorer();
-
-                builder.Services.AddSwaggerGen(options =>
-                {
-                    options.SwaggerDoc("v1", new OpenApiInfo
-                    {
-                        Title = "TimDoLele API",
-                        Version = "v1",
-                        Description = "API Tim do Lelê 🍔"
-                    });
-
-                    options.AddSecurityDefinition(
-                        "Bearer",
-                        new OpenApiSecurityScheme
-                        {
-                            Name = "Authorization",
-                            Type = SecuritySchemeType.Http,
-                            Scheme = "bearer",
-                            BearerFormat = "JWT",
-                            In = ParameterLocation.Header,
-                            Description = "Digite apenas o token"
-                        });
-
-                    options.AddSecurityRequirement(
-                        new OpenApiSecurityRequirement
-                        {
-                            {
-                                new OpenApiSecurityScheme
-                                {
-                                    Reference = new OpenApiReference
-                                    {
-                                        Type = ReferenceType.SecurityScheme,
-                                        Id = "Bearer"
-                                    }
-                                },
-                                Array.Empty<string>()
-                            }
-                        });
-                });
-
-
-                builder.Services.AddCors(options =>
-                {
-                    options.AddPolicy("AllowAngular", policy =>
-                    {
-                        policy
-                            .WithOrigins(
-                                "http://localhost:4200",
-                                "https://localhost:4200")
-                            .AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .AllowCredentials();
-                    });
-                });
-
-
-                builder.Services.AddScoped<PedidoService>();
-                builder.Services.AddScoped<AuthService>();
-
-                builder.Services.AddDbContext<TimDoLeleDbContext>(options =>
-                {
-                    options.UseSqlServer(
-                        builder.Configuration.GetConnectionString(
-                            "DefaultConnection"));
-                });
 
                 builder.Services
-                    .AddAuthentication(options =>
-                    {
-                        options.DefaultAuthenticateScheme =
-                            JwtBearerDefaults.AuthenticationScheme;
+                    .AddControllers();
 
-                        options.DefaultChallengeScheme =
-                            JwtBearerDefaults.AuthenticationScheme;
-                    })
-                    .AddJwtBearer(options =>
-                    {
-                        options.RequireHttpsMetadata = false;
-                        options.SaveToken = true;
 
-                        options.TokenValidationParameters =
-                            new TokenValidationParameters
-                            {
-                                ValidateIssuer = true,
-                                ValidateAudience = true,
-                                ValidateIssuerSigningKey = true,
-                                ValidateLifetime = true,
+                builder.Services
+                    .AddSignalR();
 
-                                ClockSkew = TimeSpan.Zero,
 
-                                ValidIssuer =
-                                    builder.Configuration["Jwt:Issuer"],
+                builder.Services
+                    .AddFluentValidationAutoValidation();
 
-                                ValidAudience =
-                                    builder.Configuration["Jwt:Audience"],
 
-                                IssuerSigningKey =
-                                    new SymmetricSecurityKey(key)
-                            };
-                    });
+                builder.Services
+                    .AddValidatorsFromAssemblyContaining<
+                        CriarPedidoValidator
+                    >();
 
-                builder.Services.AddAuthorization();
 
-                var app = builder.Build();
+                builder.Services
+                    .AddEndpointsApiExplorer();
 
- 
-                app.UseMiddleware<ErrorHandlingMiddleware>();
 
-  
-                if (app.Environment.IsDevelopment())
+                builder.Services
+                    .AddSwaggerGen(
+                        options =>
+                        {
+                            options.SwaggerDoc(
+                                "v1",
+                                new OpenApiInfo
+                                {
+                                    Title =
+                                        "TimDoLele API",
+
+                                    Version =
+                                        "v1",
+
+                                    Description =
+                                        "API Tim do Lelê 🍔"
+                                }
+                            );
+
+
+                            options.AddSecurityDefinition(
+                                "Bearer",
+                                new OpenApiSecurityScheme
+                                {
+                                    Name =
+                                        "Authorization",
+
+                                    Type =
+                                        SecuritySchemeType.Http,
+
+                                    Scheme =
+                                        "bearer",
+
+                                    BearerFormat =
+                                        "JWT",
+
+                                    In =
+                                        ParameterLocation.Header,
+
+                                    Description =
+                                        "Digite apenas o token"
+                                }
+                            );
+
+
+                            options.AddSecurityRequirement(
+                                new OpenApiSecurityRequirement
+                                {
+                                    {
+                                        new OpenApiSecurityScheme
+                                        {
+                                            Reference =
+                                                new OpenApiReference
+                                                {
+                                                    Type =
+                                                        ReferenceType.SecurityScheme,
+
+                                                    Id =
+                                                        "Bearer"
+                                                }
+                                        },
+
+                                        Array.Empty<string>()
+                                    }
+                                }
+                            );
+                        }
+                    );
+
+
+                builder.Services
+                    .AddCors(
+                        options =>
+                        {
+                            options.AddPolicy(
+                                "AllowAngular",
+                                policy =>
+                                {
+                                    policy
+                                        .WithOrigins(
+                                            "http://localhost:4200",
+                                            "https://localhost:4200"
+                                        )
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod()
+                                        .AllowCredentials();
+                                }
+                            );
+                        }
+                    );
+
+
+                builder.Services
+                    .AddScoped<PedidoService>();
+
+                builder.Services
+                    .AddScoped<AuthService>();
+
+                builder.Services
+                    .AddScoped<ConfiguracaoLojaService>();
+
+
+                builder.Services
+                    .AddDbContext<TimDoLeleDbContext>(
+                        options =>
+                        {
+                            options.UseSqlServer(
+                                builder.Configuration
+                                    .GetConnectionString(
+                                        "DefaultConnection"
+                                    )
+                            );
+                        }
+                    );
+
+
+                builder.Services
+                    .AddAuthentication(
+                        options =>
+                        {
+                            options.DefaultAuthenticateScheme =
+                                JwtBearerDefaults
+                                    .AuthenticationScheme;
+
+                            options.DefaultChallengeScheme =
+                                JwtBearerDefaults
+                                    .AuthenticationScheme;
+                        }
+                    )
+                    .AddJwtBearer(
+                        options =>
+                        {
+                            options.RequireHttpsMetadata =
+                                false;
+
+                            options.SaveToken =
+                                true;
+
+                            options.TokenValidationParameters =
+                                new TokenValidationParameters
+                                {
+                                    ValidateIssuer =
+                                        true,
+
+                                    ValidateAudience =
+                                        true,
+
+                                    ValidateIssuerSigningKey =
+                                        true,
+
+                                    ValidateLifetime =
+                                        true,
+
+                                    ClockSkew =
+                                        TimeSpan.Zero,
+
+                                    ValidIssuer =
+                                        builder
+                                            .Configuration[
+                                                "Jwt:Issuer"
+                                            ],
+
+                                    ValidAudience =
+                                        builder
+                                            .Configuration[
+                                                "Jwt:Audience"
+                                            ],
+
+                                    IssuerSigningKey =
+                                        new SymmetricSecurityKey(
+                                            key
+                                        )
+                                };
+                        }
+                    );
+
+
+                builder.Services
+                    .AddAuthorization();
+
+
+                var app =
+                    builder.Build();
+
+
+                app.UseMiddleware<
+                    ErrorHandlingMiddleware
+                >();
+
+
+                if (
+                    app.Environment
+                        .IsDevelopment()
+                )
                 {
                     app.UseSwagger();
 
-                    app.UseSwaggerUI(options =>
-                    {
-                        options.SwaggerEndpoint(
-                            "/swagger/v1/swagger.json",
-                            "TimDoLele API v1");
+                    app.UseSwaggerUI(
+                        options =>
+                        {
+                            options.SwaggerEndpoint(
+                                "/swagger/v1/swagger.json",
+                                "TimDoLele API v1"
+                            );
 
-                        options.RoutePrefix = string.Empty;
-                    });
+                            options.RoutePrefix =
+                                string.Empty;
+                        }
+                    );
                 }
 
- 
-                app.UseCors("AllowAngular");
+
+                app.UseCors(
+                    "AllowAngular"
+                );
+
 
                 app.UseHttpsRedirection();
 
+
                 app.UseAuthentication();
+
                 app.UseAuthorization();
+
 
                 app.MapControllers();
 
 
-                app.MapHub<NotificacaoHub>("/hubs/notificacoes");
+                app.MapHub<NotificacaoHub>(
+                    "/hubs/notificacoes"
+                );
+
 
                 app.Run();
             }
@@ -195,7 +314,8 @@ namespace TimDoLeLe
             {
                 Log.Fatal(
                     ex,
-                    "Erro fatal ao iniciar a aplicação");
+                    "Erro fatal ao iniciar a aplicação"
+                );
             }
             finally
             {
