@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TimDolele.Core.Entities;
+using TimDolele.Core.Enums;
 
 namespace TimDoLele.Infrastructure.Data
 {
@@ -16,13 +12,26 @@ namespace TimDoLele.Infrastructure.Data
         {
         }
 
-        public DbSet<Pedido> Pedidos => Set<Pedido>();
-        public DbSet<Cliente> Clientes => Set<Cliente>();
-        public DbSet<ItemPedido> ItensPedido => Set<ItemPedido>();
-        public DbSet<Adicional> Adicionais => Set<Adicional>();
-        public DbSet<Pagamento> Pagamentos => Set<Pagamento>();
-        public DbSet<Categoria> Categorias => Set<Categoria>();
-        public DbSet<Produto> Produtos => Set<Produto>();
+        public DbSet<Pedido> Pedidos =>
+            Set<Pedido>();
+
+        public DbSet<Cliente> Clientes =>
+            Set<Cliente>();
+
+        public DbSet<ItemPedido> ItensPedido =>
+            Set<ItemPedido>();
+
+        public DbSet<Adicional> Adicionais =>
+            Set<Adicional>();
+
+        public DbSet<Pagamento> Pagamentos =>
+            Set<Pagamento>();
+
+        public DbSet<Categoria> Categorias =>
+            Set<Categoria>();
+
+        public DbSet<Produto> Produtos =>
+            Set<Produto>();
 
         public DbSet<ProdutoAdicional> ProdutosAdicionais =>
             Set<ProdutoAdicional>();
@@ -30,12 +39,21 @@ namespace TimDoLele.Infrastructure.Data
         public DbSet<ItemPedidoAdicional> ItensPedidoAdicionais =>
             Set<ItemPedidoAdicional>();
 
-        public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<Usuarios> Usuarios =>
+            Set<Usuarios>();
+
+        public DbSet<ConfiguracaoLoja> ConfiguracoesLoja =>
+            Set<ConfiguracaoLoja>();
+
+        public DbSet<HorarioFuncionamento> HorariosFuncionamento =>
+            Set<HorarioFuncionamento>();
+
+        public DbSet<DataEspecial> DatasEspeciais =>
+            Set<DataEspecial>();
 
         protected override void OnModelCreating(
             ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Cliente>()
                 .OwnsOne(c => c.Endereco);
 
@@ -54,7 +72,6 @@ namespace TimDoLele.Infrastructure.Data
                 .WithMany(a => a.ProdutosAdicionais)
                 .HasForeignKey(pa => pa.AdicionalId);
 
-
             modelBuilder.Entity<ItemPedidoAdicional>()
                 .HasOne(ipa => ipa.ItemPedido)
                 .WithMany(ip => ip.Adicionais)
@@ -68,6 +85,21 @@ namespace TimDoLele.Infrastructure.Data
             modelBuilder.Entity<Pedido>()
                 .Property(p => p.StatusImpressao)
                 .HasConversion<int>();
+
+            modelBuilder.Entity<ConfiguracaoLoja>()
+                .Property(c => c.TaxaEntregaPadrao)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<HorarioFuncionamento>()
+                .Property(h => h.DiaSemana)
+                .HasConversion<int>();
+
+            modelBuilder.Entity<DataEspecial>()
+                .Property(d => d.Tipo)
+                .HasConversion<int>();
+
+            modelBuilder.Entity<DataEspecial>()
+                .HasIndex(d => d.Data);
 
             base.OnModelCreating(modelBuilder);
         }
