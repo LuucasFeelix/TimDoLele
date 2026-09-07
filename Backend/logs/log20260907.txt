@@ -1,0 +1,713 @@
+2026-09-07 17:01:55.423 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-07 17:01:55.986 -03:00 [INF] Now listening on: https://localhost:57668
+2026-09-07 17:01:55.987 -03:00 [INF] Now listening on: http://localhost:57669
+2026-09-07 17:01:56.151 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-07 17:01:56.153 -03:00 [INF] Hosting environment: Development
+2026-09-07 17:01:56.154 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-09-07 17:02:13.010 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-07 17:02:13.445 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 462.9031ms
+2026-09-07 17:02:13.455 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-07 17:02:13.457 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-07 17:02:13.463 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-07 17:02:13.500 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 45.7973ms
+2026-09-07 17:02:13.500 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 46.2653ms
+2026-09-07 17:02:13.560 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 103.8086ms
+2026-09-07 17:02:13.725 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-07 17:02:13.778 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 53.1211ms
+2026-09-07 17:09:39.856 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 52
+2026-09-07 17:09:39.865 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:09:39.867 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:09:41.419 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-07 17:09:41.457 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-07 17:09:43.112 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.116 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.118 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.120 -03:00 [WRN] No store type was specified for the decimal property 'TrocoPara' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.121 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Adicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.123 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.124 -03:00 [WRN] No store type was specified for the decimal property 'ValorUnitario' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.126 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'ItemPedidoAdicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.127 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.129 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.131 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:43.133 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:09:45.202 -03:00 [INF] Executed DbCommand (135ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-07 17:09:46.015 -03:00 [INF] Executed DbCommand (9ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-07 17:09:46.039 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-07 17:09:46.048 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 4584.8678ms
+2026-09-07 17:09:46.051 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-07 17:09:46.060 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 6204.7984ms
+2026-09-07 17:10:53.864 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:10:53.921 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:10:53'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:10:53.958 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:10:53'.
+2026-09-07 17:10:53.969 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:10:53.978 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:10:53.979 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 115.9035ms
+2026-09-07 17:11:20.316 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:11:20.322 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:20'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:11:20.348 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:20'.
+2026-09-07 17:11:20.352 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:11:20.353 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:11:20.354 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 38.8149ms
+2026-09-07 17:11:22.270 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:11:22.274 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:22'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:11:22.278 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:22'.
+2026-09-07 17:11:22.281 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:11:22.282 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:11:22.284 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 13.2318ms
+2026-09-07 17:11:22.871 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:11:22.874 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:22'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:11:22.877 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:22'.
+2026-09-07 17:11:22.894 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:11:22.895 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:11:22.899 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 28.546ms
+2026-09-07 17:11:46.776 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:11:46.782 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:46'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:11:46.787 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:46'.
+2026-09-07 17:11:46.790 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:11:46.792 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:11:46.794 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 18.3979ms
+2026-09-07 17:11:48.652 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:11:48.657 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:48'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:11:48.660 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:11:48'.
+2026-09-07 17:11:48.683 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:11:48.684 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:11:48.685 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 33.0927ms
+2026-09-07 17:12:13.933 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:12:13.957 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenMalformedException: IDX14100: JWT is not well formed, there are no dots (.).
+The token needs to be in JWS or JWE Compact Serialization Format. (JWS): 'EncodedHeader.EndcodedPayload.EncodedSignature'. (JWE): 'EncodedProtectedHeader.EncodedEncryptedKey.EncodedInitializationVector.EncodedCiphertext.EncodedAuthenticationTag'.
+ ---> System.ArgumentException: IDX14102: Unable to decode the header '[PII of type 'Microsoft.IdentityModel.Logging.SecurityArtifact' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]' as Base64Url encoded string.
+ ---> System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'IDX10820: Invalid character found in Base64UrlEncoding. Character: '32', Encoding: '[PII of type 'System.String' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]'.')
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoding.Decode(String input, Int32 offset, Int32 length, Byte[] output)
+   at Microsoft.IdentityModel.Tokens.Base64UrlEncoding.Decode[T](String input, Int32 offset, Int32 length, Func`3 action)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.CreateClaimSet(String rawString, Int32 startIndex, Int32 length, Func`3 action)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(String encodedJson)
+   --- End of inner exception stack trace ---
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(String encodedJson)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken..ctor(String jwtEncodedString)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ReadToken(String token, TokenValidationParameters validationParameters)
+   --- End of inner exception stack trace ---
+2026-09-07 17:12:13.972 -03:00 [INF] Bearer was not authenticated. Failure message: IDX14100: JWT is not well formed, there are no dots (.).
+The token needs to be in JWS or JWE Compact Serialization Format. (JWS): 'EncodedHeader.EndcodedPayload.EncodedSignature'. (JWE): 'EncodedProtectedHeader.EncodedEncryptedKey.EncodedInitializationVector.EncodedCiphertext.EncodedAuthenticationTag'.
+2026-09-07 17:12:13.973 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:12:13.974 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:12:13.975 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 41.8993ms
+2026-09-07 17:12:34.933 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:12:34.936 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:12:34'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:12:34.943 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:12:34'.
+2026-09-07 17:12:34.947 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:12:34.948 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:12:34.950 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 17.2132ms
+2026-09-07 17:13:58.921 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/refresh - application/json 112
+2026-09-07 17:13:58.927 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:13:58.928 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:13:58.931 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:13:58'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:13:58.937 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:13:58'.
+2026-09-07 17:13:58.941 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-07 17:13:58.948 -03:00 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-07 17:13:59.448 -03:00 [INF] Executed DbCommand (11ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-07 17:13:59.458 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-07 17:13:59.461 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-07 17:13:59.462 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele) in 512.2738ms
+2026-09-07 17:13:59.464 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-07 17:13:59.466 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/refresh - 200 null application/json; charset=utf-8 545.8187ms
+2026-09-07 17:14:04.021 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:14:04.025 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:14:04'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:14:04.038 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:14:04'.
+2026-09-07 17:14:04.041 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:14:04.043 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:14:04.048 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 27.6925ms
+2026-09-07 17:14:05.875 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:14:05.879 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:14:05'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-07 17:14:05.888 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '07/09/2026 20:10:45', Current time (UTC): '07/09/2026 20:14:05'.
+2026-09-07 17:14:05.891 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:14:05.893 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:14:05.894 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 401 0 null 19.4834ms
+2026-09-07 17:14:20.148 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-07 17:14:20.160 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 12.723ms
+2026-09-07 17:14:20.185 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-07 17:14:20.189 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-07 17:14:20.196 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 11.2302ms
+2026-09-07 17:14:20.189 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-07 17:14:20.201 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 12.1906ms
+2026-09-07 17:14:20.216 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 26.8899ms
+2026-09-07 17:14:20.392 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-07 17:14:20.450 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 57.6876ms
+2026-09-07 17:14:39.986 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 52
+2026-09-07 17:14:39.990 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:14:39.991 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:14:39.992 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-07 17:14:39.995 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-07 17:14:40.030 -03:00 [INF] Executed DbCommand (11ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-07 17:14:40.363 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-07 17:14:40.366 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-07 17:14:40.369 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 369.8159ms
+2026-09-07 17:14:40.371 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-07 17:14:40.374 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 388.0288ms
+2026-09-07 17:15:05.898 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:15:05.929 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.ObterConfiguracao (TimDoLele)'
+2026-09-07 17:15:05.936 -03:00 [INF] Route matched with {action = "ObterConfiguracao", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterConfiguracao() on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:15:05.957 -03:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-09-07 17:15:05.971 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-07 17:15:06.063 -03:00 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Precision = 10) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ConfiguracoesLoja] ([Id], [FechadaManual], [MotivoFechamentoManual], [PrazoEntregaMax], [PrazoEntregaMin], [PrazoRetiradaMax], [PrazoRetiradaMin], [TaxaEntregaPadrao])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2026-09-07 17:15:06.070 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.ConfiguracaoLojaDto'.
+2026-09-07 17:15:06.118 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.ObterConfiguracao (TimDoLele) in 180.2571ms
+2026-09-07 17:15:06.122 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.ObterConfiguracao (TimDoLele)'
+2026-09-07 17:15:06.123 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 200 null application/json; charset=utf-8 226.0966ms
+2026-09-07 17:17:52.525 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-07 17:17:53.398 -03:00 [INF] Now listening on: https://localhost:57668
+2026-09-07 17:17:53.400 -03:00 [INF] Now listening on: http://localhost:57669
+2026-09-07 17:17:53.565 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-07 17:17:53.566 -03:00 [INF] Hosting environment: Development
+2026-09-07 17:17:53.567 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-09-07 17:17:55.433 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-07 17:17:55.694 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 264.6299ms
+2026-09-07 17:17:55.701 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-07 17:17:55.701 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-07 17:17:55.701 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-07 17:17:55.711 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 10.2615ms
+2026-09-07 17:17:55.723 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 21.9621ms
+2026-09-07 17:17:55.791 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 90.2287ms
+2026-09-07 17:17:55.890 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-07 17:17:56.025 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 134.3849ms
+2026-09-07 17:18:20.338 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 52
+2026-09-07 17:18:20.349 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:18:20.351 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:18:20.399 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-07 17:18:20.434 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-07 17:18:21.435 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.438 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.440 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.442 -03:00 [WRN] No store type was specified for the decimal property 'TrocoPara' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.443 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Adicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.445 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.447 -03:00 [WRN] No store type was specified for the decimal property 'ValorUnitario' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.448 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'ItemPedidoAdicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.450 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.451 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.453 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:21.456 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:18:22.365 -03:00 [INF] Executed DbCommand (49ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-07 17:18:23.115 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-07 17:18:23.138 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-07 17:18:23.256 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 2811.8538ms
+2026-09-07 17:18:23.272 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-07 17:18:23.283 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 2945.1546ms
+2026-09-07 17:18:42.515 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes - null null
+2026-09-07 17:18:42.587 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.ObterConfiguracao (TimDoLele)'
+2026-09-07 17:18:42.594 -03:00 [INF] Route matched with {action = "ObterConfiguracao", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterConfiguracao() on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:18:42.672 -03:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-09-07 17:18:42.682 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-07 17:18:42.715 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.ConfiguracaoLojaDto'.
+2026-09-07 17:18:42.738 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.ObterConfiguracao (TimDoLele) in 141.0698ms
+2026-09-07 17:18:42.740 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.ObterConfiguracao (TimDoLele)'
+2026-09-07 17:18:42.742 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes - 200 null application/json; charset=utf-8 226.8291ms
+2026-09-07 17:21:44.436 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes/horarios - null null
+2026-09-07 17:21:44.449 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.ObterHorarios (TimDoLele)'
+2026-09-07 17:21:44.469 -03:00 [INF] Route matched with {action = "ObterHorarios", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterHorarios() on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:21:44.960 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [HorariosFuncionamento] AS [h]
+2026-09-07 17:21:45.049 -03:00 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Boolean), @p2='?' (DbType = Int32), @p3='?' (DbType = Time), @p4='?' (DbType = Time), @p5='?' (DbType = Guid), @p6='?' (DbType = Boolean), @p7='?' (DbType = Int32), @p8='?' (DbType = Time), @p9='?' (DbType = Time), @p10='?' (DbType = Guid), @p11='?' (DbType = Boolean), @p12='?' (DbType = Int32), @p13='?' (DbType = Time), @p14='?' (DbType = Time), @p15='?' (DbType = Guid), @p16='?' (DbType = Boolean), @p17='?' (DbType = Int32), @p18='?' (DbType = Time), @p19='?' (DbType = Time), @p20='?' (DbType = Guid), @p21='?' (DbType = Boolean), @p22='?' (DbType = Int32), @p23='?' (DbType = Time), @p24='?' (DbType = Time), @p25='?' (DbType = Guid), @p26='?' (DbType = Boolean), @p27='?' (DbType = Int32), @p28='?' (DbType = Time), @p29='?' (DbType = Time), @p30='?' (DbType = Guid), @p31='?' (DbType = Boolean), @p32='?' (DbType = Int32), @p33='?' (DbType = Time), @p34='?' (DbType = Time)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [HorariosFuncionamento] ([Id], [Aberto], [DiaSemana], [HoraAbertura], [HoraFechamento])
+VALUES (@p0, @p1, @p2, @p3, @p4),
+(@p5, @p6, @p7, @p8, @p9),
+(@p10, @p11, @p12, @p13, @p14),
+(@p15, @p16, @p17, @p18, @p19),
+(@p20, @p21, @p22, @p23, @p24),
+(@p25, @p26, @p27, @p28, @p29),
+(@p30, @p31, @p32, @p33, @p34);
+2026-09-07 17:21:45.083 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+ORDER BY [h].[DiaSemana]
+2026-09-07 17:21:45.089 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLeLe.Application.DTOs.HorarioFuncionamentoDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-07 17:21:45.094 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.ObterHorarios (TimDoLele) in 622.8968ms
+2026-09-07 17:21:45.097 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.ObterHorarios (TimDoLele)'
+2026-09-07 17:21:45.098 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes/horarios - 200 null application/json; charset=utf-8 662.172ms
+2026-09-07 17:23:50.943 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes - application/json 133
+2026-09-07 17:23:50.947 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:23:50.948 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:23:50.971 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarConfiguracao (TimDoLele)'
+2026-09-07 17:23:50.978 -03:00 [INF] Route matched with {action = "AtualizarConfiguracao", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarConfiguracao(TimDoLeLe.Application.DTOs.AtualizarConfiguracaoLojaDto) on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:23:51.001 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-07 17:23:51.023 -03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (Precision = 10) (Scale = 2) (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ConfiguracoesLoja] SET [PrazoEntregaMin] = @p0, [TaxaEntregaPadrao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-07 17:23:51.027 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.ConfiguracaoLojaDto'.
+2026-09-07 17:23:51.028 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.AtualizarConfiguracao (TimDoLele) in 46.1046ms
+2026-09-07 17:23:51.035 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarConfiguracao (TimDoLele)'
+2026-09-07 17:23:51.040 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes - 200 null application/json; charset=utf-8 96.4087ms
+2026-09-07 17:27:59.500 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - application/json 758
+2026-09-07 17:27:59.506 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:27:59.507 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:27:59.509 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele)'
+2026-09-07 17:27:59.514 -03:00 [INF] Route matched with {action = "AtualizarHorarios", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarHorarios(System.Collections.Generic.List`1[TimDoLeLe.Application.DTOs.AtualizarHorarioFuncionamentoDto]) on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:27:59.560 -03:00 [INF] Executed DbCommand (7ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-07 17:27:59.567 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-07 17:27:59.570 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-07 17:27:59.574 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-07 17:27:59.577 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-07 17:27:59.581 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-07 17:27:59.583 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-07 17:28:00.017 -03:00 [INF] Executed DbCommand (19ms) [Parameters=[@p3='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p1='?' (DbType = Time), @p2='?' (DbType = Time), @p7='?' (DbType = Guid), @p4='?' (DbType = Boolean), @p5='?' (DbType = Time), @p6='?' (DbType = Time), @p11='?' (DbType = Guid), @p8='?' (DbType = Boolean), @p9='?' (DbType = Time), @p10='?' (DbType = Time), @p15='?' (DbType = Guid), @p12='?' (DbType = Boolean), @p13='?' (DbType = Time), @p14='?' (DbType = Time), @p19='?' (DbType = Guid), @p16='?' (DbType = Boolean), @p17='?' (DbType = Time), @p18='?' (DbType = Time), @p23='?' (DbType = Guid), @p20='?' (DbType = Boolean), @p21='?' (DbType = Time), @p22='?' (DbType = Time), @p27='?' (DbType = Guid), @p24='?' (DbType = Boolean), @p25='?' (DbType = Time), @p26='?' (DbType = Time)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [HorariosFuncionamento] SET [Aberto] = @p0, [HoraAbertura] = @p1, [HoraFechamento] = @p2
+OUTPUT 1
+WHERE [Id] = @p3;
+UPDATE [HorariosFuncionamento] SET [Aberto] = @p4, [HoraAbertura] = @p5, [HoraFechamento] = @p6
+OUTPUT 1
+WHERE [Id] = @p7;
+UPDATE [HorariosFuncionamento] SET [Aberto] = @p8, [HoraAbertura] = @p9, [HoraFechamento] = @p10
+OUTPUT 1
+WHERE [Id] = @p11;
+UPDATE [HorariosFuncionamento] SET [Aberto] = @p12, [HoraAbertura] = @p13, [HoraFechamento] = @p14
+OUTPUT 1
+WHERE [Id] = @p15;
+UPDATE [HorariosFuncionamento] SET [Aberto] = @p16, [HoraAbertura] = @p17, [HoraFechamento] = @p18
+OUTPUT 1
+WHERE [Id] = @p19;
+UPDATE [HorariosFuncionamento] SET [Aberto] = @p20, [HoraAbertura] = @p21, [HoraFechamento] = @p22
+OUTPUT 1
+WHERE [Id] = @p23;
+UPDATE [HorariosFuncionamento] SET [Aberto] = @p24, [HoraAbertura] = @p25, [HoraFechamento] = @p26
+OUTPUT 1
+WHERE [Id] = @p27;
+2026-09-07 17:28:00.038 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [HorariosFuncionamento] AS [h]
+2026-09-07 17:28:00.044 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+ORDER BY [h].[DiaSemana]
+2026-09-07 17:28:00.047 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLeLe.Application.DTOs.HorarioFuncionamentoDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-07 17:28:00.049 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele) in 532.3286ms
+2026-09-07 17:28:00.051 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele)'
+2026-09-07 17:28:00.052 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - 200 null application/json; charset=utf-8 552.865ms
+2026-09-07 17:34:02.761 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes/fechar-manualmente?motivo=Problema%20na%20cozinha - null 0
+2026-09-07 17:34:02.765 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:34:02.766 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:34:02.768 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.FecharLojaManualmente (TimDoLele)'
+2026-09-07 17:34:02.776 -03:00 [INF] Route matched with {action = "FecharLojaManualmente", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] FecharLojaManualmente(System.String) on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:34:02.795 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-07 17:34:02.802 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ConfiguracoesLoja] SET [FechadaManual] = @p0, [MotivoFechamentoManual] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-07 17:34:02.805 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.ConfiguracaoLojaDto'.
+2026-09-07 17:34:02.807 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.FecharLojaManualmente (TimDoLele) in 25.3891ms
+2026-09-07 17:34:02.809 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.FecharLojaManualmente (TimDoLele)'
+2026-09-07 17:34:02.810 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes/fechar-manualmente?motivo=Problema%20na%20cozinha - 200 null application/json; charset=utf-8 49.5768ms
+2026-09-07 17:34:35.399 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes/abrir-manualmente - null 0
+2026-09-07 17:34:35.403 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:34:35.405 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:34:35.406 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AbrirLojaManualmente (TimDoLele)'
+2026-09-07 17:34:35.430 -03:00 [INF] Route matched with {action = "AbrirLojaManualmente", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AbrirLojaManualmente() on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:34:35.441 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-07 17:34:35.447 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ConfiguracoesLoja] SET [FechadaManual] = @p0, [MotivoFechamentoManual] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-07 17:34:35.450 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.ConfiguracaoLojaDto'.
+2026-09-07 17:34:35.452 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.AbrirLojaManualmente (TimDoLele) in 14.5306ms
+2026-09-07 17:34:35.454 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AbrirLojaManualmente (TimDoLele)'
+2026-09-07 17:34:35.455 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes/abrir-manualmente - 200 null application/json; charset=utf-8 56.4973ms
+2026-09-07 17:36:54.569 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/configuracoes/datas-especiais - application/json 117
+2026-09-07 17:36:54.574 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:36:54.575 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:36:54.577 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.CriarDataEspecial (TimDoLele)'
+2026-09-07 17:36:54.582 -03:00 [INF] Route matched with {action = "CriarDataEspecial", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CriarDataEspecial(TimDoLeLe.Application.DTOs.CriarDataEspecialDto) on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:36:55.051 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__dto_Data_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [DatasEspeciais] AS [d]
+        WHERE CONVERT(date, [d].[Data]) = @__dto_Data_Date_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-09-07 17:36:55.093 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (Size = 4000), @p3='?' (DbType = Time), @p4='?' (DbType = Time), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [DatasEspeciais] ([Id], [Data], [Descricao], [HoraAbertura], [HoraFechamento], [Tipo])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-09-07 17:36:55.099 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.DataEspecialDto'.
+2026-09-07 17:36:55.107 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.CriarDataEspecial (TimDoLele) in 521.4459ms
+2026-09-07 17:36:55.108 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.CriarDataEspecial (TimDoLele)'
+2026-09-07 17:36:55.109 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/configuracoes/datas-especiais - 200 null application/json; charset=utf-8 540.1466ms
+2026-09-07 17:37:08.358 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/configuracoes/datas-especiais - null null
+2026-09-07 17:37:08.362 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.ObterDatasEspeciais (TimDoLele)'
+2026-09-07 17:37:08.366 -03:00 [INF] Route matched with {action = "ObterDatasEspeciais", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterDatasEspeciais() on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:37:08.385 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+ORDER BY [d].[Data]
+2026-09-07 17:37:08.388 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLeLe.Application.DTOs.DataEspecialDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-07 17:37:08.390 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.ObterDatasEspeciais (TimDoLele) in 15.295ms
+2026-09-07 17:37:08.391 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.ObterDatasEspeciais (TimDoLele)'
+2026-09-07 17:37:08.392 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/configuracoes/datas-especiais - 200 null application/json; charset=utf-8 34.426ms
+2026-09-07 17:38:34.573 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/configuracoes/datas-especiais - application/json 130
+2026-09-07 17:38:34.577 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:38:34.578 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:38:34.580 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.CriarDataEspecial (TimDoLele)'
+2026-09-07 17:38:34.581 -03:00 [INF] Route matched with {action = "CriarDataEspecial", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CriarDataEspecial(TimDoLeLe.Application.DTOs.CriarDataEspecialDto) on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:38:34.594 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__dto_Data_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [DatasEspeciais] AS [d]
+        WHERE CONVERT(date, [d].[Data]) = @__dto_Data_Date_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-09-07 17:38:34.602 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (Size = 4000), @p3='?' (DbType = Time), @p4='?' (DbType = Time), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [DatasEspeciais] ([Id], [Data], [Descricao], [HoraAbertura], [HoraFechamento], [Tipo])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-09-07 17:38:34.606 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.DataEspecialDto'.
+2026-09-07 17:38:34.607 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.CriarDataEspecial (TimDoLele) in 23.3474ms
+2026-09-07 17:38:34.608 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.CriarDataEspecial (TimDoLele)'
+2026-09-07 17:38:34.609 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/configuracoes/datas-especiais - 200 null application/json; charset=utf-8 37.4366ms
+2026-09-07 17:48:21.262 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-07 17:48:21.742 -03:00 [INF] Now listening on: https://localhost:57668
+2026-09-07 17:48:21.744 -03:00 [INF] Now listening on: http://localhost:57669
+2026-09-07 17:48:21.889 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-07 17:48:21.899 -03:00 [INF] Hosting environment: Development
+2026-09-07 17:48:21.930 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-09-07 17:48:23.003 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-07 17:48:23.325 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 342.461ms
+2026-09-07 17:48:23.361 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-07 17:48:23.441 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-07 17:48:23.369 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-07 17:48:23.448 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 87.2971ms
+2026-09-07 17:48:23.457 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 88.0436ms
+2026-09-07 17:48:23.591 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 151.0428ms
+2026-09-07 17:48:23.644 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-07 17:48:23.718 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 73.5766ms
+2026-09-07 17:48:40.301 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/loja/status - null null
+2026-09-07 17:48:40.370 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-07 17:48:40.399 -03:00 [INF] Route matched with {action = "ObterStatus", controller = "Loja"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterStatus() on controller TimDoLeLe.Controllers.LojaController (TimDoLele).
+2026-09-07 17:48:41.984 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:41.986 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:41.987 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:41.988 -03:00 [WRN] No store type was specified for the decimal property 'TrocoPara' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:41.991 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Adicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:41.992 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:41.994 -03:00 [WRN] No store type was specified for the decimal property 'ValorUnitario' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:41.995 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'ItemPedidoAdicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:41.996 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:41.998 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:42.000 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:42.002 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-07 17:48:42.359 -03:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-09-07 17:48:42.793 -03:00 [INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-07 17:48:42.963 -03:00 [INF] Executed DbCommand (23ms) [Parameters=[@__agora_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__agora_Date_0
+2026-09-07 17:48:42.981 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__ontem_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__ontem_Date_0
+2026-09-07 17:48:42.996 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__ontem_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__ontem_DayOfWeek_0
+2026-09-07 17:48:43.025 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__agora_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__agora_DayOfWeek_0
+2026-09-07 17:48:43.039 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__data_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__data_Date_0
+2026-09-07 17:48:43.050 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__data_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__data_DayOfWeek_0
+2026-09-07 17:48:43.069 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.StatusLojaDto'.
+2026-09-07 17:48:43.089 -03:00 [INF] Executed action TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele) in 2684.9502ms
+2026-09-07 17:48:43.092 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-07 17:48:43.103 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/loja/status - 200 null application/json; charset=utf-8 2802.9058ms
+2026-09-07 17:52:41.696 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - application/json 110
+2026-09-07 17:52:41.705 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:52:41.707 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:52:41.718 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-07 17:52:41.725 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-07 17:52:41.727 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - 401 0 null 31.6148ms
+2026-09-07 17:53:02.916 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 52
+2026-09-07 17:53:02.922 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:53:02.924 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:53:02.929 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-07 17:53:02.944 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-07 17:53:03.100 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-07 17:53:03.762 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-07 17:53:03.779 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-07 17:53:03.782 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 833.4481ms
+2026-09-07 17:53:03.784 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-07 17:53:03.785 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 869.0722ms
+2026-09-07 17:53:17.208 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - application/json 110
+2026-09-07 17:53:17.213 -03:00 [INF] CORS policy execution failed.
+2026-09-07 17:53:17.214 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-07 17:53:17.263 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele)'
+2026-09-07 17:53:17.269 -03:00 [INF] Route matched with {action = "AtualizarHorarios", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarHorarios(System.Collections.Generic.List`1[TimDoLeLe.Application.DTOs.AtualizarHorarioFuncionamentoDto]) on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-07 17:53:17.312 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-07 17:53:17.329 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Time), @p1='?' (DbType = Time)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [HorariosFuncionamento] SET [HoraAbertura] = @p0, [HoraFechamento] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-07 17:53:17.383 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [HorariosFuncionamento] AS [h]
+2026-09-07 17:53:17.399 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+ORDER BY [h].[DiaSemana]
+2026-09-07 17:53:17.405 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLeLe.Application.DTOs.HorarioFuncionamentoDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-07 17:53:17.415 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele) in 143.5492ms
+2026-09-07 17:53:17.417 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele)'
+2026-09-07 17:53:17.419 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - 200 null application/json; charset=utf-8 210.6783ms
+2026-09-07 17:53:28.791 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/loja/status - null null
+2026-09-07 17:53:28.795 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-07 17:53:28.796 -03:00 [INF] Route matched with {action = "ObterStatus", controller = "Loja"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterStatus() on controller TimDoLeLe.Controllers.LojaController (TimDoLele).
+2026-09-07 17:53:28.805 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-07 17:53:28.814 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__agora_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__agora_Date_0
+2026-09-07 17:53:28.820 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__ontem_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__ontem_Date_0
+2026-09-07 17:53:28.824 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__ontem_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__ontem_DayOfWeek_0
+2026-09-07 17:53:28.828 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__agora_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__agora_DayOfWeek_0
+2026-09-07 17:53:28.834 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__data_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__data_Date_0
+2026-09-07 17:53:28.838 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__data_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__data_DayOfWeek_0
+2026-09-07 17:53:28.840 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.StatusLojaDto'.
+2026-09-07 17:53:28.842 -03:00 [INF] Executed action TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele) in 43.5272ms
+2026-09-07 17:53:28.844 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-07 17:53:28.846 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/loja/status - 200 null application/json; charset=utf-8 55.4223ms
+2026-09-07 17:54:04.036 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/loja/status - null null
+2026-09-07 17:54:04.039 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-07 17:54:04.040 -03:00 [INF] Route matched with {action = "ObterStatus", controller = "Loja"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterStatus() on controller TimDoLeLe.Controllers.LojaController (TimDoLele).
+2026-09-07 17:54:04.050 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-07 17:54:04.054 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__agora_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__agora_Date_0
+2026-09-07 17:54:04.060 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__ontem_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__ontem_Date_0
+2026-09-07 17:54:04.064 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__ontem_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__ontem_DayOfWeek_0
+2026-09-07 17:54:04.067 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__agora_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__agora_DayOfWeek_0
+2026-09-07 17:54:04.070 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.StatusLojaDto'.
+2026-09-07 17:54:04.072 -03:00 [INF] Executed action TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele) in 30.2072ms
+2026-09-07 17:54:04.074 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-07 17:54:04.075 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/loja/status - 200 null application/json; charset=utf-8 38.9236ms
+2026-09-07 17:55:13.836 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/loja/status - null null
+2026-09-07 17:55:13.839 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-07 17:55:13.840 -03:00 [INF] Route matched with {action = "ObterStatus", controller = "Loja"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterStatus() on controller TimDoLeLe.Controllers.LojaController (TimDoLele).
+2026-09-07 17:55:13.876 -03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-07 17:55:13.884 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__agora_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__agora_Date_0
+2026-09-07 17:55:13.889 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__ontem_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__ontem_Date_0
+2026-09-07 17:55:13.897 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__ontem_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__ontem_DayOfWeek_0
+2026-09-07 17:55:13.902 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__agora_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__agora_DayOfWeek_0
+2026-09-07 17:55:13.918 -03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__data_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__data_Date_0
+2026-09-07 17:55:13.925 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__data_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__data_DayOfWeek_0
+2026-09-07 17:55:13.928 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__data_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__data_Date_0
+2026-09-07 17:55:13.933 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__data_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__data_DayOfWeek_0
+2026-09-07 17:55:13.936 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.StatusLojaDto'.
+2026-09-07 17:55:13.938 -03:00 [INF] Executed action TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele) in 69.8212ms
+2026-09-07 17:55:13.939 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-07 17:55:13.941 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/loja/status - 200 null application/json; charset=utf-8 105.0116ms

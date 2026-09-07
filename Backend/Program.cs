@@ -176,6 +176,9 @@ namespace TimDoLeLe
                 builder.Services
                     .AddScoped<ConfiguracaoLojaService>();
 
+                builder.Services
+                    .AddScoped<StatusLojaService>();
+
 
                 builder.Services
                     .AddDbContext<TimDoLeleDbContext>(
