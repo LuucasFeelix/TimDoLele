@@ -3179,3 +3179,17 @@ WHERE [h].[DiaSemana] = @__agora_DayOfWeek_0
 2026-09-09 21:10:49.526 -03:00 [INF] Executed action TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele) in 33.2534ms
 2026-09-09 21:10:49.528 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
 2026-09-09 21:10:49.530 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/loja/status - 200 null application/json; charset=utf-8 71.5569ms
+2026-09-09 21:47:35.477 -03:00 [INF] Executed endpoint '/hubs/notificacoes'
+2026-09-09 21:47:35.482 -03:00 [INF] Request finished HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=ZpAthnqFxuUB_29vb_mxsg - 200 null null 2231775.0732ms
+2026-09-09 21:47:35.486 -03:00 [INF] Connection id "0HNOEN3DMSKA0", Request id "0HNOEN3DMSKA0:0000000B": the application completed without reading the entire request body.
+2026-09-09 23:39:52.631 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-09-09 23:39:52.636 -03:00 [INF] CORS policy execution successful.
+2026-09-09 23:39:52.637 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 6.2221ms
+2026-09-09 23:39:52.648 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-09-09 23:39:52.652 -03:00 [INF] CORS policy execution successful.
+2026-09-09 23:39:52.652 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-09-09 23:39:52.700 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-09-09 23:39:52.742 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 94.0854ms
+2026-09-09 23:39:53.069 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=i8ujbGSBv6FqRuK_ULZlWg - null null
+2026-09-09 23:39:53.072 -03:00 [INF] CORS policy execution successful.
+2026-09-09 23:39:53.073 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
