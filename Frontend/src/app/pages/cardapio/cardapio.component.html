@@ -1,6 +1,7 @@
 <div class="cardapio-mobile">
 
   <header class="topbar">
+
     <div class="back-icon">
       ←
     </div>
@@ -13,81 +14,427 @@
     <button
       class="cart-icon"
       (click)="irCheckout()"
+      [disabled]="!lojaAberta"
     >
       🛒
-      <span>{{ quantidadeTotalCarrinho() }}</span>
+
+      <span>
+        {{ quantidadeTotalCarrinho() }}
+      </span>
     </button>
+
   </header>
 
-  <section class="categorias-scroll">
+
+  <div
+    *ngIf="carregando"
+    class="loja-loading"
+  >
+    Carregando cardápio...
+  </div>
+
+
+  <div
+    *ngIf="erroCarregamento"
+    class="loja-error"
+  >
+
+    <strong>
+      Não foi possível carregar o cardápio.
+    </strong>
+
+    <button
+      type="button"
+      (click)="carregarPagina()"
+    >
+      Tentar novamente
+    </button>
+
+  </div>
+
+
+  <section
+    *ngIf="
+      !carregando &&
+      !erroCarregamento &&
+      statusLoja
+    "
+    class="status-loja"
+    [class.aberta]="lojaAberta"
+    [class.fechada]="!lojaAberta"
+  >
+
+    <div class="status-loja-icon">
+
+      <span *ngIf="lojaAberta">
+        🟢
+      </span>
+
+      <span *ngIf="!lojaAberta">
+        🔴
+      </span>
+
+    </div>
+
+    <div class="status-loja-info">
+
+      <strong>
+        {{
+          lojaAberta
+            ? 'Loja aberta'
+            : 'Loja fechada'
+        }}
+      </strong>
+
+      <span>
+        {{ statusLoja.mensagem }}
+      </span>
+
+      <small
+        *ngIf="
+          !lojaAberta &&
+          statusLoja.motivo
+        "
+      >
+        {{ statusLoja.motivo }}
+      </small>
+
+      <small
+        *ngIf="
+          !lojaAberta &&
+          statusLoja.proximaAbertura
+        "
+      >
+        Próxima abertura:
+        {{ statusLoja.proximaAbertura }}
+      </small>
+
+      <small
+        *ngIf="
+          lojaAberta &&
+          statusLoja.horaFechamento
+        "
+      >
+        Pedidos até
+        {{ statusLoja.horaFechamento }}
+      </small>
+
+    </div>
+
+  </section>
+
+
+  <section
+    *ngIf="mostrarAvisoDiscreto"
+    class="closing-warning warning-light"
+  >
+
+    <span class="closing-warning-icon">
+      🕐
+    </span>
+
+    <div>
+
+      <strong>
+        A loja fecha em
+        {{ minutosParaFechar }}
+        minutos.
+      </strong>
+
+      <span>
+        Finalize seu pedido em breve.
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <section
+    *ngIf="mostrarAvisoDestacado"
+    class="closing-warning warning-strong"
+  >
+
+    <span class="closing-warning-icon">
+      ⏰
+    </span>
+
+    <div>
+
+      <strong>
+        A loja fecha em
+        {{ minutosParaFechar }}
+        minutos!
+      </strong>
+
+      <span>
+        Finalize seu pedido antes do encerramento.
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <section
+    *ngIf="
+      !carregando &&
+      !erroCarregamento
+    "
+    class="categorias-scroll"
+  >
+
     <button
       *ngFor="let categoria of categorias"
-      [class.active]="categoriaSelecionada === categoria"
-      (click)="selecionarCategoria(categoria)"
+      [class.active]="
+        categoriaSelecionada === categoria
+      "
+      (click)="
+        selecionarCategoria(
+          categoria
+        )
+      "
     >
       {{ categoria }}
     </button>
+
   </section>
 
-  <main class="produtos-lista">
 
-    <ng-container *ngFor="let cat of cardapioFiltrado">
+  <main
+    *ngIf="
+      !carregando &&
+      !erroCarregamento
+    "
+    class="produtos-lista"
+  >
+
+    <ng-container
+      *ngFor="
+        let cat of cardapioFiltrado
+      "
+    >
 
       <h2 class="categoria-title">
         {{ cat.categoria }}
       </h2>
 
       <div
-        *ngFor="let p of cat.produtos"
+        *ngFor="
+          let p of cat.produtos
+        "
         class="produto-card"
+        [class.produto-bloqueado]="
+          !lojaAberta
+        "
       >
+
         <div class="produto-foto">
           🍔
         </div>
 
         <div class="produto-info">
-          <h3>{{ p.nome }}</h3>
+
+          <h3>
+            {{ p.nome }}
+          </h3>
 
           <p>
-            {{ p.descricao || 'Lanche artesanal preparado com ingredientes selecionados.' }}
+            {{
+              p.descricao ||
+              'Lanche artesanal preparado com ingredientes selecionados.'
+            }}
           </p>
 
           <strong>
             R$ {{ p.preco }}
           </strong>
+
         </div>
 
         <button
           class="add-button"
+          [disabled]="!lojaAberta"
           (click)="abrirProduto(p)"
         >
-          +
+
+          <span *ngIf="lojaAberta">
+            +
+          </span>
+
+          <span *ngIf="!lojaAberta">
+            🔒
+          </span>
+
         </button>
+
       </div>
 
     </ng-container>
 
   </main>
 
+
   <footer
     class="cart-footer"
-    *ngIf="carrinho.length > 0"
+    *ngIf="
+      carrinho.length > 0 &&
+      !carregando
+    "
   >
+
     <div>
-      <span>{{ quantidadeTotalCarrinho() }} item(ns)</span>
-      <strong>R$ {{ calcularTotal() }}</strong>
+
+      <span>
+        {{ quantidadeTotalCarrinho() }}
+        item(ns)
+      </span>
+
+      <strong>
+        R$ {{ calcularTotal() }}
+      </strong>
+
     </div>
 
-    <button (click)="irCheckout()">
-      Ver carrinho
+    <button
+      (click)="irCheckout()"
+      [disabled]="!lojaAberta"
+    >
+
+      {{
+        lojaAberta
+          ? 'Ver carrinho'
+          : 'Loja fechada'
+      }}
+
     </button>
+
   </footer>
 
 </div>
 
+
+<div
+  *ngIf="popupFechamentoVisivel"
+  class="closing-modal-overlay"
+>
+
+  <div class="closing-modal">
+
+    <button
+      type="button"
+      class="closing-modal-close"
+      (click)="fecharPopupFechamento()"
+    >
+      ×
+    </button>
+
+    <div class="closing-modal-icon warning">
+      ⏰
+    </div>
+
+    <h2>
+      A loja fecha em
+      {{ minutosParaFechar }}
+      minuto{{
+        minutosParaFechar === 1
+          ? ''
+          : 's'
+      }}!
+    </h2>
+
+    <p>
+      Finalize seu pedido antes do
+      encerramento do atendimento.
+    </p>
+
+    <button
+      type="button"
+      class="closing-modal-button warning"
+      (click)="fecharPopupFechamento()"
+    >
+      Entendi
+    </button>
+
+  </div>
+
+</div>
+
+
+<div
+  *ngIf="popupLojaFechadaVisivel"
+  class="closing-modal-overlay"
+>
+
+  <div class="closing-modal">
+
+    <button
+      type="button"
+      class="closing-modal-close"
+      (click)="fecharPopupLojaFechada()"
+    >
+      ×
+    </button>
+
+    <div class="closing-modal-icon closed">
+      🏪
+    </div>
+
+    <h2>
+      A loja acabou de fechar
+    </h2>
+
+    <p>
+      O horário de atendimento foi encerrado
+      e não é mais possível realizar pedidos
+      neste momento.
+    </p>
+
+    <div
+      *ngIf="statusLoja?.proximaAbertura"
+      class="next-opening"
+    >
+
+      <span>
+        📅
+      </span>
+
+      <div>
+
+        <small>
+          Próxima abertura
+        </small>
+
+        <strong>
+          {{ statusLoja?.proximaAbertura }}
+        </strong>
+
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="closing-modal-button closed"
+      (click)="fecharPopupLojaFechada()"
+    >
+      Entendi
+    </button>
+
+  </div>
+
+</div>
+
+
 <app-produto-modal
-  *ngIf="produtoSelecionado"
+  *ngIf="
+    produtoSelecionado &&
+    lojaAberta
+  "
   [produto]="produtoSelecionado"
   (fechar)="fecharModal()"
-  (adicionar)="adicionarAoCarrinho($event)">
+  (adicionar)="
+    adicionarAoCarrinho($event)
+  "
+>
 </app-produto-modal>
