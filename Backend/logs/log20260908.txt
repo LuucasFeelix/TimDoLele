@@ -1,0 +1,609 @@
+2026-09-08 13:07:07.378 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-08 13:07:07.741 -03:00 [INF] Now listening on: https://localhost:57668
+2026-09-08 13:07:07.743 -03:00 [INF] Now listening on: http://localhost:57669
+2026-09-08 13:07:07.882 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-08 13:07:07.923 -03:00 [INF] Hosting environment: Development
+2026-09-08 13:07:07.926 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-09-08 13:07:21.686 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-08 13:07:21.993 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 327.2773ms
+2026-09-08 13:07:22.000 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-08 13:07:22.000 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-08 13:07:22.000 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-08 13:07:22.025 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 24.845ms
+2026-09-08 13:07:22.058 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 58.061ms
+2026-09-08 13:07:22.119 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 118.994ms
+2026-09-08 13:07:22.183 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-08 13:07:22.245 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 61.8798ms
+2026-09-08 13:08:53.400 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 52
+2026-09-08 13:08:53.421 -03:00 [INF] CORS policy execution failed.
+2026-09-08 13:08:53.425 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-08 13:08:55.016 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-08 13:08:55.054 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-08 13:08:56.770 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.773 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.774 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.776 -03:00 [WRN] No store type was specified for the decimal property 'TrocoPara' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.778 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Adicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.779 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.781 -03:00 [WRN] No store type was specified for the decimal property 'ValorUnitario' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.783 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'ItemPedidoAdicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.785 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.786 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.788 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:56.789 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:08:58.808 -03:00 [INF] Executed DbCommand (132ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-08 13:08:59.709 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-08 13:08:59.734 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-08 13:08:59.743 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 4682.0626ms
+2026-09-08 13:08:59.745 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-08 13:08:59.757 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 6357.5409ms
+2026-09-08 13:12:48.308 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - application/json 110
+2026-09-08 13:12:48.316 -03:00 [INF] CORS policy execution failed.
+2026-09-08 13:12:48.317 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-08 13:12:48.809 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele)'
+2026-09-08 13:12:48.815 -03:00 [INF] Route matched with {action = "AtualizarHorarios", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarHorarios(System.Collections.Generic.List`1[TimDoLeLe.Application.DTOs.AtualizarHorarioFuncionamentoDto]) on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-08 13:12:48.945 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-08 13:12:48.985 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Time), @p1='?' (DbType = Time)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [HorariosFuncionamento] SET [HoraAbertura] = @p0, [HoraFechamento] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-08 13:12:49.051 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [HorariosFuncionamento] AS [h]
+2026-09-08 13:12:49.068 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+ORDER BY [h].[DiaSemana]
+2026-09-08 13:12:49.075 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLeLe.Application.DTOs.HorarioFuncionamentoDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-08 13:12:49.085 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele) in 265.9859ms
+2026-09-08 13:12:49.086 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele)'
+2026-09-08 13:12:49.088 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - 200 null application/json; charset=utf-8 779.7441ms
+2026-09-08 13:13:33.692 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes/fechar-manualmente?motivo=teste%20fechar - null 0
+2026-09-08 13:13:33.698 -03:00 [INF] CORS policy execution failed.
+2026-09-08 13:13:33.700 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-08 13:13:33.707 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.FecharLojaManualmente (TimDoLele)'
+2026-09-08 13:13:33.714 -03:00 [INF] Route matched with {action = "FecharLojaManualmente", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] FecharLojaManualmente(System.String) on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-08 13:13:33.743 -03:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-09-08 13:13:33.751 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-08 13:13:34.181 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ConfiguracoesLoja] SET [FechadaManual] = @p0, [MotivoFechamentoManual] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-08 13:13:34.186 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.ConfiguracaoLojaDto'.
+2026-09-08 13:13:34.200 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.FecharLojaManualmente (TimDoLele) in 483.6019ms
+2026-09-08 13:13:34.203 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.FecharLojaManualmente (TimDoLele)'
+2026-09-08 13:13:34.204 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes/fechar-manualmente?motivo=teste%20fechar - 200 null application/json; charset=utf-8 511.7938ms
+2026-09-08 13:15:04.119 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes/abrir-manualmente - null 0
+2026-09-08 13:15:04.123 -03:00 [INF] CORS policy execution failed.
+2026-09-08 13:15:04.124 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-08 13:15:04.128 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AbrirLojaManualmente (TimDoLele)'
+2026-09-08 13:15:04.147 -03:00 [INF] Route matched with {action = "AbrirLojaManualmente", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AbrirLojaManualmente() on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-08 13:15:04.160 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-08 13:15:04.225 -03:00 [INF] Executed DbCommand (62ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ConfiguracoesLoja] SET [FechadaManual] = @p0, [MotivoFechamentoManual] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-08 13:15:04.229 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.ConfiguracaoLojaDto'.
+2026-09-08 13:15:04.231 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.AbrirLojaManualmente (TimDoLele) in 79.2487ms
+2026-09-08 13:15:04.234 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AbrirLojaManualmente (TimDoLele)'
+2026-09-08 13:15:04.235 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes/abrir-manualmente - 200 null application/json; charset=utf-8 116.6624ms
+2026-09-08 13:22:03.207 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-08 13:22:03.513 -03:00 [INF] Now listening on: https://localhost:57668
+2026-09-08 13:22:03.514 -03:00 [INF] Now listening on: http://localhost:57669
+2026-09-08 13:22:03.646 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-08 13:22:03.647 -03:00 [INF] Hosting environment: Development
+2026-09-08 13:22:03.648 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-09-08 13:22:04.969 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-08 13:22:05.242 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 288.5149ms
+2026-09-08 13:22:05.320 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-08 13:22:05.320 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-08 13:22:05.321 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-08 13:22:05.327 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 6.6153ms
+2026-09-08 13:22:05.339 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 18.381ms
+2026-09-08 13:22:05.369 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 48.3004ms
+2026-09-08 13:22:05.431 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-08 13:22:05.498 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 66.8812ms
+2026-09-08 13:22:26.378 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 52
+2026-09-08 13:22:26.390 -03:00 [INF] CORS policy execution failed.
+2026-09-08 13:22:26.392 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-08 13:22:26.444 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-08 13:22:26.482 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-08 13:22:27.545 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.548 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.549 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.551 -03:00 [WRN] No store type was specified for the decimal property 'TrocoPara' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.557 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Adicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.560 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.564 -03:00 [WRN] No store type was specified for the decimal property 'ValorUnitario' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.568 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'ItemPedidoAdicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.569 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.571 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.573 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:27.575 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 13:22:28.500 -03:00 [INF] Executed DbCommand (49ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-08 13:22:29.264 -03:00 [INF] Executed DbCommand (6ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-08 13:22:29.286 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-08 13:22:29.295 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 2806.5662ms
+2026-09-08 13:22:29.298 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-08 13:22:29.306 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 2927.8945ms
+2026-09-08 13:24:13.199 -03:00 [INF] Request starting HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - application/json 110
+2026-09-08 13:24:13.207 -03:00 [INF] CORS policy execution failed.
+2026-09-08 13:24:13.209 -03:00 [INF] Request origin https://localhost:57668 does not have permission to access the resource.
+2026-09-08 13:24:13.262 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele)'
+2026-09-08 13:24:13.269 -03:00 [INF] Route matched with {action = "AtualizarHorarios", controller = "Configuracao"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AtualizarHorarios(System.Collections.Generic.List`1[TimDoLeLe.Application.DTOs.AtualizarHorarioFuncionamentoDto]) on controller TimDoLeLe.Controllers.ConfiguracaoController (TimDoLele).
+2026-09-08 13:24:13.374 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__diaSemana_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__diaSemana_0
+2026-09-08 13:24:13.419 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Time)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [HorariosFuncionamento] SET [HoraFechamento] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-09-08 13:24:13.504 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [HorariosFuncionamento] AS [h]
+2026-09-08 13:24:13.523 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+ORDER BY [h].[DiaSemana]
+2026-09-08 13:24:13.529 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TimDoLeLe.Application.DTOs.HorarioFuncionamentoDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-08 13:24:13.540 -03:00 [INF] Executed action TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele) in 266.1812ms
+2026-09-08 13:24:13.541 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.ConfiguracaoController.AtualizarHorarios (TimDoLele)'
+2026-09-08 13:24:13.542 -03:00 [INF] Request finished HTTP/2 PUT https://localhost:57668/api/configuracoes/horarios - 200 null application/json; charset=utf-8 343.8061ms
+2026-09-08 13:24:55.021 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/loja/status - null null
+2026-09-08 13:24:55.031 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-08 13:24:55.035 -03:00 [INF] Route matched with {action = "ObterStatus", controller = "Loja"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterStatus() on controller TimDoLeLe.Controllers.LojaController (TimDoLele).
+2026-09-08 13:24:55.055 -03:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-09-08 13:24:55.063 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-08 13:24:55.498 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__agora_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__agora_Date_0
+2026-09-08 13:24:55.511 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__ontem_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__ontem_Date_0
+2026-09-08 13:24:55.521 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__ontem_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__ontem_DayOfWeek_0
+2026-09-08 13:24:55.530 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__agora_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__agora_DayOfWeek_0
+2026-09-08 13:24:55.542 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__data_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__data_Date_0
+2026-09-08 13:24:55.551 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__data_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__data_DayOfWeek_0
+2026-09-08 13:24:55.557 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.StatusLojaDto'.
+2026-09-08 13:24:55.568 -03:00 [INF] Executed action TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele) in 530.8782ms
+2026-09-08 13:24:55.570 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-08 13:24:55.571 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/loja/status - 200 null application/json; charset=utf-8 550.9929ms
+2026-09-08 13:28:24.184 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-08 13:28:24.209 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 24.5886ms
+2026-09-08 13:28:24.227 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-08 13:28:24.227 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-08 13:28:24.227 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-08 13:28:24.237 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 9.62ms
+2026-09-08 13:28:24.235 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 8.4021ms
+2026-09-08 13:28:24.258 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 30.5938ms
+2026-09-08 13:28:24.353 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-08 13:28:24.378 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 24.8953ms
+2026-09-08 13:28:41.240 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/loja/status - null null
+2026-09-08 13:28:41.243 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-08 13:28:41.250 -03:00 [INF] Route matched with {action = "ObterStatus", controller = "Loja"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterStatus() on controller TimDoLeLe.Controllers.LojaController (TimDoLele).
+2026-09-08 13:28:41.263 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-08 13:28:41.272 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__agora_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__agora_Date_0
+2026-09-08 13:28:41.278 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__ontem_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__ontem_Date_0
+2026-09-08 13:28:41.282 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__ontem_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__ontem_DayOfWeek_0
+2026-09-08 13:28:41.285 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.StatusLojaDto'.
+2026-09-08 13:28:41.290 -03:00 [INF] Executed action TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele) in 34.3678ms
+2026-09-08 13:28:41.291 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-08 13:28:41.293 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/loja/status - 200 null application/json; charset=utf-8 52.5102ms
+2026-09-08 13:29:16.055 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-08 13:29:16.074 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 19.7799ms
+2026-09-08 13:29:16.094 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-08 13:29:16.094 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-08 13:29:16.094 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-08 13:29:16.100 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 6.5101ms
+2026-09-08 13:29:16.107 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 12.9047ms
+2026-09-08 13:29:16.123 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 29.1198ms
+2026-09-08 13:29:16.180 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-08 13:29:16.202 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 23.0824ms
+2026-09-08 13:29:41.190 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/loja/status - null null
+2026-09-08 13:29:41.194 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-08 13:29:41.206 -03:00 [INF] Route matched with {action = "ObterStatus", controller = "Loja"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ObterStatus() on controller TimDoLeLe.Controllers.LojaController (TimDoLele).
+2026-09-08 13:29:41.219 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[FechadaManual], [c].[MotivoFechamentoManual], [c].[PrazoEntregaMax], [c].[PrazoEntregaMin], [c].[PrazoRetiradaMax], [c].[PrazoRetiradaMin], [c].[TaxaEntregaPadrao]
+FROM [ConfiguracoesLoja] AS [c]
+2026-09-08 13:29:41.229 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__agora_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__agora_Date_0
+2026-09-08 13:29:41.236 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__ontem_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__ontem_Date_0
+2026-09-08 13:29:41.242 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__ontem_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__ontem_DayOfWeek_0
+2026-09-08 13:29:41.246 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__agora_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__agora_DayOfWeek_0
+2026-09-08 13:29:41.251 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__data_Date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[Id], [d].[Data], [d].[Descricao], [d].[HoraAbertura], [d].[HoraFechamento], [d].[Tipo]
+FROM [DatasEspeciais] AS [d]
+WHERE CONVERT(date, [d].[Data]) = @__data_Date_0
+2026-09-08 13:29:41.257 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__data_DayOfWeek_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [h].[Id], [h].[Aberto], [h].[DiaSemana], [h].[HoraAbertura], [h].[HoraFechamento]
+FROM [HorariosFuncionamento] AS [h]
+WHERE [h].[DiaSemana] = @__data_DayOfWeek_0
+2026-09-08 13:29:41.260 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLeLe.Application.DTOs.StatusLojaDto'.
+2026-09-08 13:29:41.263 -03:00 [INF] Executed action TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele) in 52.161ms
+2026-09-08 13:29:41.264 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.LojaController.ObterStatus (TimDoLele)'
+2026-09-08 13:29:41.267 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/loja/status - 200 null application/json; charset=utf-8 76.6198ms
+2026-09-08 13:34:31.552 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-08 13:34:31.567 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 14.9051ms
+2026-09-08 13:34:31.591 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-08 13:34:31.591 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-08 13:34:31.591 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-08 13:34:31.596 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 5.8173ms
+2026-09-08 13:34:31.602 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 10.9537ms
+2026-09-08 13:34:31.615 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 24.3714ms
+2026-09-08 13:34:31.666 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-08 13:34:31.680 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.7897ms
+2026-09-08 13:51:25.260 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/categorias - null null
+2026-09-08 13:51:25.260 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-09-08 13:51:25.271 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:25.272 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:25.279 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/categorias - 204 null null 19.2064ms
+2026-09-08 13:51:25.279 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 18.9001ms
+2026-09-08 13:51:25.300 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-09-08 13:51:25.308 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:25.310 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-09-08 13:51:25.331 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-09-08 13:51:25.335 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 34.3416ms
+2026-09-08 13:51:25.340 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=KJ3ZU7bknENP-Jmeu3NWvQ - null null
+2026-09-08 13:51:25.345 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:25.347 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-09-08 13:51:25.562 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-08 13:51:25.566 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:25.567 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - 204 null null 5.6681ms
+2026-09-08 13:51:25.574 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-08 13:51:25.579 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:25.588 -03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '04/09/2026 04:30:30', Current time (UTC): '08/09/2026 16:51:25'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-09-08 13:51:25.648 -03:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '04/09/2026 04:30:30', Current time (UTC): '08/09/2026 16:51:25'.
+2026-09-08 13:51:25.653 -03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-09-08 13:51:25.664 -03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-09-08 13:51:25.665 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 401 0 null 91.5891ms
+2026-09-08 13:51:25.670 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/refresh - null null
+2026-09-08 13:51:25.673 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:25.674 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/refresh - 204 null null 4.4565ms
+2026-09-08 13:51:25.680 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/refresh - application/json 107
+2026-09-08 13:51:25.684 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:25.685 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-08 13:51:25.693 -03:00 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(TimDoLele.Application.DTOs.RefreshTokenDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-08 13:51:25.732 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__refreshToken_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[RefreshToken] = @__refreshToken_0
+2026-09-08 13:51:26.014 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele) in 315.8697ms
+2026-09-08 13:51:26.016 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Refresh (TimDoLele)'
+2026-09-08 13:51:26.108 -03:00 [ERR] Erro capturado pelo middleware
+TimDoLele.Application.Exceptions.BadRequestException: Refresh token inválido
+   at TimDoLele.Application.Services.AuthService.RenovarTokenAsync(String refreshToken)
+   at TimDoLeLe.Controllers.AuthController.Refresh(RefreshTokenDto dto) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Controllers\AuthController.cs:line 42
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at TimDoLeLe.Middlewares.ErrorHandlingMiddleware.Invoke(HttpContext context) in D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend\Middlewares\ErrorHandlingMiddleware.cs:line 22
+2026-09-08 13:51:26.139 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/refresh - 400 null application/json 458.4238ms
+2026-09-08 13:51:30.035 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/login - null null
+2026-09-08 13:51:30.040 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:30.041 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/login - 204 null null 6.3209ms
+2026-09-08 13:51:30.043 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 43
+2026-09-08 13:51:30.052 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:30.054 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-08 13:51:30.060 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-08 13:51:30.071 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-08 13:51:30.486 -03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-08 13:51:30.493 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-08 13:51:30.495 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 432.8726ms
+2026-09-08 13:51:30.500 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-08 13:51:30.502 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 458.533ms
+2026-09-08 13:51:30.534 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-09-08 13:51:30.544 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:30.550 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 16.1868ms
+2026-09-08 13:51:30.534 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-08 13:51:30.600 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:30.603 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-08 13:51:30.610 -03:00 [INF] Route matched with {action = "GetPedidosPendentesImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPedidosPendentesImpressao() on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-08 13:51:30.774 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-09-08 13:51:30.781 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:30.785 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-08 13:51:30.796 -03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id]
+FROM [Pedidos] AS [p]
+WHERE [p].[StatusImpressao] IN (0, 1)
+ORDER BY [p].[DataHora]
+2026-09-08 13:51:30.799 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-08 13:51:30.808 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-08 13:51:30.821 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele) in 208.5283ms
+2026-09-08 13:51:30.824 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-08 13:51:30.829 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-09-08 13:51:30.842 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 200 null application/json; charset=utf-8 307.931ms
+2026-09-08 13:51:30.994 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-08 13:51:31.030 -03:00 [INF] Executed DbCommand (23ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-09-08 13:51:31.171 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-08 13:51:31.204 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 401.806ms
+2026-09-08 13:51:31.206 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-08 13:51:31.207 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 433.4908ms
+2026-09-08 13:51:36.046 -03:00 [INF] Executed endpoint '/hubs/notificacoes'
+2026-09-08 13:51:36.051 -03:00 [INF] Request finished HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=KJ3ZU7bknENP-Jmeu3NWvQ - 200 null null 10710.9633ms
+2026-09-08 13:51:36.246 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-09-08 13:51:36.246 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-09-08 13:51:36.255 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:36.257 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 10.1809ms
+2026-09-08 13:51:36.255 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:36.260 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 13.619ms
+2026-09-08 13:51:36.267 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-09-08 13:51:36.270 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-09-08 13:51:36.274 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:36.275 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-09-08 13:51:36.277 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-09-08 13:51:36.279 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 9.1027ms
+2026-09-08 13:51:36.271 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:36.286 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-08 13:51:36.287 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-08 13:51:36.288 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=HAjmg0FwtjD_RFNndJxQYg - null null
+2026-09-08 13:51:36.296 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:36.298 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-09-08 13:51:36.298 -03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-09-08 13:51:36.309 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-08 13:51:36.309 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-09-08 13:51:36.311 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:36.319 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - 204 null null 10.3097ms
+2026-09-08 13:51:36.321 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-08 13:51:36.322 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-08 13:51:36.335 -03:00 [INF] CORS policy execution successful.
+2026-09-08 13:51:36.335 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 43.7542ms
+2026-09-08 13:51:36.336 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-08 13:51:36.337 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-08 13:51:36.338 -03:00 [INF] Route matched with {action = "GetPedidosPendentesImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPedidosPendentesImpressao() on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-08 13:51:36.339 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 71.6103ms
+2026-09-08 13:51:36.347 -03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id]
+FROM [Pedidos] AS [p]
+WHERE [p].[StatusImpressao] IN (0, 1)
+ORDER BY [p].[DataHora]
+2026-09-08 13:51:36.350 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-08 13:51:36.351 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele) in 10.5576ms
+2026-09-08 13:51:36.352 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-08 13:51:36.353 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 200 null application/json; charset=utf-8 31.0981ms
+2026-09-08 14:26:38.108 -03:00 [INF] User profile is available. Using 'C:\Users\Luuca\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-08 14:26:38.407 -03:00 [INF] Now listening on: https://localhost:57668
+2026-09-08 14:26:38.408 -03:00 [INF] Now listening on: http://localhost:57669
+2026-09-08 14:26:38.576 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-08 14:26:38.577 -03:00 [INF] Hosting environment: Development
+2026-09-08 14:26:38.578 -03:00 [INF] Content root path: D:\Projetos em desenvolvimento\Projetos\TimDoLele\Backend
+2026-09-08 14:26:39.740 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.html - null null
+2026-09-08 14:26:39.996 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.html - 200 null text/html;charset=utf-8 271.4748ms
+2026-09-08 14:26:40.017 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/index.js - null null
+2026-09-08 14:26:40.017 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-08 14:26:40.017 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/_vs/browserLink - null null
+2026-09-08 14:26:40.024 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/index.js - 200 null application/javascript;charset=utf-8 6.7705ms
+2026-09-08 14:26:40.042 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_framework/aspnetcore-browser-refresh.js - 200 14923 application/javascript; charset=utf-8 24.4121ms
+2026-09-08 14:26:40.084 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/_vs/browserLink - 200 null text/javascript; charset=UTF-8 66.989ms
+2026-09-08 14:26:40.144 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - null null
+2026-09-08 14:26:40.212 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 68.5712ms
+2026-09-08 14:27:09.845 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/auth/login - null null
+2026-09-08 14:27:09.851 -03:00 [INF] CORS policy execution successful.
+2026-09-08 14:27:09.855 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/auth/login - 204 null null 10.1756ms
+2026-09-08 14:27:09.857 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/api/auth/login - application/json 43
+2026-09-08 14:27:09.863 -03:00 [INF] CORS policy execution successful.
+2026-09-08 14:27:09.908 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-08 14:27:09.940 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(TimDoLele.Application.DTOs.LoginDto) on controller TimDoLeLe.Controllers.AuthController (TimDoLele).
+2026-09-08 14:27:10.833 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.836 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.838 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.839 -03:00 [WRN] No store type was specified for the decimal property 'TrocoPara' on entity type 'Pedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.841 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Adicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.842 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.844 -03:00 [WRN] No store type was specified for the decimal property 'ValorUnitario' on entity type 'ItemPedido'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.845 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'ItemPedidoAdicional'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.846 -03:00 [WRN] No store type was specified for the decimal property 'Delivery' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.848 -03:00 [WRN] No store type was specified for the decimal property 'Subtotal' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.850 -03:00 [WRN] No store type was specified for the decimal property 'Total' on entity type 'Pagamento'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:10.851 -03:00 [WRN] No store type was specified for the decimal property 'Preco' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 14:27:11.677 -03:00 [INF] Executed DbCommand (50ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[ClienteId], [u].[Email], [u].[RefreshToken], [u].[RefreshTokenExpiracao], [u].[Role], [u].[SenhaHash]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-09-08 14:27:12.412 -03:00 [INF] Executed DbCommand (6ms) [Parameters=[@p2='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Usuarios] SET [RefreshToken] = @p0, [RefreshTokenExpiracao] = @p1
+OUTPUT 1
+WHERE [Id] = @p2;
+2026-09-08 14:27:12.441 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.LoginResponseDto'.
+2026-09-08 14:27:12.450 -03:00 [INF] Executed action TimDoLeLe.Controllers.AuthController.Login (TimDoLele) in 2503.4883ms
+2026-09-08 14:27:12.453 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.AuthController.Login (TimDoLele)'
+2026-09-08 14:27:12.463 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/api/auth/login - 200 null application/json; charset=utf-8 2606.2939ms
+2026-09-08 14:27:12.489 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos - null null
+2026-09-08 14:27:12.490 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null null
+2026-09-08 14:27:12.493 -03:00 [INF] CORS policy execution successful.
+2026-09-08 14:27:12.495 -03:00 [INF] CORS policy execution successful.
+2026-09-08 14:27:12.496 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos - 204 null null 6.531ms
+2026-09-08 14:27:12.503 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos - null null
+2026-09-08 14:27:12.497 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 204 null null 7.0563ms
+2026-09-08 14:27:12.511 -03:00 [INF] CORS policy execution successful.
+2026-09-08 14:27:12.512 -03:00 [INF] Request starting HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - null 0
+2026-09-08 14:27:12.519 -03:00 [INF] CORS policy execution successful.
+2026-09-08 14:27:12.521 -03:00 [INF] Executing endpoint '/hubs/notificacoes/negotiate'
+2026-09-08 14:27:12.532 -03:00 [INF] Executed endpoint '/hubs/notificacoes/negotiate'
+2026-09-08 14:27:12.533 -03:00 [INF] Request finished HTTP/2 POST https://localhost:57668/hubs/notificacoes/negotiate?negotiateVersion=1 - 200 316 application/json 21.7924ms
+2026-09-08 14:27:12.537 -03:00 [INF] Request starting HTTP/2 CONNECT https://localhost:57668/hubs/notificacoes?id=Nzb3kjkPZKDToAZGzv3x1w - null null
+2026-09-08 14:27:12.539 -03:00 [INF] CORS policy execution successful.
+2026-09-08 14:27:12.540 -03:00 [INF] Executing endpoint '/hubs/notificacoes'
+2026-09-08 14:27:12.568 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-08 14:27:12.574 -03:00 [INF] CORS policy execution successful.
+2026-09-08 14:27:12.575 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57668/api/pedidos/impressao/pendentes - 204 null null 6.8309ms
+2026-09-08 14:27:12.575 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-08 14:27:12.577 -03:00 [INF] Request starting HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - null null
+2026-09-08 14:27:12.582 -03:00 [INF] CORS policy execution successful.
+2026-09-08 14:27:12.585 -03:00 [INF] Executing endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-08 14:27:12.586 -03:00 [INF] Route matched with {action = "Get", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Get(System.Nullable`1[System.Guid], System.Nullable`1[TimDolele.Core.Enums.StatusPedido], Int32, Int32) on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-08 14:27:12.589 -03:00 [INF] Route matched with {action = "GetPedidosPendentesImpressao", controller = "Pedido"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPedidosPendentesImpressao() on controller TimDoLeLe.Controllers.PedidoController (TimDoLele).
+2026-09-08 14:27:12.689 -03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id]
+FROM [Pedidos] AS [p]
+WHERE [p].[StatusImpressao] IN (0, 1)
+ORDER BY [p].[DataHora]
+2026-09-08 14:27:12.693 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-08 14:27:12.697 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele) in 105.9985ms
+2026-09-08 14:27:12.699 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.GetPedidosPendentesImpressao (TimDoLele)'
+2026-09-08 14:27:12.700 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos/impressao/pendentes - 200 null application/json; charset=utf-8 123.2145ms
+2026-09-08 14:27:12.712 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Pedidos] AS [p]
+2026-09-08 14:27:12.821 -03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-08 14:27:12.856 -03:00 [INF] Executed DbCommand (23ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ClienteId], [t].[Codigo], [t].[DataHora], [t].[DataImpressao], [t].[Delivery], [t].[FormaPagamento], [t].[PagamentoId], [t].[Status], [t].[StatusImpressao], [t].[Subtotal], [t].[TentativasImpressao], [t].[TipoEntrega], [t].[Total], [t].[TrocoPara], [c].[Id], [c].[Nome], [c].[Observacao], [c].[Telefone], [c].[Endereco_Bairro], [c].[Endereco_Cidade], [c].[Endereco_Complemento], [c].[Endereco_Estado], [c].[Endereco_Numero], [c].[Endereco_Rua], [t0].[Id], [t0].[Observacao], [t0].[PedidoId], [t0].[ProdutoId], [t0].[Quantidade], [t0].[Valor], [t0].[ValorUnitario], [t0].[Id0], [t0].[Ativo], [t0].[CategoriaId], [t0].[Descricao], [t0].[Nome], [t0].[Preco], [t0].[Id1], [t0].[AdicionalId], [t0].[ItemPedidoId], [t0].[Preco0], [t0].[Id00], [t0].[Nome0], [t0].[Preco00]
+FROM (
+    SELECT [p].[Id], [p].[ClienteId], [p].[Codigo], [p].[DataHora], [p].[DataImpressao], [p].[Delivery], [p].[FormaPagamento], [p].[PagamentoId], [p].[Status], [p].[StatusImpressao], [p].[Subtotal], [p].[TentativasImpressao], [p].[TipoEntrega], [p].[Total], [p].[TrocoPara]
+    FROM [Pedidos] AS [p]
+    ORDER BY [p].[DataHora] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Clientes] AS [c] ON [t].[ClienteId] = [c].[Id]
+LEFT JOIN (
+    SELECT [i].[Id], [i].[Observacao], [i].[PedidoId], [i].[ProdutoId], [i].[Quantidade], [i].[Valor], [i].[ValorUnitario], [p0].[Id] AS [Id0], [p0].[Ativo], [p0].[CategoriaId], [p0].[Descricao], [p0].[Nome], [p0].[Preco], [t1].[Id] AS [Id1], [t1].[AdicionalId], [t1].[ItemPedidoId], [t1].[Preco] AS [Preco0], [t1].[Id0] AS [Id00], [t1].[Nome] AS [Nome0], [t1].[Preco0] AS [Preco00]
+    FROM [ItensPedido] AS [i]
+    INNER JOIN [Produtos] AS [p0] ON [i].[ProdutoId] = [p0].[Id]
+    LEFT JOIN (
+        SELECT [i0].[Id], [i0].[AdicionalId], [i0].[ItemPedidoId], [i0].[Preco], [a].[Id] AS [Id0], [a].[Nome], [a].[Preco] AS [Preco0]
+        FROM [ItensPedidoAdicionais] AS [i0]
+        INNER JOIN [Adicionais] AS [a] ON [i0].[AdicionalId] = [a].[Id]
+    ) AS [t1] ON [i].[Id] = [t1].[ItemPedidoId]
+) AS [t0] ON [t].[Id] = [t0].[PedidoId]
+ORDER BY [t].[DataHora] DESC, [t].[Id], [c].[Id], [t0].[Id], [t0].[Id0], [t0].[Id1]
+2026-09-08 14:27:13.000 -03:00 [INF] Executing OkObjectResult, writing value of type 'TimDoLele.Application.DTOs.Common.PagedResult`1[[TimDoLele.Application.DTOs.PedidoResponseDto, TimDoLele.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-08 14:27:13.042 -03:00 [INF] Executed action TimDoLeLe.Controllers.PedidoController.Get (TimDoLele) in 454.5682ms
+2026-09-08 14:27:13.044 -03:00 [INF] Executed endpoint 'TimDoLeLe.Controllers.PedidoController.Get (TimDoLele)'
+2026-09-08 14:27:13.045 -03:00 [INF] Request finished HTTP/2 GET https://localhost:57668/api/pedidos - 200 null application/json; charset=utf-8 541.8919ms

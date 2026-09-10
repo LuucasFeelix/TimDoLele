@@ -20,8 +20,8 @@ namespace TimDoLele.Application.Services
         public async Task<StatusLojaDto>
             ObterStatusAsync()
         {
-            var agora =
-                DateTime.Now;
+           var agora =
+            DateTime.Now;
 
             var configuracao =
                 await ObterConfiguracaoAsync();
