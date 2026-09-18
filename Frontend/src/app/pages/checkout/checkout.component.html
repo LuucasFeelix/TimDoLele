@@ -1,105 +1,216 @@
 <div class="checkout-app">
 
   <header class="checkout-topbar">
-    <button type="button" (click)="voltar()">
+
+    <button
+      type="button"
+      (click)="voltar()"
+    >
       ←
     </button>
 
     <div>
+
       <h1>
-        {{ etapa === 1 ? 'Meu Carrinho' : etapa === 2 ? 'Dados para entrega' : 'Pagamento' }}
+        {{
+          etapa === 1
+            ? 'Meu Carrinho'
+            : etapa === 2
+              ? 'Dados para entrega'
+              : 'Pagamento'
+        }}
       </h1>
-      <p>Tim do Lelê Lanches</p>
+
+      <p>
+        Tim do Lelê Lanches
+      </p>
+
     </div>
+
   </header>
 
+
   <section class="steps">
-    <div [class.active]="etapa === 1">
+
+    <div
+      [class.active]="etapa === 1"
+    >
       <span>3</span>
       Carrinho
     </div>
 
-    <div [class.active]="etapa === 2">
+    <div
+      [class.active]="etapa === 2"
+    >
       <span>4</span>
       Dados
     </div>
 
-    <div [class.active]="etapa === 3">
+    <div
+      [class.active]="etapa === 3"
+    >
       <span>5</span>
       Pagamento
     </div>
+
   </section>
 
-  <!-- ETAPA 1 - CARRINHO -->
-  <main *ngIf="etapa === 1" class="screen">
 
-    <div *ngIf="carrinho.length === 0" class="empty-card">
+  <main
+    *ngIf="etapa === 1"
+    class="screen"
+  >
+
+    <div
+      *ngIf="carrinho.length === 0"
+      class="empty-card"
+    >
       Seu carrinho está vazio.
     </div>
+
 
     <section
       *ngFor="let item of carrinho"
       class="cart-item"
     >
+
       <div class="item-image">
         🍔
       </div>
 
-      <div class="item-info">
-        <h3>{{ item.nome }}</h3>
 
-        <small *ngIf="item.adicionais?.length > 0">
-          <span *ngFor="let adicional of item.adicionais">
+      <div class="item-info">
+
+        <h3>
+          {{ item.nome }}
+        </h3>
+
+        <small
+          *ngIf="item.adicionais?.length > 0"
+        >
+
+          <span
+            *ngFor="let adicional of item.adicionais"
+          >
             + {{ adicional.nome }}
           </span>
+
         </small>
 
-        <small *ngIf="item.observacao">
+        <small
+          *ngIf="item.observacao"
+        >
           Obs: {{ item.observacao }}
         </small>
 
+
         <div class="qty">
-          <button (click)="diminuirQuantidade(item)">-</button>
-          <span>{{ item.quantidade }}</span>
-          <button (click)="aumentarQuantidade(item)">+</button>
+
+          <button
+            type="button"
+            (click)="diminuirQuantidade(item)"
+          >
+            -
+          </button>
+
+          <span>
+            {{ item.quantidade }}
+          </span>
+
+          <button
+            type="button"
+            (click)="aumentarQuantidade(item)"
+          >
+            +
+          </button>
+
         </div>
+
       </div>
 
+
       <div class="item-price-area">
-        <strong>R$ {{ calcularItemTotal(item) }}</strong>
+
+        <strong>
+          R$ {{ calcularItemTotal(item) }}
+        </strong>
 
         <button
+          type="button"
           class="remove"
           (click)="removerItem(item)"
         >
           ×
         </button>
+
       </div>
+
     </section>
+
 
     <section class="coupon-card">
-      <input placeholder="Possui cupom de desconto?" />
-      <button>Aplicar</button>
+
+      <input
+        placeholder="Possui cupom de desconto?"
+      />
+
+      <button type="button">
+        Aplicar
+      </button>
+
     </section>
+
 
     <section class="summary-card">
-      <div>
-        <span>Subtotal</span>
-        <strong>R$ {{ calcularSubtotal() }}</strong>
-      </div>
 
       <div>
-        <span>Taxa de entrega</span>
-        <strong>R$ {{ getTaxaEntrega().toFixed(2).replace('.', ',') }}</strong>
+
+        <span>
+          Subtotal
+        </span>
+
+        <strong>
+          R$ {{ calcularSubtotal() }}
+        </strong>
+
       </div>
+
+
+      <div>
+
+        <span>
+          Taxa de entrega
+        </span>
+
+        <strong>
+          R$
+          {{
+            getTaxaEntrega()
+              .toFixed(2)
+              .replace('.', ',')
+          }}
+        </strong>
+
+      </div>
+
 
       <div class="summary-total">
-        <span>Total</span>
-        <strong>R$ {{ calcularTotal() }}</strong>
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          R$ {{ calcularTotal() }}
+        </strong>
+
       </div>
+
     </section>
 
+
     <button
+      type="button"
       class="bottom-button"
       (click)="irParaEtapa(2)"
     >
@@ -108,86 +219,149 @@
 
   </main>
 
-  <!-- ETAPA 2 - DADOS -->
-  <main *ngIf="etapa === 2" class="screen">
+
+  <main
+    *ngIf="etapa === 2"
+    class="screen"
+  >
 
     <section class="choice-card">
-      <h2>Como deseja receber?</h2>
+
+      <h2>
+        Como deseja receber?
+      </h2>
+
 
       <div class="delivery-options">
+
         <button
+          type="button"
           [class.active]="tipoEntrega === 2"
           (click)="selecionarTipoEntrega(2)"
         >
           🛵
-          <strong>Delivery</strong>
-          <small>Receber em casa</small>
+
+          <strong>
+            Delivery
+          </strong>
+
+          <small>
+            Receber em casa
+          </small>
+
         </button>
 
+
         <button
+          type="button"
           [class.active]="tipoEntrega === 1"
           (click)="selecionarTipoEntrega(1)"
         >
           🏪
-          <strong>Retirada</strong>
-          <small>Buscar no local</small>
+
+          <strong>
+            Retirada
+          </strong>
+
+          <small>
+            Buscar no local
+          </small>
+
         </button>
+
       </div>
+
     </section>
 
+
     <section class="form-card">
+
       <label>
+
         Nome completo
+
         <input
           [(ngModel)]="nome"
           placeholder="Digite seu nome"
         />
+
       </label>
 
+
       <label>
+
         WhatsApp
+
         <input
           [(ngModel)]="telefone"
           placeholder="(16) 99999-9999"
         />
+
       </label>
 
-      <ng-container *ngIf="isDelivery()">
+
+      <ng-container
+        *ngIf="isDelivery()"
+      >
+
         <label>
+
           Endereço de entrega
+
           <input
             [(ngModel)]="endereco"
             placeholder="Rua, número, complemento"
           />
+
         </label>
 
+
         <label>
+
           Bairro
+
           <input
             [(ngModel)]="bairro"
             placeholder="Digite seu bairro"
           />
+
         </label>
 
+
         <label>
+
           Ponto de referência
+
           <input
             [(ngModel)]="referencia"
             placeholder="Ex: próximo à padaria"
           />
+
         </label>
+
       </ng-container>
+
 
       <div
         *ngIf="!isDelivery()"
         class="pickup-box"
       >
-        <strong>Retirada na loja</strong>
-        <p>Você não pagará taxa de entrega.</p>
+
+        <strong>
+          Retirada na loja
+        </strong>
+
+        <p>
+          Você não pagará taxa de entrega.
+        </p>
+
       </div>
+
     </section>
 
+
     <button
+      type="button"
       class="bottom-button"
       (click)="irParaEtapa(3)"
     >
@@ -196,92 +370,286 @@
 
   </main>
 
-  <!-- ETAPA 3 - PAGAMENTO -->
-  <main *ngIf="etapa === 3" class="screen">
+
+  <main
+    *ngIf="etapa === 3"
+    class="screen"
+  >
 
     <section class="payment-summary">
-      <h2>Resumo do pedido</h2>
+
+      <h2>
+        Resumo do pedido
+      </h2>
+
 
       <div>
-        <span>{{ quantidadeTotal() }} itens</span>
-        <strong>R$ {{ calcularSubtotal() }}</strong>
+
+        <span>
+          {{ quantidadeTotal() }} itens
+        </span>
+
+        <strong>
+          R$ {{ calcularSubtotal() }}
+        </strong>
+
       </div>
 
+
       <div>
-        <span>{{ isDelivery() ? 'Taxa de entrega' : 'Retirada' }}</span>
-        <strong>R$ {{ getTaxaEntrega().toFixed(2).replace('.', ',') }}</strong>
+
+        <span>
+          {{
+            isDelivery()
+              ? 'Taxa de entrega'
+              : 'Retirada'
+          }}
+        </span>
+
+        <strong>
+          R$
+          {{
+            getTaxaEntrega()
+              .toFixed(2)
+              .replace('.', ',')
+          }}
+        </strong>
+
       </div>
+
 
       <div class="summary-total">
-        <span>Total</span>
-        <strong>R$ {{ calcularTotal() }}</strong>
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          R$ {{ calcularTotal() }}
+        </strong>
+
       </div>
+
     </section>
 
+
     <section class="payment-card">
-      <h2>Escolha a forma de pagamento</h2>
+
+      <h2>
+        Escolha a forma de pagamento
+      </h2>
+
 
       <button
+        type="button"
         [class.active]="formaPagamento === 1"
         (click)="selecionarFormaPagamento(1)"
       >
-        <span>💠</span>
+
+        <span>
+          💠
+        </span>
+
         <div>
-          <strong>Pix</strong>
-          <small>Aprovação imediata</small>
+
+          <strong>
+            Pix
+          </strong>
+
+          <small>
+            Aprovação imediata
+          </small>
+
         </div>
+
       </button>
 
+
       <button
+        type="button"
         [class.active]="formaPagamento === 3"
         (click)="selecionarFormaPagamento(3)"
       >
-        <span>💳</span>
+
+        <span>
+          💳
+        </span>
+
         <div>
-          <strong>Cartão de Crédito</strong>
-          <small>Na entrega/retirada</small>
+
+          <strong>
+            Cartão de Crédito
+          </strong>
+
+          <small>
+            Na entrega/retirada
+          </small>
+
         </div>
+
       </button>
 
+
       <button
+        type="button"
         [class.active]="formaPagamento === 4"
         (click)="selecionarFormaPagamento(4)"
       >
-        <span>💳</span>
+
+        <span>
+          💳
+        </span>
+
         <div>
-          <strong>Cartão de Débito</strong>
-          <small>Na entrega/retirada</small>
+
+          <strong>
+            Cartão de Débito
+          </strong>
+
+          <small>
+            Na entrega/retirada
+          </small>
+
         </div>
+
       </button>
 
+
       <button
+        type="button"
         [class.active]="formaPagamento === 2"
         (click)="selecionarFormaPagamento(2)"
       >
-        <span>💵</span>
+
+        <span>
+          💵
+        </span>
+
         <div>
-          <strong>Dinheiro</strong>
-          <small>Pagamento na entrega</small>
+
+          <strong>
+            Dinheiro
+          </strong>
+
+          <small>
+            Pagamento na entrega
+          </small>
+
         </div>
+
       </button>
 
-      <label *ngIf="isDinheiro()" class="troco-field">
+
+      <label
+        *ngIf="isDinheiro()"
+        class="troco-field"
+      >
+
         Troco para quanto?
+
         <input
           type="number"
           [(ngModel)]="trocoPara"
           placeholder="Ex: 50"
         />
+
       </label>
+
     </section>
 
+
     <button
+      type="button"
       class="bottom-button"
+      [disabled]="
+        finalizandoPedido ||
+        verificandoLoja
+      "
       (click)="finalizarPedido()"
     >
-      FINALIZAR PAGAMENTO
+
+      {{
+        verificandoLoja
+          ? 'VERIFICANDO LOJA...'
+          : finalizandoPedido
+            ? 'ENVIANDO PEDIDO...'
+            : 'FINALIZAR PAGAMENTO'
+      }}
+
     </button>
 
   </main>
+
+
+  <div
+    *ngIf="lojaFechadaVisivel"
+    class="store-closed-overlay"
+  >
+
+    <div class="store-closed-modal">
+
+      <div class="store-closed-icon">
+        🔒
+      </div>
+
+
+      <h2>
+        A loja fechou
+      </h2>
+
+
+      <p class="store-closed-message">
+
+        Infelizmente a loja está fechada
+        neste momento.
+
+      </p>
+
+
+      <p class="store-closed-cart-message">
+
+        Seu carrinho continua salvo.
+        Você poderá finalizar seu pedido
+        quando estivermos abertos novamente.
+
+      </p>
+
+
+      <div
+        *ngIf="statusLoja?.proximaAbertura"
+        class="next-opening"
+      >
+
+        <span>
+          Próxima abertura
+        </span>
+
+        <strong>
+          {{ statusLoja?.proximaAbertura }}
+        </strong>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="store-closed-primary"
+        (click)="voltarCardapio()"
+      >
+        VOLTAR AO CARDÁPIO
+      </button>
+
+
+      <button
+        type="button"
+        class="store-closed-secondary"
+        (click)="fecharAvisoLojaFechada()"
+      >
+        Continuar visualizando
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
