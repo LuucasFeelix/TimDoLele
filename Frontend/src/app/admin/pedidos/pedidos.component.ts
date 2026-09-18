@@ -488,33 +488,26 @@ export class PedidosComponent
 
 
   private aoReceberNovoPedido(
-    notificacao:
-      PedidoCriadoSignalR
-  ): void {
+  notificacao:
+    PedidoCriadoSignalR
+): void {
 
-    console.log(
-      'Novo pedido recebido em tempo real:',
-      notificacao
-    );
+  console.log(
+    'Novo pedido recebido em tempo real na tela de pedidos:',
+    notificacao
+  );
 
+  this.destacarNovoPedido(
+    notificacao.pedidoId
+  );
 
-    this.destacarNovoPedido(
-      notificacao.pedidoId
-    );
+  const pedidoSelecionadoId =
+    this.pedidoSelecionado?.id;
 
-
-    this.tocarSomNovoPedido();
-
-
-    const pedidoSelecionadoId =
-      this.pedidoSelecionado?.id;
-
-
-    this.carregarPedidos(
-      pedidoSelecionadoId,
-      notificacao.pedidoId
-    );
-  }
+  this.carregarPedidos(
+    pedidoSelecionadoId
+  );
+}
 
 
   private aoReceberPedidoAtualizado(

@@ -36,7 +36,6 @@ import {
   AuthService
 } from '../../../core/services/auth.service';
 
-
 @Component({
   selector: 'app-admin-layout',
 
@@ -60,11 +59,20 @@ export class AdminLayoutComponent
   pedidosComErro:
     PedidoComErroImpressao[] = [];
 
+  toastNovoPedidoVisivel = false;
+
+  toastNovoPedido: any = null;
+
   saindo = false;
 
   private readonly destroy$ =
     new Subject<void>();
 
+  private audioNovoPedido:
+    HTMLAudioElement | null = null;
+
+  private timeoutToast:
+    ReturnType<typeof setTimeout> | null = null;
 
   constructor(
     private impressaoPedidoService:
@@ -87,8 +95,9 @@ export class AdminLayoutComponent
 
     private cdr:
       ChangeDetectorRef
-  ) {}
-
+  ) {
+    this.prepararAudio();
+  }
 
   async ngOnInit():
     Promise<void> {
@@ -110,14 +119,22 @@ export class AdminLayoutComponent
       .recuperarPedidosPendentes();
   }
 
-
   ngOnDestroy(): void {
 
     this.destroy$.next();
 
     this.destroy$.complete();
-  }
 
+    if (this.timeoutToast) {
+
+      clearTimeout(
+        this.timeoutToast
+      );
+
+      this.timeoutToast =
+        null;
+    }
+  }
 
   private escutarNovosPedidos():
     void {
@@ -140,11 +157,13 @@ export class AdminLayoutComponent
             () => {
 
               console.log(
-                '🖨️ Admin recebeu pedido para impressão global:',
+                '🔔 Novo pedido recebido globalmente:',
                 notificacao
               );
 
-              this.buscarPedidoEImprimir(
+              this.tocarSomNovoPedido();
+
+              this.buscarPedido(
                 notificacao.pedidoId
               );
             }
@@ -153,8 +172,7 @@ export class AdminLayoutComponent
       });
   }
 
-
-  private buscarPedidoEImprimir(
+  private buscarPedido(
     pedidoId: string
   ): void {
 
@@ -167,7 +185,11 @@ export class AdminLayoutComponent
         next: async (pedido) => {
 
           console.log(
-            `📦 Pedido #${pedido.codigo} carregado para impressão global.`
+            `📦 Pedido #${pedido.codigo} recebido globalmente.`
+          );
+
+          this.exibirToastNovoPedido(
+            pedido
           );
 
           await this
@@ -180,13 +202,122 @@ export class AdminLayoutComponent
         error: (erro) => {
 
           console.error(
-            `❌ Erro ao carregar o pedido ${pedidoId} para impressão.`,
+            `❌ Erro ao carregar o pedido ${pedidoId}.`,
             erro
           );
         }
       });
   }
 
+  private prepararAudio():
+    void {
+
+    this.audioNovoPedido =
+      new Audio(
+        '/sounds/novo-pedido.mp3'
+      );
+
+    this.audioNovoPedido.preload =
+      'auto';
+  }
+
+  private tocarSomNovoPedido():
+    void {
+
+    if (!this.audioNovoPedido) {
+      return;
+    }
+
+    this.audioNovoPedido.currentTime =
+      0;
+
+    this.audioNovoPedido
+      .play()
+      .catch(
+        erro => {
+
+          console.warn(
+            'O navegador bloqueou o som da notificação. Clique na página pelo menos uma vez.',
+            erro
+          );
+        }
+      );
+  }
+
+  private exibirToastNovoPedido(
+    pedido: any
+  ): void {
+
+    if (!pedido) {
+      return;
+    }
+
+    this.toastNovoPedido =
+      pedido;
+
+    this.toastNovoPedidoVisivel =
+      true;
+
+    if (this.timeoutToast) {
+
+      clearTimeout(
+        this.timeoutToast
+      );
+    }
+
+    this.timeoutToast =
+      setTimeout(
+        () => {
+
+          this.fecharToastNovoPedido();
+
+        },
+        10000
+      );
+
+    this.cdr.detectChanges();
+  }
+
+  fecharToastNovoPedido():
+    void {
+
+    this.toastNovoPedidoVisivel =
+      false;
+
+    if (this.timeoutToast) {
+
+      clearTimeout(
+        this.timeoutToast
+      );
+
+      this.timeoutToast =
+        null;
+    }
+
+    this.cdr.detectChanges();
+  }
+
+  abrirNovoPedido(): void {
+
+    if (!this.toastNovoPedido) {
+      return;
+    }
+
+    const pedidoId =
+      this.toastNovoPedido.id;
+
+    this.fecharToastNovoPedido();
+
+    this.router.navigate(
+      ['/admin/pedidos'],
+      {
+        queryParams: {
+          pedidoId:
+            pedidoId
+        }
+      }
+    );
+  }
 
   private escutarErrosImpressao():
     void {
@@ -220,7 +351,6 @@ export class AdminLayoutComponent
       });
   }
 
-
   async tentarNovamente(
     erro: PedidoComErroImpressao
   ): Promise<void> {
@@ -231,7 +361,6 @@ export class AdminLayoutComponent
         erro.pedido
       );
   }
-
 
   verPedido(
     erro: PedidoComErroImpressao
@@ -248,7 +377,6 @@ export class AdminLayoutComponent
     );
   }
 
-
   removerAviso(
     erro: PedidoComErroImpressao
   ): void {
@@ -258,7 +386,6 @@ export class AdminLayoutComponent
         erro.pedido.id
       );
   }
-
 
   formatarMoeda(
     valor: number
@@ -275,7 +402,6 @@ export class AdminLayoutComponent
     );
   }
 
-
   getTipoEntrega(
     pedido: any
   ): string {
@@ -285,7 +411,6 @@ export class AdminLayoutComponent
       ? 'Entrega'
       : 'Retirada';
   }
-
 
   sair(): void {
 
@@ -317,7 +442,6 @@ export class AdminLayoutComponent
         }
       });
   }
-
 
   private async finalizarSessao():
     Promise<void> {

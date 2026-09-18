@@ -12,74 +12,134 @@ namespace TimDoLele.Application.Services
     public class PedidoService
     {
         private readonly TimDoLeleDbContext _context;
+        private readonly StatusLojaService _statusLojaService;
 
-        public PedidoService(TimDoLeleDbContext context)
+        public PedidoService(
+            TimDoLeleDbContext context,
+            StatusLojaService statusLojaService)
         {
             _context = context;
+            _statusLojaService = statusLojaService;
         }
 
-        public async Task<Guid> CriarPedidoAsync(CriarPedidoDto dto)
+        public async Task<Guid> CriarPedidoAsync(
+            CriarPedidoDto dto)
         {
-            var cliente = new Cliente(
-                dto.Nome,
-                dto.Telefone,
-                new Endereco(
-                    dto.Endereco,
-                    "0",
-                    "",
-                    "",
-                    "",
-                    ""
-                )
-            );
+            var statusLoja =
+                await _statusLojaService
+                    .ObterStatusAsync();
 
-            await _context.Clientes.AddAsync(cliente);
-            await _context.SaveChangesAsync();
+            if (!statusLoja.Aberta)
+            {
+                var mensagem =
+                    !string.IsNullOrWhiteSpace(
+                        statusLoja.Motivo
+                    )
+                        ? statusLoja.Motivo
+                        : statusLoja.Mensagem;
+
+                if (
+                    !string.IsNullOrWhiteSpace(
+                        statusLoja.ProximaAbertura
+                    )
+                )
+                {
+                    mensagem +=
+                        $" Próxima abertura: " +
+                        $"{statusLoja.ProximaAbertura}.";
+                }
+
+                throw new BadRequestException(
+                    mensagem
+                    ?? "A loja está fechada no momento."
+                );
+            }
+
+            if (
+                dto.Itens == null ||
+                !dto.Itens.Any()
+            )
+            {
+                throw new BadRequestException(
+                    "O pedido deve possuir pelo menos um item."
+                );
+            }
+
+            var cliente =
+                new Cliente(
+                    dto.Nome,
+                    dto.Telefone,
+                    new Endereco(
+                        dto.Endereco,
+                        "0",
+                        "",
+                        "",
+                        "",
+                        ""
+                    )
+                );
 
             var taxaEntrega =
-                dto.TipoEntrega == TipoEntrega.Delivery
-                    ? 5
+                dto.TipoEntrega ==
+                TipoEntrega.Delivery
+                    ? statusLoja.TaxaEntrega
                     : 0;
 
-            var pedido = new Pedido(
-                cliente.Id,
-                dto.TipoEntrega,
-                dto.FormaPagamento,
-                taxaEntrega,
-                dto.TrocoPara
-            );
+            var pedido =
+                new Pedido(
+                    cliente.Id,
+                    dto.TipoEntrega,
+                    dto.FormaPagamento,
+                    taxaEntrega,
+                    dto.TrocoPara
+                );
 
-            foreach (var itemDto in dto.Itens)
+            foreach (
+                var itemDto in dto.Itens
+            )
             {
-                var produto = await _context.Produtos
-                    .FirstOrDefaultAsync(
-                        p => p.Id == itemDto.ProdutoId
-                    );
+                var produto =
+                    await _context
+                        .Produtos
+                        .FirstOrDefaultAsync(
+                            p =>
+                                p.Id ==
+                                itemDto.ProdutoId
+                        );
 
                 if (produto == null)
                 {
                     throw new NotFoundException(
-                        $"Produto não encontrado: {itemDto.ProdutoId}"
+                        $"Produto não encontrado: " +
+                        $"{itemDto.ProdutoId}"
                     );
                 }
 
-                var item = new ItemPedido(
-                    produto,
-                    itemDto.Quantidade
-                );
+                var item =
+                    new ItemPedido(
+                        produto,
+                        itemDto.Quantidade
+                    );
 
                 if (
                     itemDto.Adicionais != null &&
                     itemDto.Adicionais.Any()
                 )
                 {
-                    foreach (var adicionalDto in itemDto.Adicionais)
+                    foreach (
+                        var adicionalDto
+                        in itemDto.Adicionais
+                    )
                     {
-                        var adicional = await _context.Adicionais
-                            .FirstOrDefaultAsync(
-                                a => a.Id ==
-                                     adicionalDto.AdicionalId
-                            );
+                        var adicional =
+                            await _context
+                                .Adicionais
+                                .FirstOrDefaultAsync(
+                                    a =>
+                                        a.Id ==
+                                        adicionalDto
+                                            .AdicionalId
+                                );
 
                         if (adicional == null)
                         {
@@ -96,11 +156,56 @@ namespace TimDoLele.Application.Services
                     }
                 }
 
-                pedido.AdicionarItem(item);
+                pedido.AdicionarItem(
+                    item
+                );
             }
 
-            await _context.Pedidos.AddAsync(pedido);
-            await _context.SaveChangesAsync();
+            var statusAntesDeSalvar =
+                await _statusLojaService
+                    .ObterStatusAsync();
+
+            if (!statusAntesDeSalvar.Aberta)
+            {
+                var mensagem =
+                    !string.IsNullOrWhiteSpace(
+                        statusAntesDeSalvar.Motivo
+                    )
+                        ? statusAntesDeSalvar.Motivo
+                        : statusAntesDeSalvar.Mensagem;
+
+                if (
+                    !string.IsNullOrWhiteSpace(
+                        statusAntesDeSalvar
+                            .ProximaAbertura
+                    )
+                )
+                {
+                    mensagem +=
+                        $" Próxima abertura: " +
+                        $"{statusAntesDeSalvar.ProximaAbertura}.";
+                }
+
+                throw new BadRequestException(
+                    mensagem
+                    ?? "A loja fechou e não está mais recebendo pedidos."
+                );
+            }
+
+            await _context
+                .Clientes
+                .AddAsync(
+                    cliente
+                );
+
+            await _context
+                .Pedidos
+                .AddAsync(
+                    pedido
+                );
+
+            await _context
+                .SaveChangesAsync();
 
             return pedido.Id;
         }

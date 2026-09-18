@@ -21,7 +21,10 @@
 
     <nav class="menu">
 
-      <a routerLink="/admin/dashboard" routerLinkActive="active">
+      <a
+        routerLink="/admin/dashboard"
+        routerLinkActive="active"
+      >
         <span class="menu-icon">
           ▦
         </span>
@@ -32,7 +35,10 @@
       </a>
 
 
-      <a routerLink="/admin/pedidos" routerLinkActive="active">
+      <a
+        routerLink="/admin/pedidos"
+        routerLinkActive="active"
+      >
         <span class="menu-icon">
           ▤
         </span>
@@ -43,7 +49,10 @@
       </a>
 
 
-      <a routerLink="/admin/produtos" routerLinkActive="active">
+      <a
+        routerLink="/admin/produtos"
+        routerLinkActive="active"
+      >
         <span class="menu-icon">
           ☰
         </span>
@@ -54,7 +63,10 @@
       </a>
 
 
-      <a routerLink="/admin/categorias" routerLinkActive="active">
+      <a
+        routerLink="/admin/categorias"
+        routerLinkActive="active"
+      >
         <span class="menu-icon">
           □
         </span>
@@ -65,7 +77,10 @@
       </a>
 
 
-      <a routerLink="/admin/adicionais" routerLinkActive="active">
+      <a
+        routerLink="/admin/adicionais"
+        routerLinkActive="active"
+      >
         <span class="menu-icon">
           ＋
         </span>
@@ -76,7 +91,10 @@
       </a>
 
 
-      <a routerLink="/admin/relatorios" routerLinkActive="active">
+      <a
+        routerLink="/admin/relatorios"
+        routerLinkActive="active"
+      >
         <span class="menu-icon">
           ↗
         </span>
@@ -86,7 +104,11 @@
         </span>
       </a>
 
-      <a routerLink="/admin/configuracoes" routerLinkActive="active">
+
+      <a
+        routerLink="/admin/configuracoes"
+        routerLinkActive="active"
+      >
         <span class="menu-icon">
           ⚙
         </span>
@@ -101,7 +123,12 @@
 
     <div class="sidebar-footer">
 
-      <button type="button" class="logout-button" [disabled]="saindo" (click)="sair()">
+      <button
+        type="button"
+        class="logout-button"
+        [disabled]="saindo"
+        (click)="sair()"
+      >
 
         <span class="menu-icon">
           ↩
@@ -109,9 +136,9 @@
 
         <span class="menu-text">
           {{
-          saindo
-          ? 'Saindo...'
-          : 'Sair'
+            saindo
+              ? 'Saindo...'
+              : 'Sair'
           }}
         </span>
 
@@ -124,7 +151,62 @@
 
   <main class="admin-main">
 
-    <div *ngIf="pedidosComErro.length > 0" class="printing-error-summary">
+    <div
+      *ngIf="
+        toastNovoPedidoVisivel &&
+        toastNovoPedido
+      "
+      class="global-new-order-toast"
+    >
+
+      <button
+        type="button"
+        class="global-new-order-close"
+        (click)="fecharToastNovoPedido()"
+      >
+        ×
+      </button>
+
+
+      <div class="global-new-order-icon">
+        🔔
+      </div>
+
+
+      <div class="global-new-order-content">
+
+        <span class="global-new-order-label">
+          NOVO PEDIDO
+        </span>
+
+        <strong>
+          Pedido #{{ toastNovoPedido.codigo }}
+        </strong>
+
+        <span>
+          {{ toastNovoPedido.nomeCliente }}
+          •
+          {{ formatarMoeda(toastNovoPedido.total) }}
+        </span>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="global-new-order-view"
+        (click)="abrirNovoPedido()"
+      >
+        Ver pedido
+      </button>
+
+    </div>
+
+
+    <div
+      *ngIf="pedidosComErro.length > 0"
+      class="printing-error-summary"
+    >
 
       <span class="printing-error-summary-icon">
         ⚠️
@@ -146,7 +228,10 @@
     </div>
 
 
-    <div *ngFor="let erro of pedidosComErro" class="printing-error-alert">
+    <div
+      *ngFor="let erro of pedidosComErro"
+      class="printing-error-alert"
+    >
 
       <div class="printing-error-icon">
         ⚠️
@@ -170,7 +255,11 @@
           </div>
 
 
-          <button type="button" class="printing-error-close" (click)="removerAviso(erro)">
+          <button
+            type="button"
+            class="printing-error-close"
+            (click)="removerAviso(erro)"
+          >
             ×
           </button>
 
@@ -248,12 +337,20 @@
 
         <div class="printing-error-actions">
 
-          <button type="button" class="printing-error-view" (click)="verPedido(erro)">
+          <button
+            type="button"
+            class="printing-error-view"
+            (click)="verPedido(erro)"
+          >
             👁️ Ver pedido
           </button>
 
 
-          <button type="button" class="printing-error-retry" (click)="tentarNovamente(erro)">
+          <button
+            type="button"
+            class="printing-error-retry"
+            (click)="tentarNovamente(erro)"
+          >
             🖨️ Tentar novamente
           </button>
 
