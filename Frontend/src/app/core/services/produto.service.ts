@@ -22,6 +22,13 @@ export class ProdutoService {
     return this.http.put<any>(`${this.api}/${id}`, dto);
   }
 
+  reajustarPrecoCategoria(categoriaId: string, valor: number) {
+    return this.http.post<{ produtosAlterados: number }>(
+      `${this.api}/reajuste-categoria`,
+      { categoriaId, valor }
+    );
+  }
+
   ativarProduto(id: string) {
     return this.http.patch(`${this.api}/${id}/ativar`, {});
   }

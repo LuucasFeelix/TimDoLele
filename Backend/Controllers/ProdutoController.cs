@@ -116,6 +116,52 @@ namespace TimDoLeLe.Controllers
             });
         }
 
+        // Soma (ou subtrai, se negativo) o mesmo valor no preço
+        // de todos os produtos de uma categoria.
+        [Authorize(Roles = "Admin")]
+        [HttpPost("reajuste-categoria")]
+        public async Task<IActionResult> ReajustarPrecoCategoria(
+            [FromBody] ReajustePrecoCategoriaDto dto)
+        {
+            if (dto.Valor == 0)
+                return BadRequest("Informe um valor diferente de zero.");
+
+            var categoriaExiste = await _context.Categorias
+                .AnyAsync(c => c.Id == dto.CategoriaId);
+
+            if (!categoriaExiste)
+                return BadRequest("Categoria não encontrada.");
+
+            var produtos = await _context.Produtos
+                .Where(p => p.CategoriaId == dto.CategoriaId)
+                .ToListAsync();
+
+            if (produtos.Count == 0)
+                return BadRequest("Esta categoria não possui produtos.");
+
+            var produtoInvalido = produtos
+                .FirstOrDefault(p => p.Preco + dto.Valor <= 0);
+
+            if (produtoInvalido != null)
+                return BadRequest(
+                    $"O produto \"{produtoInvalido.Nome}\" ficaria com preço zero ou negativo."
+                );
+
+            foreach (var produto in produtos)
+            {
+                produto.AlterarPreco(
+                    Math.Round(produto.Preco + dto.Valor, 2)
+                );
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                ProdutosAlterados = produtos.Count
+            });
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPatch("{id}/ativar")]
         public async Task<IActionResult> Ativar(Guid id)
@@ -239,5 +285,13 @@ namespace TimDoLeLe.Controllers
         public decimal Preco { get; set; }
 
         public Guid CategoriaId { get; set; }
+    }
+
+    public class ReajustePrecoCategoriaDto
+    {
+        public Guid CategoriaId { get; set; }
+
+        // Ex.: 0.50 aumenta R$ 0,50 | -1.00 diminui R$ 1,00
+        public decimal Valor { get; set; }
     }
 }
