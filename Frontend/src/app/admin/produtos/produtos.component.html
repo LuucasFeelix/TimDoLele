@@ -63,6 +63,82 @@
 
 </section>
 
+<section class="form-card card">
+
+  <h2>💲 Reajustar preços por categoria</h2>
+
+  <p class="reajuste-ajuda">
+    Soma ou diminui o mesmo valor no preço de todos os produtos
+    da categoria. Para um produto específico, use o botão Editar.
+  </p>
+
+  <div class="reajuste-grid">
+
+    <select [(ngModel)]="reajusteCategoriaId">
+      <option value="">Selecione a categoria</option>
+
+      <option
+        *ngFor="let categoria of categorias"
+        [value]="categoria.id"
+      >
+        {{ categoria.nome }}
+      </option>
+    </select>
+
+    <select [(ngModel)]="reajusteTipo">
+      <option value="aumentar">➕ Aumentar</option>
+      <option value="diminuir">➖ Diminuir</option>
+    </select>
+
+    <input
+      type="number"
+      min="0"
+      step="0.50"
+      [(ngModel)]="reajusteValor"
+      placeholder="Valor (ex.: 0,50 ou 1,00)"
+    />
+
+    <button
+      class="primary-button"
+      (click)="aplicarReajuste()"
+      [disabled]="aplicandoReajuste"
+    >
+      {{ aplicandoReajuste ? 'Aplicando...' : 'Aplicar reajuste' }}
+    </button>
+
+  </div>
+
+  <!-- PRÉVIA -->
+  <div
+    *ngIf="previaReajuste.length > 0 && reajusteValor"
+    class="reajuste-previa"
+  >
+    <strong>Prévia</strong>
+
+    <div
+      *ngFor="let item of previaReajuste"
+      class="reajuste-linha"
+      [class.reajuste-invalido]="item.novo <= 0"
+    >
+      <span>{{ item.nome }}</span>
+
+      <span>
+        R$ {{ formatarPreco(item.atual) }}
+        →
+        <b>R$ {{ formatarPreco(item.novo) }}</b>
+      </span>
+    </div>
+  </div>
+
+  <p
+    *ngIf="reajusteCategoriaId && previaReajuste.length === 0"
+    class="empty"
+  >
+    Esta categoria não possui produtos.
+  </p>
+
+</section>
+
 <section class="list-card card">
 
   <h2>Lista de produtos</h2>
@@ -164,9 +240,9 @@
     <div>
       <strong>{{ produto.nome }}</strong>
 
-      <small>
-        {{ produto.categoria }} • R$ {{ produto.preco }}
-      </small>
+      <span class="produto-preco">
+        R$ {{ formatarPreco(produto.preco) }}
+      </span>
 
       <p *ngIf="produto.descricao">
         {{ produto.descricao }}

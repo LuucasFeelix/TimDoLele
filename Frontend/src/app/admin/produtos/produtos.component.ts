@@ -36,6 +36,12 @@ export class ProdutosComponent implements OnInit {
   filtroBusca = '';
   filtroStatus: 'todos' | 'ativos' | 'inativos' = 'todos';
 
+  // Reajuste de preço por categoria
+  reajusteCategoriaId = '';
+  reajusteTipo: 'aumentar' | 'diminuir' = 'aumentar';
+  reajusteValor: number | null = null;
+  aplicandoReajuste = false;
+
   constructor(
     private produtoService: ProdutoService,
     private categoriaService: CategoriaService,
@@ -209,6 +215,106 @@ export class ProdutosComponent implements OnInit {
         },
         error: (err: any) => console.error(err)
       });
+  }
+
+  // =====================================================
+  // REAJUSTE DE PREÇO POR CATEGORIA
+  // =====================================================
+
+  // Valor com sinal: positivo aumenta, negativo diminui
+  private get valorReajuste(): number {
+    const valor = Math.abs(Number(this.reajusteValor) || 0);
+
+    return this.reajusteTipo === 'aumentar' ? valor : -valor;
+  }
+
+  // Prévia: preço atual -> preço novo de cada produto da categoria
+  get previaReajuste(): { nome: string; atual: number; novo: number }[] {
+    if (!this.reajusteCategoriaId) {
+      return [];
+    }
+
+    return this.produtos
+      .filter(p => p.categoriaId === this.reajusteCategoriaId)
+      .map(p => ({
+        nome: p.nome,
+        atual: Number(p.preco),
+        novo: Math.round((Number(p.preco) + this.valorReajuste) * 100) / 100
+      }))
+      .sort((a, b) => a.nome.localeCompare(b.nome));
+  }
+
+  get reajusteDeixaPrecoInvalido(): boolean {
+    return this.previaReajuste.some(p => p.novo <= 0);
+  }
+
+  aplicarReajuste(): void {
+    if (!this.reajusteCategoriaId) {
+      alert('Selecione a categoria.');
+      return;
+    }
+
+    if (!this.valorReajuste) {
+      alert('Informe o valor do reajuste.');
+      return;
+    }
+
+    if (this.previaReajuste.length === 0) {
+      alert('Esta categoria não possui produtos.');
+      return;
+    }
+
+    if (this.reajusteDeixaPrecoInvalido) {
+      alert('Algum produto ficaria com preço zero ou negativo.');
+      return;
+    }
+
+    const categoria = this.categorias.find(
+      c => c.id === this.reajusteCategoriaId
+    );
+
+    const acao = this.reajusteTipo === 'aumentar' ? 'AUMENTAR' : 'DIMINUIR';
+
+    const confirmou = confirm(
+      `${acao} R$ ${this.formatarPreco(Math.abs(this.valorReajuste))} ` +
+      `em ${this.previaReajuste.length} produto(s) da categoria ` +
+      `"${categoria?.nome}"?`
+    );
+
+    if (!confirmou) {
+      return;
+    }
+
+    this.aplicandoReajuste = true;
+
+    this.produtoService
+      .reajustarPrecoCategoria(this.reajusteCategoriaId, this.valorReajuste)
+      .subscribe({
+        next: (res) => {
+          alert(`Preço de ${res.produtosAlterados} produto(s) atualizado!`);
+
+          this.aplicandoReajuste = false;
+          this.reajusteValor = null;
+          this.carregarProdutos();
+        },
+        error: (err: any) => {
+          console.error(err);
+
+          this.aplicandoReajuste = false;
+
+          alert(
+            typeof err.error === 'string'
+              ? err.error
+              : 'Erro ao reajustar preços.'
+          );
+
+          this.cdr.detectChanges();
+        }
+      });
+  }
+
+  formatarPreco(valor: number): string {
+    return Number(valor).toFixed(2).replace('.', ',');
   }
 
   // =====================================================
