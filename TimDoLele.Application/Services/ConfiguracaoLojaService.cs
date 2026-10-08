@@ -44,6 +44,14 @@ namespace TimDoLele.Application.Services
                 dto.TaxaEntregaPadrao
             );
 
+            configuracao.AtualizarDadosEstabelecimento(
+                dto.NomeEstabelecimento,
+                dto.TelefoneFixo,
+                dto.Celular,
+                dto.WhatsApp,
+                dto.Endereco
+            );
+
             await _context.SaveChangesAsync();
 
             return MapearConfiguracao(
@@ -492,7 +500,23 @@ namespace TimDoLele.Application.Services
 
                 MotivoFechamentoManual =
                     configuracao
-                        .MotivoFechamentoManual
+                        .MotivoFechamentoManual,
+
+                NomeEstabelecimento =
+                    configuracao
+                        .NomeEstabelecimento,
+
+                TelefoneFixo =
+                    configuracao.TelefoneFixo,
+
+                Celular =
+                    configuracao.Celular,
+
+                WhatsApp =
+                    configuracao.WhatsApp,
+
+                Endereco =
+                    configuracao.Endereco
             };
         }
 

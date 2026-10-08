@@ -34,3 +34,6 @@ D:\Projetos em desenvolvimento\Projetos\TimDoLele\TimDoLele.Application\obj\Debu
 D:\Projetos em desenvolvimento\Projetos\TimDoLele\TimDoLele.Application\obj\Debug\net8.0\refint\TimDoLele.Application.dll
 D:\Projetos em desenvolvimento\Projetos\TimDoLele\TimDoLele.Application\obj\Debug\net8.0\TimDoLele.Application.pdb
 D:\Projetos em desenvolvimento\Projetos\TimDoLele\TimDoLele.Application\obj\Debug\net8.0\ref\TimDoLele.Application.dll
+C:\Users\Luuca\AppData\Local\Temp\timdolele-build\TimDoLele.Application.deps.json
+C:\Users\Luuca\AppData\Local\Temp\timdolele-build\TimDoLele.Application.dll
+C:\Users\Luuca\AppData\Local\Temp\timdolele-build\TimDoLele.Application.pdb

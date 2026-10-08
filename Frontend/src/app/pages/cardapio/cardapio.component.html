@@ -348,6 +348,49 @@
       encerramento do atendimento.
     </p>
 
+    <div
+      *ngIf="temTelefoneContato"
+      class="closing-modal-contact"
+    >
+
+      <p class="closing-modal-contact-title">
+        Quer fazer seu pedido mais rápido?
+        <strong>Ligue para nós!</strong>
+      </p>
+
+      <!-- Dois números: um botão para cada -->
+      <ng-container *ngIf="telefoneFixo && celular">
+
+        <a
+          class="closing-modal-call"
+          [href]="linkTelefone(telefoneFixo)"
+        >
+          <span>☎️ Ligar para telefone fixo</span>
+          <small>{{ formatarTelefone(telefoneFixo) }}</small>
+        </a>
+
+        <a
+          class="closing-modal-call"
+          [href]="linkTelefone(celular)"
+        >
+          <span>📱 Ligar para celular</span>
+          <small>{{ formatarTelefone(celular) }}</small>
+        </a>
+
+      </ng-container>
+
+      <!-- Só um número: botão "Ligar agora" -->
+      <a
+        *ngIf="!(telefoneFixo && celular)"
+        class="closing-modal-call"
+        [href]="linkTelefone((telefoneFixo || celular)!)"
+      >
+        <span>📞 Ligar agora</span>
+        <small>{{ formatarTelefone((telefoneFixo || celular)!) }}</small>
+      </a>
+
+    </div>
+
     <button
       type="button"
       class="closing-modal-button warning"

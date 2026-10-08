@@ -27,5 +27,9 @@
         public int PrazoRetiradaMax { get; set; }
 
         public decimal TaxaEntrega { get; set; }
+
+        public string? TelefoneFixo { get; set; }
+
+        public string? Celular { get; set; }
     }
 }

@@ -53,7 +53,12 @@ export class ConfiguracoesComponent implements OnInit {
     prazoEntregaMax: 0,
     prazoRetiradaMin: 0,
     prazoRetiradaMax: 0,
-    taxaEntregaPadrao: 0
+    taxaEntregaPadrao: 0,
+    nomeEstabelecimento: null,
+    telefoneFixo: null,
+    celular: null,
+    whatsApp: null,
+    endereco: null
   };
 
   horarios: HorarioFuncionamento[] = [];
@@ -169,7 +174,22 @@ export class ConfiguracoesComponent implements OnInit {
         configuracao.prazoRetiradaMax,
 
       taxaEntregaPadrao:
-        configuracao.taxaEntregaPadrao
+        configuracao.taxaEntregaPadrao,
+
+      nomeEstabelecimento:
+        configuracao.nomeEstabelecimento,
+
+      telefoneFixo:
+        configuracao.telefoneFixo,
+
+      celular:
+        configuracao.celular,
+
+      whatsApp:
+        configuracao.whatsApp,
+
+      endereco:
+        configuracao.endereco
     };
   }
 
