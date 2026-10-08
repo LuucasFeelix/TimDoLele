@@ -539,7 +539,13 @@ namespace TimDoLele.Application.Services
 
                 TaxaEntrega =
                     configuracao
-                        .TaxaEntregaPadrao
+                        .TaxaEntregaPadrao,
+
+                TelefoneFixo =
+                    configuracao.TelefoneFixo,
+
+                Celular =
+                    configuracao.Celular
             };
         }
 
@@ -590,7 +596,13 @@ namespace TimDoLele.Application.Services
 
                 TaxaEntrega =
                     configuracao
-                        .TaxaEntregaPadrao
+                        .TaxaEntregaPadrao,
+
+                TelefoneFixo =
+                    configuracao.TelefoneFixo,
+
+                Celular =
+                    configuracao.Celular
             };
         }
 

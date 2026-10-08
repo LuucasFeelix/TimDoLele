@@ -289,6 +289,134 @@
 
 
     <!-- ====================================== -->
+    <!-- CONTATO DA LOJA -->
+    <!-- ====================================== -->
+
+    <section class="config-card">
+
+      <div class="section-title">
+
+        <div>
+          <h2>📞 Contato da loja</h2>
+          <p>
+            Os telefones aparecem para o cliente
+            no aviso de fechamento, com botão
+            para ligar.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="settings-grid">
+
+        <div class="settings-block">
+
+          <h3>☎️ Telefones</h3>
+
+          <label>
+            Telefone fixo
+            <div class="input-with-prefix">
+              <span>☎️</span>
+              <input
+                type="tel"
+                placeholder="(16) 3333-4444"
+                [(ngModel)]="
+                  configuracao.telefoneFixo
+                "
+              />
+            </div>
+          </label>
+
+          <label>
+            Celular
+            <div class="input-with-prefix">
+              <span>📱</span>
+              <input
+                type="tel"
+                placeholder="(16) 99999-9999"
+                [(ngModel)]="
+                  configuracao.celular
+                "
+              />
+            </div>
+          </label>
+
+          <label>
+            WhatsApp
+            <div class="input-with-prefix">
+              <span>💬</span>
+              <input
+                type="tel"
+                placeholder="(16) 99999-9999"
+                [(ngModel)]="
+                  configuracao.whatsApp
+                "
+              />
+            </div>
+          </label>
+
+        </div>
+
+
+        <div class="settings-block">
+
+          <h3>🏪 Estabelecimento</h3>
+
+          <label>
+            Nome do estabelecimento
+            <div class="input-with-prefix">
+              <span>🍔</span>
+              <input
+                type="text"
+                placeholder="Tim do Lelê Lanches"
+                [(ngModel)]="
+                  configuracao.nomeEstabelecimento
+                "
+              />
+            </div>
+          </label>
+
+          <label>
+            Endereço
+            <div class="input-with-prefix">
+              <span>📍</span>
+              <input
+                type="text"
+                placeholder="Rua, número - bairro"
+                [(ngModel)]="
+                  configuracao.endereco
+                "
+              />
+            </div>
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <div class="section-actions">
+
+        <button
+          type="button"
+          class="save-button"
+          (click)="salvarConfiguracoes()"
+          [disabled]="salvandoConfiguracoes"
+        >
+          {{
+            salvandoConfiguracoes
+              ? 'Salvando...'
+              : '💾 Salvar contato'
+          }}
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================== -->
     <!-- HORÁRIOS -->
     <!-- ====================================== -->
 

@@ -16,9 +16,21 @@
 
         public string? MotivoFechamentoManual { get; private set; }
 
+        public string? NomeEstabelecimento { get; private set; }
+
+        public string? TelefoneFixo { get; private set; }
+
+        public string? Celular { get; private set; }
+
+        public string? WhatsApp { get; private set; }
+
+        public string? Endereco { get; private set; }
+
+
         private ConfiguracaoLoja()
         {
         }
+
 
         public ConfiguracaoLoja(
             int prazoEntregaMin,
@@ -35,6 +47,7 @@
                 taxaEntregaPadrao
             );
         }
+
 
         public void Atualizar(
             int prazoEntregaMin,
@@ -94,21 +107,75 @@
                 taxaEntregaPadrao;
         }
 
+
+        public void AtualizarDadosEstabelecimento(
+            string? nomeEstabelecimento,
+            string? telefoneFixo,
+            string? celular,
+            string? whatsapp,
+            string? endereco)
+        {
+            NomeEstabelecimento =
+                LimparTexto(
+                    nomeEstabelecimento
+                );
+
+            TelefoneFixo =
+                LimparTexto(
+                    telefoneFixo
+                );
+
+            Celular =
+                LimparTexto(
+                    celular
+                );
+
+            WhatsApp =
+                LimparTexto(
+                    whatsapp
+                );
+
+            Endereco =
+                LimparTexto(
+                    endereco
+                );
+        }
+
+
         public void FecharManual(
             string? motivo = null)
         {
-            FechadaManual = true;
+            FechadaManual =
+                true;
 
             MotivoFechamentoManual =
                 motivo;
         }
 
+
         public void AbrirManual()
         {
-            FechadaManual = false;
+            FechadaManual =
+                false;
 
             MotivoFechamentoManual =
                 null;
+        }
+
+
+        private static string? LimparTexto(
+            string? valor)
+        {
+            if (
+                string.IsNullOrWhiteSpace(
+                    valor
+                )
+            )
+            {
+                return null;
+            }
+
+            return valor.Trim();
         }
     }
 }

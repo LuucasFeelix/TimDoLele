@@ -24,6 +24,16 @@ export interface ConfiguracaoLoja {
   fechadaManual: boolean;
 
   motivoFechamentoManual: string | null;
+
+  nomeEstabelecimento: string | null;
+
+  telefoneFixo: string | null;
+
+  celular: string | null;
+
+  whatsApp: string | null;
+
+  endereco: string | null;
 }
 
 // =====================================================
@@ -38,6 +48,16 @@ export interface AtualizarConfiguracaoLojaRequest {
   prazoRetiradaMax: number;
 
   taxaEntregaPadrao: number;
+
+  nomeEstabelecimento: string | null;
+
+  telefoneFixo: string | null;
+
+  celular: string | null;
+
+  whatsApp: string | null;
+
+  endereco: string | null;
 }
 
 // =====================================================
@@ -134,6 +154,10 @@ export interface StatusLoja {
   prazoRetiradaMax: number;
 
   taxaEntrega: number;
+
+  telefoneFixo: string | null;
+
+  celular: string | null;
 }
 
 @Injectable({

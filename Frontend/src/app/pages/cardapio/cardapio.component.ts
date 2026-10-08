@@ -439,6 +439,96 @@ export class CardapioComponent
     );
   }
 
+  get telefoneFixo(): string | null {
+
+    return (
+      this.statusLoja?.telefoneFixo?.trim() ||
+      null
+    );
+  }
+
+  get celular(): string | null {
+
+    return (
+      this.statusLoja?.celular?.trim() ||
+      null
+    );
+  }
+
+  get temTelefoneContato(): boolean {
+
+    return (
+      !!this.telefoneFixo ||
+      !!this.celular
+    );
+  }
+
+  // Monta o link "tel:" só com números.
+  // Ex.: "(16) 99999-9999" -> "tel:+5516999999999"
+  linkTelefone(
+    telefone: string
+  ): string {
+
+    const numeros =
+      telefone.replace(
+        /\D/g,
+        ''
+      );
+
+    if (
+      numeros.length === 10 ||
+      numeros.length === 11
+    ) {
+
+      return `tel:+55${numeros}`;
+    }
+
+    return `tel:${numeros}`;
+  }
+
+  // Formata para exibição.
+  // Ex.: "1636633366"  -> "(16) 3663-3366"
+  //      "16992618003" -> "(16) 99261-8003"
+  formatarTelefone(
+    telefone: string
+  ): string {
+
+    let numeros =
+      telefone.replace(
+        /\D/g,
+        ''
+      );
+
+    // Remove o +55 se vier junto
+    if (
+      numeros.length > 11 &&
+      numeros.startsWith('55')
+    ) {
+
+      numeros =
+        numeros.substring(2);
+    }
+
+    if (numeros.length === 11) {
+
+      return numeros.replace(
+        /(\d{2})(\d{5})(\d{4})/,
+        '($1) $2-$3'
+      );
+    }
+
+    if (numeros.length === 10) {
+
+      return numeros.replace(
+        /(\d{2})(\d{4})(\d{4})/,
+        '($1) $2-$3'
+      );
+    }
+
+    // Formato desconhecido: mostra como foi cadastrado
+    return telefone;
+  }
+
   fecharPopupFechamento(): void {
 
     this.popupFechamentoVisivel =
