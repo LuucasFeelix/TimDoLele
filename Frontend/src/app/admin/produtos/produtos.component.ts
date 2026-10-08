@@ -31,6 +31,11 @@ export class ProdutosComponent implements OnInit {
   adicionaisProduto: any[] = [];
   modalAdicionaisAberto = false;
 
+  // Filtros da lista
+  filtroCategoria = 'Todas';
+  filtroBusca = '';
+  filtroStatus: 'todos' | 'ativos' | 'inativos' = 'todos';
+
   constructor(
     private produtoService: ProdutoService,
     private categoriaService: CategoriaService,
@@ -204,6 +209,94 @@ export class ProdutosComponent implements OnInit {
         },
         error: (err: any) => console.error(err)
       });
+  }
+
+  // =====================================================
+  // FILTROS
+  // =====================================================
+
+  // Categorias que têm produto, em ordem alfabética
+  get categoriasComProduto(): string[] {
+    const nomes = this.produtos.map(p => p.categoria || 'Sem categoria');
+
+    return [...new Set<string>(nomes)].sort((a, b) =>
+      a.localeCompare(b)
+    );
+  }
+
+  contarPorCategoria(categoria: string): number {
+    if (categoria === 'Todas') {
+      return this.produtos.length;
+    }
+
+    return this.produtos.filter(
+      p => (p.categoria || 'Sem categoria') === categoria
+    ).length;
+  }
+
+  get produtosFiltrados(): any[] {
+    const busca = this.filtroBusca.trim().toLowerCase();
+
+    return this.produtos.filter(p => {
+      const categoria = p.categoria || 'Sem categoria';
+
+      if (
+        this.filtroCategoria !== 'Todas' &&
+        categoria !== this.filtroCategoria
+      ) {
+        return false;
+      }
+
+      if (this.filtroStatus === 'ativos' && !p.ativo) {
+        return false;
+      }
+
+      if (this.filtroStatus === 'inativos' && p.ativo) {
+        return false;
+      }
+
+      if (busca && !p.nome?.toLowerCase().includes(busca)) {
+        return false;
+      }
+
+      return true;
+    });
+  }
+
+  // Produtos filtrados separados por categoria
+  get gruposProdutos(): { categoria: string; produtos: any[] }[] {
+    const grupos: { categoria: string; produtos: any[] }[] = [];
+
+    for (const produto of this.produtosFiltrados) {
+      const categoria = produto.categoria || 'Sem categoria';
+
+      let grupo = grupos.find(g => g.categoria === categoria);
+
+      if (!grupo) {
+        grupo = { categoria, produtos: [] };
+        grupos.push(grupo);
+      }
+
+      grupo.produtos.push(produto);
+    }
+
+    grupos.sort((a, b) => a.categoria.localeCompare(b.categoria));
+
+    grupos.forEach(g =>
+      g.produtos.sort((a, b) => a.nome.localeCompare(b.nome))
+    );
+
+    return grupos;
+  }
+
+  selecionarCategoria(categoria: string): void {
+    this.filtroCategoria = categoria;
+  }
+
+  limparFiltros(): void {
+    this.filtroCategoria = 'Todas';
+    this.filtroBusca = '';
+    this.filtroStatus = 'todos';
   }
 
   limparFormulario(): void {
