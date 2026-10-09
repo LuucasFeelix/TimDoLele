@@ -26,13 +26,23 @@ import {
   ProdutoModalComponent
 } from '../produto-modal/produto-modal.component';
 
+import {
+  copiarItem,
+  nomeAdicional,
+  separarItensPersonalizados,
+  temPersonalizacao,
+  valorUnitarioItem
+} from '../../core/utils/carrinho.utils';
+import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
+
 @Component({
   selector: 'app-checkout',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
-    ProdutoModalComponent
+    ProdutoModalComponent,
+    SemEmojiDirective
   ],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
@@ -104,8 +114,10 @@ export class CheckoutComponent
     if (carrinhoStorage) {
 
       this.carrinho =
-        JSON.parse(
-          carrinhoStorage
+        separarItensPersonalizados(
+          JSON.parse(
+            carrinhoStorage
+          )
         );
     }
 
@@ -361,7 +373,36 @@ export class CheckoutComponent
       return;
     }
 
-    item.quantidade++;
+    // Lanche personalizado: o "+" cria outra linha igual,
+    // logo abaixo, para poder editar separado
+    if (
+      temPersonalizacao(
+        item
+      )
+    ) {
+
+      const indice =
+        this.carrinho.indexOf(
+          item
+        );
+
+      this.carrinho.splice(
+        indice + 1,
+        0,
+        copiarItem(
+          item,
+          1
+        )
+      );
+
+      this.carrinho = [
+        ...this.carrinho
+      ];
+
+    } else {
+
+      item.quantidade++;
+    }
 
     this.salvarCarrinho();
   }
@@ -493,8 +534,15 @@ export class CheckoutComponent
 
     if (indice >= 0) {
 
-      this.carrinho[indice] =
-        novoItem;
+      // Se ficou personalizado com quantidade > 1,
+      // já entra separado (uma linha por lanche)
+      this.carrinho.splice(
+        indice,
+        1,
+        ...separarItensPersonalizados([
+          novoItem
+        ])
+      );
 
       this.carrinho = [
         ...this.carrinho
@@ -531,35 +579,10 @@ export class CheckoutComponent
     item: any
   ): string {
 
-    let total =
-      Number(
-        item.preco
-          .toString()
-          .replace(
-            ',',
-            '.'
-          )
-      );
-
-    item.adicionais
-      ?.forEach(
-        (
-          adicional: any
-        ) => {
-
-          total +=
-            Number(
-              adicional.preco
-                .toString()
-                .replace(
-                  ',',
-                  '.'
-                )
-            );
-        }
-      );
-
-    total *=
+    const total =
+      valorUnitarioItem(
+        item
+      ) *
       item.quantidade;
 
     return total
@@ -570,6 +593,15 @@ export class CheckoutComponent
       );
   }
 
+  nomeAdicional(
+    adicional: any
+  ): string {
+
+    return nomeAdicional(
+      adicional
+    );
+  }
+
   calcularSubtotal(): string {
 
     let total = 0;
@@ -577,36 +609,10 @@ export class CheckoutComponent
     this.carrinho.forEach(
       item => {
 
-        let subtotal =
-          Number(
-            item.preco
-              .toString()
-              .replace(
-                ',',
-                '.'
-              )
-          );
-
-        item.adicionais
-          ?.forEach(
-            (
-              adicional: any
-            ) => {
-
-              subtotal +=
-                Number(
-                  adicional.preco
-                    .toString()
-                    .replace(
-                      ',',
-                      '.'
-                    )
-                );
-            }
-          );
-
         total +=
-          subtotal *
+          valorUnitarioItem(
+            item
+          ) *
           item.quantidade;
       }
     );
@@ -910,7 +916,10 @@ export class CheckoutComponent
                 ) => ({
 
                   adicionalId:
-                    adicional.id
+                    adicional.id,
+
+                  quantidade:
+                    adicional.quantidade ?? 1
                 })
               )
           })

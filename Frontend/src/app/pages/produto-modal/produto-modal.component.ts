@@ -2,11 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProdutoService } from '../../core/services/produto.service';
+import { limparTextoImpressao } from '../../core/utils/texto.utils';
+import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
 
 @Component({
   selector: 'app-produto-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SemEmojiDirective],
   templateUrl: './produto-modal.component.html',
   styleUrls: ['./produto-modal.component.css']
 })
@@ -34,40 +36,80 @@ export class ProdutoModalComponent implements OnInit {
     this.quantidade = this.itemEdicao.quantidade ?? 1;
     this.observacao = this.itemEdicao.observacao ?? '';
 
-    // Marca os adicionais que o cliente já tinha escolhido
-    const idsEscolhidos = (this.itemEdicao.adicionais ?? []).map(
-      (a: any) => a.id
-    );
+    // Marca os adicionais (e quantidades) que o cliente já tinha escolhido.
+    // Usa os dados atuais do produto (nome/preço de agora).
+    this.adicionaisSelecionados = (this.itemEdicao.adicionais ?? [])
+      .map((escolhido: any) => {
+        const atual = (this.produto?.adicionais ?? []).find(
+          (a: any) => a.id === escolhido.id
+        );
 
-    this.adicionaisSelecionados = (this.produto?.adicionais ?? []).filter(
-      (a: any) => idsEscolhidos.includes(a.id)
-    );
+        return atual
+          ? { ...atual, quantidade: escolhido.quantidade ?? 1 }
+          : null;
+      })
+      .filter((a: any) => !!a);
   }
 
   get urlImagem(): string | null {
     return this.produtoService.urlImagem(this.produto?.imagemUrl);
   }
 
-  toggleAdicional(adicional: any): void {
-    const existe = this.adicionaisSelecionados.find(
-      a => a.id === adicional.id
+  // =====================================================
+  // ADICIONAIS (cada um pode ir até 5x: ex. 2x Bacon)
+  // =====================================================
+
+  readonly maximoPorAdicional = 5;
+
+  quantidadeAdicional(adicional: any): number {
+    return (
+      this.adicionaisSelecionados.find(a => a.id === adicional.id)
+        ?.quantidade ?? 0
     );
-
-    if (existe) {
-      this.adicionaisSelecionados =
-        this.adicionaisSelecionados.filter(
-          a => a.id !== adicional.id
-        );
-
-      return;
-    }
-
-    this.adicionaisSelecionados.push(adicional);
   }
 
   adicionalSelecionado(adicional: any): boolean {
-    return this.adicionaisSelecionados.some(
+    return this.quantidadeAdicional(adicional) > 0;
+  }
+
+  // Clicar no adicional: se ainda não tem, adiciona 1
+  toggleAdicional(adicional: any): void {
+    if (!this.adicionalSelecionado(adicional)) {
+      this.aumentarAdicional(adicional);
+    }
+  }
+
+  aumentarAdicional(adicional: any): void {
+    const existente = this.adicionaisSelecionados.find(
       a => a.id === adicional.id
+    );
+
+    if (!existente) {
+      this.adicionaisSelecionados.push({ ...adicional, quantidade: 1 });
+      return;
+    }
+
+    if (existente.quantidade < this.maximoPorAdicional) {
+      existente.quantidade++;
+    }
+  }
+
+  diminuirAdicional(adicional: any): void {
+    const existente = this.adicionaisSelecionados.find(
+      a => a.id === adicional.id
+    );
+
+    if (!existente) {
+      return;
+    }
+
+    if (existente.quantidade > 1) {
+      existente.quantidade--;
+      return;
+    }
+
+    this.adicionaisSelecionados = this.adicionaisSelecionados.filter(
+      a => a.id !== adicional.id
     );
   }
 
@@ -89,7 +131,7 @@ export class ProdutoModalComponent implements OnInit {
     this.adicionaisSelecionados.forEach(a => {
       total += Number(
         a.preco.toString().replace(',', '.')
-      );
+      ) * (a.quantidade ?? 1);
     });
 
     total *= this.quantidade;
@@ -105,8 +147,10 @@ export class ProdutoModalComponent implements OnInit {
       nome: this.produto.nome,
       preco: this.produto.preco,
       quantidade: this.quantidade,
-      observacao: this.observacao,
-      adicionais: [...this.adicionaisSelecionados]
+      observacao: limparTextoImpressao(this.observacao)
+        .replace(/ {2,}/g, ' ')
+        .trim(),
+      adicionais: this.adicionaisSelecionados.map(a => ({ ...a }))
     });
 
     this.fechar.emit();

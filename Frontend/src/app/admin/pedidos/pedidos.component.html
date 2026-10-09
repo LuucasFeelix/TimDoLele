@@ -800,6 +800,9 @@
               >
 
                 +
+                <strong *ngIf="adicional.quantidade > 1">
+                  {{ adicional.quantidade }}x
+                </strong>
                 {{
                   adicional.nome ||
                   adicional.adicionalId
@@ -807,7 +810,7 @@
 
                 -
 
-                R$ {{ adicional.preco }}
+                R$ {{ adicional.preco * (adicional.quantidade || 1) }}
 
               </li>
 
@@ -818,7 +821,7 @@
               *ngIf="item.observacao"
               class="item-observacao"
             >
-              📝 Obs: {{ item.observacao }}
+              Obs: {{ item.observacao }}
             </p>
 
           </div>

@@ -201,6 +201,13 @@
   color: var(--secondary);
 }
 
+/* Quando o subtotal é a única linha do resumo */
+.summary-total:only-child {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 0;
+}
+
 .choice-card h2,
 .payment-summary h2,
 .payment-card h2 {

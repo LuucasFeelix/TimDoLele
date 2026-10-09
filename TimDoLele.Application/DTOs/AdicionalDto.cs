@@ -10,5 +10,8 @@ namespace TimDoLele.Application.DTOs
     {
         public Guid AdicionalId { get; set; }
 
+        // Ex.: 2 = "2x Bacon". Se não vier, vale 1.
+        public int Quantidade { get; set; } = 1;
+
     }
 }

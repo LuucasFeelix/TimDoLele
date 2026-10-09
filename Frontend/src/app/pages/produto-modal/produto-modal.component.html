@@ -58,13 +58,45 @@
 
             <div>
               <strong>{{ adicional.nome }}</strong>
-              <small>Adicionar ao lanche</small>
+              <small>
+                {{
+                  adicionalSelecionado(adicional)
+                    ? 'Toque no + para colocar mais'
+                    : 'Adicionar ao lanche'
+                }}
+              </small>
             </div>
           </div>
 
-          <strong class="adicional-preco">
-            + R$ {{ adicional.preco }}
-          </strong>
+          <div class="adicional-lado">
+            <strong class="adicional-preco">
+              + R$ {{ adicional.preco }}
+            </strong>
+
+            <!-- Quantidade do adicional (ex.: 2x Bacon) -->
+            <div
+              *ngIf="adicionalSelecionado(adicional)"
+              class="adicional-qtd"
+              (click)="$event.stopPropagation()"
+            >
+              <button
+                type="button"
+                (click)="diminuirAdicional(adicional)"
+              >
+                -
+              </button>
+
+              <span>{{ quantidadeAdicional(adicional) }}</span>
+
+              <button
+                type="button"
+                (click)="aumentarAdicional(adicional)"
+                [disabled]="quantidadeAdicional(adicional) >= maximoPorAdicional"
+              >
+                +
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -75,6 +107,7 @@
         </div>
 
         <textarea
+          semEmoji
           [(ngModel)]="observacao"
           maxlength="200"
           placeholder="Ex: sem cebola, pouco molho..."
@@ -96,6 +129,18 @@
           </button>
         </div>
       </div>
+
+      <p
+        *ngIf="
+          !itemEdicao &&
+          quantidade > 1 &&
+          (adicionaisSelecionados.length > 0 || observacao.trim())
+        "
+        class="aviso-unidades"
+      >
+        ℹ️ Os {{ quantidade }} lanches vão <strong>separados</strong>
+        no carrinho. Lá você pode editar cada um.
+      </p>
 
     </div>
 

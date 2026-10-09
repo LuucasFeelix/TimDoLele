@@ -35,19 +35,22 @@ namespace TimDolele.Core.Entities
             RecalcularValor();
         }
 
-        public void AdicionarAdicional(Guid adicionalId, decimal preco)
+        public void AdicionarAdicional(Guid adicionalId, decimal preco, int quantidade = 1)
         {
-            if (Adicionais.Any(a => a.AdicionalId == adicionalId))
-                return;
+            var existente = Adicionais
+                .FirstOrDefault(a => a.AdicionalId == adicionalId);
 
-            Adicionais.Add(new ItemPedidoAdicional(adicionalId, preco));
+            if (existente != null)
+                existente.AumentarQuantidade(quantidade);
+            else
+                Adicionais.Add(new ItemPedidoAdicional(adicionalId, preco, quantidade));
 
             RecalcularValor();
         }
 
         private void RecalcularValor()
         {
-            var totalAdicionais = Adicionais.Sum(a => a.Preco);
+            var totalAdicionais = Adicionais.Sum(a => a.Preco * a.Quantidade);
             Valor = (ValorUnitario + totalAdicionais) * Quantidade;
         }
     }

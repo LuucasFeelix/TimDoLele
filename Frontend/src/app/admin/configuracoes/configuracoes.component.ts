@@ -21,13 +21,15 @@ import {
   AtualizarHorarioFuncionamentoRequest,
   CriarDataEspecialRequest
 } from '../../core/services/configuracao-loja.service';
+import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
 
 @Component({
   selector: 'app-configuracoes',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    SemEmojiDirective
   ],
   templateUrl: './configuracoes.component.html',
   styleUrls: ['./configuracoes.component.css']

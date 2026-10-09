@@ -77,6 +77,11 @@ namespace TimDoLele.Infrastructure.Data
                 .WithMany(ip => ip.Adicionais)
                 .HasForeignKey(ipa => ipa.ItemPedidoId);
 
+            // Pedidos antigos ficam com Quantidade = 1
+            modelBuilder.Entity<ItemPedidoAdicional>()
+                .Property(ipa => ipa.Quantidade)
+                .HasDefaultValue(1);
+
             modelBuilder.Entity<ItemPedidoAdicional>()
                 .HasOne(ipa => ipa.Adicional)
                 .WithMany()
