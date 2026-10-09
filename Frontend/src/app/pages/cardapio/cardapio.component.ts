@@ -17,6 +17,10 @@ import {
 } from '../../core/services/pedido.service';
 
 import {
+  ProdutoService
+} from '../../core/services/produto.service';
+
+import {
   ConfiguracaoLojaService,
   StatusLoja
 } from '../../core/services/configuracao-loja.service';
@@ -61,12 +65,22 @@ export class CardapioComponent
 
   avisoFechamentoFechado = false;
 
+  // "Pedir de novo": itens do último pedido feito neste aparelho
+  ultimoPedidoItens: any[] = [];
+
+  ultimoPedidoData: string | null = null;
+
+  mensagemPedirDeNovo: string | null = null;
+
   private intervaloStatus:
     ReturnType<typeof setInterval> | null = null;
 
   constructor(
     private pedidoService:
       PedidoService,
+
+    private produtoService:
+      ProdutoService,
 
     private configuracaoLojaService:
       ConfiguracaoLojaService,
@@ -76,6 +90,8 @@ export class CardapioComponent
   ) {}
 
   ngOnInit(): void {
+
+    this.carregarCarrinhoSalvo();
 
     this.carregarPagina();
 
@@ -119,6 +135,20 @@ export class CardapioComponent
           this.cardapio = [
             ...resultado.cardapio
           ];
+
+          // Atualiza o carrinho salvo com preços atuais
+          // e tira produtos que saíram do cardápio
+          const sincronizado =
+            this.sincronizarItens(
+              this.carrinho
+            );
+
+          this.carrinho =
+            sincronizado.itens;
+
+          this.salvarCarrinho();
+
+          this.carregarUltimoPedido();
 
           this.aplicarStatusLoja(
             resultado.statusLoja
@@ -439,6 +469,15 @@ export class CardapioComponent
     );
   }
 
+  urlImagem(
+    produto: any
+  ): string | null {
+
+    return this.produtoService.urlImagem(
+      produto?.imagemUrl
+    );
+  }
+
   get telefoneFixo(): string | null {
 
     return (
@@ -652,8 +691,242 @@ export class CardapioComponent
       );
     }
 
+    this.salvarCarrinho();
+
     this.produtoSelecionado =
       null;
+  }
+
+  // =====================================================
+  // CARRINHO SALVO NO NAVEGADOR
+  // (o checkout lê o mesmo 'carrinho')
+  // =====================================================
+
+  private carregarCarrinhoSalvo(): void {
+
+    try {
+
+      const salvo =
+        localStorage.getItem(
+          'carrinho'
+        );
+
+      this.carrinho =
+        salvo
+          ? JSON.parse(salvo)
+          : [];
+
+    } catch {
+
+      this.carrinho = [];
+    }
+  }
+
+  private salvarCarrinho(): void {
+
+    localStorage.setItem(
+      'carrinho',
+      JSON.stringify(
+        this.carrinho
+      )
+    );
+  }
+
+  // =====================================================
+  // PEDIR DE NOVO
+  // =====================================================
+
+  private carregarUltimoPedido(): void {
+
+    try {
+
+      const salvo =
+        localStorage.getItem(
+          'ultimoPedidoItens'
+        );
+
+      if (!salvo) {
+        return;
+      }
+
+      const ultimo =
+        JSON.parse(salvo);
+
+      // Mostra só o que ainda está no cardápio
+      this.ultimoPedidoItens =
+        this.sincronizarItens(
+          ultimo.itens
+        ).itens;
+
+      this.ultimoPedidoData =
+        ultimo.data ?? null;
+
+    } catch {
+
+      this.ultimoPedidoItens = [];
+    }
+  }
+
+  get ultimoPedidoDataTexto(): string {
+
+    if (!this.ultimoPedidoData) {
+      return '';
+    }
+
+    const data =
+      new Date(
+        this.ultimoPedidoData
+      );
+
+    return data.toLocaleDateString(
+      'pt-BR',
+      {
+        day: '2-digit',
+        month: '2-digit'
+      }
+    );
+  }
+
+  descreverItem(
+    item: any
+  ): string {
+
+    const adicionais =
+      (item.adicionais ?? [])
+        .map((a: any) => a.nome)
+        .join(', ');
+
+    return adicionais
+      ? `${item.nome} (+ ${adicionais})`
+      : item.nome;
+  }
+
+  pedirDeNovo(): void {
+
+    if (!this.lojaAberta) {
+
+      this.popupLojaFechadaVisivel =
+        true;
+
+      this.cdr.detectChanges();
+
+      return;
+    }
+
+    // Confere de novo na hora do clique
+    const salvo =
+      JSON.parse(
+        localStorage.getItem(
+          'ultimoPedidoItens'
+        ) ?? '{"itens":[]}'
+      );
+
+    const sincronizado =
+      this.sincronizarItens(
+        salvo.itens
+      );
+
+    // Cópia de cada item, para não ligar o carrinho
+    // à lista do último pedido
+    sincronizado.itens.forEach(
+      item =>
+        this.adicionarAoCarrinho({
+          ...item,
+          adicionais: [...item.adicionais]
+        })
+    );
+
+    this.mensagemPedirDeNovo =
+      sincronizado.indisponiveis.length > 0
+        ? `Adicionado ao carrinho! Não está mais disponível: ${sincronizado.indisponiveis.join(', ')}.`
+        : 'Adicionado ao carrinho! 🛒';
+
+    this.cdr.detectChanges();
+
+    setTimeout(
+      () => {
+
+        this.mensagemPedirDeNovo =
+          null;
+
+        this.cdr.detectChanges();
+      },
+      5000
+    );
+  }
+
+  private buscarProdutoNoCardapio(
+    produtoId: string
+  ): any | null {
+
+    for (const categoria of this.cardapio) {
+
+      const produto =
+        categoria.produtos?.find(
+          (p: any) => p.id === produtoId
+        );
+
+      if (produto) {
+        return produto;
+      }
+    }
+
+    return null;
+  }
+
+  // Confere itens guardados (carrinho ou último pedido)
+  // com o cardápio de agora:
+  // - usa nome e preço atuais
+  // - tira adicionais que não existem mais no produto
+  // - separa produtos que saíram do cardápio
+  private sincronizarItens(
+    itens: any[]
+  ): { itens: any[]; indisponiveis: string[] } {
+
+    const resultado: any[] = [];
+
+    const indisponiveis: string[] = [];
+
+    for (const item of itens ?? []) {
+
+      const produto =
+        this.buscarProdutoNoCardapio(
+          item.produtoId
+        );
+
+      if (!produto) {
+
+        indisponiveis.push(
+          item.nome
+        );
+
+        continue;
+      }
+
+      const adicionais =
+        (item.adicionais ?? [])
+          .map((a: any) =>
+            produto.adicionais?.find(
+              (pa: any) => pa.id === a.id
+            )
+          )
+          .filter((a: any) => !!a);
+
+      resultado.push({
+        produtoId: produto.id,
+        nome: produto.nome,
+        preco: produto.preco,
+        imagemUrl: produto.imagemUrl,
+        quantidade: item.quantidade,
+        observacao: item.observacao ?? '',
+        adicionais
+      });
+    }
+
+    return {
+      itens: resultado,
+      indisponiveis
+    };
   }
 
   irCheckout(): void {
@@ -730,6 +1003,8 @@ export class CardapioComponent
     }
 
     item.quantidade++;
+
+    this.salvarCarrinho();
   }
 
   diminuirQuantidade(
@@ -747,6 +1022,8 @@ export class CardapioComponent
 
       item.quantidade--;
 
+      this.salvarCarrinho();
+
     } else {
 
       this.removerItem(
@@ -763,6 +1040,8 @@ export class CardapioComponent
       this.carrinho.filter(
         x => x !== item
       );
+
+    this.salvarCarrinho();
   }
 
   calcularTotal(): string {

@@ -12,6 +12,10 @@ namespace TimDolele.Core.Entities
         public Guid CategoriaId { get; private set; }
         public Categoria? Categoria { get; private set; }
         public bool Ativo { get; private set; }
+
+        // Caminho relativo da foto. Ex.: /uploads/produtos/abc.jpg
+        public string? ImagemUrl { get; private set; }
+
         public List<ProdutoAdicional> Adicionais { get; private set; } = new();
 
         private Produto() { }
@@ -41,6 +45,11 @@ namespace TimDolele.Core.Entities
         public void AlterarPreco(decimal preco)
         {
             Preco = preco;
+        }
+
+        public void DefinirImagem(string? imagemUrl)
+        {
+            ImagemUrl = imagemUrl;
         }
 
         public void Desativar()

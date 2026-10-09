@@ -11,10 +11,22 @@ namespace TimDoLeLe.Controllers
     public class ProdutoController : ControllerBase
     {
         private readonly TimDoLeleDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public ProdutoController(TimDoLeleDbContext context)
+        // Fotos aceitas e tamanho máximo (5 MB)
+        private static readonly string[] ExtensoesImagem =
+            { ".jpg", ".jpeg", ".png", ".webp" };
+
+        private const long TamanhoMaximoImagem = 5 * 1024 * 1024;
+
+        private const string PastaImagens = "uploads/produtos";
+
+        public ProdutoController(
+            TimDoLeleDbContext context,
+            IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         [HttpGet]
@@ -31,7 +43,8 @@ namespace TimDoLeLe.Controllers
                     p.Preco,
                     p.CategoriaId,
                     Categoria = p.Categoria != null ? p.Categoria.Nome : "",
-                    p.Ativo
+                    p.Ativo,
+                    p.ImagemUrl
                 })
                 .ToListAsync();
 
@@ -160,6 +173,93 @@ namespace TimDoLeLe.Controllers
             {
                 ProdutosAlterados = produtos.Count
             });
+        }
+
+        // Envia (ou troca) a foto do produto
+        [Authorize(Roles = "Admin")]
+        [HttpPost("{id}/imagem")]
+        [RequestSizeLimit(TamanhoMaximoImagem + 1024 * 1024)]
+        public async Task<IActionResult> EnviarImagem(Guid id, IFormFile? arquivo)
+        {
+            if (arquivo == null || arquivo.Length == 0)
+                return BadRequest("Selecione uma imagem.");
+
+            if (arquivo.Length > TamanhoMaximoImagem)
+                return BadRequest("A imagem deve ter no máximo 5 MB.");
+
+            var extensao = Path.GetExtension(arquivo.FileName).ToLowerInvariant();
+
+            if (!ExtensoesImagem.Contains(extensao))
+                return BadRequest("Formato inválido. Use JPG, PNG ou WEBP.");
+
+            var produto = await _context.Produtos
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (produto == null)
+                return NotFound("Produto não encontrado.");
+
+            var pasta = Path.Combine(ObterPastaWwwroot(), PastaImagens);
+
+            Directory.CreateDirectory(pasta);
+
+            // Nome aleatório: evita conflito e nomes estranhos de arquivo
+            var nomeArquivo = $"{Guid.NewGuid()}{extensao}";
+
+            using (var stream = new FileStream(
+                Path.Combine(pasta, nomeArquivo),
+                FileMode.Create))
+            {
+                await arquivo.CopyToAsync(stream);
+            }
+
+            // Apaga a foto antiga, se tinha
+            ApagarArquivoImagem(produto.ImagemUrl);
+
+            produto.DefinirImagem($"/{PastaImagens}/{nomeArquivo}");
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new { produto.ImagemUrl });
+        }
+
+        // Remove a foto do produto
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}/imagem")]
+        public async Task<IActionResult> RemoverImagem(Guid id)
+        {
+            var produto = await _context.Produtos
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (produto == null)
+                return NotFound("Produto não encontrado.");
+
+            ApagarArquivoImagem(produto.ImagemUrl);
+
+            produto.DefinirImagem(null);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private string ObterPastaWwwroot()
+        {
+            return _env.WebRootPath
+                ?? Path.Combine(_env.ContentRootPath, "wwwroot");
+        }
+
+        private void ApagarArquivoImagem(string? imagemUrl)
+        {
+            if (string.IsNullOrWhiteSpace(imagemUrl))
+                return;
+
+            var caminho = Path.Combine(
+                ObterPastaWwwroot(),
+                imagemUrl.TrimStart('/')
+            );
+
+            if (System.IO.File.Exists(caminho))
+                System.IO.File.Delete(caminho);
         }
 
         [Authorize(Roles = "Admin")]

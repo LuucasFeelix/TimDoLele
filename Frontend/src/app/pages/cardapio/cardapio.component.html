@@ -201,6 +201,61 @@
   </section>
 
 
+  <!-- PEDIR DE NOVO -->
+  <section
+    *ngIf="
+      !carregando &&
+      !erroCarregamento &&
+      ultimoPedidoItens.length > 0
+    "
+    class="pedir-de-novo"
+  >
+
+    <div class="pedir-de-novo-topo">
+
+      <span class="pedir-de-novo-icone">🔁</span>
+
+      <div>
+        <strong>Pedir de novo</strong>
+        <small *ngIf="ultimoPedidoDataTexto">
+          Seu último pedido · {{ ultimoPedidoDataTexto }}
+        </small>
+      </div>
+
+    </div>
+
+    <ul>
+      <li *ngFor="let item of ultimoPedidoItens">
+        <b>{{ item.quantidade }}x</b>
+        {{ descreverItem(item) }}
+        <em *ngIf="item.observacao">
+          "{{ item.observacao }}"
+        </em>
+      </li>
+    </ul>
+
+    <button
+      type="button"
+      (click)="pedirDeNovo()"
+      [disabled]="!lojaAberta"
+    >
+      {{
+        lojaAberta
+          ? '🛒 Adicionar ao carrinho'
+          : 'Loja fechada'
+      }}
+    </button>
+
+    <p
+      *ngIf="mensagemPedirDeNovo"
+      class="pedir-de-novo-mensagem"
+    >
+      {{ mensagemPedirDeNovo }}
+    </p>
+
+  </section>
+
+
   <main
     *ngIf="
       !carregando &&
@@ -230,7 +285,14 @@
       >
 
         <div class="produto-foto">
-          🍔
+          <img
+            *ngIf="urlImagem(p) as url; else semFoto"
+            [src]="url"
+            [alt]="p.nome"
+            loading="lazy"
+          />
+
+          <ng-template #semFoto>🍔</ng-template>
         </div>
 
         <div class="produto-info">

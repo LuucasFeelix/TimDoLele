@@ -23,14 +23,21 @@ namespace TimDoLeLe.Controllers
                 .Include(c => c.Produtos)
                     .ThenInclude(p => p.Adicionais)
                         .ThenInclude(pa => pa.Adicional)
+                // Só categorias que têm pelo menos um produto ativo
+                .Where(c => c.Produtos.Any(p => p.Ativo))
                 .Select(c => new CardapioDto
                 {
                     Categoria = c.Nome,
-                    Produtos = c.Produtos.Select(p => new ProdutoCardapioDto
+                    // Só produtos ativos aparecem para o cliente
+                    Produtos = c.Produtos
+                        .Where(p => p.Ativo)
+                        .Select(p => new ProdutoCardapioDto
                     {
                         Id = p.Id,
                         Nome = p.Nome,
+                        Descricao = p.Descricao,
                         Preco = p.Preco.ToString("F2"),
+                        ImagemUrl = p.ImagemUrl,
                         Adicionais = p.Adicionais.Select(a => new AdicionalCardapioDto
                         {
                             Id = a.Adicional.Id,

@@ -42,6 +42,10 @@ export class ProdutosComponent implements OnInit {
   reajusteValor: number | null = null;
   aplicandoReajuste = false;
 
+  // Foto: id do produto que está enviando foto agora
+  enviandoFotoId: string | null = null;
+  private produtoFoto: any = null;
+
   constructor(
     private produtoService: ProdutoService,
     private categoriaService: CategoriaService,
@@ -215,6 +219,86 @@ export class ProdutosComponent implements OnInit {
         },
         error: (err: any) => console.error(err)
       });
+  }
+
+  // =====================================================
+  // FOTO DO PRODUTO
+  // =====================================================
+
+  urlImagem(produto: any): string | null {
+    return this.produtoService.urlImagem(produto.imagemUrl);
+  }
+
+  // Guarda o produto e abre a janela de escolher arquivo
+  escolherFoto(produto: any, input: HTMLInputElement): void {
+    this.produtoFoto = produto;
+    input.value = '';
+    input.click();
+  }
+
+  fotoSelecionada(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const arquivo = input.files?.[0];
+
+    if (!arquivo || !this.produtoFoto) {
+      return;
+    }
+
+    const tiposPermitidos = ['image/jpeg', 'image/png', 'image/webp'];
+
+    if (!tiposPermitidos.includes(arquivo.type)) {
+      alert('Formato inválido. Use JPG, PNG ou WEBP.');
+      return;
+    }
+
+    if (arquivo.size > 5 * 1024 * 1024) {
+      alert('A imagem deve ter no máximo 5 MB.');
+      return;
+    }
+
+    const produto = this.produtoFoto;
+
+    this.enviandoFotoId = produto.id;
+    this.cdr.detectChanges();
+
+    this.produtoService.enviarImagem(produto.id, arquivo).subscribe({
+      next: (res) => {
+        produto.imagemUrl = res.imagemUrl;
+        this.enviandoFotoId = null;
+        this.produtoFoto = null;
+        this.cdr.detectChanges();
+      },
+      error: (err: any) => {
+        console.error(err);
+        this.enviandoFotoId = null;
+        this.produtoFoto = null;
+
+        alert(
+          typeof err.error === 'string'
+            ? err.error
+            : 'Erro ao enviar a foto.'
+        );
+
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  removerFoto(produto: any): void {
+    if (!confirm(`Remover a foto de "${produto.nome}"?`)) {
+      return;
+    }
+
+    this.produtoService.removerImagem(produto.id).subscribe({
+      next: () => {
+        produto.imagemUrl = null;
+        this.cdr.detectChanges();
+      },
+      error: (err: any) => {
+        console.error(err);
+        alert('Erro ao remover a foto.');
+      }
+    });
   }
 
   // =====================================================

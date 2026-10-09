@@ -115,6 +115,14 @@ namespace TimDoLele.Application.Services
                     );
                 }
 
+                if (!produto.Ativo)
+                {
+                    throw new BadRequestException(
+                        $"O produto \"{produto.Nome}\" não está mais disponível. " +
+                        "Remova-o do carrinho para continuar."
+                    );
+                }
+
                 var item =
                     new ItemPedido(
                         produto,

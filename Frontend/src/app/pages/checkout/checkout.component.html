@@ -293,7 +293,12 @@
         WhatsApp
 
         <input
-          [(ngModel)]="telefone"
+          type="tel"
+          inputmode="numeric"
+          autocomplete="tel-national"
+          maxlength="15"
+          [value]="telefone"
+          (input)="aoDigitarTelefone($event)"
           placeholder="(16) 99999-9999"
         />
 
@@ -646,6 +651,68 @@
         (click)="fecharAvisoLojaFechada()"
       >
         Continuar visualizando
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- PRODUTO INDISPONÍVEL -->
+  <div
+    *ngIf="produtoIndisponivelVisivel"
+    class="store-closed-overlay"
+  >
+
+    <div class="store-closed-modal">
+
+      <div class="store-closed-icon">
+        🚫
+      </div>
+
+
+      <h2>
+        Produto indisponível
+      </h2>
+
+
+      <p class="store-closed-message">
+        {{ mensagemProdutoIndisponivel }}
+      </p>
+
+
+      <p class="store-closed-cart-message">
+        Remova este item do carrinho para
+        finalizar o restante do seu pedido.
+      </p>
+
+
+      <button
+        *ngIf="produtoIndisponivelNoCarrinho"
+        type="button"
+        class="store-closed-primary"
+        (click)="removerProdutoIndisponivel()"
+      >
+        REMOVER DO CARRINHO
+      </button>
+
+
+      <button
+        *ngIf="!produtoIndisponivelNoCarrinho"
+        type="button"
+        class="store-closed-primary"
+        (click)="fecharPopupProdutoIndisponivel()"
+      >
+        REVISAR CARRINHO
+      </button>
+
+
+      <button
+        type="button"
+        class="store-closed-secondary"
+        (click)="voltarCardapio()"
+      >
+        Voltar ao cardápio
       </button>
 
     </div>

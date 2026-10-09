@@ -57,6 +57,13 @@ export class CheckoutComponent
 
   lojaFechadaVisivel = false;
 
+  // Popup de produto que foi desativado
+  produtoIndisponivelVisivel = false;
+
+  mensagemProdutoIndisponivel = '';
+
+  nomeProdutoIndisponivel: string | null = null;
+
   verificandoLoja = false;
 
   finalizandoPedido = false;
@@ -511,6 +518,69 @@ export class CheckoutComponent
       );
   }
 
+  // Aceita só números, no máximo 11 (DDD + 9 dígitos),
+  // e formata enquanto digita: (16) 99261-8003
+  aoDigitarTelefone(
+    event: Event
+  ): void {
+
+    const input =
+      event.target as HTMLInputElement;
+
+    const numeros =
+      input.value
+        .replace(
+          /\D/g,
+          ''
+        )
+        .substring(
+          0,
+          11
+        );
+
+    const formatado =
+      this.formatarTelefone(
+        numeros
+      );
+
+    input.value =
+      formatado;
+
+    this.telefone =
+      formatado;
+  }
+
+  private formatarTelefone(
+    numeros: string
+  ): string {
+
+    if (numeros.length === 0) {
+      return '';
+    }
+
+    if (numeros.length <= 2) {
+      return `(${numeros}`;
+    }
+
+    const ddd =
+      numeros.substring(0, 2);
+
+    const resto =
+      numeros.substring(2);
+
+    if (resto.length <= 4) {
+      return `(${ddd}) ${resto}`;
+    }
+
+    // Celular (9 dígitos): 99261-8003
+    if (resto.length === 9) {
+      return `(${ddd}) ${resto.substring(0, 5)}-${resto.substring(5)}`;
+    }
+
+    // Fixo (8 dígitos) ou ainda digitando: 3663-3366
+    return `(${ddd}) ${resto.substring(0, 4)}-${resto.substring(4)}`;
+  }
+
   dadosValidos(): boolean {
 
     if (
@@ -520,6 +590,24 @@ export class CheckoutComponent
 
       alert(
         'Preencha nome e WhatsApp.'
+      );
+
+      return false;
+    }
+
+    const digitosTelefone =
+      this.telefone.replace(
+        /\D/g,
+        ''
+      ).length;
+
+    if (
+      digitosTelefone !== 10 &&
+      digitosTelefone !== 11
+    ) {
+
+      alert(
+        'Informe um WhatsApp válido com DDD. Ex.: (16) 99999-9999'
       );
 
       return false;
@@ -762,6 +850,19 @@ export class CheckoutComponent
             })
           );
 
+          // Guarda os itens para o "Pedir de novo" do cardápio
+          localStorage.setItem(
+            'ultimoPedidoItens',
+            JSON.stringify({
+
+              data:
+                new Date().toISOString(),
+
+              itens:
+                this.carrinho
+            })
+          );
+
           localStorage.removeItem(
             'carrinho'
           );
@@ -793,13 +894,104 @@ export class CheckoutComponent
             return;
           }
 
+          // Erro 400 traz uma mensagem pensada para o cliente
+          // (ex.: produto que não está mais disponível)
+          const mensagemApi =
+            err?.status === 400
+              ? err?.error?.Message ??
+                err?.error?.message
+              : null;
+
+          if (
+            mensagemApi?.includes(
+              'não está mais disponível'
+            )
+          ) {
+
+            this.abrirPopupProdutoIndisponivel(
+              mensagemApi
+            );
+
+            return;
+          }
+
           alert(
+            mensagemApi ||
             'Não foi possível finalizar seu pedido. Tente novamente.'
           );
 
           this.cdr.detectChanges();
         }
       });
+  }
+
+  private abrirPopupProdutoIndisponivel(
+    mensagem: string
+  ): void {
+
+    // A mensagem da API traz o nome entre aspas:
+    // O produto "X - Frango" não está mais disponível...
+    const nome =
+      mensagem.match(
+        /"(.+?)"/
+      )?.[1] ?? null;
+
+    this.nomeProdutoIndisponivel =
+      nome;
+
+    this.mensagemProdutoIndisponivel =
+      nome
+        ? `O produto "${nome}" foi retirado do cardápio e não pode mais ser pedido.`
+        : mensagem;
+
+    this.produtoIndisponivelVisivel =
+      true;
+
+    this.cdr.detectChanges();
+  }
+
+  get produtoIndisponivelNoCarrinho(): boolean {
+
+    return (
+      !!this.nomeProdutoIndisponivel &&
+      this.carrinho.some(
+        item =>
+          item.nome ===
+          this.nomeProdutoIndisponivel
+      )
+    );
+  }
+
+  removerProdutoIndisponivel(): void {
+
+    this.carrinho =
+      this.carrinho.filter(
+        item =>
+          item.nome !==
+          this.nomeProdutoIndisponivel
+      );
+
+    this.salvarCarrinho();
+
+    this.fecharPopupProdutoIndisponivel();
+
+    if (
+      this.carrinho.length === 0
+    ) {
+
+      this.voltarCardapio();
+    }
+  }
+
+  fecharPopupProdutoIndisponivel(): void {
+
+    this.produtoIndisponivelVisivel =
+      false;
+
+    this.nomeProdutoIndisponivel =
+      null;
+
+    this.cdr.detectChanges();
   }
 
   private erroIndicaLojaFechada(

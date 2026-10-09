@@ -11,7 +11,13 @@
     </button>
 
     <div class="produto-banner">
-      🍔
+      <img
+        *ngIf="urlImagem; else semFotoBanner"
+        [src]="urlImagem"
+        [alt]="produto?.nome"
+      />
+
+      <ng-template #semFotoBanner>🍔</ng-template>
     </div>
 
     <div class="produto-content">
