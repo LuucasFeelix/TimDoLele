@@ -92,7 +92,7 @@
           <span
             *ngFor="let adicional of item.adicionais"
           >
-            + {{ adicional.nome }}
+            + {{ nomeAdicional(adicional) }}
           </span>
 
         </small>
@@ -122,6 +122,15 @@
             (click)="aumentarQuantidade(item)"
           >
             +
+          </button>
+
+          <button
+            type="button"
+            class="edit-item"
+            (click)="editarItem(item)"
+            [disabled]="carregandoEdicao"
+          >
+            ✏️ Editar
           </button>
 
         </div>
@@ -161,9 +170,12 @@
     </section>
 
 
+    <!-- Na etapa do carrinho mostra só o subtotal:
+         a taxa de entrega aparece quando o cliente
+         escolhe Delivery e no resumo do pagamento -->
     <section class="summary-card">
 
-      <div>
+      <div class="summary-total">
 
         <span>
           Subtotal
@@ -171,37 +183,6 @@
 
         <strong>
           R$ {{ calcularSubtotal() }}
-        </strong>
-
-      </div>
-
-
-      <div>
-
-        <span>
-          Taxa de entrega
-        </span>
-
-        <strong>
-          R$
-          {{
-            getTaxaEntrega()
-              .toFixed(2)
-              .replace('.', ',')
-          }}
-        </strong>
-
-      </div>
-
-
-      <div class="summary-total">
-
-        <span>
-          Total
-        </span>
-
-        <strong>
-          R$ {{ calcularTotal() }}
         </strong>
 
       </div>
@@ -281,6 +262,7 @@
         Nome completo
 
         <input
+          semEmoji
           [(ngModel)]="nome"
           placeholder="Digite seu nome"
         />
@@ -314,6 +296,7 @@
           Endereço de entrega
 
           <input
+            semEmoji
             [(ngModel)]="endereco"
             placeholder="Rua, número, complemento"
           />
@@ -326,6 +309,7 @@
           Bairro
 
           <input
+            semEmoji
             [(ngModel)]="bairro"
             placeholder="Digite seu bairro"
           />
@@ -338,6 +322,7 @@
           Ponto de referência
 
           <input
+            semEmoji
             [(ngModel)]="referencia"
             placeholder="Ex: próximo à padaria"
           />
@@ -656,6 +641,16 @@
     </div>
 
   </div>
+
+
+  <!-- EDITAR ITEM: mesmo modal do cardápio, já preenchido -->
+  <app-produto-modal
+    *ngIf="itemEditando && produtoEditando"
+    [produto]="produtoEditando"
+    [itemEdicao]="itemEditando"
+    (adicionar)="salvarEdicaoItem($event)"
+    (fechar)="fecharEdicaoItem()"
+  ></app-produto-modal>
 
 
   <!-- PRODUTO INDISPONÍVEL -->

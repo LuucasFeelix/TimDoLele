@@ -3,6 +3,7 @@ using TimDolele.Core.Entities;
 using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
 using TimDoLele.Application.Exceptions;
+using TimDoLele.Application.Helpers;
 using TimDoLele.Infrastructure.Data;
 using TimDoLeLe.Application.DTOs;
 
@@ -44,12 +45,13 @@ namespace TimDoLele.Application.Services
                 dto.TaxaEntregaPadrao
             );
 
+            // Sem emojis: esses dados aparecem no cardápio e na impressão
             configuracao.AtualizarDadosEstabelecimento(
-                dto.NomeEstabelecimento,
-                dto.TelefoneFixo,
-                dto.Celular,
-                dto.WhatsApp,
-                dto.Endereco
+                TextoHelper.LimparParaImpressao(dto.NomeEstabelecimento),
+                TextoHelper.LimparParaImpressao(dto.TelefoneFixo),
+                TextoHelper.LimparParaImpressao(dto.Celular),
+                TextoHelper.LimparParaImpressao(dto.WhatsApp),
+                TextoHelper.LimparParaImpressao(dto.Endereco)
             );
 
             await _context.SaveChangesAsync();
@@ -67,7 +69,9 @@ namespace TimDoLele.Application.Services
                 await ObterOuCriarConfiguracaoAsync();
 
             configuracao.FecharManual(
-                motivo
+                TextoHelper.LimparParaImpressao(
+                    motivo
+                )
             );
 
             await _context.SaveChangesAsync();
@@ -250,6 +254,11 @@ namespace TimDoLele.Application.Services
             CriarDataEspecialAsync(
                 CriarDataEspecialDto dto)
         {
+            dto.Descricao =
+                TextoHelper.LimparParaImpressao(
+                    dto.Descricao
+                ) ?? string.Empty;
+
             if (
                 string.IsNullOrWhiteSpace(
                     dto.Descricao

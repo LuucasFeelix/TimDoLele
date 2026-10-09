@@ -21,6 +21,13 @@ import {
 } from '../../core/services/produto.service';
 
 import {
+  nomeAdicional,
+  separarItensPersonalizados,
+  temPersonalizacao,
+  valorUnitarioItem
+} from '../../core/utils/carrinho.utils';
+
+import {
   ConfiguracaoLojaService,
   StatusLoja
 } from '../../core/services/configuracao-loja.service';
@@ -144,7 +151,9 @@ export class CardapioComponent
             );
 
           this.carrinho =
-            sincronizado.itens;
+            separarItensPersonalizados(
+              sincronizado.itens
+            );
 
           this.salvarCarrinho();
 
@@ -660,6 +669,28 @@ export class CardapioComponent
       return;
     }
 
+    // Lanche com adicional/observação: uma linha por unidade
+    // (ex.: 2x X-Tudo + Bacon vira duas linhas de 1x)
+    if (
+      temPersonalizacao(
+        item
+      )
+    ) {
+
+      this.carrinho.push(
+        ...separarItensPersonalizados([
+          item
+        ])
+      );
+
+      this.salvarCarrinho();
+
+      this.produtoSelecionado =
+        null;
+
+      return;
+    }
+
     const itemExistente =
       this.carrinho.find(
         x =>
@@ -793,7 +824,7 @@ export class CardapioComponent
 
     const adicionais =
       (item.adicionais ?? [])
-        .map((a: any) => a.nome)
+        .map((a: any) => nomeAdicional(a))
         .join(', ');
 
     return adicionais
@@ -903,13 +934,21 @@ export class CardapioComponent
         continue;
       }
 
+      // Mantém a quantidade escolhida (ex.: 2x Bacon)
+      // com nome e preço atuais do adicional
       const adicionais =
         (item.adicionais ?? [])
-          .map((a: any) =>
-            produto.adicionais?.find(
-              (pa: any) => pa.id === a.id
-            )
-          )
+          .map((a: any) => {
+
+            const atual =
+              produto.adicionais?.find(
+                (pa: any) => pa.id === a.id
+              );
+
+            return atual
+              ? { ...atual, quantidade: a.quantidade ?? 1 }
+              : null;
+          })
           .filter((a: any) => !!a);
 
       resultado.push({
@@ -1051,36 +1090,10 @@ export class CardapioComponent
     this.carrinho.forEach(
       item => {
 
-        let subtotal =
-          Number(
-            item.preco
-              .toString()
-              .replace(
-                ',',
-                '.'
-              )
-          );
-
-        item.adicionais
-          ?.forEach(
-            (
-              adicional: any
-            ) => {
-
-              subtotal +=
-                Number(
-                  adicional.preco
-                    .toString()
-                    .replace(
-                      ',',
-                      '.'
-                    )
-                );
-            }
-          );
-
         total +=
-          subtotal *
+          valorUnitarioItem(
+            item
+          ) *
           item.quantidade;
       }
     );
@@ -1097,35 +1110,10 @@ export class CardapioComponent
     item: any
   ): string {
 
-    let total =
-      Number(
-        item.preco
-          .toString()
-          .replace(
-            ',',
-            '.'
-          )
-      );
-
-    item.adicionais
-      ?.forEach(
-        (
-          adicional: any
-        ) => {
-
-          total +=
-            Number(
-              adicional.preco
-                .toString()
-                .replace(
-                  ',',
-                  '.'
-                )
-            );
-        }
-      );
-
-    total *=
+    const total =
+      valorUnitarioItem(
+        item
+      ) *
       item.quantidade;
 
     return total

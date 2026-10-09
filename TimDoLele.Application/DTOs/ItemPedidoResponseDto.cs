@@ -10,6 +10,8 @@
 
         public decimal Valor { get; set; }
 
+        public string? Observacao { get; set; }
+
         public List<AdicionalResponseDto> Adicionais { get; set; } = new();
     }
 }

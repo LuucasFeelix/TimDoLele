@@ -4,6 +4,7 @@ using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
 using TimDoLele.Application.DTOs.Common;
 using TimDoLele.Application.Exceptions;
+using TimDoLele.Application.Helpers;
 using TimDoLele.Infrastructure.Data;
 using TimDoLeLe.Application.DTOs;
 
@@ -65,12 +66,30 @@ namespace TimDoLele.Application.Services
                 );
             }
 
+            // Sem emojis: nome e endereço vão para a impressora térmica
+            var nomeCliente =
+                TextoHelper.LimparParaImpressao(
+                    dto.Nome
+                );
+
+            if (nomeCliente == null)
+            {
+                throw new BadRequestException(
+                    "Informe seu nome."
+                );
+            }
+
+            var enderecoCliente =
+                TextoHelper.LimparParaImpressao(
+                    dto.Endereco
+                ) ?? string.Empty;
+
             var cliente =
                 new Cliente(
-                    dto.Nome,
+                    nomeCliente,
                     dto.Telefone,
                     new Endereco(
-                        dto.Endereco,
+                        enderecoCliente,
                         "0",
                         "",
                         "",
@@ -126,7 +145,11 @@ namespace TimDoLele.Application.Services
                 var item =
                     new ItemPedido(
                         produto,
-                        itemDto.Quantidade
+                        itemDto.Quantidade,
+                        // Sem emojis: a impressora térmica não imprime
+                        TextoHelper.LimparParaImpressao(
+                            itemDto.Observacao
+                        )
                     );
 
                 if (
@@ -157,9 +180,21 @@ namespace TimDoLele.Application.Services
                             );
                         }
 
+                        if (
+                            adicionalDto.Quantidade < 1 ||
+                            adicionalDto.Quantidade > 5
+                        )
+                        {
+                            throw new BadRequestException(
+                                $"Quantidade inválida para o adicional {adicional.Nome}. " +
+                                "Escolha de 1 a 5."
+                            );
+                        }
+
                         item.AdicionarAdicional(
                             adicional.Id,
-                            adicional.Preco
+                            adicional.Preco,
+                            adicionalDto.Quantidade
                         );
                     }
                 }
@@ -326,6 +361,9 @@ namespace TimDoLele.Application.Services
                                 Valor =
                                     i.Valor,
 
+                                Observacao =
+                                    i.Observacao,
+
                                 Adicionais =
                                     i.Adicionais
                                     .Select(a =>
@@ -340,7 +378,10 @@ namespace TimDoLele.Application.Services
                                                     : "",
 
                                             Preco =
-                                                a.Preco
+                                                a.Preco,
+
+                                            Quantidade =
+                                                a.Quantidade
                                         })
                                     .ToList()
                             })
@@ -443,6 +484,9 @@ namespace TimDoLele.Application.Services
                             Valor =
                                 i.Valor,
 
+                            Observacao =
+                                i.Observacao,
+
                             Adicionais =
                                 i.Adicionais
                                 .Select(a =>
@@ -457,7 +501,10 @@ namespace TimDoLele.Application.Services
                                                 : "",
 
                                         Preco =
-                                            a.Preco
+                                            a.Preco,
+
+                                        Quantidade =
+                                            a.Quantidade
                                     })
                                 .ToList()
                         })

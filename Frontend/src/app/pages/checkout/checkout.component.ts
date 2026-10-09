@@ -22,12 +22,27 @@ import {
   StatusLoja
 } from '../../core/services/configuracao-loja.service';
 
+import {
+  ProdutoModalComponent
+} from '../produto-modal/produto-modal.component';
+
+import {
+  copiarItem,
+  nomeAdicional,
+  separarItensPersonalizados,
+  temPersonalizacao,
+  valorUnitarioItem
+} from '../../core/utils/carrinho.utils';
+import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
+
 @Component({
   selector: 'app-checkout',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ProdutoModalComponent,
+    SemEmojiDirective
   ],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
@@ -56,6 +71,13 @@ export class CheckoutComponent
   statusLoja: StatusLoja | null = null;
 
   lojaFechadaVisivel = false;
+
+  // Edição de item do carrinho (abre o modal do produto)
+  itemEditando: any = null;
+
+  produtoEditando: any = null;
+
+  carregandoEdicao = false;
 
   // Popup de produto que foi desativado
   produtoIndisponivelVisivel = false;
@@ -92,8 +114,10 @@ export class CheckoutComponent
     if (carrinhoStorage) {
 
       this.carrinho =
-        JSON.parse(
-          carrinhoStorage
+        separarItensPersonalizados(
+          JSON.parse(
+            carrinhoStorage
+          )
         );
     }
 
@@ -349,7 +373,36 @@ export class CheckoutComponent
       return;
     }
 
-    item.quantidade++;
+    // Lanche personalizado: o "+" cria outra linha igual,
+    // logo abaixo, para poder editar separado
+    if (
+      temPersonalizacao(
+        item
+      )
+    ) {
+
+      const indice =
+        this.carrinho.indexOf(
+          item
+        );
+
+      this.carrinho.splice(
+        indice + 1,
+        0,
+        copiarItem(
+          item,
+          1
+        )
+      );
+
+      this.carrinho = [
+        ...this.carrinho
+      ];
+
+    } else {
+
+      item.quantidade++;
+    }
 
     this.salvarCarrinho();
   }
@@ -394,6 +447,124 @@ export class CheckoutComponent
     this.salvarCarrinho();
   }
 
+  // =====================================================
+  // EDITAR ITEM DO CARRINHO
+  // =====================================================
+
+  // Busca o produto atualizado (adicionais e preço de agora)
+  // e abre o modal preenchido com o que o cliente escolheu
+  editarItem(
+    item: any
+  ): void {
+
+    if (this.carregandoEdicao) {
+      return;
+    }
+
+    this.carregandoEdicao =
+      true;
+
+    this.pedidoService
+      .getCardapio()
+      .subscribe({
+
+        next: (
+          cardapio: any[]
+        ) => {
+
+          this.carregandoEdicao =
+            false;
+
+          const produto =
+            cardapio
+              .flatMap(
+                (c: any) =>
+                  c.produtos ?? []
+              )
+              .find(
+                (p: any) =>
+                  p.id === item.produtoId
+              );
+
+          if (!produto) {
+
+            this.abrirPopupProdutoIndisponivel(
+              `O produto "${item.nome}" não está mais disponível.`
+            );
+
+            return;
+          }
+
+          this.produtoEditando =
+            produto;
+
+          this.itemEditando =
+            item;
+
+          this.cdr.detectChanges();
+        },
+
+        error: (
+          erro: any
+        ) => {
+
+          console.error(
+            'Erro ao carregar produto para edição:',
+            erro
+          );
+
+          this.carregandoEdicao =
+            false;
+
+          alert(
+            'Não foi possível abrir o item para edição.'
+          );
+        }
+      });
+  }
+
+  salvarEdicaoItem(
+    novoItem: any
+  ): void {
+
+    const indice =
+      this.carrinho.indexOf(
+        this.itemEditando
+      );
+
+    if (indice >= 0) {
+
+      // Se ficou personalizado com quantidade > 1,
+      // já entra separado (uma linha por lanche)
+      this.carrinho.splice(
+        indice,
+        1,
+        ...separarItensPersonalizados([
+          novoItem
+        ])
+      );
+
+      this.carrinho = [
+        ...this.carrinho
+      ];
+
+      this.salvarCarrinho();
+    }
+
+    this.fecharEdicaoItem();
+  }
+
+  fecharEdicaoItem(): void {
+
+    this.itemEditando =
+      null;
+
+    this.produtoEditando =
+      null;
+
+    this.cdr.detectChanges();
+  }
+
   salvarCarrinho(): void {
 
     localStorage.setItem(
@@ -408,35 +579,10 @@ export class CheckoutComponent
     item: any
   ): string {
 
-    let total =
-      Number(
-        item.preco
-          .toString()
-          .replace(
-            ',',
-            '.'
-          )
-      );
-
-    item.adicionais
-      ?.forEach(
-        (
-          adicional: any
-        ) => {
-
-          total +=
-            Number(
-              adicional.preco
-                .toString()
-                .replace(
-                  ',',
-                  '.'
-                )
-            );
-        }
-      );
-
-    total *=
+    const total =
+      valorUnitarioItem(
+        item
+      ) *
       item.quantidade;
 
     return total
@@ -447,6 +593,15 @@ export class CheckoutComponent
       );
   }
 
+  nomeAdicional(
+    adicional: any
+  ): string {
+
+    return nomeAdicional(
+      adicional
+    );
+  }
+
   calcularSubtotal(): string {
 
     let total = 0;
@@ -454,36 +609,10 @@ export class CheckoutComponent
     this.carrinho.forEach(
       item => {
 
-        let subtotal =
-          Number(
-            item.preco
-              .toString()
-              .replace(
-                ',',
-                '.'
-              )
-          );
-
-        item.adicionais
-          ?.forEach(
-            (
-              adicional: any
-            ) => {
-
-              subtotal +=
-                Number(
-                  adicional.preco
-                    .toString()
-                    .replace(
-                      ',',
-                      '.'
-                    )
-                );
-            }
-          );
-
         total +=
-          subtotal *
+          valorUnitarioItem(
+            item
+          ) *
           item.quantidade;
       }
     );
@@ -773,6 +902,10 @@ export class CheckoutComponent
             quantidade:
               item.quantidade,
 
+            observacao:
+              item.observacao?.trim() ||
+              null,
+
             adicionais:
               (
                 item.adicionais ??
@@ -783,7 +916,10 @@ export class CheckoutComponent
                 ) => ({
 
                   adicionalId:
-                    adicional.id
+                    adicional.id,
+
+                  quantidade:
+                    adicional.quantidade ?? 1
                 })
               )
           })

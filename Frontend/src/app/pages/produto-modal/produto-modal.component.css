@@ -54,6 +54,16 @@
   overflow: hidden;
 }
 
+.aviso-unidades {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff8e1;
+  color: #5f4b00;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 .produto-banner img {
   width: 100%;
   height: 100%;
@@ -175,6 +185,40 @@
 .adicional-preco {
   color: var(--secondary);
   white-space: nowrap;
+}
+
+.adicional-lado {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.adicional-qtd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adicional-qtd button {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 8px;
+  background: #ffd21f;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.adicional-qtd button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.adicional-qtd span {
+  min-width: 14px;
+  text-align: center;
+  font-weight: 800;
 }
 
 textarea {

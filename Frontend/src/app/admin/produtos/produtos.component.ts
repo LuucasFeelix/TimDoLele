@@ -5,11 +5,12 @@ import { RouterModule } from '@angular/router';
 import { ProdutoService } from '../../core/services/produto.service';
 import { CategoriaService } from '../../core/services/categoria.service';
 import { AdicionalService } from '../../core/services/adicional.service';
+import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
 
 @Component({
   selector: 'app-produtos',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, SemEmojiDirective],
   templateUrl: './produtos.component.html',
   styleUrls: ['./produtos.component.css']
 })

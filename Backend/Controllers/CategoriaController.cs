@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TimDolele.Core.Entities;
+using TimDoLele.Application.Helpers;
 using TimDoLele.Infrastructure.Data;
 
 namespace TimDoLeLe.Controllers
@@ -36,6 +37,9 @@ namespace TimDoLeLe.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CriarCategoriaDto dto)
         {
+            // Sem emojis: o texto vai para o cardápio e a impressora
+            dto.Nome = TextoHelper.LimparParaImpressao(dto.Nome) ?? string.Empty;
+
             if (string.IsNullOrWhiteSpace(dto.Nome))
                 return BadRequest("Nome da categoria é obrigatório.");
 
@@ -62,6 +66,9 @@ namespace TimDoLeLe.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] CriarCategoriaDto dto)
         {
+            // Sem emojis: o texto vai para o cardápio e a impressora
+            dto.Nome = TextoHelper.LimparParaImpressao(dto.Nome) ?? string.Empty;
+
             if (string.IsNullOrWhiteSpace(dto.Nome))
                 return BadRequest("Nome da categoria é obrigatório.");
 

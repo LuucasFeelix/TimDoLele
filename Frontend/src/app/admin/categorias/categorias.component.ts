@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoriaService } from '../../core/services/categoria.service';
 import { RouterModule } from '@angular/router';
+import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
 
 @Component({
   selector: 'app-categorias',
@@ -10,7 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    SemEmojiDirective
   ],
   templateUrl: './categorias.component.html',
   styleUrls: ['./categorias.component.css']

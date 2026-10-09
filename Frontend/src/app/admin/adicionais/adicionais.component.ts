@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AdicionalService } from '../../core/services/adicional.service';
+import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
 
 @Component({
   selector: 'app-adicionais',
@@ -11,7 +12,8 @@ import { AdicionalService } from '../../core/services/adicional.service';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    SemEmojiDirective
   ],
   templateUrl: './adicionais.component.html',
   styleUrls: ['./adicionais.component.css']
