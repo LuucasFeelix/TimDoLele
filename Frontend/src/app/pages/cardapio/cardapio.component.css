@@ -266,6 +266,13 @@
   display: grid;
   place-items: center;
   font-size: 48px;
+  overflow: hidden;
+}
+
+.produto-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .produto-info {
@@ -530,6 +537,75 @@
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+/* PEDIR DE NOVO */
+.pedir-de-novo {
+  margin: 12px 14px 0;
+  padding: 14px;
+  border: 1px solid #f3d36b;
+  border-radius: 14px;
+  background: #fffaf0;
+}
+
+.pedir-de-novo-topo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pedir-de-novo-icone {
+  font-size: 24px;
+}
+
+.pedir-de-novo-topo strong {
+  display: block;
+  font-size: 15px;
+}
+
+.pedir-de-novo-topo small {
+  color: #777;
+  font-size: 12px;
+}
+
+.pedir-de-novo ul {
+  margin: 10px 0 12px;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: #333;
+}
+
+.pedir-de-novo li {
+  padding: 3px 0;
+}
+
+.pedir-de-novo em {
+  color: #888;
+}
+
+.pedir-de-novo button {
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  background: #e30613;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pedir-de-novo button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.pedir-de-novo-mensagem {
+  margin: 10px 0 0;
+  color: #147a35;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
 }
 
 @media (max-width: 500px) {

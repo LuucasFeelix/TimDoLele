@@ -143,6 +143,15 @@
 
   <h2>Lista de produtos</h2>
 
+  <!-- Campo escondido usado pelos botões de foto -->
+  <input
+    #inputFoto
+    type="file"
+    accept="image/jpeg,image/png,image/webp"
+    hidden
+    (change)="fotoSelecionada($event)"
+  />
+
   <p *ngIf="loading">Carregando...</p>
 
   <div
@@ -237,6 +246,41 @@
     *ngFor="let produto of grupo.produtos"
     class="produto-item"
   >
+    <!-- FOTO -->
+    <div class="produto-thumb-area">
+      <button
+        type="button"
+        class="produto-thumb"
+        title="Clique para enviar ou trocar a foto"
+        (click)="escolherFoto(produto, inputFoto)"
+        [disabled]="enviandoFotoId === produto.id"
+      >
+        <img
+          *ngIf="urlImagem(produto) as url"
+          [src]="url"
+          [alt]="produto.nome"
+        />
+
+        <span *ngIf="!produto.imagemUrl">🍔</span>
+
+        <span
+          *ngIf="enviandoFotoId === produto.id"
+          class="produto-thumb-enviando"
+        >
+          Enviando...
+        </span>
+      </button>
+
+      <button
+        *ngIf="produto.imagemUrl"
+        type="button"
+        class="link-button remover-foto"
+        (click)="removerFoto(produto)"
+      >
+        Remover
+      </button>
+    </div>
+
     <div>
       <strong>{{ produto.nome }}</strong>
 
@@ -259,6 +303,14 @@
     </div>
 
     <div class="actions">
+      <button
+        class="secondary-button"
+        (click)="escolherFoto(produto, inputFoto)"
+        [disabled]="enviandoFotoId === produto.id"
+      >
+        📷 {{ produto.imagemUrl ? 'Trocar foto' : 'Foto' }}
+      </button>
+
       <button
         class="secondary-button"
         (click)="editar(produto)"

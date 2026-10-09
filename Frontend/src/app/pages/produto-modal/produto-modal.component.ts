@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProdutoService } from '../../core/services/produto.service';
 
 @Component({
   selector: 'app-produto-modal',
@@ -18,6 +19,12 @@ export class ProdutoModalComponent {
   quantidade = 1;
   observacao = '';
   adicionaisSelecionados: any[] = [];
+
+  constructor(private produtoService: ProdutoService) {}
+
+  get urlImagem(): string | null {
+    return this.produtoService.urlImagem(this.produto?.imagemUrl);
+  }
 
   toggleAdicional(adicional: any): void {
     const existe = this.adicionaisSelecionados.find(

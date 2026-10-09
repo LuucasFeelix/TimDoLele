@@ -298,6 +298,11 @@ namespace TimDoLeLe
                 app.UseHttpsRedirection();
 
 
+                // Serve os arquivos da pasta wwwroot
+                // (ex.: fotos em /uploads/produtos)
+                app.UseStaticFiles();
+
+
                 app.UseAuthentication();
 
                 app.UseAuthorization();

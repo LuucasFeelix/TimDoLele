@@ -6,9 +6,36 @@ import { Injectable } from '@angular/core';
 })
 export class ProdutoService {
 
-  private api = 'https://localhost:57668/api/produtos';
+  private servidor = 'https://localhost:57668';
+
+  private api = `${this.servidor}/api/produtos`;
 
   constructor(private http: HttpClient) { }
+
+  // A API guarda só o caminho (/uploads/produtos/abc.jpg);
+  // aqui monta o endereço completo para a tag <img>.
+  urlImagem(caminho: string | null | undefined): string | null {
+    if (!caminho) {
+      return null;
+    }
+
+    return `${this.servidor}${caminho}`;
+  }
+
+  enviarImagem(produtoId: string, arquivo: File) {
+    const formData = new FormData();
+
+    formData.append('arquivo', arquivo);
+
+    return this.http.post<{ imagemUrl: string }>(
+      `${this.api}/${produtoId}/imagem`,
+      formData
+    );
+  }
+
+  removerImagem(produtoId: string) {
+    return this.http.delete(`${this.api}/${produtoId}/imagem`);
+  }
 
   getProdutos() {
     return this.http.get<any[]>(this.api);
