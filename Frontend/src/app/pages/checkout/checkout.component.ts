@@ -22,12 +22,17 @@ import {
   StatusLoja
 } from '../../core/services/configuracao-loja.service';
 
+import {
+  ProdutoModalComponent
+} from '../produto-modal/produto-modal.component';
+
 @Component({
   selector: 'app-checkout',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ProdutoModalComponent
   ],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
@@ -56,6 +61,13 @@ export class CheckoutComponent
   statusLoja: StatusLoja | null = null;
 
   lojaFechadaVisivel = false;
+
+  // Edição de item do carrinho (abre o modal do produto)
+  itemEditando: any = null;
+
+  produtoEditando: any = null;
+
+  carregandoEdicao = false;
 
   // Popup de produto que foi desativado
   produtoIndisponivelVisivel = false;
@@ -392,6 +404,117 @@ export class CheckoutComponent
       );
 
     this.salvarCarrinho();
+  }
+
+  // =====================================================
+  // EDITAR ITEM DO CARRINHO
+  // =====================================================
+
+  // Busca o produto atualizado (adicionais e preço de agora)
+  // e abre o modal preenchido com o que o cliente escolheu
+  editarItem(
+    item: any
+  ): void {
+
+    if (this.carregandoEdicao) {
+      return;
+    }
+
+    this.carregandoEdicao =
+      true;
+
+    this.pedidoService
+      .getCardapio()
+      .subscribe({
+
+        next: (
+          cardapio: any[]
+        ) => {
+
+          this.carregandoEdicao =
+            false;
+
+          const produto =
+            cardapio
+              .flatMap(
+                (c: any) =>
+                  c.produtos ?? []
+              )
+              .find(
+                (p: any) =>
+                  p.id === item.produtoId
+              );
+
+          if (!produto) {
+
+            this.abrirPopupProdutoIndisponivel(
+              `O produto "${item.nome}" não está mais disponível.`
+            );
+
+            return;
+          }
+
+          this.produtoEditando =
+            produto;
+
+          this.itemEditando =
+            item;
+
+          this.cdr.detectChanges();
+        },
+
+        error: (
+          erro: any
+        ) => {
+
+          console.error(
+            'Erro ao carregar produto para edição:',
+            erro
+          );
+
+          this.carregandoEdicao =
+            false;
+
+          alert(
+            'Não foi possível abrir o item para edição.'
+          );
+        }
+      });
+  }
+
+  salvarEdicaoItem(
+    novoItem: any
+  ): void {
+
+    const indice =
+      this.carrinho.indexOf(
+        this.itemEditando
+      );
+
+    if (indice >= 0) {
+
+      this.carrinho[indice] =
+        novoItem;
+
+      this.carrinho = [
+        ...this.carrinho
+      ];
+
+      this.salvarCarrinho();
+    }
+
+    this.fecharEdicaoItem();
+  }
+
+  fecharEdicaoItem(): void {
+
+    this.itemEditando =
+      null;
+
+    this.produtoEditando =
+      null;
+
+    this.cdr.detectChanges();
   }
 
   salvarCarrinho(): void {
@@ -772,6 +895,10 @@ export class CheckoutComponent
 
             quantidade:
               item.quantidade,
+
+            observacao:
+              item.observacao?.trim() ||
+              null,
 
             adicionais:
               (

@@ -131,6 +131,22 @@
   font-weight: 900;
 }
 
+.qty .edit-item {
+  width: auto;
+  margin-left: 6px;
+  padding: 0 10px;
+  border: 1px solid #f3d36b;
+  background: #fff8e1;
+  color: #5f4b00;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.qty .edit-item:disabled {
+  opacity: .6;
+}
+
 .item-price-area {
   text-align: right;
 }

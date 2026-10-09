@@ -76,6 +76,7 @@
 
         <textarea
           [(ngModel)]="observacao"
+          maxlength="200"
           placeholder="Ex: sem cebola, pouco molho..."
         ></textarea>
       </div>
@@ -109,7 +110,7 @@
         class="add-cart-button"
         (click)="confirmar()"
       >
-        Adicionar
+        {{ itemEdicao ? 'Salvar alterações' : 'Adicionar' }}
       </button>
     </div>
 

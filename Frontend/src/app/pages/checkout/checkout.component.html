@@ -124,6 +124,15 @@
             +
           </button>
 
+          <button
+            type="button"
+            class="edit-item"
+            (click)="editarItem(item)"
+            [disabled]="carregandoEdicao"
+          >
+            ✏️ Editar
+          </button>
+
         </div>
 
       </div>
@@ -656,6 +665,16 @@
     </div>
 
   </div>
+
+
+  <!-- EDITAR ITEM: mesmo modal do cardápio, já preenchido -->
+  <app-produto-modal
+    *ngIf="itemEditando && produtoEditando"
+    [produto]="produtoEditando"
+    [itemEdicao]="itemEditando"
+    (adicionar)="salvarEdicaoItem($event)"
+    (fechar)="fecharEdicaoItem()"
+  ></app-produto-modal>
 
 
   <!-- PRODUTO INDISPONÍVEL -->

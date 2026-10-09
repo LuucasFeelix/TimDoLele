@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProdutoService } from '../../core/services/produto.service';
@@ -10,8 +10,12 @@ import { ProdutoService } from '../../core/services/produto.service';
   templateUrl: './produto-modal.component.html',
   styleUrls: ['./produto-modal.component.css']
 })
-export class ProdutoModalComponent {
+export class ProdutoModalComponent implements OnInit {
   @Input() produto: any;
+
+  // Quando informado, o modal abre preenchido para editar
+  // um item que já está no carrinho
+  @Input() itemEdicao: any = null;
 
   @Output() fechar = new EventEmitter<void>();
   @Output() adicionar = new EventEmitter<any>();
@@ -21,6 +25,24 @@ export class ProdutoModalComponent {
   adicionaisSelecionados: any[] = [];
 
   constructor(private produtoService: ProdutoService) {}
+
+  ngOnInit(): void {
+    if (!this.itemEdicao) {
+      return;
+    }
+
+    this.quantidade = this.itemEdicao.quantidade ?? 1;
+    this.observacao = this.itemEdicao.observacao ?? '';
+
+    // Marca os adicionais que o cliente já tinha escolhido
+    const idsEscolhidos = (this.itemEdicao.adicionais ?? []).map(
+      (a: any) => a.id
+    );
+
+    this.adicionaisSelecionados = (this.produto?.adicionais ?? []).filter(
+      (a: any) => idsEscolhidos.includes(a.id)
+    );
+  }
 
   get urlImagem(): string | null {
     return this.produtoService.urlImagem(this.produto?.imagemUrl);

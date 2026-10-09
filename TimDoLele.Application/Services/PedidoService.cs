@@ -126,7 +126,12 @@ namespace TimDoLele.Application.Services
                 var item =
                     new ItemPedido(
                         produto,
-                        itemDto.Quantidade
+                        itemDto.Quantidade,
+                        string.IsNullOrWhiteSpace(
+                            itemDto.Observacao
+                        )
+                            ? null
+                            : itemDto.Observacao.Trim()
                     );
 
                 if (
@@ -326,6 +331,9 @@ namespace TimDoLele.Application.Services
                                 Valor =
                                     i.Valor,
 
+                                Observacao =
+                                    i.Observacao,
+
                                 Adicionais =
                                     i.Adicionais
                                     .Select(a =>
@@ -442,6 +450,9 @@ namespace TimDoLele.Application.Services
 
                             Valor =
                                 i.Valor,
+
+                            Observacao =
+                                i.Observacao,
 
                             Adicionais =
                                 i.Adicionais
