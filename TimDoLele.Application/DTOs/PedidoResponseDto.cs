@@ -16,6 +16,10 @@
 
         public decimal Total { get; set; }
 
+        public decimal Desconto { get; set; }
+
+        public string? CupomCodigo { get; set; }
+
         public string Status { get; set; } = string.Empty;
 
         public Guid UsuarioId { get; set; }

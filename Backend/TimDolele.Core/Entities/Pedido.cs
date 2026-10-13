@@ -31,6 +31,15 @@ public class Pedido : BaseEntity
 
     public decimal Total { get; private set; }
 
+    // Cupom usado no pedido (opcional). O código fica guardado
+    // para o histórico mesmo se o cupom for alterado depois.
+    public Guid? CupomId { get; private set; }
+
+    public string? CupomCodigo { get; private set; }
+
+    // Desconto em R$ sobre o subtotal (não afeta a taxa de entrega)
+    public decimal Desconto { get; private set; }
+
     public StatusImpressao StatusImpressao { get; private set; }
 
     public DateTime? DataImpressao { get; private set; }
@@ -89,7 +98,16 @@ public class Pedido : BaseEntity
     {
         Subtotal = Itens.Sum(i => i.Valor);
 
-        Total = Subtotal + Delivery;
+        Total = Subtotal - Desconto + Delivery;
+    }
+
+    public void AplicarCupom(Guid cupomId, string codigo, decimal desconto)
+    {
+        CupomId = cupomId;
+        CupomCodigo = codigo;
+        Desconto = Math.Min(desconto, Subtotal);
+
+        RecalcularTotais();
     }
 
     public void DefinirPagamento(Pagamento pagamento)

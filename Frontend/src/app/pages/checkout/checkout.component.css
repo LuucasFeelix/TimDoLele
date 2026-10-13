@@ -166,16 +166,51 @@
   font-weight: 900;
 }
 
-.coupon-card {
+.coupon-row {
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
-.coupon-card input {
+.coupon-row input {
   flex: 1;
 }
 
+.coupon-row > div {
+  flex: 1;
+}
+
+.coupon-row small {
+  display: block;
+  margin-top: 2px;
+  color: #147a35;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.coupon-row .coupon-aviso {
+  color: #9a6400;
+}
+
+.coupon-erro {
+  margin: 8px 0 0;
+  color: #b00020;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.coupon-aplicado {
+  border: 1px dashed #1f9d55;
+  background: #f1fbf4;
+}
+
+.linha-desconto strong,
+.linha-desconto span {
+  color: #147a35;
+}
+
 .coupon-card button {
+  align-self: stretch;
   background: white;
   border: 1px solid #ddd;
   border-radius: 10px;
