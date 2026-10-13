@@ -4,6 +4,7 @@ import {
   Observable,
   tap
 } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface LoginResponse {
   token: string;
@@ -16,7 +17,7 @@ export interface LoginResponse {
 export class AuthService {
 
   private readonly api =
-    'https://localhost:57668/api/auth';
+    `${environment.apiUrl}/api/auth`;
 
   constructor(
     private http: HttpClient

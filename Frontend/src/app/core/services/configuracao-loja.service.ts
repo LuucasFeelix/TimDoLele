@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 // =====================================================
 // CONFIGURAÇÃO DA LOJA - RETORNO DA API
@@ -168,7 +169,7 @@ export interface StatusLoja {
 export class ConfiguracaoLojaService {
 
   private readonly apiUrl =
-    'https://localhost:57668/api';
+    `${environment.apiUrl}/api`;
 
   constructor(
     private http: HttpClient

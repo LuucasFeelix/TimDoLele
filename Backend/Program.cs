@@ -43,7 +43,9 @@ namespace TimDoLeLe
                 )
                 {
                     throw new InvalidOperationException(
-                        "A configuração Jwt:Key não foi encontrada no appsettings.json."
+                        "A configuração Jwt:Key não foi encontrada. " +
+                        "Em desenvolvimento ela fica no appsettings.Development.json; " +
+                        "no servidor, na variável de ambiente Jwt__Key."
                     );
                 }
 
@@ -153,10 +155,18 @@ namespace TimDoLeLe
                                 "AllowAngular",
                                 policy =>
                                 {
+                                    // Sites que podem chamar a API.
+                                    // Vem de "Cors:Origens" (appsettings
+                                    // ou variável de ambiente no servidor).
+                                    var origens =
+                                        builder.Configuration
+                                            .GetSection("Cors:Origens")
+                                            .Get<string[]>()
+                                        ?? Array.Empty<string>();
+
                                     policy
                                         .WithOrigins(
-                                            "http://localhost:4200",
-                                            "https://localhost:4200"
+                                            origens
                                         )
                                         .AllowAnyHeader()
                                         .AllowAnyMethod()
