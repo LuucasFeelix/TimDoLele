@@ -17,6 +17,9 @@ namespace TimDoLeLe.Application.DTOs
 
         public decimal? TrocoPara { get; set; }
 
+        // Código do cupom de desconto (opcional)
+        public string? CupomCodigo { get; set; }
+
         public List<ItemPedidoDto> Itens { get; set; } = new();
     }
 }

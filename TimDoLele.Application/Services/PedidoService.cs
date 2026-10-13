@@ -14,13 +14,16 @@ namespace TimDoLele.Application.Services
     {
         private readonly TimDoLeleDbContext _context;
         private readonly StatusLojaService _statusLojaService;
+        private readonly CupomService _cupomService;
 
         public PedidoService(
             TimDoLeleDbContext context,
-            StatusLojaService statusLojaService)
+            StatusLojaService statusLojaService,
+            CupomService cupomService)
         {
             _context = context;
             _statusLojaService = statusLojaService;
+            _cupomService = cupomService;
         }
 
         public async Task<Guid> CriarPedidoAsync(
@@ -204,6 +207,31 @@ namespace TimDoLele.Application.Services
                 );
             }
 
+            // Cupom: confere de novo aqui (o backend decide o desconto)
+            if (
+                !string.IsNullOrWhiteSpace(
+                    dto.CupomCodigo
+                )
+            )
+            {
+                var cupom =
+                    await _cupomService
+                        .ObterCupomValidoAsync(
+                            dto.CupomCodigo,
+                            pedido.Subtotal
+                        );
+
+                pedido.AplicarCupom(
+                    cupom.Id,
+                    cupom.Codigo,
+                    cupom.CalcularDesconto(
+                        pedido.Subtotal
+                    )
+                );
+
+                cupom.RegistrarUso();
+            }
+
             var statusAntesDeSalvar =
                 await _statusLojaService
                     .ObterStatusAsync();
@@ -327,6 +355,10 @@ namespace TimDoLele.Application.Services
 
                     Total = p.Total,
 
+                    Desconto = p.Desconto,
+
+                    CupomCodigo = p.CupomCodigo,
+
                     Status = p.Status.ToString(),
 
                     TipoEntrega = p.TipoEntrega.ToString(),
@@ -446,6 +478,12 @@ namespace TimDoLele.Application.Services
 
                 Total =
                     pedido.Total,
+
+                Desconto =
+                    pedido.Desconto,
+
+                CupomCodigo =
+                    pedido.CupomCodigo,
 
                 Status =
                     pedido.Status.ToString(),

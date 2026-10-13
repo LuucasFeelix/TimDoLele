@@ -600,6 +600,10 @@
   font-size: 21px;
 }
 
+.desconto-detail {
+  color: #147a35 !important;
+}
+
 /* ========================= */
 /* ITENS DO PEDIDO */
 /* ========================= */

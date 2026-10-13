@@ -157,15 +157,74 @@
     </section>
 
 
-    <section class="coupon-card">
+    <!-- CUPOM: ainda não aplicado -->
+    <section
+      *ngIf="!cupomAplicado"
+      class="coupon-card"
+    >
 
-      <input
-        placeholder="Possui cupom de desconto?"
-      />
+      <div class="coupon-row">
 
-      <button type="button">
-        Aplicar
-      </button>
+        <input
+          type="text"
+          [value]="codigoCupom"
+          (input)="aoDigitarCupom($event)"
+          (keyup.enter)="aplicarCupom()"
+          placeholder="Possui cupom de desconto?"
+        />
+
+        <button
+          type="button"
+          (click)="aplicarCupom()"
+          [disabled]="!codigoCupom || aplicandoCupom"
+        >
+          {{ aplicandoCupom ? '...' : 'Aplicar' }}
+        </button>
+
+      </div>
+
+      <p
+        *ngIf="erroCupom"
+        class="coupon-erro"
+      >
+        {{ erroCupom }}
+      </p>
+
+    </section>
+
+
+    <!-- CUPOM: aplicado -->
+    <section
+      *ngIf="cupomAplicado"
+      class="coupon-card coupon-aplicado"
+    >
+
+      <div class="coupon-row">
+
+        <div>
+          <strong>🏷️ {{ cupomAplicado.codigo }}</strong>
+
+          <small *ngIf="!cupomAbaixoDoMinimo">
+            Desconto de R$ {{ formatarValor(descontoCupom) }}
+          </small>
+
+          <small
+            *ngIf="cupomAbaixoDoMinimo"
+            class="coupon-aviso"
+          >
+            Vale para pedidos a partir de
+            R$ {{ formatarValor(cupomAplicado.pedidoMinimo!) }}
+          </small>
+        </div>
+
+        <button
+          type="button"
+          (click)="removerCupom()"
+        >
+          Remover
+        </button>
+
+      </div>
 
     </section>
 
@@ -175,14 +234,28 @@
          escolhe Delivery e no resumo do pagamento -->
     <section class="summary-card">
 
+      <ng-container *ngIf="descontoCupom > 0">
+
+        <div>
+          <span>Subtotal</span>
+          <strong>R$ {{ calcularSubtotal() }}</strong>
+        </div>
+
+        <div class="linha-desconto">
+          <span>Desconto ({{ cupomAplicado?.codigo }})</span>
+          <strong>- R$ {{ formatarValor(descontoCupom) }}</strong>
+        </div>
+
+      </ng-container>
+
       <div class="summary-total">
 
         <span>
-          Subtotal
+          {{ descontoCupom > 0 ? 'Subtotal com desconto' : 'Subtotal' }}
         </span>
 
         <strong>
-          R$ {{ calcularSubtotal() }}
+          R$ {{ formatarValor(subtotalComDesconto) }}
         </strong>
 
       </div>
@@ -381,6 +454,22 @@
 
         <strong>
           R$ {{ calcularSubtotal() }}
+        </strong>
+
+      </div>
+
+
+      <div
+        *ngIf="descontoCupom > 0"
+        class="linha-desconto"
+      >
+
+        <span>
+          Desconto ({{ cupomAplicado?.codigo }})
+        </span>
+
+        <strong>
+          - R$ {{ formatarValor(descontoCupom) }}
         </strong>
 
       </div>

@@ -158,6 +158,8 @@ export interface StatusLoja {
   telefoneFixo: string | null;
 
   celular: string | null;
+
+  whatsApp: string | null;
 }
 
 @Injectable({

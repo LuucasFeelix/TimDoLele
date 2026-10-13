@@ -1,0 +1,174 @@
+<header class="admin-header">
+  <div>
+    <h1>Cupons</h1>
+    <p>Crie cupons de desconto para os clientes usarem no checkout</p>
+  </div>
+</header>
+
+<section class="form-card card">
+
+  <h2>
+    {{ editandoId ? 'Editar cupom' : 'Novo cupom' }}
+  </h2>
+
+  <div class="cupom-grid">
+
+    <label>
+      Código
+      <input
+        type="text"
+        [value]="codigo"
+        (input)="aoDigitarCodigo($event)"
+        placeholder="Ex.: BEMVINDO10"
+      />
+      <small>Letras e números, sem espaço</small>
+    </label>
+
+    <label>
+      Tipo de desconto
+      <select [(ngModel)]="tipo">
+        <option [ngValue]="1">Porcentagem (%)</option>
+        <option [ngValue]="2">Valor fixo (R$)</option>
+      </select>
+    </label>
+
+    <label>
+      {{ tipo === 1 ? 'Desconto (%)' : 'Desconto (R$)' }}
+      <input
+        type="number"
+        min="0"
+        [step]="tipo === 1 ? 1 : 0.5"
+        [(ngModel)]="valor"
+        [placeholder]="tipo === 1 ? 'Ex.: 10' : 'Ex.: 5,00'"
+      />
+    </label>
+
+    <label>
+      Pedido mínimo (R$)
+      <input
+        type="number"
+        min="0"
+        step="1"
+        [(ngModel)]="pedidoMinimo"
+        placeholder="Opcional"
+      />
+    </label>
+
+    <label>
+      Válido até
+      <input
+        type="date"
+        [(ngModel)]="validoAte"
+      />
+      <small>Deixe vazio para não expirar</small>
+    </label>
+
+    <label>
+      Limite de usos
+      <input
+        type="number"
+        min="1"
+        step="1"
+        [(ngModel)]="limiteUsos"
+        placeholder="Opcional"
+      />
+      <small>Total de pedidos que podem usar</small>
+    </label>
+
+  </div>
+
+  <div class="form-actions">
+
+    <button
+      class="primary-button"
+      (click)="salvar()"
+      [disabled]="salvando"
+    >
+      {{
+        salvando
+          ? 'Salvando...'
+          : editandoId ? 'Atualizar' : 'Cadastrar'
+      }}
+    </button>
+
+    <button
+      *ngIf="editandoId"
+      class="secondary-button"
+      (click)="limparFormulario()"
+    >
+      Cancelar
+    </button>
+
+  </div>
+
+</section>
+
+<section class="list-card card">
+
+  <h2>Lista de cupons</h2>
+
+  <p *ngIf="carregando">Carregando...</p>
+
+  <p
+    *ngIf="!carregando && cupons.length === 0"
+    class="empty"
+  >
+    Nenhum cupom cadastrado.
+  </p>
+
+  <div
+    *ngFor="let cupom of cupons"
+    class="cupom-item"
+  >
+
+    <div>
+      <strong class="cupom-codigo">{{ cupom.codigo }}</strong>
+
+      <span class="cupom-desconto">
+        {{ descreverDesconto(cupom) }}
+      </span>
+
+      <small>
+        <ng-container *ngIf="cupom.pedidoMinimo">
+          Pedido mínimo R$ {{ formatarValor(cupom.pedidoMinimo) }} ·
+        </ng-container>
+
+        <ng-container *ngIf="cupom.validoAte; else semValidade">
+          Válido até {{ formatarData(cupom.validoAte) }} ·
+        </ng-container>
+        <ng-template #semValidade>Sem data de validade · </ng-template>
+
+        {{ cupom.usos }}{{ cupom.limiteUsos ? ' de ' + cupom.limiteUsos : '' }}
+        uso(s)
+      </small>
+    </div>
+
+    <span
+      class="cupom-status"
+      [ngClass]="situacao(cupom).classe"
+    >
+      {{ situacao(cupom).texto }}
+    </span>
+
+    <div class="actions">
+
+      <button
+        class="secondary-button"
+        (click)="editar(cupom)"
+      >
+        Editar
+      </button>
+
+      <button
+        [class.danger-button]="cupom.ativo"
+        [class.primary-button]="!cupom.ativo"
+        (click)="alternarAtivo(cupom)"
+      >
+        {{ cupom.ativo ? 'Desativar' : 'Ativar' }}
+      </button>
+
+    </div>
+
+  </div>
+
+</section>

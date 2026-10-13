@@ -35,6 +35,13 @@ namespace TimDoLele.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CupomCodigo")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("CupomId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DataHora")
                         .HasColumnType("datetime2");
 
@@ -43,6 +50,10 @@ namespace TimDoLele.Infrastructure.Migrations
 
                     b.Property<decimal>("Delivery")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Desconto")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("FormaPagamento")
                         .HasColumnType("int");
@@ -181,6 +192,48 @@ namespace TimDoLele.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ConfiguracoesLoja");
+                });
+
+            modelBuilder.Entity("TimDolele.Core.Entities.Cupom", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int?>("LimiteUsos")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("PedidoMinimo")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Usos")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ValidoAte")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Valor")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Codigo")
+                        .IsUnique();
+
+                    b.ToTable("Cupons");
                 });
 
             modelBuilder.Entity("TimDolele.Core.Entities.DataEspecial", b =>

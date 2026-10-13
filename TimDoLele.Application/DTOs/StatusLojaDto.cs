@@ -31,5 +31,7 @@
         public string? TelefoneFixo { get; set; }
 
         public string? Celular { get; set; }
+
+        public string? WhatsApp { get; set; }
     }
 }

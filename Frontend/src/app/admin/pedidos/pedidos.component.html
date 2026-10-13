@@ -745,6 +745,19 @@
           </strong>
 
 
+          <ng-container *ngIf="pedidoSelecionado.desconto > 0">
+
+            <span>
+              Cupom {{ pedidoSelecionado.cupomCodigo }}:
+            </span>
+
+            <strong class="desconto-detail">
+              - R$ {{ pedidoSelecionado.desconto }}
+            </strong>
+
+          </ng-container>
+
+
           <span>
             Total do pedido:
           </span>

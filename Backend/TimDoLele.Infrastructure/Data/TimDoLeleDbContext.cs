@@ -51,6 +51,9 @@ namespace TimDoLele.Infrastructure.Data
         public DbSet<DataEspecial> DatasEspeciais =>
             Set<DataEspecial>();
 
+        public DbSet<Cupom> Cupons =>
+            Set<Cupom>();
+
         protected override void OnModelCreating(
             ModelBuilder modelBuilder)
         {
@@ -105,6 +108,35 @@ namespace TimDoLele.Infrastructure.Data
 
             modelBuilder.Entity<DataEspecial>()
                 .HasIndex(d => d.Data);
+
+            // CUPONS
+            modelBuilder.Entity<Cupom>()
+                .HasIndex(c => c.Codigo)
+                .IsUnique();
+
+            modelBuilder.Entity<Cupom>()
+                .Property(c => c.Codigo)
+                .HasMaxLength(20);
+
+            modelBuilder.Entity<Cupom>()
+                .Property(c => c.Tipo)
+                .HasConversion<int>();
+
+            modelBuilder.Entity<Cupom>()
+                .Property(c => c.Valor)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Cupom>()
+                .Property(c => c.PedidoMinimo)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Pedido>()
+                .Property(p => p.Desconto)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Pedido>()
+                .Property(p => p.CupomCodigo)
+                .HasMaxLength(20);
 
             base.OnModelCreating(modelBuilder);
         }

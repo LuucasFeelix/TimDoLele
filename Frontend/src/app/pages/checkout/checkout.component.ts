@@ -27,6 +27,13 @@ import {
 } from '../produto-modal/produto-modal.component';
 
 import {
+  calcularDescontoCupom,
+  CupomService,
+  CupomValidado,
+  mensagemErroApi
+} from '../../core/services/cupom.service';
+
+import {
   copiarItem,
   nomeAdicional,
   separarItensPersonalizados,
@@ -72,6 +79,15 @@ export class CheckoutComponent
 
   lojaFechadaVisivel = false;
 
+  // Cupom de desconto
+  codigoCupom = '';
+
+  cupomAplicado: CupomValidado | null = null;
+
+  aplicandoCupom = false;
+
+  erroCupom: string | null = null;
+
   // Edição de item do carrinho (abre o modal do produto)
   itemEditando: any = null;
 
@@ -99,6 +115,9 @@ export class CheckoutComponent
 
     private configuracaoLojaService:
       ConfiguracaoLojaService,
+
+    private cupomService:
+      CupomService,
 
     private cdr:
       ChangeDetectorRef
@@ -627,19 +646,167 @@ export class CheckoutComponent
 
   calcularTotal(): string {
 
-    const subtotal =
-      Number(
-        this.calcularSubtotal()
-          .replace(
-            ',',
-            '.'
-          )
-      );
-
     return (
-      subtotal +
+      this.subtotalNumero() -
+      this.descontoCupom +
       this.getTaxaEntrega()
     )
+      .toFixed(2)
+      .replace(
+        '.',
+        ','
+      );
+  }
+
+  private subtotalNumero(): number {
+
+    return Number(
+      this.calcularSubtotal()
+        .replace(
+          ',',
+          '.'
+        )
+    );
+  }
+
+  // =====================================================
+  // CUPOM DE DESCONTO
+  // (o backend confere tudo de novo ao finalizar)
+  // =====================================================
+
+  // Código: só letras e números, em maiúsculas
+  aoDigitarCupom(
+    event: Event
+  ): void {
+
+    const campo =
+      event.target as HTMLInputElement;
+
+    const limpo =
+      campo.value
+        .toUpperCase()
+        .replace(
+          /[^A-Z0-9]/g,
+          ''
+        )
+        .substring(
+          0,
+          20
+        );
+
+    campo.value =
+      limpo;
+
+    this.codigoCupom =
+      limpo;
+
+    this.erroCupom =
+      null;
+  }
+
+  aplicarCupom(): void {
+
+    if (
+      !this.codigoCupom ||
+      this.aplicandoCupom
+    ) {
+      return;
+    }
+
+    this.aplicandoCupom =
+      true;
+
+    this.erroCupom =
+      null;
+
+    this.cupomService
+      .validar(
+        this.codigoCupom,
+        this.subtotalNumero()
+      )
+      .subscribe({
+
+        next: (
+          cupom
+        ) => {
+
+          this.cupomAplicado =
+            cupom;
+
+          this.aplicandoCupom =
+            false;
+
+          this.cdr.detectChanges();
+        },
+
+        error: (
+          err
+        ) => {
+
+          this.aplicandoCupom =
+            false;
+
+          this.erroCupom =
+            mensagemErroApi(
+              err,
+              'Não foi possível aplicar o cupom.'
+            );
+
+          this.cdr.detectChanges();
+        }
+      });
+  }
+
+  removerCupom(): void {
+
+    this.cupomAplicado =
+      null;
+
+    this.codigoCupom =
+      '';
+
+    this.erroCupom =
+      null;
+  }
+
+  // Recalcula na hora se o cliente mudar o carrinho
+  get descontoCupom(): number {
+
+    if (
+      !this.cupomAplicado ||
+      this.cupomAbaixoDoMinimo
+    ) {
+      return 0;
+    }
+
+    return calcularDescontoCupom(
+      this.cupomAplicado,
+      this.subtotalNumero()
+    );
+  }
+
+  get subtotalComDesconto(): number {
+
+    return (
+      this.subtotalNumero() -
+      this.descontoCupom
+    );
+  }
+
+  get cupomAbaixoDoMinimo(): boolean {
+
+    return (
+      !!this.cupomAplicado?.pedidoMinimo &&
+      this.subtotalNumero() <
+        this.cupomAplicado.pedidoMinimo
+    );
+  }
+
+  formatarValor(
+    valor: number
+  ): string {
+
+    return Number(valor)
       .toFixed(2)
       .replace(
         '.',
@@ -890,6 +1057,11 @@ export class CheckoutComponent
               this.trocoPara
             )
 
+          : null,
+
+      cupomCodigo:
+        this.descontoCupom > 0
+          ? this.cupomAplicado?.codigo
           : null,
 
       itens:

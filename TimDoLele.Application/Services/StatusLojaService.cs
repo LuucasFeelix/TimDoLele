@@ -545,7 +545,10 @@ namespace TimDoLele.Application.Services
                     configuracao.TelefoneFixo,
 
                 Celular =
-                    configuracao.Celular
+                    configuracao.Celular,
+
+                WhatsApp =
+                    configuracao.WhatsApp
             };
         }
 
@@ -602,7 +605,10 @@ namespace TimDoLele.Application.Services
                     configuracao.TelefoneFixo,
 
                 Celular =
-                    configuracao.Celular
+                    configuracao.Celular,
+
+                WhatsApp =
+                    configuracao.WhatsApp
             };
         }
 
