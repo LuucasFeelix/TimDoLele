@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 // 1 = Percentual (ex.: 10%) | 2 = Valor fixo (ex.: R$ 5,00)
 export type TipoDesconto = 1 | 2;
@@ -38,7 +39,7 @@ export interface CupomValidado {
 })
 export class CupomService {
 
-  private api = 'https://localhost:57668/api/cupons';
+  private api = `${environment.apiUrl}/api/cupons`;
 
   constructor(private http: HttpClient) {}
 

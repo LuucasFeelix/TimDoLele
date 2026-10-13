@@ -71,3 +71,13 @@ backend/packages.lock.json
 # Fotos enviadas pelo admin (mantém só a pasta)
 Backend/wwwroot/uploads/produtos/*
 !Backend/wwwroot/uploads/produtos/.gitkeep
+
+# Segredos de desenvolvimento (chave JWT, connection string)
+Backend/appsettings.Development.json
+
+# Logs da API
+Backend/logs/
+
+# Saida de build do .NET (todas as pastas)
+**/bin/
+**/obj/

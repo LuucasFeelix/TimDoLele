@@ -9,6 +9,7 @@ import {
   Observable,
   Subject
 } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface PedidoCriadoSignalR {
   pedidoId: string;
@@ -34,7 +35,7 @@ export interface DashboardAtualizadoSignalR {
 export class NotificacaoSignalrService {
 
   private readonly hubUrl =
-    'https://localhost:57668/hubs/notificacoes';
+    `${environment.apiUrl}/hubs/notificacoes`;
 
   private hubConnection: HubConnection;
 
