@@ -282,6 +282,42 @@
   margin-bottom: 12px;
 }
 
+.troco-info {
+  margin: -4px 0 8px;
+  color: #147a35;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.troco-info.troco-erro {
+  color: #b00020;
+}
+
+.troco-exato {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 13px;
+  border: 2px solid #f8b400;
+  border-radius: 12px;
+  background: #fff4c2;
+  color: #5f4b00;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: 0 3px 0 #e0a200;
+  cursor: pointer;
+  transition: transform .1s ease, box-shadow .1s ease;
+}
+
+.troco-exato:hover {
+  background: #ffe98a;
+}
+
+/* Efeito de "afundar" ao tocar, como um botão de verdade */
+.troco-exato:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #e0a200;
+}
+
 .form-card input,
 .troco-field input,
 .coupon-card input {

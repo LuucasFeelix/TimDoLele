@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -9,15 +9,20 @@ import {
   SalvarCupomRequest,
   TipoDesconto
 } from '../../core/services/cupom.service';
+import { AvisoService } from '../../core/services/aviso.service';
+import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 @Component({
   selector: 'app-cupons',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DinheiroPipe],
   templateUrl: './cupons.component.html',
   styleUrls: ['./cupons.component.css']
 })
 export class CuponsComponent implements OnInit {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   cupons: Cupom[] = [];
 
@@ -71,17 +76,17 @@ export class CuponsComponent implements OnInit {
 
   salvar(): void {
     if (this.codigo.length < 3) {
-      alert('O código precisa ter pelo menos 3 letras ou números.');
+      this.aviso.atencao('O código precisa ter pelo menos 3 letras ou números.');
       return;
     }
 
     if (!this.valor || this.valor <= 0) {
-      alert('Informe o valor do desconto.');
+      this.aviso.atencao('Informe o valor do desconto.');
       return;
     }
 
     if (this.tipo === 1 && this.valor > 100) {
-      alert('O percentual não pode passar de 100%.');
+      this.aviso.atencao('O percentual não pode passar de 100%.');
       return;
     }
 
@@ -109,7 +114,7 @@ export class CuponsComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.salvando = false;
-        alert(mensagemErroApi(err, 'Erro ao salvar o cupom.'));
+        this.aviso.erro(mensagemErroApi(err, 'Erro ao salvar o cupom.'));
         this.cdr.detectChanges();
       }
     });
@@ -136,7 +141,7 @@ export class CuponsComponent implements OnInit {
       next: () => this.carregarCupons(),
       error: (err) => {
         console.error(err);
-        alert(mensagemErroApi(err, 'Erro ao alterar o cupom.'));
+        this.aviso.erro(mensagemErroApi(err, 'Erro ao alterar o cupom.'));
       }
     });
   }

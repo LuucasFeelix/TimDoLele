@@ -600,6 +600,11 @@
   font-size: 21px;
 }
 
+.endereco-detail {
+  line-height: 1.4;
+  word-break: break-word;
+}
+
 .desconto-detail {
   color: #147a35 !important;
 }

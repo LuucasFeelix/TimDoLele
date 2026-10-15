@@ -2,7 +2,8 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
+  inject
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
@@ -35,6 +36,8 @@ import {
 import {
   ProdutoModalComponent
 } from '../produto-modal/produto-modal.component';
+import { AvisoService } from '../../core/services/aviso.service';
+import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 @Component({
   selector: 'app-cardapio',
@@ -42,13 +45,17 @@ import {
   imports: [
     CommonModule,
     RouterModule,
-    ProdutoModalComponent
+    ProdutoModalComponent,
+    DinheiroPipe
   ],
   templateUrl: './cardapio.component.html',
   styleUrls: ['./cardapio.component.css']
 })
 export class CardapioComponent
   implements OnInit, OnDestroy {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   cardapio: any[] = [];
 
@@ -998,7 +1005,7 @@ export class CardapioComponent
             0
           ) {
 
-            alert(
+            this.aviso.atencao(
               'Carrinho vazio'
             );
 
@@ -1025,7 +1032,7 @@ export class CardapioComponent
             erro
           );
 
-          alert(
+          this.aviso.erro(
             'Não foi possível verificar o funcionamento da loja.'
           );
         }

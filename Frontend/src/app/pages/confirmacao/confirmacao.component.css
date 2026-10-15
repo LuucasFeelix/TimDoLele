@@ -56,6 +56,13 @@
   color: var(--secondary);
 }
 
+.info-box small {
+  display: block;
+  margin-top: 4px;
+  color: #777;
+  font-size: 12px;
+}
+
 .whatsapp-button {
   width: 100%;
   background: var(--success);

@@ -10,6 +10,12 @@
 
         public string NomeCliente { get; set; } = string.Empty;
 
+        public string Telefone { get; set; } = string.Empty;
+
+        // Endereço de entrega (rua, número, bairro e referência).
+        // Vazio quando é retirada na loja.
+        public string? Endereco { get; set; }
+
         public decimal SubTotal { get; set; }
 
         public decimal Delivery { get; set; }

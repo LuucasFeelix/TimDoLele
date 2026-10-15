@@ -1,9 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoriaService } from '../../core/services/categoria.service';
 import { RouterModule } from '@angular/router';
 import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
+import { AvisoService } from '../../core/services/aviso.service';
 
 @Component({
   selector: 'app-categorias',
@@ -18,6 +19,9 @@ import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
   styleUrls: ['./categorias.component.css']
 })
 export class CategoriasComponent implements OnInit {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   categorias: any[] = [];
 
@@ -54,7 +58,7 @@ export class CategoriasComponent implements OnInit {
 
   salvar(): void {
     if (!this.nome.trim()) {
-      alert('Informe o nome da categoria.');
+      this.aviso.atencao('Informe o nome da categoria.');
       return;
     }
 
@@ -66,13 +70,13 @@ export class CategoriasComponent implements OnInit {
       this.categoriaService.atualizarCategoria(this.editandoId, dto)
         .subscribe({
           next: () => {
-            alert('Categoria atualizada!');
+            this.aviso.sucesso('Categoria atualizada!');
             this.limparFormulario();
             this.carregarCategorias();
           },
           error: (err: any) => {
             console.error(err);
-            alert('Erro ao atualizar categoria.');
+            this.aviso.erro('Erro ao atualizar categoria.');
           }
         });
 
@@ -82,13 +86,13 @@ export class CategoriasComponent implements OnInit {
     this.categoriaService.criarCategoria(dto)
       .subscribe({
         next: () => {
-          alert('Categoria criada!');
+          this.aviso.sucesso('Categoria criada!');
           this.limparFormulario();
           this.carregarCategorias();
         },
         error: (err: any) => {
           console.error(err);
-          alert('Erro ao criar categoria.');
+          this.aviso.erro('Erro ao criar categoria.');
         }
       });
   }
@@ -98,9 +102,10 @@ export class CategoriasComponent implements OnInit {
     this.nome = categoria.nome;
   }
 
-  excluir(categoria: any): void {
-    const confirmar = confirm(
-      `Deseja excluir a categoria "${categoria.nome}"?`
+  async excluir(categoria: any): Promise<void> {
+    const confirmar = await this.aviso.confirmar(
+      `Deseja excluir a categoria "${categoria.nome}"?`,
+      { titulo: 'Excluir categoria', textoConfirmar: 'Excluir', perigo: true }
     );
 
     if (!confirmar) {
@@ -110,12 +115,12 @@ export class CategoriasComponent implements OnInit {
     this.categoriaService.excluirCategoria(categoria.id)
       .subscribe({
         next: () => {
-          alert('Categoria excluída!');
+          this.aviso.sucesso('Categoria excluída!');
           this.carregarCategorias();
         },
         error: (err: any) => {
           console.error(err);
-          alert('Erro ao excluir categoria. Verifique se ela possui produtos vinculados.');
+          this.aviso.erro('Erro ao excluir categoria. Verifique se ela possui produtos vinculados.');
         }
       });
   }

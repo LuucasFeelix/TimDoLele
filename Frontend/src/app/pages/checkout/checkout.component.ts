@@ -2,7 +2,8 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
+  inject
 } from '@angular/core';
 
 import {
@@ -41,6 +42,8 @@ import {
   valorUnitarioItem
 } from '../../core/utils/carrinho.utils';
 import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
+import { AvisoService } from '../../core/services/aviso.service';
+import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 @Component({
   selector: 'app-checkout',
@@ -49,13 +52,17 @@ import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
     CommonModule,
     FormsModule,
     ProdutoModalComponent,
-    SemEmojiDirective
+    SemEmojiDirective,
+    DinheiroPipe
   ],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent
   implements OnInit, OnDestroy {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   etapa = 1;
 
@@ -261,7 +268,7 @@ export class CheckoutComponent
       this.carrinho.length === 0
     ) {
 
-      alert(
+      this.aviso.atencao(
         'Carrinho vazio.'
       );
 
@@ -312,6 +319,29 @@ export class CheckoutComponent
       this.trocoPara =
         '';
     }
+  }
+
+  // "45 a 60 min" (entrega) ou "20 a 30 min" (retirada),
+  // conforme Admin > Configurações
+  private textoPrazo(): string | null {
+
+    if (!this.statusLoja) {
+      return null;
+    }
+
+    const minimo =
+      this.isDelivery()
+        ? this.statusLoja.prazoEntregaMin
+        : this.statusLoja.prazoRetiradaMin;
+
+    const maximo =
+      this.isDelivery()
+        ? this.statusLoja.prazoEntregaMax
+        : this.statusLoja.prazoRetiradaMax;
+
+    return minimo === maximo
+      ? `${minimo} min`
+      : `${minimo} a ${maximo} min`;
   }
 
   isDelivery(): boolean {
@@ -535,7 +565,7 @@ export class CheckoutComponent
           this.carregandoEdicao =
             false;
 
-          alert(
+          this.aviso.erro(
             'Não foi possível abrir o item para edição.'
           );
         }
@@ -656,6 +686,113 @@ export class CheckoutComponent
         '.',
         ','
       );
+  }
+
+  private totalNumero(): number {
+
+    return (
+      this.subtotalNumero() -
+      this.descontoCupom +
+      this.getTaxaEntrega()
+    );
+  }
+
+  // =====================================================
+  // TROCO (pagamento em dinheiro)
+  // =====================================================
+
+  // Máscara de dinheiro: o cliente digita só números
+  // e o valor vai se formando: 1 -> R$ 0,01 ... 10000 -> R$ 100,00
+  aoDigitarTroco(
+    event: Event
+  ): void {
+
+    const campo =
+      event.target as HTMLInputElement;
+
+    // Até 7 dígitos = R$ 99.999,99
+    const numeros =
+      campo.value
+        .replace(
+          /\D/g,
+          ''
+        )
+        .replace(
+          /^0+/,
+          ''
+        )
+        .substring(
+          0,
+          7
+        );
+
+    const formatado =
+      numeros
+        ? this.formatarMoeda(
+            Number(numeros) / 100
+          )
+        : '';
+
+    campo.value =
+      formatado;
+
+    this.trocoPara =
+      formatado;
+  }
+
+  pagarValorExato(): void {
+
+    this.trocoPara =
+      this.formatarMoeda(
+        this.totalNumero()
+      );
+  }
+
+  trocoNumero(): number {
+
+    const numeros =
+      (this.trocoPara ?? '')
+        .toString()
+        .replace(
+          /\D/g,
+          ''
+        );
+
+    return numeros
+      ? Number(numeros) / 100
+      : 0;
+  }
+
+  get trocoInsuficiente(): boolean {
+
+    // Compara em centavos para não errar por arredondamento
+    return (
+      Math.round(this.trocoNumero() * 100) <
+      Math.round(this.totalNumero() * 100)
+    );
+  }
+
+  get valorTroco(): number {
+
+    return Math.max(
+      this.trocoNumero() -
+      this.totalNumero(),
+      0
+    );
+  }
+
+  // 1234.5 -> "R$ 1.234,50"
+  private formatarMoeda(
+    valor: number
+  ): string {
+
+    return valor.toLocaleString(
+      'pt-BR',
+      {
+        style: 'currency',
+        currency: 'BRL'
+      }
+    );
   }
 
   private subtotalNumero(): number {
@@ -884,7 +1021,7 @@ export class CheckoutComponent
       !this.telefone
     ) {
 
-      alert(
+      this.aviso.atencao(
         'Preencha nome e WhatsApp.'
       );
 
@@ -902,7 +1039,7 @@ export class CheckoutComponent
       digitosTelefone !== 11
     ) {
 
-      alert(
+      this.aviso.atencao(
         'Informe um WhatsApp válido com DDD. Ex.: (16) 99999-9999'
       );
 
@@ -917,7 +1054,7 @@ export class CheckoutComponent
       )
     ) {
 
-      alert(
+      this.aviso.atencao(
         'Informe endereço e bairro para delivery.'
       );
 
@@ -945,11 +1082,36 @@ export class CheckoutComponent
     }
 
     if (
+      this.isDinheiro() &&
+      this.trocoNumero() <= 0
+    ) {
+
+      this.aviso.atencao(
+        'Informe para quanto precisa de troco. ' +
+        'Se for pagar o valor exato, toque em "Vou pagar o valor exato".'
+      );
+
+      return;
+    }
+
+    if (
+      this.isDinheiro() &&
+      this.trocoInsuficiente
+    ) {
+
+      this.aviso.atencao(
+        `O valor para troco precisa ser de pelo menos R$ ${this.calcularTotal()}.`
+      );
+
+      return;
+    }
+
+    if (
       this.carrinho.length ===
       0
     ) {
 
-      alert(
+      this.aviso.atencao(
         'Carrinho vazio.'
       );
 
@@ -1003,7 +1165,7 @@ export class CheckoutComponent
           this.verificandoLoja =
             false;
 
-          alert(
+          this.aviso.erro(
             'Não foi possível verificar se a loja está aberta. Tente novamente.'
           );
 
@@ -1050,13 +1212,8 @@ export class CheckoutComponent
         this.formaPagamento,
 
       trocoPara:
-        this.isDinheiro() &&
-        this.trocoPara
-
-          ? Number(
-              this.trocoPara
-            )
-
+        this.isDinheiro()
+          ? this.trocoNumero()
           : null,
 
       cupomCodigo:
@@ -1135,11 +1292,17 @@ export class CheckoutComponent
 
                   : 'Retirada',
 
+              // Prazo configurado no admin para o tipo escolhido
+              prazo:
+                this.textoPrazo(),
+
               formaPagamento:
                 this.obterFormaPagamentoTexto(),
 
               trocoPara:
-                this.trocoPara,
+                this.isDinheiro()
+                  ? this.trocoNumero()
+                  : null,
 
               taxaEntrega:
                 this.getTaxaEntrega(),
@@ -1149,12 +1312,8 @@ export class CheckoutComponent
 
               codigo:
                 res?.data?.codigo ??
-                res?.data?.pedidoCodigo ??
                 res?.codigo ??
-                res?.pedidoCodigo ??
-                res?.data?.pedidoId ??
-                res?.pedidoId ??
-                '0000'
+                null
             })
           );
 
@@ -1223,7 +1382,7 @@ export class CheckoutComponent
             return;
           }
 
-          alert(
+          this.aviso.erro(
             mensagemApi ||
             'Não foi possível finalizar seu pedido. Tente novamente.'
           );

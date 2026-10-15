@@ -75,7 +75,7 @@
         </small>
 
         <small *ngIf="pedido.trocoPara" class="troco">
-          💵 Troco para R$ {{ pedido.trocoPara }}
+          💵 Troco para {{ pedido.trocoPara | dinheiro }}
         </small>
       </div>
 
@@ -84,7 +84,7 @@
       </div>
 
       <div class="pedido-total">
-        R$ {{ pedido.total }}
+        {{ pedido.total | dinheiro }}
       </div>
 
       <span class="status preparo-status">
@@ -126,7 +126,7 @@
         </small>
 
         <small *ngIf="pedido.trocoPara" class="troco">
-          💵 Troco para R$ {{ pedido.trocoPara }}
+          💵 Troco para {{ pedido.trocoPara | dinheiro }}
         </small>
       </div>
 
@@ -135,7 +135,7 @@
       </div>
 
       <div class="pedido-total">
-        R$ {{ pedido.total }}
+        {{ pedido.total | dinheiro }}
       </div>
 
       <span class="status pronto">
@@ -177,7 +177,7 @@
         </small>
 
         <small *ngIf="pedido.trocoPara" class="troco">
-          💵 Troco para R$ {{ pedido.trocoPara }}
+          💵 Troco para {{ pedido.trocoPara | dinheiro }}
         </small>
       </div>
 
@@ -186,7 +186,7 @@
       </div>
 
       <div class="pedido-total">
-        R$ {{ pedido.total }}
+        {{ pedido.total | dinheiro }}
       </div>
 
       <span class="status rota">

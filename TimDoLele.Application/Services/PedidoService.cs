@@ -26,7 +26,8 @@ namespace TimDoLele.Application.Services
             _cupomService = cupomService;
         }
 
-        public async Task<Guid> CriarPedidoAsync(
+        // Devolve o Id (uso interno) e o Código curto (mostrado ao cliente)
+        public async Task<(Guid Id, string Codigo)> CriarPedidoAsync(
             CriarPedidoDto dto)
         {
             var statusLoja =
@@ -232,6 +233,29 @@ namespace TimDoLele.Application.Services
                 cupom.RegistrarUso();
             }
 
+            // Pagamento em dinheiro: o troco precisa cobrir o total,
+            // senão a loja não sabe quanto levar de troco
+            if (
+                dto.FormaPagamento ==
+                FormaPagamento.Dinheiro
+            )
+            {
+                if (!dto.TrocoPara.HasValue)
+                {
+                    throw new BadRequestException(
+                        "Informe para quanto precisa de troco."
+                    );
+                }
+
+                if (dto.TrocoPara.Value < pedido.Total)
+                {
+                    throw new BadRequestException(
+                        $"O valor para troco ({TextoHelper.FormatarDinheiro(dto.TrocoPara.Value)}) " +
+                        $"é menor que o total do pedido ({TextoHelper.FormatarDinheiro(pedido.Total)})."
+                    );
+                }
+            }
+
             var statusAntesDeSalvar =
                 await _statusLojaService
                     .ObterStatusAsync();
@@ -278,7 +302,7 @@ namespace TimDoLele.Application.Services
             await _context
                 .SaveChangesAsync();
 
-            return pedido.Id;
+            return (pedido.Id, pedido.Codigo);
         }
 
         public async Task<PagedResult<PedidoResponseDto>>
@@ -348,6 +372,13 @@ namespace TimDoLele.Application.Services
                     DataHora = p.DataHora,
 
                     NomeCliente = p.Cliente!.Nome,
+
+                    Telefone = p.Cliente.Telefone,
+
+                    Endereco =
+                        string.IsNullOrWhiteSpace(p.Cliente.Endereco?.Rua)
+                            ? null
+                            : p.Cliente.Endereco.Rua,
 
                     SubTotal = p.Subtotal,
 
@@ -470,6 +501,14 @@ namespace TimDoLele.Application.Services
                 NomeCliente =
                     pedido.Cliente!.Nome,
 
+                Telefone =
+                    pedido.Cliente.Telefone,
+
+                Endereco =
+                    string.IsNullOrWhiteSpace(pedido.Cliente.Endereco?.Rua)
+                        ? null
+                        : pedido.Cliente.Endereco.Rua,
+
                 SubTotal =
                     pedido.Subtotal,
 
@@ -566,6 +605,21 @@ namespace TimDoLele.Application.Services
             }
 
             pedido.AtualizarStatus(status);
+
+            // Cancelou um pedido com cupom: devolve o uso do cupom
+            if (
+                status == StatusPedido.Cancelado &&
+                pedido.CupomId.HasValue
+            )
+            {
+                var cupom =
+                    await _context.Cupons
+                        .FindAsync(
+                            pedido.CupomId.Value
+                        );
+
+                cupom?.EstornarUso();
+            }
 
             await _context.SaveChangesAsync();
         }

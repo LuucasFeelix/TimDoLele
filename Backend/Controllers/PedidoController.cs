@@ -37,7 +37,7 @@ namespace TimDoLeLe.Controllers
         public async Task<IActionResult> Criar(
             [FromBody] CriarPedidoDto dto)
         {
-            var pedidoId =
+            var (pedidoId, codigo) =
                 await _pedidoService
                     .CriarPedidoAsync(dto);
 
@@ -79,7 +79,10 @@ namespace TimDoLeLe.Controllers
                 ApiResponse<object>.Ok(
                     new
                     {
-                        pedidoId
+                        pedidoId,
+
+                        // Código curto que o cliente vê (igual ao do admin)
+                        codigo
                     },
                     "Pedido criado com sucesso"
                 )

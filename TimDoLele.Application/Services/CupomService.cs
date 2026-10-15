@@ -4,6 +4,7 @@ using TimDolele.Core.Entities;
 using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
 using TimDoLele.Application.Exceptions;
+using TimDoLele.Application.Helpers;
 using TimDoLele.Infrastructure.Data;
 
 namespace TimDoLele.Application.Services
@@ -127,7 +128,7 @@ namespace TimDoLele.Application.Services
 
             if (cupom.PedidoMinimo.HasValue && subtotal < cupom.PedidoMinimo.Value)
                 throw new BadRequestException(
-                    $"Este cupom vale para pedidos a partir de R$ {cupom.PedidoMinimo.Value:N2}."
+                    $"Este cupom vale para pedidos a partir de {TextoHelper.FormatarDinheiro(cupom.PedidoMinimo.Value)}."
                 );
 
             return cupom;

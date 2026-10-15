@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { AvisoService } from '../../core/services/aviso.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -13,6 +14,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class Login {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   email = '';
   senha = '';
@@ -34,7 +38,7 @@ export class Login {
       !this.email.trim() ||
       !this.senha
     ) {
-      alert('Informe o e-mail e a senha.');
+      this.aviso.atencao('Informe o e-mail e a senha.');
       return;
     }
 
@@ -65,7 +69,7 @@ export class Login {
             err
           );
 
-          alert(
+          this.aviso.erro(
             'Email ou senha inválidos'
           );
         }

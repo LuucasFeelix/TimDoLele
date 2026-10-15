@@ -309,7 +309,7 @@
           </p>
 
           <strong>
-            R$ {{ p.preco }}
+            {{ p.preco | dinheiro }}
           </strong>
 
         </div>
@@ -353,7 +353,7 @@
       </span>
 
       <strong>
-        R$ {{ calcularTotal() }}
+        {{ calcularTotal() | dinheiro }}
       </strong>
 
     </div>

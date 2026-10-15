@@ -1,19 +1,25 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PedidoService } from '../../core/services/pedido.service';
+import { AvisoService } from '../../core/services/aviso.service';
+import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    DinheiroPipe
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class Dashboard implements OnInit {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   pedidos: any[] = [];
 
@@ -99,7 +105,7 @@ export class Dashboard implements OnInit {
       },
       error: (err: any) => {
         console.error(err);
-        alert('Erro ao atualizar status');
+        this.aviso.erro('Erro ao atualizar status');
       }
     });
   }

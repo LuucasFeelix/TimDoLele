@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { ProdutoService } from '../../core/services/produto.service';
 import { limparTextoImpressao } from '../../core/utils/texto.utils';
 import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
+import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 @Component({
   selector: 'app-produto-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, SemEmojiDirective],
+  imports: [CommonModule, FormsModule, SemEmojiDirective, DinheiroPipe],
   templateUrl: './produto-modal.component.html',
   styleUrls: ['./produto-modal.component.css']
 })

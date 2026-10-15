@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AvisoPopupComponent } from './shared/aviso-popup/aviso-popup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AvisoPopupComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

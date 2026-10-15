@@ -13,6 +13,16 @@ namespace TimDoLele.Application.Helpers
             RegexOptions.Compiled
         );
 
+        private static readonly System.Globalization.CultureInfo PtBr =
+            new("pt-BR");
+
+        // 1234.5 -> "R$ 1.234,50" (mesmo formato das telas,
+        // não importa o idioma do Windows do servidor)
+        public static string FormatarDinheiro(decimal valor)
+        {
+            return valor.ToString("C", PtBr);
+        }
+
         public static string? LimparParaImpressao(string? texto)
         {
             if (string.IsNullOrWhiteSpace(texto))

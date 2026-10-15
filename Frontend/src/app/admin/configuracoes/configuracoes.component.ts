@@ -1,7 +1,8 @@
 import {
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnInit,
+  inject
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
@@ -22,6 +23,7 @@ import {
   CriarDataEspecialRequest
 } from '../../core/services/configuracao-loja.service';
 import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
+import { AvisoService } from '../../core/services/aviso.service';
 
 @Component({
   selector: 'app-configuracoes',
@@ -35,6 +37,9 @@ import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
   styleUrls: ['./configuracoes.component.css']
 })
 export class ConfiguracoesComponent implements OnInit {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   carregando = true;
 
@@ -636,13 +641,18 @@ export class ConfiguracoesComponent implements OnInit {
       });
   }
 
-  excluirDataEspecial(
+  async excluirDataEspecial(
     dataEspecial: DataEspecial
-  ): void {
+  ): Promise<void> {
 
     const confirmar =
-      window.confirm(
-        `Deseja realmente excluir "${dataEspecial.descricao}"?`
+      await this.aviso.confirmar(
+        `Deseja realmente excluir "${dataEspecial.descricao}"?`,
+        {
+          titulo: 'Excluir data especial',
+          textoConfirmar: 'Excluir',
+          perigo: true
+        }
       );
 
     if (!confirmar) {
