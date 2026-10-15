@@ -17,6 +17,10 @@ export interface ItemFilaImpressao {
   status: StatusImpressao;
   adicionadoEm: Date;
   tentativas: number;
+
+  // true = reimpressão manual (depois de erro):
+  // não muda o status do pedido automaticamente
+  reimpressao: boolean;
 }
 
 export interface PedidoComErroImpressao {
@@ -63,7 +67,8 @@ export class ImpressaoPedidoService {
   ) { }
 
   async adicionarNaFila(
-    pedido: any
+    pedido: any,
+    reimpressao = false
   ): Promise<void> {
 
     if (!pedido?.id) {
@@ -94,7 +99,8 @@ export class ImpressaoPedidoService {
       );
 
       this.adicionarPedidoNaFilaLocal(
-        pedido
+        pedido,
+        reimpressao
       );
 
     } catch (erro) {
@@ -144,7 +150,8 @@ export class ImpressaoPedidoService {
   }
 
   private adicionarPedidoNaFilaLocal(
-    pedido: any
+    pedido: any,
+    reimpressao = false
   ): void {
 
     this.pedidosConhecidos.add(
@@ -155,7 +162,8 @@ export class ImpressaoPedidoService {
       pedido,
       status: 'Aguardando',
       adicionadoEm: new Date(),
-      tentativas: 0
+      tentativas: 0,
+      reimpressao
     });
 
     console.log(
@@ -385,7 +393,9 @@ export class ImpressaoPedidoService {
         await firstValueFrom(
           this.pedidoService
             .concluirImpressao(
-              item.pedido.id
+              item.pedido.id,
+              // automática: Pendente -> Em preparo
+              !item.reimpressao
             )
         );
 
@@ -525,7 +535,8 @@ export class ImpressaoPedidoService {
     );
 
     await this.adicionarNaFila(
-      pedido
+      pedido,
+      true
     );
   }
 

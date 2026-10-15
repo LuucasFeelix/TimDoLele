@@ -52,10 +52,13 @@ export class PedidoService {
     );
   }
 
-  concluirImpressao(id: string) {
+  // avancarStatus = true: impressão automática, o pedido
+  // passa de "Pendente" para "Em preparo"
+  concluirImpressao(id: string, avancarStatus = false) {
     return this.http.put(
       `${this.api}/${id}/impressao/concluir`,
-      {}
+      {},
+      { params: { avancarStatus } }
     );
   }
 

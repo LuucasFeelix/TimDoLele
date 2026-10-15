@@ -196,10 +196,62 @@ namespace TimDoLeLe.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}/impressao/concluir")]
         public async Task<IActionResult>
-            ConcluirImpressao(Guid id)
+            ConcluirImpressao(
+                Guid id,
+                [FromQuery] bool avancarStatus = false)
         {
-            await _pedidoService
-                .ConcluirImpressaoAsync(id);
+            var statusMudou =
+                await _pedidoService
+                    .ConcluirImpressaoAsync(
+                        id,
+                        avancarStatus
+                    );
+
+            // Avisa as telas abertas, igual à mudança manual de status
+            if (statusMudou)
+            {
+                var dataEvento =
+                    DateTime.Now;
+
+                var status =
+                    StatusPedido.EmPreparo.ToString();
+
+                await _notificacaoHub
+                    .Clients
+                    .All
+                    .SendAsync(
+                        "PedidoAtualizado",
+                        new
+                        {
+                            pedidoId = id,
+
+                            status,
+
+                            atualizadoEm =
+                                dataEvento
+                        }
+                    );
+
+                await _notificacaoHub
+                    .Clients
+                    .All
+                    .SendAsync(
+                        "DashboardAtualizado",
+                        new
+                        {
+                            motivo =
+                                "StatusPedidoAtualizado",
+
+                            pedidoId =
+                                id,
+
+                            status,
+
+                            atualizadoEm =
+                                dataEvento
+                        }
+                    );
+            }
 
             return NoContent();
         }

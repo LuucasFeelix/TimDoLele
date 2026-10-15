@@ -650,8 +650,13 @@ namespace TimDoLele.Application.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task ConcluirImpressaoAsync(
-            Guid pedidoId)
+        // avancarStatus = true na impressão automática:
+        // pedido impresso vai para "Em preparo".
+        // Na reimpressão manual (após erro) o status é mudado à mão.
+        // Retorna true se o status mudou.
+        public async Task<bool> ConcluirImpressaoAsync(
+            Guid pedidoId,
+            bool avancarStatus = false)
         {
             var pedido =
                 await ObterPedidoEntidadeAsync(
@@ -660,7 +665,26 @@ namespace TimDoLele.Application.Services
 
             pedido.MarcarComoImpresso();
 
+            var statusMudou = false;
+
+            // Só se ainda estiver Pendente: não desfaz
+            // um status que alguém já mudou manualmente
+            if (
+                avancarStatus &&
+                pedido.Status ==
+                StatusPedido.Pendente
+            )
+            {
+                pedido.AtualizarStatus(
+                    StatusPedido.EmPreparo
+                );
+
+                statusMudou = true;
+            }
+
             await _context.SaveChangesAsync();
+
+            return statusMudou;
         }
 
         public async Task MarcarErroImpressaoAsync(
