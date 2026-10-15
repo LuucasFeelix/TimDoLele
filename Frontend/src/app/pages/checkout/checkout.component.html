@@ -141,7 +141,7 @@
       <div class="item-price-area">
 
         <strong>
-          R$ {{ calcularItemTotal(item) }}
+          {{ calcularItemTotal(item) | dinheiro }}
         </strong>
 
         <button
@@ -205,7 +205,7 @@
           <strong>🏷️ {{ cupomAplicado.codigo }}</strong>
 
           <small *ngIf="!cupomAbaixoDoMinimo">
-            Desconto de R$ {{ formatarValor(descontoCupom) }}
+            Desconto de {{ descontoCupom | dinheiro }}
           </small>
 
           <small
@@ -213,7 +213,7 @@
             class="coupon-aviso"
           >
             Vale para pedidos a partir de
-            R$ {{ formatarValor(cupomAplicado.pedidoMinimo!) }}
+            {{ cupomAplicado.pedidoMinimo! | dinheiro }}
           </small>
         </div>
 
@@ -238,12 +238,12 @@
 
         <div>
           <span>Subtotal</span>
-          <strong>R$ {{ calcularSubtotal() }}</strong>
+          <strong>{{ calcularSubtotal() | dinheiro }}</strong>
         </div>
 
         <div class="linha-desconto">
           <span>Desconto ({{ cupomAplicado?.codigo }})</span>
-          <strong>- R$ {{ formatarValor(descontoCupom) }}</strong>
+          <strong>- {{ descontoCupom | dinheiro }}</strong>
         </div>
 
       </ng-container>
@@ -255,7 +255,7 @@
         </span>
 
         <strong>
-          R$ {{ formatarValor(subtotalComDesconto) }}
+          {{ subtotalComDesconto | dinheiro }}
         </strong>
 
       </div>
@@ -453,7 +453,7 @@
         </span>
 
         <strong>
-          R$ {{ calcularSubtotal() }}
+          {{ calcularSubtotal() | dinheiro }}
         </strong>
 
       </div>
@@ -469,7 +469,7 @@
         </span>
 
         <strong>
-          - R$ {{ formatarValor(descontoCupom) }}
+          - {{ descontoCupom | dinheiro }}
         </strong>
 
       </div>
@@ -486,12 +486,7 @@
         </span>
 
         <strong>
-          R$
-          {{
-            getTaxaEntrega()
-              .toFixed(2)
-              .replace('.', ',')
-          }}
+          {{ getTaxaEntrega() | dinheiro }}
         </strong>
 
       </div>
@@ -504,7 +499,7 @@
         </span>
 
         <strong>
-          R$ {{ calcularTotal() }}
+          {{ calcularTotal() | dinheiro }}
         </strong>
 
       </div>
@@ -627,12 +622,45 @@
         Troco para quanto?
 
         <input
-          type="number"
-          [(ngModel)]="trocoPara"
-          placeholder="Ex: 50"
+          type="text"
+          inputmode="numeric"
+          [value]="trocoPara"
+          (input)="aoDigitarTroco($event)"
+          placeholder="R$ 0,00"
         />
 
       </label>
+
+      <ng-container *ngIf="isDinheiro()">
+
+        <p
+          *ngIf="trocoNumero() > 0 && trocoInsuficiente"
+          class="troco-info troco-erro"
+        >
+          O valor precisa ser de pelo menos
+          {{ calcularTotal() | dinheiro }} (total do pedido).
+        </p>
+
+        <p
+          *ngIf="trocoNumero() > 0 && !trocoInsuficiente"
+          class="troco-info"
+        >
+          {{
+            valorTroco > 0
+              ? 'Troco a receber: R$ ' + formatarValor(valorTroco)
+              : 'Sem troco: valor exato.'
+          }}
+        </p>
+
+        <button
+          type="button"
+          class="troco-exato"
+          (click)="pagarValorExato()"
+        >
+          💵 Vou pagar o valor exato ({{ calcularTotal() | dinheiro }})
+        </button>
+
+      </ng-container>
 
     </section>
 

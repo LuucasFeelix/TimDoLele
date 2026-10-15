@@ -125,9 +125,9 @@
       <span>{{ item.nome }}</span>
 
       <span>
-        R$ {{ formatarPreco(item.atual) }}
+        {{ item.atual | dinheiro }}
         →
-        <b>R$ {{ formatarPreco(item.novo) }}</b>
+        <b>{{ item.novo | dinheiro }}</b>
       </span>
     </div>
   </div>
@@ -287,7 +287,7 @@
       <strong>{{ produto.nome }}</strong>
 
       <span class="produto-preco">
-        R$ {{ formatarPreco(produto.preco) }}
+        {{ produto.preco | dinheiro }}
       </span>
 
       <p *ngIf="produto.descricao">
@@ -388,7 +388,7 @@
         />
 
         <span>
-          {{ adicional.nome }} - R$ {{ adicional.preco }}
+          {{ adicional.nome }} - {{ adicional.preco | dinheiro }}
         </span>
       </label>
     </div>

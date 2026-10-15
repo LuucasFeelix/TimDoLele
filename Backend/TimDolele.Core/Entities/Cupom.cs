@@ -63,6 +63,13 @@ namespace TimDolele.Core.Entities
 
         public void RegistrarUso() => Usos++;
 
+        // Pedido cancelado: o uso volta para outro pedido poder usar
+        public void EstornarUso()
+        {
+            if (Usos > 0)
+                Usos--;
+        }
+
         // Desconto em R$ sobre o subtotal (nunca maior que o subtotal)
         public decimal CalcularDesconto(decimal subtotal)
         {

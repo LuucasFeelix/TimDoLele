@@ -32,7 +32,7 @@
         </div>
 
         <strong>
-          R$ {{ produto?.preco }}
+          {{ produto?.preco | dinheiro }}
         </strong>
       </div>
 
@@ -70,7 +70,7 @@
 
           <div class="adicional-lado">
             <strong class="adicional-preco">
-              + R$ {{ adicional.preco }}
+              + {{ adicional.preco | dinheiro }}
             </strong>
 
             <!-- Quantidade do adicional (ex.: 2x Bacon) -->
@@ -147,7 +147,7 @@
     <div class="modal-footer">
       <div>
         <span>Total</span>
-        <strong>R$ {{ calcularTotal() }}</strong>
+        <strong>{{ calcularTotal() | dinheiro }}</strong>
       </div>
 
       <button

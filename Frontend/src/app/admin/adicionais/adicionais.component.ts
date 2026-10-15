@@ -1,10 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AdicionalService } from '../../core/services/adicional.service';
 import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
+import { AvisoService } from '../../core/services/aviso.service';
+import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 @Component({
   selector: 'app-adicionais',
@@ -13,12 +15,16 @@ import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
     CommonModule,
     FormsModule,
     RouterModule,
-    SemEmojiDirective
+    SemEmojiDirective,
+    DinheiroPipe
   ],
   templateUrl: './adicionais.component.html',
   styleUrls: ['./adicionais.component.css']
 })
 export class AdicionaisComponent implements OnInit {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   adicionais: any[] = [];
 
@@ -67,7 +73,7 @@ export class AdicionaisComponent implements OnInit {
         .atualizarAdicional(this.editandoId, dto)
         .subscribe({
           next: () => {
-            alert('Adicional atualizado!');
+            this.aviso.sucesso('Adicional atualizado!');
             this.limparFormulario();
             this.carregarAdicionais();
           }
@@ -79,7 +85,7 @@ export class AdicionaisComponent implements OnInit {
     this.adicionalService.criarAdicional(dto)
       .subscribe({
         next: () => {
-          alert('Adicional criado!');
+          this.aviso.sucesso('Adicional criado!');
           this.limparFormulario();
           this.carregarAdicionais();
         }
@@ -92,16 +98,21 @@ export class AdicionaisComponent implements OnInit {
     this.preco = adicional.preco;
   }
 
-  excluir(adicional: any): void {
+  async excluir(adicional: any): Promise<void> {
 
-    if (!confirm(`Excluir ${adicional.nome}?`))
+    const confirmou = await this.aviso.confirmar(
+      `Deseja excluir o adicional "${adicional.nome}"?`,
+      { titulo: 'Excluir adicional', textoConfirmar: 'Excluir', perigo: true }
+    );
+
+    if (!confirmou)
       return;
 
     this.adicionalService
       .excluirAdicional(adicional.id)
       .subscribe({
         next: () => {
-          alert('Excluído!');
+          this.aviso.sucesso('Excluído!');
           this.carregarAdicionais();
         }
       });

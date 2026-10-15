@@ -130,7 +130,7 @@
 
       <small>
         <ng-container *ngIf="cupom.pedidoMinimo">
-          Pedido mínimo R$ {{ formatarValor(cupom.pedidoMinimo) }} ·
+          Pedido mínimo {{ cupom.pedidoMinimo | dinheiro }} ·
         </ng-container>
 
         <ng-container *ngIf="cupom.validoAte; else semValidade">

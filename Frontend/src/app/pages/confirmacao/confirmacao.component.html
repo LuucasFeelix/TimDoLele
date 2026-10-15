@@ -12,19 +12,30 @@
       Seu pedido foi recebido e em breve será preparado.
     </p>
 
-    <div class="info-box">
+    <div
+      *ngIf="pedido?.codigo"
+      class="info-box"
+    >
       <span>Número do pedido</span>
-      <strong>#{{ pedido?.codigo }}</strong>
+      <strong>#{{ pedido.codigo }}</strong>
     </div>
 
-    <div class="info-box">
-      <span>Previsão de entrega</span>
-      <strong>40 a 60 min</strong>
+    <div
+      *ngIf="prazo"
+      class="info-box"
+    >
+      <span>
+        {{ ehRetirada ? 'Previsão para retirada' : 'Previsão de entrega' }}
+      </span>
+      <strong>{{ prazo }}</strong>
+      <small *ngIf="ehRetirada">
+        Retire seu pedido no balcão da loja
+      </small>
     </div>
 
     <div class="info-box">
       <span>Total</span>
-      <strong>R$ {{ pedido?.total }}</strong>
+      <strong>{{ pedido?.total | dinheiro }}</strong>
     </div>
 
     <button

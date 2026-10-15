@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -6,15 +6,20 @@ import { ProdutoService } from '../../core/services/produto.service';
 import { CategoriaService } from '../../core/services/categoria.service';
 import { AdicionalService } from '../../core/services/adicional.service';
 import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
+import { AvisoService } from '../../core/services/aviso.service';
+import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 @Component({
   selector: 'app-produtos',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, SemEmojiDirective],
+  imports: [CommonModule, FormsModule, RouterModule, SemEmojiDirective, DinheiroPipe],
   templateUrl: './produtos.component.html',
   styleUrls: ['./produtos.component.css']
 })
 export class ProdutosComponent implements OnInit {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   produtos: any[] = [];
   categorias: any[] = [];
@@ -98,7 +103,7 @@ export class ProdutosComponent implements OnInit {
 
   salvar(): void {
     if (!this.nome.trim() || !this.preco || !this.categoriaId) {
-      alert('Informe nome, preço e categoria.');
+      this.aviso.atencao('Informe nome, preço e categoria.');
       return;
     }
 
@@ -112,13 +117,13 @@ export class ProdutosComponent implements OnInit {
     if (this.editandoId) {
       this.produtoService.atualizarProduto(this.editandoId, dto).subscribe({
         next: () => {
-          alert('Produto atualizado!');
+          this.aviso.sucesso('Produto atualizado!');
           this.limparFormulario();
           this.carregarProdutos();
         },
         error: (err: any) => {
           console.error(err);
-          alert('Erro ao atualizar produto.');
+          this.aviso.erro('Erro ao atualizar produto.');
         }
       });
 
@@ -127,13 +132,13 @@ export class ProdutosComponent implements OnInit {
 
     this.produtoService.criarProduto(dto).subscribe({
       next: () => {
-        alert('Produto criado!');
+        this.aviso.sucesso('Produto criado!');
         this.limparFormulario();
         this.carregarProdutos();
       },
       error: (err: any) => {
         console.error(err);
-        alert('Erro ao criar produto.');
+        this.aviso.erro('Erro ao criar produto.');
       }
     });
   }
@@ -248,12 +253,12 @@ export class ProdutosComponent implements OnInit {
     const tiposPermitidos = ['image/jpeg', 'image/png', 'image/webp'];
 
     if (!tiposPermitidos.includes(arquivo.type)) {
-      alert('Formato inválido. Use JPG, PNG ou WEBP.');
+      this.aviso.atencao('Formato inválido. Use JPG, PNG ou WEBP.');
       return;
     }
 
     if (arquivo.size > 5 * 1024 * 1024) {
-      alert('A imagem deve ter no máximo 5 MB.');
+      this.aviso.atencao('A imagem deve ter no máximo 5 MB.');
       return;
     }
 
@@ -274,7 +279,7 @@ export class ProdutosComponent implements OnInit {
         this.enviandoFotoId = null;
         this.produtoFoto = null;
 
-        alert(
+        this.aviso.erro(
           typeof err.error === 'string'
             ? err.error
             : 'Erro ao enviar a foto.'
@@ -285,8 +290,13 @@ export class ProdutosComponent implements OnInit {
     });
   }
 
-  removerFoto(produto: any): void {
-    if (!confirm(`Remover a foto de "${produto.nome}"?`)) {
+  async removerFoto(produto: any): Promise<void> {
+    const confirmou = await this.aviso.confirmar(
+      `Remover a foto de "${produto.nome}"?`,
+      { titulo: 'Remover foto', textoConfirmar: 'Remover', perigo: true }
+    );
+
+    if (!confirmou) {
       return;
     }
 
@@ -297,7 +307,7 @@ export class ProdutosComponent implements OnInit {
       },
       error: (err: any) => {
         console.error(err);
-        alert('Erro ao remover a foto.');
+        this.aviso.erro('Erro ao remover a foto.');
       }
     });
   }
@@ -333,24 +343,24 @@ export class ProdutosComponent implements OnInit {
     return this.previaReajuste.some(p => p.novo <= 0);
   }
 
-  aplicarReajuste(): void {
+  async aplicarReajuste(): Promise<void> {
     if (!this.reajusteCategoriaId) {
-      alert('Selecione a categoria.');
+      this.aviso.atencao('Selecione a categoria.');
       return;
     }
 
     if (!this.valorReajuste) {
-      alert('Informe o valor do reajuste.');
+      this.aviso.atencao('Informe o valor do reajuste.');
       return;
     }
 
     if (this.previaReajuste.length === 0) {
-      alert('Esta categoria não possui produtos.');
+      this.aviso.atencao('Esta categoria não possui produtos.');
       return;
     }
 
     if (this.reajusteDeixaPrecoInvalido) {
-      alert('Algum produto ficaria com preço zero ou negativo.');
+      this.aviso.atencao('Algum produto ficaria com preço zero ou negativo.');
       return;
     }
 
@@ -358,12 +368,13 @@ export class ProdutosComponent implements OnInit {
       c => c.id === this.reajusteCategoriaId
     );
 
-    const acao = this.reajusteTipo === 'aumentar' ? 'AUMENTAR' : 'DIMINUIR';
+    const acao = this.reajusteTipo === 'aumentar' ? 'Aumentar' : 'Diminuir';
 
-    const confirmou = confirm(
+    const confirmou = await this.aviso.confirmar(
       `${acao} R$ ${this.formatarPreco(Math.abs(this.valorReajuste))} ` +
       `em ${this.previaReajuste.length} produto(s) da categoria ` +
-      `"${categoria?.nome}"?`
+      `"${categoria?.nome}"?`,
+      { titulo: 'Reajustar preços', textoConfirmar: 'Aplicar reajuste' }
     );
 
     if (!confirmou) {
@@ -376,7 +387,7 @@ export class ProdutosComponent implements OnInit {
       .reajustarPrecoCategoria(this.reajusteCategoriaId, this.valorReajuste)
       .subscribe({
         next: (res) => {
-          alert(`Preço de ${res.produtosAlterados} produto(s) atualizado!`);
+          this.aviso.sucesso(`Preço de ${res.produtosAlterados} produto(s) atualizado!`);
 
           this.aplicandoReajuste = false;
           this.reajusteValor = null;
@@ -387,7 +398,7 @@ export class ProdutosComponent implements OnInit {
 
           this.aplicandoReajuste = false;
 
-          alert(
+          this.aviso.erro(
             typeof err.error === 'string'
               ? err.error
               : 'Erro ao reajustar preços.'

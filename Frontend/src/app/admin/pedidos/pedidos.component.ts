@@ -2,7 +2,8 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
+  inject
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
@@ -31,6 +32,8 @@ import {
   PedidoAtualizadoSignalR,
   PedidoCriadoSignalR
 } from '../../core/services/notificacao-signalr.service';
+import { AvisoService } from '../../core/services/aviso.service';
+import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 
 @Component({
@@ -40,7 +43,8 @@ import {
 
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    DinheiroPipe
   ],
 
   templateUrl:
@@ -52,6 +56,9 @@ import {
 })
 export class PedidosComponent
   implements OnInit, OnDestroy {
+
+  // Popup padrão de avisos (substitui alert/confirm)
+  private aviso = inject(AvisoService);
 
   pedidos: any[] = [];
 
@@ -1072,7 +1079,7 @@ export class PedidosComponent
           );
 
 
-          alert(
+          this.aviso.erro(
             'Erro ao atualizar status'
           );
         }

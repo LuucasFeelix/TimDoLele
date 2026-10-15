@@ -1,0 +1,58 @@
+@if (avisoService.atual(); as aviso) {
+
+  <div
+    class="aviso-overlay"
+    (click)="cancelar()"
+  >
+
+    <div
+      class="aviso-modal"
+      role="alertdialog"
+      aria-modal="true"
+      [attr.aria-label]="aviso.titulo"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div
+        class="aviso-icone"
+        [ngClass]="aviso.tipo"
+      >
+        {{ icones[aviso.tipo] }}
+      </div>
+
+      <h2 [ngClass]="aviso.tipo">
+        {{ aviso.titulo }}
+      </h2>
+
+      <p class="aviso-mensagem">
+        {{ aviso.mensagem }}
+      </p>
+
+      <div class="aviso-botoes">
+
+        @if (aviso.confirmacao) {
+          <button
+            type="button"
+            class="aviso-cancelar"
+            (click)="cancelar()"
+          >
+            {{ aviso.textoCancelar }}
+          </button>
+        }
+
+        <button
+          type="button"
+          class="aviso-confirmar"
+          [class.perigo]="aviso.perigo"
+          (click)="confirmar()"
+        >
+          {{ aviso.textoConfirmar }}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}
