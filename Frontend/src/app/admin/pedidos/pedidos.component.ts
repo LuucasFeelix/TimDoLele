@@ -1132,7 +1132,7 @@ export class PedidosComponent
         'SaiuParaEntrega'
     ) {
 
-      return 'Retirada';
+      return 'Pronto para retirada';
     }
 
 
@@ -1289,7 +1289,7 @@ export class PedidosComponent
       return pedido.tipoEntrega ===
         'Retirada'
 
-        ? '🛍️ Retirada pronta'
+        ? '🛍️ Pronto para retirada'
 
         : '🛵 Saiu para entrega';
     }
