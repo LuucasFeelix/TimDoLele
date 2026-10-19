@@ -207,6 +207,108 @@
   font-size: 13px;
 }
 
+/* ===== DIA E BUSCA ===== */
+.toolbar-dia {
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dia-atalhos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.toolbar-label {
+  color: #333;
+  font-weight: 900;
+}
+
+.dia-atalhos button {
+  padding: 10px 18px;
+  border: 1px solid #d8dde6;
+  border-radius: 8px;
+  background: white;
+  color: #111;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.dia-atalhos button.active {
+  background: #f8b400;
+  border-color: #f8b400;
+}
+
+.dia-calendario {
+  padding: 9px 12px;
+  border: 1px solid #d8dde6;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.busca-pedido {
+  position: relative;
+  flex: 0 1 380px;
+}
+
+.busca-pedido input {
+  width: 100%;
+  padding: 11px 38px 11px 14px;
+  border: 1px solid #d8dde6;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.busca-pedido input:focus {
+  border-color: #f8b400;
+  outline: none;
+}
+
+.limpar-busca {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 50%;
+  background: #eee;
+  color: #555;
+  cursor: pointer;
+}
+
+/* ===== PAGINAÇÃO ===== */
+.paginacao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0 4px;
+  font-size: 14px;
+}
+
+.paginacao button {
+  padding: 9px 16px;
+  border: 1px solid #d8dde6;
+  border-radius: 8px;
+  background: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.paginacao button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
 /* ========================= */
 /* LAYOUT PRINCIPAL */
 /* ========================= */
