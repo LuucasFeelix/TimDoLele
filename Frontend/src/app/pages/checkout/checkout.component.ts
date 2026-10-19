@@ -35,6 +35,12 @@ import {
 } from '../../core/services/cupom.service';
 
 import {
+  Bairro,
+  BairroService,
+  normalizarBairro
+} from '../../core/services/bairro.service';
+
+import {
   copiarItem,
   nomeAdicional,
   separarItensPersonalizados,
@@ -73,6 +79,16 @@ export class CheckoutComponent
   endereco = '';
   bairro = '';
   referencia = '';
+
+  // Bairros com taxa (Admin > Bairros e taxas).
+  // Lista vazia = jeito antigo (bairro digitado + taxa padrão).
+  bairrosDisponiveis: Bairro[] = [];
+
+  buscaBairro = '';
+
+  bairroSelecionado: Bairro | null = null;
+
+  listaBairroAberta = false;
 
   tipoEntrega = 2;
 
@@ -126,6 +142,9 @@ export class CheckoutComponent
     private cupomService:
       CupomService,
 
+    private bairroService:
+      BairroService,
+
     private cdr:
       ChangeDetectorRef
   ) {}
@@ -150,6 +169,177 @@ export class CheckoutComponent
     this.verificarStatusLoja();
 
     this.iniciarMonitoramentoLoja();
+
+    this.carregarBairros();
+  }
+
+  // =====================================================
+  // BAIRRO E TAXA DE ENTREGA
+  // =====================================================
+
+  private carregarBairros(): void {
+
+    this.bairroService
+      .listarAtivos()
+      .subscribe({
+
+        next: (
+          bairros
+        ) => {
+
+          this.bairrosDisponiveis =
+            bairros;
+
+          this.cdr.detectChanges();
+        },
+
+        error: (
+          erro
+        ) => {
+
+          // Sem a lista, continua no jeito antigo (bairro digitado)
+          console.error(
+            'Erro ao carregar os bairros:',
+            erro
+          );
+        }
+      });
+  }
+
+  // true = cliente escolhe o bairro na lista (taxa por bairro)
+  get usaListaBairros(): boolean {
+
+    return (
+      this.bairrosDisponiveis.length > 0
+    );
+  }
+
+  // Bairros que combinam com o que foi digitado (até 8)
+  get sugestoesBairro(): Bairro[] {
+
+    const termo =
+      normalizarBairro(
+        this.buscaBairro
+      );
+
+    const lista =
+      termo
+        ? this.bairrosDisponiveis.filter(
+            b =>
+              normalizarBairro(b.nome)
+                .includes(termo)
+          )
+        : this.bairrosDisponiveis;
+
+    return lista.slice(
+      0,
+      8
+    );
+  }
+
+  aoDigitarBairro(
+    event: Event
+  ): void {
+
+    this.buscaBairro =
+      (event.target as HTMLInputElement).value;
+
+    // Só vale depois de clicar numa opção da lista
+    this.bairroSelecionado =
+      null;
+
+    this.listaBairroAberta =
+      true;
+  }
+
+  escolherBairro(
+    bairro: Bairro
+  ): void {
+
+    this.bairroSelecionado =
+      bairro;
+
+    this.buscaBairro =
+      bairro.nome;
+
+    this.listaBairroAberta =
+      false;
+  }
+
+  // Espera o clique na opção acontecer antes de fechar a lista
+  fecharListaBairro(): void {
+
+    setTimeout(
+      () => {
+
+        this.listaBairroAberta =
+          false;
+
+        // Digitou mas não escolheu: se o texto for exatamente
+        // um bairro da lista, escolhe sozinho
+        if (
+          !this.bairroSelecionado &&
+          this.buscaBairro.trim()
+        ) {
+
+          const exato =
+            this.bairrosDisponiveis.find(
+              b =>
+                normalizarBairro(b.nome) ===
+                normalizarBairro(this.buscaBairro)
+            );
+
+          if (exato) {
+
+            this.escolherBairro(
+              exato
+            );
+          }
+        }
+
+        this.cdr.detectChanges();
+      },
+      200
+    );
+  }
+
+  async bairroForaDaLista(): Promise<void> {
+
+    this.listaBairroAberta =
+      false;
+
+    const telefones =
+      [
+        this.statusLoja?.telefoneFixo,
+        this.statusLoja?.celular
+      ]
+        .filter(t => !!t)
+        .join(' ou ');
+
+    const escolherRetirada =
+      await this.aviso.confirmar(
+        'Ainda não entregamos no seu bairro. ' +
+        'Você pode escolher Retirada e buscar na loja' +
+        (
+          telefones
+            ? `, ou ligar para nós: ${telefones}.`
+            : '.'
+        ),
+        {
+          titulo: 'Bairro fora da área de entrega',
+          textoConfirmar: 'Escolher retirada',
+          textoCancelar: 'Voltar'
+        }
+      );
+
+    if (escolherRetirada) {
+
+      this.selecionarTipoEntrega(
+        1
+      );
+
+      this.cdr.detectChanges();
+    }
   }
 
   ngOnDestroy(): void {
@@ -304,6 +494,12 @@ export class CheckoutComponent
 
       this.referencia =
         '';
+
+      this.buscaBairro =
+        '';
+
+      this.bairroSelecionado =
+        null;
     }
   }
 
@@ -362,9 +558,21 @@ export class CheckoutComponent
 
   getTaxaEntrega(): number {
 
-    return this.isDelivery()
-      ? this.taxaEntrega
-      : 0;
+    if (!this.isDelivery()) {
+      return 0;
+    }
+
+    // Com bairros cadastrados: taxa do bairro escolhido
+    if (this.usaListaBairros) {
+
+      return (
+        this.bairroSelecionado?.taxaEntrega ??
+        0
+      );
+    }
+
+    // Sem bairros cadastrados: taxa padrão (jeito antigo)
+    return this.taxaEntrega;
   }
 
   obterFormaPagamentoTexto():
@@ -1048,9 +1256,26 @@ export class CheckoutComponent
 
     if (
       this.isDelivery() &&
+      this.usaListaBairros &&
+      !this.bairroSelecionado
+    ) {
+
+      this.aviso.atencao(
+        'Escolha o seu bairro na lista. ' +
+        'Comece a digitar o nome e toque no seu bairro.'
+      );
+
+      return false;
+    }
+
+    if (
+      this.isDelivery() &&
       (
         !this.endereco ||
-        !this.bairro
+        (
+          !this.usaListaBairros &&
+          !this.bairro
+        )
       )
     ) {
 
@@ -1183,16 +1408,18 @@ export class CheckoutComponent
       return;
     }
 
-    const enderecoFinal =
-      this.isDelivery()
-
-        ? `${this.endereco} - ${this.bairro}${this.referencia
-            ? ' - Ref: ' +
-              this.referencia
-            : ''
-          }`
-
+    const referenciaTexto =
+      this.referencia
+        ? ' - Ref: ' + this.referencia
         : '';
+
+    // Com a lista de bairros, o bairro vai separado (bairroId)
+    const enderecoFinal =
+      !this.isDelivery()
+        ? ''
+        : this.usaListaBairros
+          ? `${this.endereco}${referenciaTexto}`
+          : `${this.endereco} - ${this.bairro}${referenciaTexto}`;
 
     const dto = {
 
@@ -1219,6 +1446,12 @@ export class CheckoutComponent
       cupomCodigo:
         this.descontoCupom > 0
           ? this.cupomAplicado?.codigo
+          : null,
+
+      bairroId:
+        this.isDelivery() &&
+        this.usaListaBairros
+          ? this.bairroSelecionado?.id
           : null,
 
       itens:

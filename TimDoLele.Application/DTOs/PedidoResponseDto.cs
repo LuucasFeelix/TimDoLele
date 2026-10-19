@@ -16,6 +16,9 @@
         // Vazio quando é retirada na loja.
         public string? Endereco { get; set; }
 
+        // Bairro escolhido na lista (vazio nos pedidos antigos)
+        public string? Bairro { get; set; }
+
         public decimal SubTotal { get; set; }
 
         public decimal Delivery { get; set; }

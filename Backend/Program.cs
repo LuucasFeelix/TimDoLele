@@ -192,6 +192,9 @@ namespace TimDoLeLe
                 builder.Services
                     .AddScoped<CupomService>();
 
+                builder.Services
+                    .AddScoped<BairroService>();
+
 
                 builder.Services
                     .AddDbContext<TimDoLeleDbContext>(

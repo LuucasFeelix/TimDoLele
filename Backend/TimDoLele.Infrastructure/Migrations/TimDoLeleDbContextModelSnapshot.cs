@@ -109,6 +109,37 @@ namespace TimDoLele.Infrastructure.Migrations
                     b.ToTable("Adicionais");
                 });
 
+            modelBuilder.Entity("TimDolele.Core.Entities.Bairro", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NomeNormalizado")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("TaxaEntrega")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NomeNormalizado")
+                        .IsUnique();
+
+                    b.ToTable("Bairros");
+                });
+
             modelBuilder.Entity("TimDolele.Core.Entities.Categoria", b =>
                 {
                     b.Property<Guid>("Id")

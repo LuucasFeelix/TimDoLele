@@ -720,6 +720,24 @@
           </ng-container>
 
 
+          <ng-container
+            *ngIf="
+              pedidoSelecionado.tipoEntrega === 'Delivery' &&
+              pedidoSelecionado.bairro
+            "
+          >
+
+            <span>
+              Bairro:
+            </span>
+
+            <strong>
+              {{ pedidoSelecionado.bairro }}
+            </strong>
+
+          </ng-container>
+
+
           <span>
             Pagamento:
           </span>

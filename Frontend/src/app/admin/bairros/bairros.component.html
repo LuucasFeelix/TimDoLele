@@ -1,0 +1,269 @@
+<header class="admin-header">
+  <div>
+    <h1>Bairros e taxas</h1>
+    <p>
+      Bairros onde a loja entrega e a taxa de cada um.
+      O cliente escolhe o bairro na lista do checkout.
+    </p>
+  </div>
+</header>
+
+
+<!-- Enquanto não houver bairro ativo, o checkout usa a taxa padrão -->
+<div
+  *ngIf="!carregando && quantidadeAtivos === 0"
+  class="aviso-sem-bairros"
+>
+  ℹ️ Nenhum bairro ativo ainda. Enquanto isso, o checkout usa o
+  <strong>bairro digitado</strong> e a <strong>taxa padrão</strong>
+  de Configurações. Ao cadastrar o primeiro bairro, passa a valer a lista.
+</div>
+
+
+<!-- ====================================== -->
+<!-- UM BAIRRO -->
+<!-- ====================================== -->
+
+<section class="form-card card">
+
+  <h2>
+    {{ editandoId ? 'Editar bairro' : 'Novo bairro' }}
+  </h2>
+
+  <div class="form-row">
+
+    <input
+      type="text"
+      semEmoji
+      [(ngModel)]="nome"
+      placeholder="Nome do bairro"
+      maxlength="100"
+      (keyup.enter)="salvar()"
+    />
+
+    <input
+      type="number"
+      min="0"
+      step="0.50"
+      class="campo-taxa"
+      [(ngModel)]="taxa"
+      placeholder="Taxa (R$)"
+      (keyup.enter)="salvar()"
+    />
+
+    <button
+      class="primary-button"
+      (click)="salvar()"
+      [disabled]="salvando"
+    >
+      {{ salvando ? 'Salvando...' : editandoId ? 'Atualizar' : 'Adicionar' }}
+    </button>
+
+    <button
+      *ngIf="editandoId"
+      class="secondary-button"
+      (click)="limparFormulario()"
+    >
+      Cancelar
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ====================================== -->
+<!-- ADICIONAR VÁRIOS -->
+<!-- ====================================== -->
+
+<section class="form-card card">
+
+  <h2>Adicionar vários de uma vez</h2>
+
+  <p class="ajuda">
+    Cole a lista com <strong>um bairro por linha</strong>, no formato
+    <code>Nome do bairro; taxa</code>. Bairros que já existem têm a taxa atualizada.
+  </p>
+
+  <textarea
+    *ngIf="previa.length === 0"
+    [(ngModel)]="textoImportacao"
+    rows="6"
+    placeholder="Jardim Bela Vista; 5,00&#10;Centro; 4,00&#10;Monte Verde; 7,00"
+  ></textarea>
+
+  <div
+    *ngIf="previa.length === 0"
+    class="form-actions"
+  >
+    <button
+      class="primary-button"
+      (click)="gerarPrevia()"
+      [disabled]="!textoImportacao.trim()"
+    >
+      Ver prévia
+    </button>
+  </div>
+
+
+  <!-- PRÉVIA -->
+  <div
+    *ngIf="previa.length > 0"
+    class="previa"
+  >
+
+    <div class="previa-resumo">
+      <strong>{{ linhasValidas.length }}</strong> bairro(s) prontos para importar
+      <span *ngIf="linhasComErro > 0" class="previa-erros">
+        · {{ linhasComErro }} linha(s) com erro serão ignoradas
+      </span>
+    </div>
+
+    <div
+      *ngFor="let linha of previa"
+      class="previa-linha"
+      [class.com-erro]="linha.erro"
+    >
+      <span class="previa-nome">{{ linha.nome || linha.texto }}</span>
+
+      <span *ngIf="!linha.erro">
+        {{ linha.taxa | dinheiro }}
+        <em class="previa-tag" [class.atualiza]="linha.jaExiste">
+          {{ linha.jaExiste ? 'atualiza' : 'novo' }}
+        </em>
+      </span>
+
+      <span *ngIf="linha.erro" class="previa-erro">
+        {{ linha.erro }}
+      </span>
+    </div>
+
+    <div class="form-actions">
+
+      <button
+        class="primary-button"
+        (click)="importar()"
+        [disabled]="importando || linhasValidas.length === 0"
+      >
+        {{ importando ? 'Importando...' : 'Importar ' + linhasValidas.length + ' bairro(s)' }}
+      </button>
+
+      <button
+        class="secondary-button"
+        (click)="cancelarImportacao()"
+      >
+        Voltar e editar
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ====================================== -->
+<!-- LISTA -->
+<!-- ====================================== -->
+
+<section class="list-card card">
+
+  <div class="lista-topo">
+    <h2>Bairros cadastrados ({{ bairros.length }})</h2>
+
+    <input
+      type="text"
+      class="campo-busca"
+      [(ngModel)]="busca"
+      (ngModelChange)="aoBuscar()"
+      placeholder="🔍 Buscar bairro..."
+    />
+  </div>
+
+  <p *ngIf="carregando">Carregando...</p>
+
+  <p
+    *ngIf="!carregando && bairros.length === 0"
+    class="empty"
+  >
+    Nenhum bairro cadastrado.
+  </p>
+
+  <p
+    *ngIf="!carregando && bairros.length > 0 && bairrosFiltrados.length === 0"
+    class="empty"
+  >
+    Nenhum bairro encontrado com "{{ busca }}".
+  </p>
+
+  <div
+    *ngFor="let bairro of bairrosPagina"
+    class="bairro-item"
+    [class.inativo]="!bairro.ativo"
+  >
+
+    <strong>{{ bairro.nome }}</strong>
+
+    <span class="bairro-taxa">
+      {{ bairro.taxaEntrega > 0 ? (bairro.taxaEntrega | dinheiro) : 'Grátis' }}
+    </span>
+
+    <span
+      class="bairro-status"
+      [class.ativo]="bairro.ativo"
+    >
+      {{ bairro.ativo ? 'Ativo' : 'Inativo' }}
+    </span>
+
+    <div class="actions">
+
+      <button
+        class="secondary-button"
+        (click)="editar(bairro)"
+      >
+        Editar
+      </button>
+
+      <button
+        [class.danger-button]="bairro.ativo"
+        [class.primary-button]="!bairro.ativo"
+        (click)="alternarAtivo(bairro)"
+      >
+        {{ bairro.ativo ? 'Desativar' : 'Ativar' }}
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- PAGINAÇÃO (10 por página) -->
+  <div
+    *ngIf="totalPaginas > 1"
+    class="paginacao"
+  >
+
+    <button
+      class="secondary-button"
+      (click)="irParaPagina(paginaAtual - 1)"
+      [disabled]="paginaAtual === 1"
+    >
+      ‹ Anterior
+    </button>
+
+    <span>
+      Página <strong>{{ paginaAtual }}</strong> de {{ totalPaginas }}
+      <small>({{ bairrosFiltrados.length }} bairros)</small>
+    </span>
+
+    <button
+      class="secondary-button"
+      (click)="irParaPagina(paginaAtual + 1)"
+      [disabled]="paginaAtual === totalPaginas"
+    >
+      Próxima ›
+    </button>
+
+  </div>
+
+</section>

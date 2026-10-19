@@ -56,6 +56,9 @@ import {
 export class AdminLayoutComponent
   implements OnInit, OnDestroy {
 
+  // true quando public/TimDoLeleLogo.png não existe (mostra o ícone)
+  logoComErro = false;
+
   pedidosComErro:
     PedidoComErroImpressao[] = [];
 
