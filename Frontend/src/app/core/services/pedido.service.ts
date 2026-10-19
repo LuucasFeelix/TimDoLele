@@ -17,6 +17,14 @@ export class PedidoService {
     return this.http.get<any>(this.api);
   }
 
+  // Pedidos de um status (0 Pendente, 1 EmPreparo, 2 SaiuParaEntrega...).
+  // Usado pelo dashboard: busca até 50 de cada status.
+  getPedidosPorStatus(status: number, pageSize = 50) {
+    return this.http.get<any>(this.api, {
+      params: { status, page: 1, pageSize }
+    });
+  }
+
   getPedidoPorId(id: string) {
     return this.http.get<any>(
       `${this.api}/${id}`

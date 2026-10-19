@@ -232,7 +232,7 @@
 
   <!-- LISTA SEPARADA POR CATEGORIA -->
   <div
-    *ngFor="let grupo of gruposProdutos"
+    *ngFor="let grupo of gruposProdutos; trackBy: rastrearGrupo"
     class="grupo-categoria"
   >
 
@@ -245,7 +245,7 @@
   </h3>
 
   <div
-    *ngFor="let produto of grupo.produtos"
+    *ngFor="let produto of grupo.produtos; trackBy: rastrearProduto"
     class="produto-item"
   >
     <!-- FOTO -->
