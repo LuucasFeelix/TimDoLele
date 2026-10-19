@@ -466,6 +466,17 @@ export class ProdutosComponent implements OnInit {
   }
 
   // Produtos filtrados separados por categoria
+  // Como o Angular reconhece cada grupo/produto na lista.
+  // Sem isso, como os grupos são montados de novo a cada clique,
+  // ele redesenhava a lista inteira e a página voltava para o topo.
+  rastrearGrupo(_: number, grupo: { categoria: string }): string {
+    return grupo.categoria;
+  }
+
+  rastrearProduto(_: number, produto: any): string {
+    return produto.id;
+  }
+
   get gruposProdutos(): { categoria: string; produtos: any[] }[] {
     const grupos: { categoria: string; produtos: any[] }[] = [];
 

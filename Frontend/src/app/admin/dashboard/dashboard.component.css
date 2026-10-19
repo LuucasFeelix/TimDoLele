@@ -216,6 +216,114 @@
   color: #1d4ed8;
 }
 
+/* ===== LISTA COM ROLAGEM DENTRO DO CARD =====
+   Altura para ~2 pedidos; os outros aparecem rolando. */
+.lista-pedidos {
+  max-height: 350px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+
+  /* barra fina e discreta (Firefox) */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, .18) transparent;
+}
+
+/* barra fina e discreta (Chrome / Edge) */
+.lista-pedidos::-webkit-scrollbar {
+  width: 6px;
+}
+
+.lista-pedidos::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.lista-pedidos::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .15);
+}
+
+.lista-pedidos:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .3);
+}
+
+/* ===== BOTÕES DE STATUS ===== */
+.acao-pedido {
+  grid-column: 1 / 3;
+  justify-self: start;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .2px;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .18);
+  transition: transform .1s ease, box-shadow .1s ease, filter .15s ease;
+}
+
+.acao-pedido:hover:not(:disabled) {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, .18);
+}
+
+/* "afunda" ao clicar, como um botão de verdade */
+.acao-pedido:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .18);
+}
+
+.acao-pedido:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+/* Entrega: azul (mesma cor do bloco "Saiu para entrega") */
+.acao-pedido.acao-entrega {
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+}
+
+/* Retirada: verde (mesma cor do bloco "Pronto para retirada") */
+.acao-pedido.acao-retirada {
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+}
+
+/* "Ao vivo · atualizado às ..." */
+.header-atualizacao {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ao-vivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ponto-ao-vivo {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: piscarAoVivo 1.6s ease-in-out infinite;
+}
+
+@keyframes piscarAoVivo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .35; }
+}
+
 .ver-todos {
   display: block;
   text-align: center;

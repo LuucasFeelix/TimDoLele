@@ -376,13 +376,14 @@
               autocomplete="off"
               [value]="buscaBairro"
               (input)="aoDigitarBairro($event)"
-              (focus)="listaBairroAberta = true"
+              (focus)="listaBairroAberta = !!buscaBairro.trim() && !bairroSelecionado"
               (blur)="fecharListaBairro()"
               [class.bairro-ok]="bairroSelecionado"
               placeholder="Digite para buscar seu bairro..."
             />
 
-            @if (listaBairroAberta) {
+            <!-- Só mostra sugestões depois que o cliente começa a digitar -->
+            @if (listaBairroAberta && buscaBairro.trim()) {
 
               <ul class="bairro-sugestoes">
 

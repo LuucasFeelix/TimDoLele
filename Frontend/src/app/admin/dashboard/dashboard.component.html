@@ -4,9 +4,26 @@
     <p>Controle operacional da lanchonete</p>
   </div>
 
-  <button class="primary-button" (click)="carregarPedidos()">
-    🔄 Atualizar
-  </button>
+  <div class="header-atualizacao">
+
+    <!-- Atualiza sozinho em tempo real; o botão é para forçar -->
+    <span
+      *ngIf="ultimaAtualizacao"
+      class="ao-vivo"
+    >
+      <i class="ponto-ao-vivo"></i>
+      Ao vivo · atualizado às {{ horaAtualizacao }}
+    </span>
+
+    <button
+      class="primary-button"
+      (click)="carregarPedidos()"
+      [disabled]="loading"
+    >
+      {{ loading ? 'Atualizando...' : '🔄 Atualizar' }}
+    </button>
+
+  </div>
 </header>
 
 <section class="cards">
@@ -14,7 +31,7 @@
     <div class="icon yellow">🛍️</div>
     <div>
       <span>Pedidos Hoje</span>
-      <strong>{{ pedidos.length }}</strong>
+      <strong>{{ pedidosHoje }}</strong>
     </div>
   </div>
 
@@ -22,7 +39,7 @@
     <div class="icon red">⏰</div>
     <div>
       <span>Pendentes</span>
-      <strong>{{ pedidosPendentes.length }}</strong>
+      <strong>{{ totalPendentes }}</strong>
     </div>
   </div>
 
@@ -30,7 +47,7 @@
     <div class="icon blue">👨‍🍳</div>
     <div>
       <span>Em preparo</span>
-      <strong>{{ pedidosEmPreparo.length }}</strong>
+      <strong>{{ totalEmPreparo }}</strong>
     </div>
   </div>
 
@@ -45,8 +62,8 @@
 
 <section class="dashboard-grid">
 
+  <!-- ===== EM PREPARO ===== -->
   <div class="dashboard-column card preparo">
-
     <header class="column-header">
       <div>
         <h2>👨‍🍳 Em preparo</h2>
@@ -60,7 +77,13 @@
       Nenhum pedido em preparo.
     </div>
 
-    <div *ngFor="let pedido of pedidosEmPreparo" class="pedido-row">
+    <!-- Mostra 2 pedidos; o resto aparece rolando dentro do card -->
+    <div class="lista-pedidos" *ngIf="pedidosEmPreparo.length > 0">
+
+    <div
+      *ngFor="let pedido of pedidosEmPreparo"
+      class="pedido-row"
+    >
       <div class="pedido-code">
         #{{ pedido.codigo }}
       </div>
@@ -87,19 +110,33 @@
         {{ pedido.total | dinheiro }}
       </div>
 
-      <span class="status preparo-status">
-        PREPARO
-      </span>
+      <button
+        type="button"
+        class="acao-pedido"
+        [class.acao-entrega]="pedido.tipoEntrega === 'Delivery'"
+        [class.acao-retirada]="pedido.tipoEntrega !== 'Delivery'"
+        (click)="marcarPronto(pedido)"
+        [disabled]="atualizandoId === pedido.id"
+      >
+        {{
+          atualizandoId === pedido.id
+            ? 'Atualizando...'
+            : pedido.tipoEntrega === 'Delivery'
+              ? '🛵 Saiu para entrega'
+              : '🛍️ Pronto para retirada'
+        }}
+      </button>
+    </div>
+
     </div>
 
     <a routerLink="/admin/pedidos" class="ver-todos laranja">
       Ver todos →
     </a>
-
   </div>
 
+  <!-- ===== PRONTO PARA RETIRADA ===== -->
   <div class="dashboard-column card retirada">
-
     <header class="column-header">
       <div>
         <h2>🛍️ Pronto para retirada</h2>
@@ -113,7 +150,13 @@
       Nenhum pedido aguardando retirada.
     </div>
 
-    <div *ngFor="let pedido of pedidosRetirada" class="pedido-row">
+    <!-- Mostra 2 pedidos; o resto aparece rolando dentro do card -->
+    <div class="lista-pedidos" *ngIf="pedidosRetirada.length > 0">
+
+    <div
+      *ngFor="let pedido of pedidosRetirada"
+      class="pedido-row"
+    >
       <div class="pedido-code">
         #{{ pedido.codigo }}
       </div>
@@ -138,19 +181,25 @@
         {{ pedido.total | dinheiro }}
       </div>
 
-      <span class="status pronto">
-        PRONTO
-      </span>
+      <button
+        type="button"
+        class="acao-pedido acao-retirada"
+        (click)="marcarEntregue(pedido)"
+        [disabled]="atualizandoId === pedido.id"
+      >
+        {{ atualizandoId === pedido.id ? 'Atualizando...' : '✅ Entregue ao cliente' }}
+      </button>
+    </div>
+
     </div>
 
     <a routerLink="/admin/pedidos" class="ver-todos verde">
       Ver todos →
     </a>
-
   </div>
 
+  <!-- ===== SAIU PARA ENTREGA ===== -->
   <div class="dashboard-column card entrega">
-
     <header class="column-header">
       <div>
         <h2>🛵 Saiu para entrega</h2>
@@ -164,7 +213,13 @@
       Nenhum pedido em rota.
     </div>
 
-    <div *ngFor="let pedido of pedidosEntrega" class="pedido-row">
+    <!-- Mostra 2 pedidos; o resto aparece rolando dentro do card -->
+    <div class="lista-pedidos" *ngIf="pedidosEntrega.length > 0">
+
+    <div
+      *ngFor="let pedido of pedidosEntrega"
+      class="pedido-row"
+    >
       <div class="pedido-code">
         #{{ pedido.codigo }}
       </div>
@@ -189,15 +244,21 @@
         {{ pedido.total | dinheiro }}
       </div>
 
-      <span class="status rota">
-        EM ROTA
-      </span>
+      <button
+        type="button"
+        class="acao-pedido acao-entrega"
+        (click)="marcarEntregue(pedido)"
+        [disabled]="atualizandoId === pedido.id"
+      >
+        {{ atualizandoId === pedido.id ? 'Atualizando...' : '✅ Entregue' }}
+      </button>
+    </div>
+
     </div>
 
     <a routerLink="/admin/pedidos" class="ver-todos azul">
       Ver todos →
     </a>
-
   </div>
 
 </section>
