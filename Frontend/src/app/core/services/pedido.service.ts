@@ -17,6 +17,41 @@ export class PedidoService {
     return this.http.get<any>(this.api);
   }
 
+  // Tela de Pedidos: pedidos do dia, com aba, busca e paginação.
+  // data no formato "2026-10-19"; filtro = Todos, Pendente, EmPreparo,
+  // Entrega, Retirada, Entregue ou Cancelado.
+  listarPedidosDia(opcoes: {
+    data: string;
+    filtro: string;
+    busca: string;
+    page: number;
+    pageSize: number;
+  }) {
+    const params: Record<string, string | number> = {
+      data: opcoes.data,
+      filtro: opcoes.filtro,
+      page: opcoes.page,
+      pageSize: opcoes.pageSize
+    };
+
+    if (opcoes.busca.trim()) {
+      params['busca'] = opcoes.busca.trim();
+    }
+
+    return this.http.get<any>(this.api, { params });
+  }
+
+  // Quantidade de pedidos de cada aba, no dia escolhido
+  getResumoDia(data: string, busca: string) {
+    const params: Record<string, string> = { data };
+
+    if (busca.trim()) {
+      params['busca'] = busca.trim();
+    }
+
+    return this.http.get<any>(`${this.api}/resumo-dia`, { params });
+  }
+
   // Pedidos de um status (0 Pendente, 1 EmPreparo, 2 SaiuParaEntrega...).
   // Usado pelo dashboard: busca até 50 de cada status.
   getPedidosPorStatus(status: number, pageSize = 50) {

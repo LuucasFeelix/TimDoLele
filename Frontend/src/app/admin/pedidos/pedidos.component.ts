@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import {
   ActivatedRoute,
@@ -15,6 +16,7 @@ import {
 
 import {
   Subject,
+  forkJoin,
   takeUntil
 } from 'rxjs';
 
@@ -43,6 +45,7 @@ import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
     DinheiroPipe
   ],
@@ -67,6 +70,35 @@ export class PedidosComponent
   loading = false;
 
   filtroAtual = 'Todos';
+
+  // Dia escolhido (formato 2026-10-19). Abre sempre em hoje.
+  dataSelecionada = this.formatarDataIso(new Date());
+
+  // Busca por código, nome ou telefone
+  busca = '';
+
+  private timeoutBusca:
+    ReturnType<typeof setTimeout> | null = null;
+
+  // Paginação (20 por página)
+  readonly porPagina = 20;
+
+  pagina = 1;
+
+  totalPaginas = 1;
+
+  totalPedidos = 0;
+
+  // Quantidade de cada aba no dia (vem do backend)
+  resumo = {
+    todos: 0,
+    pendentes: 0,
+    emPreparo: 0,
+    entrega: 0,
+    retirada: 0,
+    entregues: 0,
+    cancelados: 0
+  };
 
   pedidoSelecionado: any = null;
 
@@ -244,9 +276,8 @@ export class PedidosComponent
     pedidoId: string
   ): void {
 
-    this.aplicarFiltro(
-      'Todos'
-    );
+    this.pedidosFiltrados =
+      this.pedidos;
 
 
     const pedidoNaLista =
@@ -313,9 +344,8 @@ export class PedidosComponent
           }
 
 
-          this.aplicarFiltro(
-            'Todos'
-          );
+          this.pedidosFiltrados =
+            this.pedidos;
 
 
           this.pedidoSelecionado =
@@ -652,11 +682,6 @@ export class PedidosComponent
       this.toastNovoPedido.id;
 
 
-    this.aplicarFiltro(
-      'Todos'
-    );
-
-
     const pedido =
       this.pedidos.find(
         (item: any) =>
@@ -669,6 +694,26 @@ export class PedidosComponent
 
       this.pedidoSelecionado =
         pedido;
+
+    } else {
+
+      // Está vendo outro dia/aba/página: volta para hoje, "Todos",
+      // e abre o pedido novo quando a lista carregar
+      this.dataSelecionada =
+        this.formatarDataIso(new Date());
+
+      this.filtroAtual =
+        'Todos';
+
+      this.busca =
+        '';
+
+      this.pagina =
+        1;
+
+      this.carregarPedidos(
+        pedidoId
+      );
     }
 
 
@@ -741,19 +786,49 @@ export class PedidosComponent
       true;
 
 
-    this.pedidoService
-      .getPedidos()
+    forkJoin({
+
+      lista:
+        this.pedidoService
+          .listarPedidosDia({
+            data: this.dataSelecionada,
+            filtro: this.filtroAtual,
+            busca: this.busca,
+            page: this.pagina,
+            pageSize: this.porPagina
+          }),
+
+      resumo:
+        this.pedidoService
+          .getResumoDia(
+            this.dataSelecionada,
+            this.busca
+          )
+    })
       .subscribe({
 
-        next: (res: any) => {
+        next: ({ lista, resumo }: any) => {
 
           this.pedidos =
-            res.data ?? res;
+            lista?.data ?? [];
 
+          this.totalPedidos =
+            lista?.total ?? 0;
 
-          this.aplicarFiltro(
-            this.filtroAtual
-          );
+          this.totalPaginas =
+            Math.max(
+              lista?.totalPages ?? 1,
+              1
+            );
+
+          this.resumo = {
+            ...this.resumo,
+            ...resumo
+          };
+
+          // O backend já devolve filtrado pela aba escolhida
+          this.pedidosFiltrados =
+            this.pedidos;
 
 
           if (
@@ -848,60 +923,159 @@ export class PedidosComponent
     this.filtroAtual =
       filtro;
 
+    this.pagina =
+      1;
 
-    if (
-      filtro === 'Todos'
-    ) {
+    this.carregarPedidos(
+      this.pedidoSelecionado?.id
+    );
+  }
 
-      this.pedidosFiltrados =
-        this.pedidos;
 
+  // =========================================
+  // DIA, BUSCA E PAGINAÇÃO
+  // =========================================
+
+  selecionarDia(
+    data: string
+  ): void {
+
+    if (!data) {
       return;
     }
 
+    this.dataSelecionada =
+      data;
 
-    if (
-      filtro === 'Entrega'
-    ) {
+    this.pagina =
+      1;
 
-      this.pedidosFiltrados =
-        this.pedidos.filter(
-          (pedido: any) =>
-            pedido.tipoEntrega ===
-              'Delivery' &&
-            pedido.status ===
-              'SaiuParaEntrega'
-        );
+    this.pedidoSelecionado =
+      null;
 
-      return;
-    }
+    this.carregarPedidos();
+  }
 
+  irParaHoje(): void {
 
-    if (
-      filtro === 'Retirada'
-    ) {
+    this.selecionarDia(
+      this.formatarDataIso(new Date())
+    );
+  }
 
-      this.pedidosFiltrados =
-        this.pedidos.filter(
-          (pedido: any) =>
-            pedido.tipoEntrega ===
-              'Retirada' &&
-            pedido.status ===
-              'SaiuParaEntrega'
-        );
+  irParaOntem(): void {
 
-      return;
-    }
+    const ontem =
+      new Date();
 
+    ontem.setDate(
+      ontem.getDate() - 1
+    );
 
-    this.pedidosFiltrados =
-      this.pedidos.filter(
-        (pedido: any) =>
-          String(
-            pedido.status
-          ).trim() ===
-          filtro
+    this.selecionarDia(
+      this.formatarDataIso(ontem)
+    );
+  }
+
+  get ehHoje(): boolean {
+
+    return (
+      this.dataSelecionada ===
+      this.formatarDataIso(new Date())
+    );
+  }
+
+  get ehOntem(): boolean {
+
+    const ontem =
+      new Date();
+
+    ontem.setDate(
+      ontem.getDate() - 1
+    );
+
+    return (
+      this.dataSelecionada ===
+      this.formatarDataIso(ontem)
+    );
+  }
+
+  // Espera parar de digitar (0,4 s) para buscar
+  aoBuscar(): void {
+
+    if (this.timeoutBusca) {
+
+      clearTimeout(
+        this.timeoutBusca
       );
+    }
+
+    this.timeoutBusca =
+      setTimeout(
+        () => {
+
+          this.pagina =
+            1;
+
+          this.carregarPedidos(
+            this.pedidoSelecionado?.id
+          );
+        },
+        400
+      );
+  }
+
+  limparBusca(): void {
+
+    this.busca =
+      '';
+
+    this.aoBuscar();
+  }
+
+  irParaPagina(
+    pagina: number
+  ): void {
+
+    const destino =
+      Math.min(
+        Math.max(pagina, 1),
+        this.totalPaginas
+      );
+
+    if (destino === this.pagina) {
+      return;
+    }
+
+    this.pagina =
+      destino;
+
+    this.carregarPedidos(
+      this.pedidoSelecionado?.id
+    );
+  }
+
+  // Date -> "2026-10-19" (no fuso do computador da loja)
+  private formatarDataIso(
+    data: Date
+  ): string {
+
+    const mes =
+      String(data.getMonth() + 1).padStart(2, '0');
+
+    const dia =
+      String(data.getDate()).padStart(2, '0');
+
+    return `${data.getFullYear()}-${mes}-${dia}`;
+  }
+
+  // "2026-10-19" -> "19/10/2026"
+  get dataSelecionadaTexto(): string {
+
+    const [ano, mes, dia] =
+      this.dataSelecionada.split('-');
+
+    return `${dia}/${mes}/${ano}`;
   }
 
 
@@ -1420,129 +1594,47 @@ export class PedidosComponent
   // CONTADORES
   // =========================================
 
-  contarPendentes():
-    number {
-
-    return this.pedidos.filter(
-      (pedido: any) =>
-        pedido.status ===
-        'Pendente'
-    ).length;
+  contarPendentes(): number {
+    return this.resumo.pendentes;
   }
 
 
-  contarEmPreparo():
-    number {
-
-    return this.pedidos.filter(
-      (pedido: any) =>
-        pedido.status ===
-        'EmPreparo'
-    ).length;
+  contarEmPreparo(): number {
+    return this.resumo.emPreparo;
   }
 
 
-  contarEntrega():
-    number {
-
-    return this.pedidos.filter(
-      (pedido: any) =>
-        pedido.tipoEntrega ===
-          'Delivery' &&
-        pedido.status ===
-          'SaiuParaEntrega'
-    ).length;
+  contarEntrega(): number {
+    return this.resumo.entrega;
   }
 
 
-  contarRetirada():
-    number {
-
-    return this.pedidos.filter(
-      (pedido: any) =>
-        pedido.tipoEntrega ===
-          'Retirada' &&
-        pedido.status ===
-          'SaiuParaEntrega'
-    ).length;
+  contarRetirada(): number {
+    return this.resumo.retirada;
   }
 
 
-  contarCancelados():
-    number {
-
-    return this.pedidos.filter(
-      (pedido: any) =>
-        pedido.status ===
-        'Cancelado'
-    ).length;
+  contarCancelados(): number {
+    return this.resumo.cancelados;
   }
 
 
+  // Número de cada aba (todos os pedidos do dia, não só a página)
   contarFiltro(
     filtro: string
   ): number {
 
-    if (
-      filtro === 'Todos'
-    ) {
+    const mapa: Record<string, number> = {
+      Todos: this.resumo.todos,
+      Pendente: this.resumo.pendentes,
+      EmPreparo: this.resumo.emPreparo,
+      Entrega: this.resumo.entrega,
+      Retirada: this.resumo.retirada,
+      Entregue: this.resumo.entregues,
+      Cancelado: this.resumo.cancelados
+    };
 
-      return this.pedidos.length;
-    }
-
-
-    if (
-      filtro === 'Pendente'
-    ) {
-
-      return this
-        .contarPendentes();
-    }
-
-
-    if (
-      filtro === 'EmPreparo'
-    ) {
-
-      return this
-        .contarEmPreparo();
-    }
-
-
-    if (
-      filtro === 'Entrega'
-    ) {
-
-      return this
-        .contarEntrega();
-    }
-
-
-    if (
-      filtro === 'Retirada'
-    ) {
-
-      return this
-        .contarRetirada();
-    }
-
-
-    if (
-      filtro === 'Cancelado'
-    ) {
-
-      return this
-        .contarCancelados();
-    }
-
-
-    return this.pedidos.filter(
-      (pedido: any) =>
-        String(
-          pedido.status
-        ).trim() ===
-        filtro
-    ).length;
+    return mapa[filtro] ?? 0;
   }
 
 

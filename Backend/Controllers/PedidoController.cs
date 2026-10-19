@@ -96,7 +96,10 @@ namespace TimDoLeLe.Controllers
             [FromQuery] Guid? clienteId,
             [FromQuery] StatusPedido? status,
             [FromQuery] int page = 1,
-            [FromQuery] int pageSize = 10)
+            [FromQuery] int pageSize = 10,
+            [FromQuery] DateTime? data = null,
+            [FromQuery] string? busca = null,
+            [FromQuery] string? filtro = null)
         {
             var result =
                 await _pedidoService
@@ -104,10 +107,31 @@ namespace TimDoLeLe.Controllers
                         clienteId,
                         status,
                         page,
-                        pageSize
+                        pageSize,
+                        dia: data,
+                        busca: busca,
+                        filtro: filtro
                     );
 
             return Ok(result);
+        }
+
+
+        // Quantidade de pedidos em cada aba, para o dia escolhido
+        [Authorize(Roles = "Admin")]
+        [HttpGet("resumo-dia")]
+        public async Task<IActionResult> GetResumoDia(
+            [FromQuery] DateTime? data = null,
+            [FromQuery] string? busca = null)
+        {
+            var resumo =
+                await _pedidoService
+                    .ObterResumoDiaAsync(
+                        data,
+                        busca
+                    );
+
+            return Ok(resumo);
         }
 
 

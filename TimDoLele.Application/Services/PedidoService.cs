@@ -339,13 +339,138 @@ namespace TimDoLele.Application.Services
             return (pedido.Id, pedido.Codigo);
         }
 
+        // =====================================================
+        // TELA DE PEDIDOS: dia, busca, abas e contagens
+        // =====================================================
+
+        // Contagem de cada aba para o dia escolhido (e a busca, se houver)
+        public async Task<ResumoPedidosDiaDto> ObterResumoDiaAsync(
+            DateTime? data,
+            string? busca)
+        {
+            var query = FiltrarPorDiaEBusca(
+                _context.Pedidos.AsQueryable(),
+                data,
+                busca
+            );
+
+            var grupos = await query
+                .GroupBy(p => new { p.Status, p.TipoEntrega })
+                .Select(g => new
+                {
+                    g.Key.Status,
+                    g.Key.TipoEntrega,
+                    Quantidade = g.Count()
+                })
+                .ToListAsync();
+
+            int Contar(StatusPedido status, TipoEntrega? tipo = null) =>
+                grupos
+                    .Where(g => g.Status == status && (tipo == null || g.TipoEntrega == tipo))
+                    .Sum(g => g.Quantidade);
+
+            return new ResumoPedidosDiaDto
+            {
+                Todos = grupos.Sum(g => g.Quantidade),
+                Pendentes = Contar(StatusPedido.Pendente),
+                EmPreparo = Contar(StatusPedido.EmPreparo),
+                Entrega = Contar(StatusPedido.SaiuParaEntrega, TipoEntrega.Delivery),
+                Retirada = Contar(StatusPedido.SaiuParaEntrega, TipoEntrega.Retirada),
+                Entregues = Contar(StatusPedido.Entregue),
+                Cancelados = Contar(StatusPedido.Cancelado)
+            };
+        }
+
+        // Dia: pedidos feitos naquela data.
+        // Busca: código, nome ou telefone do cliente.
+        private static IQueryable<Pedido> FiltrarPorDiaEBusca(
+            IQueryable<Pedido> query,
+            DateTime? data,
+            string? busca)
+        {
+            if (data.HasValue)
+            {
+                var inicio = data.Value.Date;
+                var fim = inicio.AddDays(1);
+
+                query = query.Where(
+                    p => p.DataHora >= inicio && p.DataHora < fim
+                );
+            }
+
+            var termo = (busca ?? string.Empty).Trim().TrimStart('#');
+
+            if (termo.Length == 0)
+            {
+                return query;
+            }
+
+            var codigo = termo.ToUpper();
+
+            var numeros = new string(termo.Where(char.IsDigit).ToArray());
+
+            // Telefone é salvo formatado: "(16) 99383-7839".
+            // Compara só os números, para achar "1699383" ou "99383-7839".
+            return query.Where(
+                p =>
+                    p.Codigo.Contains(codigo) ||
+                    p.Cliente!.Nome.Contains(termo) ||
+                    (
+                        numeros.Length >= 4 &&
+                        p.Cliente.Telefone
+                            .Replace("(", "")
+                            .Replace(")", "")
+                            .Replace(" ", "")
+                            .Replace("-", "")
+                            .Contains(numeros)
+                    )
+            );
+        }
+
+        // Mesmas abas da tela de Pedidos
+        private static IQueryable<Pedido> FiltrarPorAba(
+            IQueryable<Pedido> query,
+            string? filtro)
+        {
+            return filtro switch
+            {
+                "Pendente" =>
+                    query.Where(p => p.Status == StatusPedido.Pendente),
+
+                "EmPreparo" =>
+                    query.Where(p => p.Status == StatusPedido.EmPreparo),
+
+                "Entrega" =>
+                    query.Where(p =>
+                        p.Status == StatusPedido.SaiuParaEntrega &&
+                        p.TipoEntrega == TipoEntrega.Delivery),
+
+                "Retirada" =>
+                    query.Where(p =>
+                        p.Status == StatusPedido.SaiuParaEntrega &&
+                        p.TipoEntrega == TipoEntrega.Retirada),
+
+                "Entregue" =>
+                    query.Where(p => p.Status == StatusPedido.Entregue),
+
+                "Cancelado" =>
+                    query.Where(p => p.Status == StatusPedido.Cancelado),
+
+                // "Todos" ou vazio: sem filtro
+                _ => query
+            };
+        }
+
         public async Task<PagedResult<PedidoResponseDto>>
             ObterPedidosAsync(
                 Guid? clienteId,
                 StatusPedido? status,
                 int page = 1,
                 int pageSize = 10,
-                Guid? usuarioId = null)
+                Guid? usuarioId = null,
+                DateTime? dia = null,
+                string? busca = null,
+                string? filtro = null)
         {
             var query = _context.Pedidos
                 .Include(p => p.Cliente)
@@ -355,6 +480,11 @@ namespace TimDoLele.Application.Services
                     .ThenInclude(i => i.Adicionais)
                         .ThenInclude(a => a.Adicional)
                 .AsQueryable();
+
+            // Tela de Pedidos: dia escolhido, busca e aba (Pendentes, Entrega...)
+            query = FiltrarPorDiaEBusca(query, dia, busca);
+
+            query = FiltrarPorAba(query, filtro);
 
             if (clienteId.HasValue)
             {
