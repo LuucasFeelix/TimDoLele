@@ -15,6 +15,9 @@ import { AvisoService } from '../../core/services/aviso.service';
 })
 export class Login {
 
+  // true quando public/TimDoLeleLogo.png não existe (mostra o ícone)
+  logoComErro = false;
+
   // Popup padrão de avisos (substitui alert/confirm)
   private aviso = inject(AvisoService);
 

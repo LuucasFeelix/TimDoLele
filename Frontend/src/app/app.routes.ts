@@ -14,6 +14,7 @@ import { PedidosComponent } from './admin/pedidos/pedidos.component';
 import { RelatoriosComponent } from './admin/relatorios/relatorios.component';
 import { ConfiguracoesComponent } from './admin/configuracoes/configuracoes.component';
 import { CuponsComponent } from './admin/cupons/cupons.component';
+import { BairrosComponent } from './admin/bairros/bairros.component';
 
 import { AdminLayoutComponent } from './admin/layout/admin-layout/admin-layout.component';
 
@@ -86,6 +87,11 @@ export const routes: Routes = [
       {
         path: 'adicionais',
         component: AdicionaisComponent,
+      },
+
+      {
+        path: 'bairros',
+        component: BairrosComponent,
       },
 
       {

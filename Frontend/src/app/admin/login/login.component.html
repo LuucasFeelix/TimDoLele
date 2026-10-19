@@ -5,16 +5,24 @@
     <div class="login-brand">
 
       <div class="logo-box">
-        🍔
+        <!-- Logo em Frontend/public/TimDoLeleLogo.png; sem o arquivo, mostra o ícone -->
+        @if (!logoComErro) {
+          <img src="TimDoLeleLogo.png" alt="Logo" (error)="logoComErro = true" />
+        } @else {
+          🍔
+        }
       </div>
 
-      <h1>
-        TIM DO LELÊ
-      </h1>
+      <!-- A logo já tem o nome; o texto só aparece se ela não carregar -->
+      @if (logoComErro) {
+        <h1>
+          TIM DO LELÊ
+        </h1>
 
-      <strong>
-        LANCHES
-      </strong>
+        <strong>
+          LANCHES
+        </strong>
+      }
 
       <p>
         Acesso exclusivo ao painel administrativo

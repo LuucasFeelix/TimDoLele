@@ -329,6 +329,88 @@
   background: white;
 }
 
+/* BAIRRO COM LISTA (taxa por bairro) */
+.bairro-campo {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.bairro-label {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.bairro-campo input.bairro-ok {
+  border-color: #1f9d55;
+  background: #f1fbf4;
+}
+
+.bairro-sugestoes {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  margin: 4px 0 0;
+  padding: 6px;
+  max-height: 280px;
+  overflow-y: auto;
+  list-style: none;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .12);
+}
+
+.bairro-sugestoes li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.bairro-sugestoes li:hover {
+  background: #fff4c2;
+}
+
+.bairro-sugestoes li strong {
+  color: var(--secondary);
+  white-space: nowrap;
+}
+
+.bairro-sugestoes .bairro-vazio {
+  color: #888;
+  cursor: default;
+}
+
+.bairro-sugestoes .bairro-vazio:hover {
+  background: none;
+}
+
+.bairro-sugestoes .bairro-fora {
+  margin-top: 4px;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 8px 8px;
+  color: #555;
+  font-weight: 700;
+}
+
+.bairro-taxa {
+  margin: 6px 0 0;
+  color: #147a35;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bairro-pendente {
+  margin: 6px 0 0;
+  color: #9a6400;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .pickup-box {
   background: #fff4c2;
   border-radius: 14px;

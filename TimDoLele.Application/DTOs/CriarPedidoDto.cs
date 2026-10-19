@@ -20,6 +20,9 @@ namespace TimDoLeLe.Application.DTOs
         // Código do cupom de desconto (opcional)
         public string? CupomCodigo { get; set; }
 
+        // Bairro escolhido na lista (delivery). A taxa vem dele.
+        public Guid? BairroId { get; set; }
+
         public List<ItemPedidoDto> Itens { get; set; } = new();
     }
 }

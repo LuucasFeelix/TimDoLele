@@ -364,27 +364,101 @@
         *ngIf="isDelivery()"
       >
 
+        <!-- BAIRRO: com bairros cadastrados, escolhe na lista (define a taxa) -->
+        @if (usaListaBairros) {
+
+          <div class="bairro-campo">
+
+            <span class="bairro-label">Bairro</span>
+
+            <input
+              type="text"
+              autocomplete="off"
+              [value]="buscaBairro"
+              (input)="aoDigitarBairro($event)"
+              (focus)="listaBairroAberta = true"
+              (blur)="fecharListaBairro()"
+              [class.bairro-ok]="bairroSelecionado"
+              placeholder="Digite para buscar seu bairro..."
+            />
+
+            @if (listaBairroAberta) {
+
+              <ul class="bairro-sugestoes">
+
+                @for (b of sugestoesBairro; track b.id) {
+                  <li (mousedown)="escolherBairro(b)">
+                    <span>{{ b.nome }}</span>
+                    <strong>
+                      {{ b.taxaEntrega > 0 ? (b.taxaEntrega | dinheiro) : 'Grátis' }}
+                    </strong>
+                  </li>
+                }
+
+                @if (sugestoesBairro.length === 0) {
+                  <li class="bairro-vazio">
+                    Nenhum bairro encontrado com "{{ buscaBairro }}"
+                  </li>
+                }
+
+                <li
+                  class="bairro-fora"
+                  (mousedown)="bairroForaDaLista()"
+                >
+                  Meu bairro não está na lista
+                </li>
+
+              </ul>
+            }
+
+            @if (bairroSelecionado) {
+              <p class="bairro-taxa">
+                ✓ Taxa de entrega para {{ bairroSelecionado.nome }}:
+                <strong>
+                  {{
+                    bairroSelecionado.taxaEntrega > 0
+                      ? (bairroSelecionado.taxaEntrega | dinheiro)
+                      : 'Grátis'
+                  }}
+                </strong>
+              </p>
+            } @else if (buscaBairro.trim() && !listaBairroAberta) {
+              <p class="bairro-pendente">
+                Toque no seu bairro na lista para confirmar.
+              </p>
+            }
+
+          </div>
+
+        } @else {
+
+          <label>
+
+            Bairro
+
+            <input
+              semEmoji
+              [(ngModel)]="bairro"
+              placeholder="Digite seu bairro"
+            />
+
+          </label>
+
+        }
+
+
         <label>
 
-          Endereço de entrega
+          {{ usaListaBairros ? 'Rua e número' : 'Endereço de entrega' }}
 
           <input
             semEmoji
             [(ngModel)]="endereco"
-            placeholder="Rua, número, complemento"
-          />
-
-        </label>
-
-
-        <label>
-
-          Bairro
-
-          <input
-            semEmoji
-            [(ngModel)]="bairro"
-            placeholder="Digite seu bairro"
+            [placeholder]="
+              usaListaBairros
+                ? 'Ex.: Rua das Flores, 120 - casa 2'
+                : 'Rua, número, complemento'
+            "
           />
 
         </label>

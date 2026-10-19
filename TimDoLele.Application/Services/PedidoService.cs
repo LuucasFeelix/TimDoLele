@@ -15,15 +15,18 @@ namespace TimDoLele.Application.Services
         private readonly TimDoLeleDbContext _context;
         private readonly StatusLojaService _statusLojaService;
         private readonly CupomService _cupomService;
+        private readonly BairroService _bairroService;
 
         public PedidoService(
             TimDoLeleDbContext context,
             StatusLojaService statusLojaService,
-            CupomService cupomService)
+            CupomService cupomService,
+            BairroService bairroService)
         {
             _context = context;
             _statusLojaService = statusLojaService;
             _cupomService = cupomService;
+            _bairroService = bairroService;
         }
 
         // Devolve o Id (uso interno) e o Código curto (mostrado ao cliente)
@@ -88,6 +91,43 @@ namespace TimDoLele.Application.Services
                     dto.Endereco
                 ) ?? string.Empty;
 
+            // Taxa de entrega:
+            // - com bairros cadastrados: a taxa do bairro escolhido
+            //   (o backend decide; não confia no valor da tela)
+            // - sem bairros cadastrados: a taxa padrão (jeito antigo)
+            decimal taxaEntrega = 0;
+
+            var nomeBairro = string.Empty;
+
+            if (
+                dto.TipoEntrega ==
+                TipoEntrega.Delivery
+            )
+            {
+                if (
+                    await _bairroService
+                        .UsaTaxaPorBairroAsync()
+                )
+                {
+                    var bairro =
+                        await _bairroService
+                            .ObterAtivoParaPedidoAsync(
+                                dto.BairroId
+                            );
+
+                    taxaEntrega =
+                        bairro.TaxaEntrega;
+
+                    nomeBairro =
+                        bairro.Nome;
+                }
+                else
+                {
+                    taxaEntrega =
+                        statusLoja.TaxaEntrega;
+                }
+            }
+
             var cliente =
                 new Cliente(
                     nomeCliente,
@@ -95,18 +135,12 @@ namespace TimDoLele.Application.Services
                     new Endereco(
                         enderecoCliente,
                         "0",
-                        "",
+                        nomeBairro,
                         "",
                         "",
                         ""
                     )
                 );
-
-            var taxaEntrega =
-                dto.TipoEntrega ==
-                TipoEntrega.Delivery
-                    ? statusLoja.TaxaEntrega
-                    : 0;
 
             var pedido =
                 new Pedido(
@@ -380,6 +414,11 @@ namespace TimDoLele.Application.Services
                             ? null
                             : p.Cliente.Endereco.Rua,
 
+                    Bairro =
+                        string.IsNullOrWhiteSpace(p.Cliente.Endereco?.Bairro)
+                            ? null
+                            : p.Cliente.Endereco.Bairro,
+
                     SubTotal = p.Subtotal,
 
                     Delivery = p.Delivery,
@@ -508,6 +547,11 @@ namespace TimDoLele.Application.Services
                     string.IsNullOrWhiteSpace(pedido.Cliente.Endereco?.Rua)
                         ? null
                         : pedido.Cliente.Endereco.Rua,
+
+                Bairro =
+                    string.IsNullOrWhiteSpace(pedido.Cliente.Endereco?.Bairro)
+                        ? null
+                        : pedido.Cliente.Endereco.Bairro,
 
                 SubTotal =
                     pedido.Subtotal,

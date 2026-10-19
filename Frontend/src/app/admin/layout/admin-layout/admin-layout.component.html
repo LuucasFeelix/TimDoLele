@@ -5,12 +5,20 @@
     <div class="brand">
 
       <div class="logo-box">
-        🍔
+        <!-- Logo em Frontend/public/TimDoLeleLogo.png; sem o arquivo, mostra o ícone -->
+        @if (!logoComErro) {
+          <img src="TimDoLeleLogo.png" alt="Logo" (error)="logoComErro = true" />
+        } @else {
+          🍔
+        }
       </div>
 
-      <h2>
-        Tim do Lelê
-      </h2>
+      <!-- A logo já tem o nome; o texto só aparece se ela não carregar -->
+      @if (logoComErro) {
+        <h2>
+          Tim do Lelê
+        </h2>
+      }
 
       <span>
         Administração
@@ -87,6 +95,20 @@
 
         <span class="menu-text">
           Adicionais
+        </span>
+      </a>
+
+
+      <a
+        routerLink="/admin/bairros"
+        routerLinkActive="active"
+      >
+        <span class="menu-icon">
+          ⌂
+        </span>
+
+        <span class="menu-text">
+          Bairros e taxas
         </span>
       </a>
 

@@ -54,6 +54,9 @@ namespace TimDoLele.Infrastructure.Data
         public DbSet<Cupom> Cupons =>
             Set<Cupom>();
 
+        public DbSet<Bairro> Bairros =>
+            Set<Bairro>();
+
         protected override void OnModelCreating(
             ModelBuilder modelBuilder)
         {
@@ -108,6 +111,23 @@ namespace TimDoLele.Infrastructure.Data
 
             modelBuilder.Entity<DataEspecial>()
                 .HasIndex(d => d.Data);
+
+            // BAIRROS (taxa de entrega por bairro)
+            modelBuilder.Entity<Bairro>()
+                .HasIndex(b => b.NomeNormalizado)
+                .IsUnique();
+
+            modelBuilder.Entity<Bairro>()
+                .Property(b => b.Nome)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Bairro>()
+                .Property(b => b.NomeNormalizado)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Bairro>()
+                .Property(b => b.TaxaEntrega)
+                .HasPrecision(10, 2);
 
             // CUPONS
             modelBuilder.Entity<Cupom>()
