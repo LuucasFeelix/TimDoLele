@@ -6,11 +6,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
+using TimDoLele.Application.Pagamentos;
 using TimDoLele.Application.Services;
 using TimDoLele.Application.Validators;
 using TimDoLele.Infrastructure.Data;
 using TimDoLeLe.Hubs;
 using TimDoLeLe.Middlewares;
+using TimDoLeLe.Services;
 
 namespace TimDoLeLe
 {
@@ -194,6 +196,41 @@ namespace TimDoLeLe
 
                 builder.Services
                     .AddScoped<BairroService>();
+
+
+                // ===== PAGAMENTO PIX =====
+                // "Pix:Provedor" no appsettings escolhe a empresa.
+                // Hoje: "Simulador" (testes). Depois: "PagBank".
+                builder.Services
+                    .Configure<PixOpcoes>(
+                        builder.Configuration
+                            .GetSection("Pix")
+                    );
+
+                var provedorPix =
+                    builder.Configuration["Pix:Provedor"]
+                    ?? "Simulador";
+
+                switch (provedorPix)
+                {
+                    case "Simulador":
+                        builder.Services
+                            .AddSingleton<IProvedorPix, SimuladorPixProvedor>();
+                        break;
+
+                    default:
+                        throw new InvalidOperationException(
+                            $"Provedor PIX '{provedorPix}' ainda não implementado. " +
+                            "Use \"Simulador\" em Pix:Provedor."
+                        );
+                }
+
+                builder.Services
+                    .AddScoped<PixService>();
+
+                // Confirma PIX pagos e expira os vencidos (a cada 20 s)
+                builder.Services
+                    .AddHostedService<VerificacaoPixBackgroundService>();
 
 
                 builder.Services

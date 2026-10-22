@@ -57,6 +57,9 @@ namespace TimDoLele.Infrastructure.Data
         public DbSet<Bairro> Bairros =>
             Set<Bairro>();
 
+        public DbSet<CobrancaPix> CobrancasPix =>
+            Set<CobrancaPix>();
+
         protected override void OnModelCreating(
             ModelBuilder modelBuilder)
         {
@@ -111,6 +114,29 @@ namespace TimDoLele.Infrastructure.Data
 
             modelBuilder.Entity<DataEspecial>()
                 .HasIndex(d => d.Data);
+
+            // COBRANÇAS PIX
+            modelBuilder.Entity<CobrancaPix>()
+                .HasIndex(c => c.PedidoId);
+
+            modelBuilder.Entity<CobrancaPix>()
+                .HasIndex(c => c.IdExterno);
+
+            modelBuilder.Entity<CobrancaPix>()
+                .Property(c => c.Provedor)
+                .HasMaxLength(30);
+
+            modelBuilder.Entity<CobrancaPix>()
+                .Property(c => c.IdExterno)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<CobrancaPix>()
+                .Property(c => c.Valor)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<CobrancaPix>()
+                .Property(c => c.Status)
+                .HasConversion<int>();
 
             // BAIRROS (taxa de entrega por bairro)
             modelBuilder.Entity<Bairro>()

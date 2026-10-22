@@ -1,0 +1,124 @@
+<div class="pix-page">
+
+  <div class="pix-card">
+
+    <!-- CARREGANDO -->
+    @if (!situacao && !erro) {
+      <p class="pix-carregando">Gerando seu PIX...</p>
+    }
+
+    <!-- ERRO -->
+    @if (erro) {
+      <div class="pix-icone erro">⚠️</div>
+      <h1>{{ erro }}</h1>
+      <button type="button" class="pix-botao" (click)="voltarCardapio()">
+        Voltar ao cardápio
+      </button>
+    }
+
+    @if (situacao) {
+
+      <!-- ===== AGUARDANDO PAGAMENTO ===== -->
+      @if (situacao.status === 'Aguardando') {
+
+        <h1>Pague com PIX</h1>
+
+        <p class="pix-subtitulo">
+          Pedido <strong>#{{ situacao.codigo }}</strong> ·
+          <strong>{{ situacao.valor | dinheiro }}</strong>
+        </p>
+
+        <div
+          class="pix-cronometro"
+          [class.acabando]="tempoAcabando"
+        >
+          ⏱️ Pague em <strong>{{ tempoTexto }}</strong>
+        </div>
+
+        <div class="pix-qrcode">
+          @if (qrCodeImagem) {
+            <img [src]="qrCodeImagem" alt="QR Code PIX" />
+          } @else {
+            <span>Gerando QR Code...</span>
+          }
+        </div>
+
+        <ol class="pix-passos">
+          <li>Abra o app do seu banco e escolha <strong>PIX</strong>.</li>
+          <li>Leia o <strong>QR Code</strong> ou use o <strong>PIX copia e cola</strong>.</li>
+          <li>Confirme o pagamento. Esta tela atualiza sozinha.</li>
+        </ol>
+
+        <textarea
+          id="pix-copia-e-cola"
+          class="pix-codigo"
+          readonly
+          rows="3"
+        >{{ situacao.copiaECola }}</textarea>
+
+        <button
+          type="button"
+          class="pix-botao"
+          (click)="copiarCodigo()"
+        >
+          {{ copiado ? '✅ Código copiado!' : '📋 Copiar código PIX' }}
+        </button>
+
+        <p class="pix-aguardando">
+          <i class="pix-ponto"></i>
+          Aguardando a confirmação do pagamento...
+        </p>
+
+        <p class="pix-aviso">
+          Seu pedido só é enviado para a loja depois que o PIX for confirmado.
+        </p>
+
+        <!-- SÓ EM TESTES (simulador): nunca aparece para clientes -->
+        @if (situacao.simulador) {
+          <div class="pix-teste">
+            <strong>🧪 Modo de teste</strong>
+            <span>Este PIX é de mentira e não funciona em banco.</span>
+            <button
+              type="button"
+              (click)="simularPagamento()"
+              [disabled]="simulando"
+            >
+              {{ simulando ? 'Simulando...' : 'Simular pagamento (teste)' }}
+            </button>
+          </div>
+        }
+      }
+
+      <!-- ===== PAGO ===== -->
+      @if (situacao.status === 'Pago') {
+        <div class="pix-icone sucesso">✅</div>
+        <h1>PIX confirmado!</h1>
+        <p class="pix-subtitulo">
+          Seu pedido <strong>#{{ situacao.codigo }}</strong> foi enviado para a loja.
+        </p>
+        <p class="pix-redirecionando">Só um instante...</p>
+      }
+
+      <!-- ===== EXPIRADO ===== -->
+      @if (situacao.status === 'Expirado') {
+        <div class="pix-icone erro">⌛</div>
+        <h1>O tempo para pagar acabou</h1>
+        <p class="pix-subtitulo">
+          O PIX não foi pago a tempo, então o pedido
+          <strong>não foi enviado</strong> para a loja.
+          Seu carrinho continua salvo.
+        </p>
+
+        <button type="button" class="pix-botao" (click)="tentarNovamente()">
+          🔁 Gerar novo PIX
+        </button>
+
+        <button type="button" class="pix-botao secundario" (click)="voltarCardapio()">
+          Voltar ao cardápio
+        </button>
+      }
+    }
+
+  </div>
+
+</div>

@@ -16,21 +16,25 @@ namespace TimDoLele.Application.Services
         private readonly StatusLojaService _statusLojaService;
         private readonly CupomService _cupomService;
         private readonly BairroService _bairroService;
+        private readonly PixService _pixService;
 
         public PedidoService(
             TimDoLeleDbContext context,
             StatusLojaService statusLojaService,
             CupomService cupomService,
-            BairroService bairroService)
+            BairroService bairroService,
+            PixService pixService)
         {
             _context = context;
             _statusLojaService = statusLojaService;
             _cupomService = cupomService;
             _bairroService = bairroService;
+            _pixService = pixService;
         }
 
-        // Devolve o Id (uso interno) e o Código curto (mostrado ao cliente)
-        public async Task<(Guid Id, string Codigo)> CriarPedidoAsync(
+        // Devolve o Id (uso interno), o Código curto (mostrado ao cliente)
+        // e se o pedido está esperando o pagamento PIX
+        public async Task<(Guid Id, string Codigo, bool AguardandoPagamento)> CriarPedidoAsync(
             CriarPedidoDto dto)
         {
             var statusLoja =
@@ -321,6 +325,20 @@ namespace TimDoLele.Application.Services
                 );
             }
 
+            // PIX: gera a cobrança. O pedido fica "Aguardando pagamento"
+            // e só vai para a loja quando o PIX for confirmado.
+            if (
+                dto.FormaPagamento ==
+                FormaPagamento.Pix
+            )
+            {
+                await _pixService
+                    .GerarCobrancaAsync(
+                        pedido,
+                        nomeCliente
+                    );
+            }
+
             await _context
                 .Clientes
                 .AddAsync(
@@ -336,7 +354,7 @@ namespace TimDoLele.Application.Services
             await _context
                 .SaveChangesAsync();
 
-            return (pedido.Id, pedido.Codigo);
+            return (pedido.Id, pedido.Codigo, !pedido.VisivelParaLoja);
         }
 
         // =====================================================
@@ -349,7 +367,7 @@ namespace TimDoLele.Application.Services
             string? busca)
         {
             var query = FiltrarPorDiaEBusca(
-                _context.Pedidos.AsQueryable(),
+                ApenasVisiveisParaLoja(_context.Pedidos.AsQueryable()),
                 data,
                 busca
             );
@@ -379,6 +397,15 @@ namespace TimDoLele.Application.Services
                 Entregues = Contar(StatusPedido.Entregue),
                 Cancelados = Contar(StatusPedido.Cancelado)
             };
+        }
+
+        // PIX esperando pagamento ou expirado: a loja não vê
+        private static IQueryable<Pedido> ApenasVisiveisParaLoja(
+            IQueryable<Pedido> query)
+        {
+            return query.Where(p =>
+                p.Status != StatusPedido.AguardandoPagamento &&
+                p.Status != StatusPedido.PagamentoExpirado);
         }
 
         // Dia: pedidos feitos naquela data.
@@ -480,6 +507,9 @@ namespace TimDoLele.Application.Services
                     .ThenInclude(i => i.Adicionais)
                         .ThenInclude(a => a.Adicional)
                 .AsQueryable();
+
+            // PIX não pago não aparece para a loja
+            query = ApenasVisiveisParaLoja(query);
 
             // Tela de Pedidos: dia escolhido, busca e aba (Pendentes, Entrega...)
             query = FiltrarPorDiaEBusca(query, dia, busca);
@@ -890,7 +920,7 @@ namespace TimDoLele.Application.Services
         public async Task<List<Guid>>
             ObterPedidosPendentesImpressaoAsync()
         {
-            return await _context.Pedidos
+            return await ApenasVisiveisParaLoja(_context.Pedidos)
                 .Where(
                     p =>
                         p.StatusImpressao ==
@@ -996,7 +1026,7 @@ namespace TimDoLele.Application.Services
             }
 
             var pedidos =
-                await _context.Pedidos
+                await ApenasVisiveisParaLoja(_context.Pedidos)
                     .Where(
                         p =>
                             p.DataHora >= inicio
@@ -1250,7 +1280,7 @@ namespace TimDoLele.Application.Services
                 ?? 0;
 
             var quantidadeHoje =
-                await _context.Pedidos
+                await ApenasVisiveisParaLoja(_context.Pedidos)
                     .CountAsync(
                         p =>
                             p.DataHora >= inicioHoje

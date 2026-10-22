@@ -115,8 +115,50 @@ public class Pedido : BaseEntity
         Pagamento = pagamento;
     }
 
+    // ===== PIX =====
+
+    // Pedido pago com PIX nasce esperando o pagamento
+    public void AguardarPagamento()
+    {
+        Status = StatusPedido.AguardandoPagamento;
+    }
+
+    // PIX confirmado: o pedido vai para a loja como "Pendente".
+    // Retorna false se não estava esperando pagamento.
+    public bool ConfirmarPagamento()
+    {
+        if (Status != StatusPedido.AguardandoPagamento)
+            return false;
+
+        Status = StatusPedido.Pendente;
+        DataHora = DateTime.Now;
+
+        return true;
+    }
+
+    // Prazo do PIX acabou sem pagamento
+    public bool ExpirarPagamento()
+    {
+        if (Status != StatusPedido.AguardandoPagamento)
+            return false;
+
+        Status = StatusPedido.PagamentoExpirado;
+
+        return true;
+    }
+
+    public bool VisivelParaLoja =>
+        Status != StatusPedido.AguardandoPagamento &&
+        Status != StatusPedido.PagamentoExpirado;
+
     public void AtualizarStatus(StatusPedido novoStatus)
     {
+        if (!VisivelParaLoja)
+        {
+            throw new Exception(
+                "Pedido aguardando pagamento PIX não pode ter o status alterado.");
+        }
+
         if (Status == StatusPedido.Entregue)
         {
             throw new Exception(

@@ -12,6 +12,14 @@ namespace TimDolele.Core.Enums
         EmPreparo = 1,
         SaiuParaEntrega = 2,
         Entregue = 3,
-        Cancelado = 4
+        Cancelado = 4,
+
+        // PIX gerado, esperando o cliente pagar.
+        // A loja NÃO vê o pedido nesse status.
+        AguardandoPagamento = 5,
+
+        // Passou o prazo e o PIX não foi pago.
+        // Também fica escondido da loja (não é um "cancelado" de verdade).
+        PagamentoExpirado = 6
     }
 }
