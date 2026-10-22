@@ -6,6 +6,7 @@ import { Dashboard } from './admin/dashboard/dashboard.component';
 import { CardapioComponent } from './pages/cardapio/cardapio.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ConfirmacaoComponent } from './pages/confirmacao/confirmacao.component';
+import { PagamentoPixComponent } from './pages/pagamento-pix/pagamento-pix.component';
 
 import { CategoriasComponent } from './admin/categorias/categorias.component';
 import { ProdutosComponent } from './admin/produtos/produtos.component';
@@ -42,6 +43,12 @@ export const routes: Routes = [
   {
     path: 'confirmacao',
     component: ConfirmacaoComponent,
+  },
+
+  // Tela do QR Code PIX (o pedido só vai para a loja depois de pago)
+  {
+    path: 'pagamento-pix/:pedidoId',
+    component: PagamentoPixComponent,
   },
 
 

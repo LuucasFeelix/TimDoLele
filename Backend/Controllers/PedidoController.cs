@@ -37,43 +37,19 @@ namespace TimDoLeLe.Controllers
         public async Task<IActionResult> Criar(
             [FromBody] CriarPedidoDto dto)
         {
-            var (pedidoId, codigo) =
+            var (pedidoId, codigo, aguardandoPagamento) =
                 await _pedidoService
                     .CriarPedidoAsync(dto);
 
-            var dataEvento =
-                DateTime.Now;
-
-            await _notificacaoHub
-                .Clients
-                .All
-                .SendAsync(
-                    "PedidoCriado",
-                    new
-                    {
-                        pedidoId,
-
-                        criadoEm =
-                            dataEvento
-                    }
-                );
-
-            await _notificacaoHub
-                .Clients
-                .All
-                .SendAsync(
-                    "DashboardAtualizado",
-                    new
-                    {
-                        motivo =
-                            "PedidoCriado",
-
-                        pedidoId,
-
-                        atualizadoEm =
-                            dataEvento
-                    }
-                );
+            // PIX: a loja só é avisada quando o pagamento for confirmado
+            if (!aguardandoPagamento)
+            {
+                await NotificacoesPedido
+                    .PedidoLiberadoParaLojaAsync(
+                        _notificacaoHub,
+                        pedidoId
+                    );
+            }
 
             return Ok(
                 ApiResponse<object>.Ok(
@@ -82,7 +58,10 @@ namespace TimDoLeLe.Controllers
                         pedidoId,
 
                         // Código curto que o cliente vê (igual ao do admin)
-                        codigo
+                        codigo,
+
+                        // true = mostrar a tela do QR Code PIX
+                        aguardandoPagamento
                     },
                     "Pedido criado com sucesso"
                 )

@@ -1550,9 +1550,7 @@ export class CheckoutComponent
             })
           );
 
-          // Guarda os itens para o "Pedir de novo" do cardápio
-          localStorage.setItem(
-            'ultimoPedidoItens',
+          const itensDoPedido =
             JSON.stringify({
 
               data:
@@ -1560,7 +1558,30 @@ export class CheckoutComponent
 
               itens:
                 this.carrinho
-            })
+            });
+
+          // PIX: vai para a tela do QR Code. O carrinho continua
+          // guardado até o pagamento ser confirmado (se o PIX
+          // expirar, o cliente tenta de novo sem perder nada).
+          if (
+            res?.data?.aguardandoPagamento === true
+          ) {
+
+            localStorage.setItem(
+              'pixPendente',
+              itensDoPedido
+            );
+
+            window.location.href =
+              `/pagamento-pix/${res.data.pedidoId}`;
+
+            return;
+          }
+
+          // Guarda os itens para o "Pedir de novo" do cardápio
+          localStorage.setItem(
+            'ultimoPedidoItens',
+            itensDoPedido
           );
 
           localStorage.removeItem(
