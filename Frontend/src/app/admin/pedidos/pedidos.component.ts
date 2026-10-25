@@ -35,6 +35,7 @@ import {
   PedidoCriadoSignalR
 } from '../../core/services/notificacao-signalr.service';
 import { AvisoService } from '../../core/services/aviso.service';
+import { ComandaImpressaoService } from '../../core/services/comanda-impressao.service';
 import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 
@@ -62,6 +63,9 @@ export class PedidosComponent
 
   // Popup padrão de avisos (substitui alert/confirm)
   private aviso = inject(AvisoService);
+
+  // Monta e imprime a comanda (cupom térmico)
+  private comandaImpressaoService = inject(ComandaImpressaoService);
 
   pedidos: any[] = [];
 
@@ -1207,7 +1211,9 @@ export class PedidosComponent
   }
 
 
-  imprimirPedido(): void {
+  // Imprime a COMANDA do pedido (cupom no tamanho do papel térmico).
+  // Sem impressora: escolha "Microsoft Print to PDF" para ver como fica.
+  async imprimirPedido(): Promise<void> {
 
     if (
       !this.pedidoSelecionado
@@ -1217,7 +1223,25 @@ export class PedidosComponent
     }
 
 
-    window.print();
+    try {
+
+      await this
+        .comandaImpressaoService
+        .imprimir(
+          this.pedidoSelecionado
+        );
+
+    } catch (erro) {
+
+      console.error(
+        'Erro ao imprimir a comanda:',
+        erro
+      );
+
+      this.aviso.erro(
+        'Não foi possível imprimir a comanda.'
+      );
+    }
   }
 
 
