@@ -512,6 +512,13 @@
 
               {{ pedido.total | dinheiro }}
 
+              <span
+                *ngIf="pedido.pixPago"
+                class="pix-pago-tag"
+              >
+                ✅ PIX pago
+              </span>
+
             </td>
 
 
@@ -847,6 +854,15 @@
             }}
 
           </strong>
+
+
+          <!-- PIX confirmado pelo sistema: não cobrar o cliente -->
+          <div
+            *ngIf="pedidoSelecionado.pixPago"
+            class="pix-pago-banner"
+          >
+            ✅ PIX pago e confirmado · não cobrar o cliente
+          </div>
 
 
           <span

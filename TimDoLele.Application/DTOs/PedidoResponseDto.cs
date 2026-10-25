@@ -39,6 +39,9 @@
 
         public decimal? TrocoPara { get; set; }
 
+        // true = PIX pago e confirmado pelo sistema: NÃO cobrar o cliente
+        public bool PixPago { get; set; }
+
         public string StatusImpressao { get; set; } = string.Empty;
 
         public int TentativasImpressao { get; set; }
