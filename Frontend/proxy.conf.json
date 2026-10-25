@@ -1,0 +1,21 @@
+{
+  "/api": {
+    "target": "https://localhost:57668",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "warn"
+  },
+  "/hubs": {
+    "target": "https://localhost:57668",
+    "secure": false,
+    "changeOrigin": true,
+    "ws": true,
+    "logLevel": "warn"
+  },
+  "/uploads": {
+    "target": "https://localhost:57668",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "warn"
+  }
+}

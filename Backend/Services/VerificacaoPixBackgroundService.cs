@@ -5,6 +5,7 @@ using TimDoLeLe.Hubs;
 namespace TimDoLeLe.Services
 {
     // Roda sozinho enquanto a API está ligada, a cada 20 segundos:
+    // - envia WhatsApp pendentes (só no modo automático / API oficial)
     // - confirma PIX pagos (mesmo se o aviso da empresa se perder
     //   ou se o cliente fechar a tela antes de confirmar)
     // - expira os PIX que passaram do prazo
@@ -42,6 +43,12 @@ namespace TimDoLeLe.Services
                     {
                         await NotificacoesPedido.PedidoLiberadoParaLojaAsync(_hub, pedidoId);
                     }
+
+                    // WhatsApp no modo automático (API oficial): envia as
+                    // mensagens pendentes. No modo manual não faz nada.
+                    var whatsappService = scope.ServiceProvider.GetRequiredService<WhatsappService>();
+
+                    await whatsappService.EnviarPendentesAutomaticamenteAsync();
                 }
                 catch (Exception ex)
                 {

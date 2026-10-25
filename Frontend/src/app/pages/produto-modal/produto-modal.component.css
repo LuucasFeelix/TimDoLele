@@ -294,6 +294,37 @@ textarea {
   font-weight: 900;
 }
 
+/* Celular com tela baixa: foto menor, mais espaço para os adicionais */
+@media (max-height: 700px) {
+  .produto-banner {
+    height: 150px;
+    font-size: 90px;
+  }
+
+  .produto-content {
+    max-height: calc(92vh - 250px);
+  }
+}
+
+/* Celulares estreitos (até 360 px) */
+@media (max-width: 360px) {
+  .produto-content {
+    padding: 14px;
+  }
+
+  .modal-footer {
+    padding: 12px 14px;
+  }
+
+  .modal-footer strong {
+    font-size: 19px;
+  }
+
+  .add-cart-button {
+    padding: 14px 18px;
+  }
+}
+
 @media (min-width: 700px) {
   .overlay {
     align-items: center;

@@ -15,15 +15,18 @@ namespace TimDoLele.Application.Services
         private readonly TimDoLeleDbContext _context;
         private readonly IProvedorPix _provedor;
         private readonly PixOpcoes _opcoes;
+        private readonly WhatsappService _whatsappService;
 
         public PixService(
             TimDoLeleDbContext context,
             IProvedorPix provedor,
-            IOptions<PixOpcoes> opcoes)
+            IOptions<PixOpcoes> opcoes,
+            WhatsappService whatsappService)
         {
             _context = context;
             _provedor = provedor;
             _opcoes = opcoes.Value;
+            _whatsappService = whatsappService;
         }
 
         public bool UsaSimulador => _provedor is SimuladorPixProvedor;
@@ -154,7 +157,18 @@ namespace TimDoLele.Application.Services
             {
                 cobranca.MarcarPaga();
 
-                return pedido.ConfirmarPagamento();
+                var confirmado = pedido.ConfirmarPagamento();
+
+                // WhatsApp "recebemos seu pedido" (agora que foi pago)
+                if (confirmado)
+                {
+                    await _whatsappService.RegistrarAsync(
+                        pedido,
+                        TipoMensagemWhatsapp.PedidoRecebido
+                    );
+                }
+
+                return confirmado;
             }
 
             if (cobranca.Venceu)

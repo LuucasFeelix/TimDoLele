@@ -17,19 +17,22 @@ namespace TimDoLele.Application.Services
         private readonly CupomService _cupomService;
         private readonly BairroService _bairroService;
         private readonly PixService _pixService;
+        private readonly WhatsappService _whatsappService;
 
         public PedidoService(
             TimDoLeleDbContext context,
             StatusLojaService statusLojaService,
             CupomService cupomService,
             BairroService bairroService,
-            PixService pixService)
+            PixService pixService,
+            WhatsappService whatsappService)
         {
             _context = context;
             _statusLojaService = statusLojaService;
             _cupomService = cupomService;
             _bairroService = bairroService;
             _pixService = pixService;
+            _whatsappService = whatsappService;
         }
 
         // Devolve o Id (uso interno), o Código curto (mostrado ao cliente)
@@ -351,6 +354,18 @@ namespace TimDoLele.Application.Services
                     pedido
                 );
 
+            // WhatsApp "recebemos seu pedido" (PIX: só quando for pago)
+            if (pedido.VisivelParaLoja)
+            {
+                await _whatsappService
+                    .RegistrarAsync(
+                        pedido,
+                        nomeCliente,
+                        dto.Telefone,
+                        TipoMensagemWhatsapp.PedidoRecebido
+                    );
+            }
+
             await _context
                 .SaveChangesAsync();
 
@@ -573,14 +588,20 @@ namespace TimDoLele.Application.Services
                 .Take(pageSize)
                 .ToListAsync();
 
-            var pixPagos = await ObterPedidosComPixPagoAsync(
-                pedidos.Select(p => p.Id).ToList()
-            );
+            var idsPagina = pedidos.Select(p => p.Id).ToList();
+
+            var pixPagos = await ObterPedidosComPixPagoAsync(idsPagina);
+
+            var whatsappPendentes =
+                await _whatsappService.ContarPendentesAsync(idsPagina);
 
             var data = pedidos
                 .Select(p => new PedidoResponseDto
                 {
                     PixPago = pixPagos.Contains(p.Id),
+
+                    WhatsappPendentes =
+                        whatsappPendentes.GetValueOrDefault(p.Id),
 
                     Id = p.Id,
 
@@ -717,9 +738,17 @@ namespace TimDoLele.Application.Services
                     new List<Guid> { pedido.Id }
                 )).Contains(pedido.Id);
 
+            var whatsappPendentes =
+                await _whatsappService.ContarPendentesAsync(
+                    new List<Guid> { pedido.Id }
+                );
+
             return new PedidoResponseDto
             {
                 PixPago = pixPago,
+
+                WhatsappPendentes =
+                    whatsappPendentes.GetValueOrDefault(pedido.Id),
 
                 Id = pedido.Id,
 
@@ -840,6 +869,22 @@ namespace TimDoLele.Application.Services
 
             pedido.AtualizarStatus(status);
 
+            // WhatsApp para o cliente: em preparo / saiu / pronto
+            var tipoMensagem =
+                WhatsappService.TipoParaStatus(
+                    status,
+                    pedido.TipoEntrega
+                );
+
+            if (tipoMensagem.HasValue)
+            {
+                await _whatsappService
+                    .RegistrarAsync(
+                        pedido,
+                        tipoMensagem.Value
+                    );
+            }
+
             // Cancelou um pedido com cupom: devolve o uso do cupom
             if (
                 status == StatusPedido.Cancelado &&
@@ -912,6 +957,12 @@ namespace TimDoLele.Application.Services
                 pedido.AtualizarStatus(
                     StatusPedido.EmPreparo
                 );
+
+                await _whatsappService
+                    .RegistrarAsync(
+                        pedido,
+                        TipoMensagemWhatsapp.EmPreparo
+                    );
 
                 statusMudou = true;
             }

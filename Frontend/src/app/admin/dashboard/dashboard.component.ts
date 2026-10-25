@@ -7,6 +7,7 @@ import { PedidoService } from '../../core/services/pedido.service';
 import { AvisoService } from '../../core/services/aviso.service';
 import { NotificacaoSignalrService } from '../../core/services/notificacao-signalr.service';
 import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
+import { WhatsappService } from '../../core/services/whatsapp.service';
 
 // Status do backend (StatusPedido)
 const STATUS_EM_PREPARO = 1;
@@ -30,6 +31,9 @@ export class Dashboard implements OnInit, OnDestroy {
   private aviso = inject(AvisoService);
 
   private signalR = inject(NotificacaoSignalrService);
+
+  // Mensagens de WhatsApp para o cliente (abre o WhatsApp pronto)
+  private whatsappService = inject(WhatsappService);
 
   // Cards do topo (contagens certas, vindas do /api/pedidos/dashboard)
   pedidosHoje = 0;
@@ -160,18 +164,35 @@ export class Dashboard implements OnInit, OnDestroy {
 
     this.atualizandoId = pedido.id;
 
+    // Abre a aba do WhatsApp já no clique; a mensagem entra depois
+    const janelaWhatsapp = this.whatsappService.abrirJanelaParaStatus(status);
+
     this.pedidoService.atualizarStatus(pedido.id, status).subscribe({
-      next: () => {
+      next: async () => {
+        // Saiu para entrega / pronto: WhatsApp pronto para o cliente
+        await this.whatsappService.enviarPendentes(pedido.id, janelaWhatsapp);
+
         this.atualizandoId = null;
         this.carregarPedidos();
       },
       error: (err: any) => {
+        janelaWhatsapp?.close();
         console.error(err);
         this.atualizandoId = null;
         this.aviso.erro('Erro ao atualizar o status do pedido.');
         this.cdr.detectChanges();
       }
     });
+  }
+
+  // "📲 Avisar cliente": mensagens que nasceram sozinhas
+  // (pedido recebido, em preparo depois da impressão)
+  async avisarCliente(pedido: any): Promise<void> {
+    const janela = this.whatsappService.abrirJanela();
+
+    await this.whatsappService.enviarPendentes(pedido.id, janela);
+
+    this.carregarPedidos();
   }
 
   // =====================================================

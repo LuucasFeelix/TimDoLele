@@ -77,3 +77,18 @@
   width: 100%;
   margin-top: 12px;
 }
+
+/* Celulares pequenos: menos margem, mais espaço para o conteúdo */
+@media (max-width: 400px) {
+  .confirmacao-page {
+    padding: 12px;
+  }
+
+  .confirmacao-card {
+    padding: 24px 18px;
+  }
+
+  .confirmacao-card h1 {
+    font-size: 22px;
+  }
+}
