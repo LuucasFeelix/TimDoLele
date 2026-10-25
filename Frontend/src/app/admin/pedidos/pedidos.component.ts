@@ -36,6 +36,7 @@ import {
 } from '../../core/services/notificacao-signalr.service';
 import { AvisoService } from '../../core/services/aviso.service';
 import { ComandaImpressaoService } from '../../core/services/comanda-impressao.service';
+import { WhatsappService } from '../../core/services/whatsapp.service';
 import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 
 
@@ -66,6 +67,9 @@ export class PedidosComponent
 
   // Monta e imprime a comanda (cupom térmico)
   private comandaImpressaoService = inject(ComandaImpressaoService);
+
+  // Mensagens de WhatsApp para o cliente (abre o WhatsApp pronto)
+  private whatsappService = inject(WhatsappService);
 
   pedidos: any[] = [];
 
@@ -1254,6 +1258,14 @@ export class PedidosComponent
     status: number
   ): void {
 
+    // Abre a aba do WhatsApp já no clique (o navegador só deixa
+    // abrir aba nova neste momento); a mensagem entra depois
+    const janelaWhatsapp =
+      this.whatsappService
+        .abrirJanelaParaStatus(
+          status
+        );
+
     this.pedidoService
       .atualizarStatus(
         pedidoId,
@@ -1261,7 +1273,14 @@ export class PedidosComponent
       )
       .subscribe({
 
-        next: () => {
+        next: async () => {
+
+          // Em preparo / saiu / pronto: WhatsApp pronto para o cliente
+          await this.whatsappService
+            .enviarPendentes(
+              pedidoId,
+              janelaWhatsapp
+            );
 
           this.carregarPedidos(
             pedidoId
@@ -1270,6 +1289,8 @@ export class PedidosComponent
 
 
         error: (erro: any) => {
+
+          janelaWhatsapp?.close();
 
           console.error(
             'Erro ao atualizar status:',
@@ -1282,6 +1303,28 @@ export class PedidosComponent
           );
         }
       });
+  }
+
+
+  // "📲 Avisar cliente": envia as mensagens que nasceram sozinhas
+  // (pedido recebido, em preparo depois da impressão...)
+  async avisarClienteWhatsapp(
+    pedido: any
+  ): Promise<void> {
+
+    const janela =
+      this.whatsappService
+        .abrirJanela();
+
+    await this.whatsappService
+      .enviarPendentes(
+        pedido.id,
+        janela
+      );
+
+    this.carregarPedidos(
+      pedido.id
+    );
   }
 
 

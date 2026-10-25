@@ -429,6 +429,49 @@ namespace TimDoLele.Infrastructure.Migrations
                     b.ToTable("ItensPedidoAdicionais");
                 });
 
+            modelBuilder.Entity("TimDolele.Core.Entities.MensagemWhatsapp", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CriadaEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("EnviadaEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Erro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PedidoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("Tentativas")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PedidoId", "Status");
+
+                    b.ToTable("MensagensWhatsapp");
+                });
+
             modelBuilder.Entity("TimDolele.Core.Entities.Pagamento", b =>
                 {
                     b.Property<Guid>("Id")

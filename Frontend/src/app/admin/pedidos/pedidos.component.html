@@ -519,6 +519,14 @@
                 ✅ PIX pago
               </span>
 
+              <span
+                *ngIf="pedido.whatsappPendentes > 0"
+                class="whatsapp-tag"
+                title="Mensagem de WhatsApp para enviar ao cliente"
+              >
+                📲 avisar cliente
+              </span>
+
             </td>
 
 
@@ -1039,6 +1047,15 @@
 
 
         <div class="actions">
+
+          <!-- Mensagens de WhatsApp que faltam enviar ao cliente -->
+          <button
+            *ngIf="pedidoSelecionado.whatsappPendentes > 0"
+            class="whatsapp-button"
+            (click)="avisarClienteWhatsapp(pedidoSelecionado)"
+          >
+            📲 Avisar cliente no WhatsApp
+          </button>
 
           <button
             class="print-button"

@@ -60,6 +60,9 @@ namespace TimDoLele.Infrastructure.Data
         public DbSet<CobrancaPix> CobrancasPix =>
             Set<CobrancaPix>();
 
+        public DbSet<MensagemWhatsapp> MensagensWhatsapp =>
+            Set<MensagemWhatsapp>();
+
         protected override void OnModelCreating(
             ModelBuilder modelBuilder)
         {
@@ -114,6 +117,22 @@ namespace TimDoLele.Infrastructure.Data
 
             modelBuilder.Entity<DataEspecial>()
                 .HasIndex(d => d.Data);
+
+            // MENSAGENS DE WHATSAPP PARA O CLIENTE
+            modelBuilder.Entity<MensagemWhatsapp>()
+                .HasIndex(m => new { m.PedidoId, m.Status });
+
+            modelBuilder.Entity<MensagemWhatsapp>()
+                .Property(m => m.Telefone)
+                .HasMaxLength(20);
+
+            modelBuilder.Entity<MensagemWhatsapp>()
+                .Property(m => m.Tipo)
+                .HasConversion<int>();
+
+            modelBuilder.Entity<MensagemWhatsapp>()
+                .Property(m => m.Status)
+                .HasConversion<int>();
 
             // COBRANÇAS PIX
             modelBuilder.Entity<CobrancaPix>()

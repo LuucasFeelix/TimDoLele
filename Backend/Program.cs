@@ -8,6 +8,7 @@ using Serilog;
 using System.Text;
 using TimDoLele.Application.Pagamentos;
 using TimDoLele.Application.Services;
+using TimDoLele.Application.WhatsApp;
 using TimDoLele.Application.Validators;
 using TimDoLele.Infrastructure.Data;
 using TimDoLeLe.Hubs;
@@ -224,6 +225,37 @@ namespace TimDoLeLe
                             "Use \"Simulador\" em Pix:Provedor."
                         );
                 }
+
+                // ===== WHATSAPP PARA O CLIENTE =====
+                // "WhatsApp:Modo" no appsettings:
+                // "Manual" (hoje) = o admin abre o WhatsApp e envia.
+                // Futuro: "MetaCloudApi" = API oficial, envia sozinho.
+                builder.Services
+                    .Configure<WhatsappOpcoes>(
+                        builder.Configuration
+                            .GetSection("WhatsApp")
+                    );
+
+                var modoWhatsapp =
+                    builder.Configuration["WhatsApp:Modo"]
+                    ?? "Manual";
+
+                switch (modoWhatsapp)
+                {
+                    case "Manual":
+                        builder.Services
+                            .AddSingleton<IEnvioWhatsapp, EnvioWhatsappManual>();
+                        break;
+
+                    default:
+                        throw new InvalidOperationException(
+                            $"Modo de WhatsApp '{modoWhatsapp}' ainda não implementado. " +
+                            "Use \"Manual\" em WhatsApp:Modo."
+                        );
+                }
+
+                builder.Services
+                    .AddScoped<WhatsappService>();
 
                 builder.Services
                     .AddScoped<PixService>();

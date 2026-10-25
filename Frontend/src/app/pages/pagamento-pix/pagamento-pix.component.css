@@ -56,9 +56,10 @@
 }
 
 /* QR Code */
+/* Diminui junto com a tela em celulares pequenos (sempre quadrado) */
 .pix-qrcode {
-  width: 260px;
-  height: 260px;
+  width: min(260px, 100%);
+  aspect-ratio: 1;
   margin: 0 auto 16px;
   display: grid;
   place-items: center;
@@ -197,4 +198,19 @@
 
 .pix-teste button:disabled {
   opacity: .6;
+}
+
+/* Celulares pequenos (até 360 px) */
+@media (max-width: 360px) {
+  .pix-page {
+    padding: 10px;
+  }
+
+  .pix-card {
+    padding: 22px 14px;
+  }
+
+  .pix-card h1 {
+    font-size: 21px;
+  }
 }

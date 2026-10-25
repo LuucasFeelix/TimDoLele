@@ -126,6 +126,15 @@
               : '🛍️ Pronto para retirada'
         }}
       </button>
+
+      <button
+        *ngIf="pedido.whatsappPendentes > 0"
+        type="button"
+        class="acao-pedido acao-whatsapp"
+        (click)="avisarCliente(pedido)"
+      >
+        📲 Avisar cliente
+      </button>
     </div>
 
     </div>
@@ -189,6 +198,15 @@
       >
         {{ atualizandoId === pedido.id ? 'Atualizando...' : '✅ Entregue ao cliente' }}
       </button>
+
+      <button
+        *ngIf="pedido.whatsappPendentes > 0"
+        type="button"
+        class="acao-pedido acao-whatsapp"
+        (click)="avisarCliente(pedido)"
+      >
+        📲 Avisar cliente
+      </button>
     </div>
 
     </div>
@@ -251,6 +269,15 @@
         [disabled]="atualizandoId === pedido.id"
       >
         {{ atualizandoId === pedido.id ? 'Atualizando...' : '✅ Entregue' }}
+      </button>
+
+      <button
+        *ngIf="pedido.whatsappPendentes > 0"
+        type="button"
+        class="acao-pedido acao-whatsapp"
+        (click)="avisarCliente(pedido)"
+      >
+        📲 Avisar cliente
       </button>
     </div>
 
