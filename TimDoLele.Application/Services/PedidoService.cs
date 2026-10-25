@@ -399,6 +399,23 @@ namespace TimDoLele.Application.Services
             };
         }
 
+        // Pedidos (da lista informada) com cobrança PIX confirmada
+        private async Task<HashSet<Guid>> ObterPedidosComPixPagoAsync(
+            List<Guid> pedidoIds)
+        {
+            if (pedidoIds.Count == 0)
+                return new HashSet<Guid>();
+
+            var pagos = await _context.CobrancasPix
+                .Where(c =>
+                    pedidoIds.Contains(c.PedidoId) &&
+                    c.Status == StatusCobrancaPix.Paga)
+                .Select(c => c.PedidoId)
+                .ToListAsync();
+
+            return pagos.ToHashSet();
+        }
+
         // PIX esperando pagamento ou expirado: a loja não vê
         private static IQueryable<Pedido> ApenasVisiveisParaLoja(
             IQueryable<Pedido> query)
@@ -556,9 +573,15 @@ namespace TimDoLele.Application.Services
                 .Take(pageSize)
                 .ToListAsync();
 
+            var pixPagos = await ObterPedidosComPixPagoAsync(
+                pedidos.Select(p => p.Id).ToList()
+            );
+
             var data = pedidos
                 .Select(p => new PedidoResponseDto
                 {
+                    PixPago = pixPagos.Contains(p.Id),
+
                     Id = p.Id,
 
                     Codigo = p.Codigo,
@@ -689,8 +712,15 @@ namespace TimDoLele.Application.Services
                 );
             }
 
+            var pixPago =
+                (await ObterPedidosComPixPagoAsync(
+                    new List<Guid> { pedido.Id }
+                )).Contains(pedido.Id);
+
             return new PedidoResponseDto
             {
+                PixPago = pixPago,
+
                 Id = pedido.Id,
 
                 Codigo = pedido.Codigo,

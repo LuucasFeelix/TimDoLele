@@ -93,7 +93,7 @@
 
         <small>
           {{ pedido.tipoEntrega === 'Delivery' ? '🛵 Delivery' : '🛍️ Retirada' }}
-          • {{ pedido.formaPagamento }}
+          • {{ pedido.pixPago ? 'PIX pago ✅' : pedido.formaPagamento }}
           • {{ formatarHora(pedido.dataHora) }}
         </small>
 
@@ -165,7 +165,7 @@
         <strong>{{ pedido.nomeCliente }}</strong>
 
         <small>
-          🛍️ Retirada • {{ pedido.formaPagamento }} • {{ formatarHora(pedido.dataHora) }}
+          🛍️ Retirada • {{ pedido.pixPago ? 'PIX pago ✅' : pedido.formaPagamento }} • {{ formatarHora(pedido.dataHora) }}
         </small>
 
         <small *ngIf="pedido.trocoPara" class="troco">
@@ -228,7 +228,7 @@
         <strong>{{ pedido.nomeCliente }}</strong>
 
         <small>
-          🛵 Delivery • {{ pedido.formaPagamento }} • {{ formatarHora(pedido.dataHora) }}
+          🛵 Delivery • {{ pedido.pixPago ? 'PIX pago ✅' : pedido.formaPagamento }} • {{ formatarHora(pedido.dataHora) }}
         </small>
 
         <small *ngIf="pedido.trocoPara" class="troco">

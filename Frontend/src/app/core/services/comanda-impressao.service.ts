@@ -64,16 +64,26 @@ export class ComandaImpressaoService {
 <style>
   @page { size: ${largura}mm auto; margin: 0; }
 
-  * { box-sizing: border-box; }
+  /* Impressora térmica só imprime PRETO: nada de cor nem cinza.
+     Tudo em negrito, porque letra fina sai fraca no papel térmico. */
+  * {
+    box-sizing: border-box;
+    color: #000 !important;
+    background: transparent !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
   body {
     width: ${areaUtil}mm;
     margin: 0 auto;
     padding: 3mm 0 6mm;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: ${largura >= 80 ? 12 : 10.5}px;
+    font-family: Consolas, 'Lucida Console', 'Courier New', monospace;
+    font-size: ${largura >= 80 ? 12.5 : 11}px;
+    font-weight: 700;
     line-height: 1.35;
-    color: #000;
+    -webkit-font-smoothing: none;
+    text-rendering: optimizeLegibility;
   }
 
   .centro { text-align: center; }
@@ -96,6 +106,7 @@ export class ComandaImpressaoService {
   .valor { display: flex; justify-content: space-between; }
   .total { font-size: 1.3em; font-weight: 900; }
   .destaque { margin-top: 4px; padding: 3px; border: 1px solid #000; font-weight: 900; text-align: center; }
+  .destaque.pago { padding: 5px 3px; border: 3px solid #000; font-size: 1.25em; }
   .corte { margin: 6mm 0; text-align: center; }
   .rodape { margin-top: 6px; font-size: .9em; text-align: center; }
 </style>
@@ -180,8 +191,11 @@ export class ComandaImpressaoService {
     partes.push('<div class="linha"></div>');
     partes.push(`<div><span class="forte">Pagamento:</span> ${this.traduzirPagamento(pedido.formaPagamento)}</div>`);
 
-    if (pedido.formaPagamento === 'Pix') {
-      partes.push('<div class="destaque">PAGO VIA PIX - NAO COBRAR</div>');
+    // Só diz "pago" quando o sistema confirmou o PIX de verdade
+    if (pedido.pixPago) {
+      partes.push('<div class="destaque pago">*** PAGO VIA PIX ***<br>NAO COBRAR O CLIENTE</div>');
+    } else if (pedido.formaPagamento === 'Pix') {
+      partes.push('<div class="destaque">PIX NAO CONFIRMADO - CONFERIR</div>');
     }
 
     if (pedido.formaPagamento === 'Dinheiro' && pedido.trocoPara) {
