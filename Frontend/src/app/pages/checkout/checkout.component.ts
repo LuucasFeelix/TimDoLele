@@ -96,6 +96,19 @@ export class CheckoutComponent
 
   trocoPara = '';
 
+  // CPF de quem paga o PIX (o PagBank exige). Não fica salvo.
+  cpfPagador = '';
+
+  // Popup do CPF (abre ao escolher PIX)
+  cpfPopupVisivel = false;
+
+  cpfDigitado = '';
+
+  cpfErro = '';
+
+  // Popup aberto pelo "Finalizar": depois do CPF, finaliza sozinho
+  private finalizarAposCpf = false;
+
   taxaEntrega = 5;
 
   statusLoja: StatusLoja | null = null;
@@ -507,6 +520,14 @@ export class CheckoutComponent
     forma: number
   ): void {
 
+    // PIX: pede o CPF antes (só troca para PIX depois de confirmar)
+    if (forma === 1) {
+
+      this.abrirPopupCpf();
+
+      return;
+    }
+
     this.formaPagamento =
       forma;
 
@@ -545,6 +566,14 @@ export class CheckoutComponent
     return (
       this.tipoEntrega ===
       2
+    );
+  }
+
+  isPix(): boolean {
+
+    return (
+      this.formaPagamento ===
+      1
     );
   }
 
@@ -902,6 +931,144 @@ export class CheckoutComponent
       this.subtotalNumero() -
       this.descontoCupom +
       this.getTaxaEntrega()
+    );
+  }
+
+  // =====================================================
+  // CPF (pagamento PIX)
+  // =====================================================
+
+  abrirPopupCpf(
+    finalizarDepois = false
+  ): void {
+
+    this.finalizarAposCpf =
+      finalizarDepois;
+
+    this.cpfDigitado =
+      this.cpfPagador;
+
+    this.cpfErro =
+      '';
+
+    this.cpfPopupVisivel =
+      true;
+
+    // Cursor já no campo, pronto para digitar
+    setTimeout(() =>
+      (document.getElementById('cpf-popup-campo') as HTMLInputElement | null)?.focus()
+    );
+  }
+
+  confirmarCpf(): void {
+
+    if (!this.cpfEhValido(this.cpfDigitado)) {
+
+      this.cpfErro =
+        'CPF inválido. Confira os números.';
+
+      return;
+    }
+
+    this.cpfPagador =
+      this.cpfDigitado;
+
+    this.formaPagamento =
+      1;
+
+    this.trocoPara =
+      '';
+
+    this.cpfPopupVisivel =
+      false;
+
+    if (this.finalizarAposCpf) {
+
+      this.finalizarAposCpf =
+        false;
+
+      this.finalizarPedido();
+    }
+  }
+
+  // Desistiu: continua com a forma de pagamento que estava
+  cancelarCpf(): void {
+
+    this.cpfPopupVisivel =
+      false;
+
+    this.finalizarAposCpf =
+      false;
+  }
+
+  // Máscara: 12345678909 -> 123.456.789-09
+  aoDigitarCpf(
+    event: Event
+  ): void {
+
+    const campo =
+      event.target as HTMLInputElement;
+
+    const n =
+      campo.value
+        .replace(/\D/g, '')
+        .substring(0, 11);
+
+    let formatado = n;
+
+    if (n.length > 9) {
+      formatado = `${n.slice(0, 3)}.${n.slice(3, 6)}.${n.slice(6, 9)}-${n.slice(9)}`;
+    } else if (n.length > 6) {
+      formatado = `${n.slice(0, 3)}.${n.slice(3, 6)}.${n.slice(6)}`;
+    } else if (n.length > 3) {
+      formatado = `${n.slice(0, 3)}.${n.slice(3)}`;
+    }
+
+    campo.value =
+      formatado;
+
+    this.cpfDigitado =
+      formatado;
+
+    this.cpfErro =
+      '';
+  }
+
+  get cpfValido(): boolean {
+
+    return this.cpfEhValido(
+      this.cpfPagador
+    );
+  }
+
+  // Confere os 2 dígitos verificadores (mesma regra do backend)
+  private cpfEhValido(
+    cpf: string
+  ): boolean {
+
+    const n =
+      (cpf ?? '').replace(/\D/g, '');
+
+    if (n.length !== 11 || /^(\d)\1+$/.test(n)) {
+      return false;
+    }
+
+    const digito = (tamanho: number): number => {
+
+      let soma = 0;
+
+      for (let i = 0; i < tamanho; i++) {
+        soma += Number(n[i]) * (tamanho + 1 - i);
+      }
+
+      const resto = soma % 11;
+
+      return resto < 2 ? 0 : 11 - resto;
+    };
+
+    return (
+      digito(9) === Number(n[9]) &&
+      digito(10) === Number(n[10])
     );
   }
 
@@ -1307,6 +1474,17 @@ export class CheckoutComponent
     }
 
     if (
+      this.isPix() &&
+      !this.cpfValido
+    ) {
+
+      // Pede o CPF e, ao confirmar, finaliza o pedido
+      this.abrirPopupCpf(true);
+
+      return;
+    }
+
+    if (
       this.isDinheiro() &&
       this.trocoNumero() <= 0
     ) {
@@ -1441,6 +1619,11 @@ export class CheckoutComponent
       trocoPara:
         this.isDinheiro()
           ? this.trocoNumero()
+          : null,
+
+      cpfPagador:
+        this.isPix()
+          ? this.cpfPagador.replace(/\D/g, '')
           : null,
 
       cupomCodigo:

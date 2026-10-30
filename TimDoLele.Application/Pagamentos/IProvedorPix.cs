@@ -28,6 +28,11 @@ namespace TimDoLele.Application.Pagamentos
         public DateTime ExpiraEm { get; set; }
 
         public string NomeCliente { get; set; } = string.Empty;
+
+        // Só números (o PagBank exige o CPF de quem paga)
+        public string CpfCliente { get; set; } = string.Empty;
+
+        public string TelefoneCliente { get; set; } = string.Empty;
     }
 
     public class CobrancaPixGerada

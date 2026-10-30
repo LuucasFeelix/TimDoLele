@@ -219,17 +219,29 @@ namespace TimDoLeLe
                             .AddSingleton<IProvedorPix, SimuladorPixProvedor>();
                         break;
 
+                    // Token em "PagBank:Token" (appsettings.Development.json)
+                    case "PagBank":
+                        builder.Services
+                            .Configure<PagBankOpcoes>(
+                                builder.Configuration
+                                    .GetSection("PagBank")
+                            );
+
+                        builder.Services
+                            .AddHttpClient<IProvedorPix, PagBankPixProvedor>();
+                        break;
+
                     default:
                         throw new InvalidOperationException(
-                            $"Provedor PIX '{provedorPix}' ainda não implementado. " +
-                            "Use \"Simulador\" em Pix:Provedor."
+                            $"Provedor PIX '{provedorPix}' não existe. " +
+                            "Use \"Simulador\" ou \"PagBank\" em Pix:Provedor."
                         );
                 }
 
                 // ===== WHATSAPP PARA O CLIENTE =====
                 // "WhatsApp:Modo" no appsettings:
-                // "Manual" (hoje) = o admin abre o WhatsApp e envia.
-                // Futuro: "MetaCloudApi" = API oficial, envia sozinho.
+                // "Manual" = o admin abre o WhatsApp e envia.
+                // "MetaCloudApi" = API oficial, envia sozinho.
                 builder.Services
                     .Configure<WhatsappOpcoes>(
                         builder.Configuration
@@ -247,10 +259,16 @@ namespace TimDoLeLe
                             .AddSingleton<IEnvioWhatsapp, EnvioWhatsappManual>();
                         break;
 
+                    // Token e IdNumeroTelefone em "WhatsApp" (appsettings.Development.json)
+                    case "MetaCloudApi":
+                        builder.Services
+                            .AddHttpClient<IEnvioWhatsapp, EnvioWhatsappMetaCloudApi>();
+                        break;
+
                     default:
                         throw new InvalidOperationException(
-                            $"Modo de WhatsApp '{modoWhatsapp}' ainda não implementado. " +
-                            "Use \"Manual\" em WhatsApp:Modo."
+                            $"Modo de WhatsApp '{modoWhatsapp}' não existe. " +
+                            "Use \"Manual\" ou \"MetaCloudApi\" em WhatsApp:Modo."
                         );
                 }
 
