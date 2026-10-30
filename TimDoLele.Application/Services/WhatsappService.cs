@@ -12,6 +12,41 @@ namespace TimDoLele.Application.Services
     // recebido -> em preparo -> saiu para entrega / pronto para retirada
     public class WhatsappService
     {
+        // =====================================================
+        // TEXTOS DAS MENSAGENS (pode editar à vontade aqui)
+        //
+        // Marcadores que o sistema troca sozinho:
+        //   {nome}    -> primeiro nome do cliente
+        //   {codigo}  -> código do pedido (ex.: 8DED75D4)
+        //   {loja}    -> nome da loja (Admin > Configurações)
+        //   {total}   -> total do pedido (ex.: R$ 85,00)
+        //   {prazo}   -> prazo (ex.: 45 a 60 min) de entrega ou retirada
+        //   {tipo}    -> "entrega" ou "retirada"
+        //
+        // \n = quebra de linha | *texto* = negrito no WhatsApp
+        // Depois de editar: pare a API, recompile e rode de novo.
+        //
+        // ATENÇÃO: no modo automático (API oficial) quem vale é o texto
+        // do MODELO cadastrado na Meta, não estes. Mudou aqui? Mude lá também.
+        // =====================================================
+
+        private const string TextoPedidoRecebido =
+            "Olá, {nome}! ✅ Recebemos seu pedido *#{codigo}* no *{loja}*.\n" +
+            "Total: {total}\n" +
+            "Previsão de {tipo}: {prazo}.\n" +
+            "Vamos te avisando por aqui. 😉";
+
+        private const string TextoEmPreparo =
+            "👨‍🍳 Seu pedido *#{codigo}* já está sendo preparado!";
+
+        private const string TextoSaiuParaEntrega =
+            "🛵 Seu pedido *#{codigo}* saiu para entrega! Em breve chega aí.";
+
+        private const string TextoProntoParaRetirada =
+            "🛍️ Seu pedido *#{codigo}* está pronto para retirada! Pode vir buscar.";
+
+        // =====================================================
+
         private readonly TimDoLeleDbContext _context;
         private readonly IEnvioWhatsapp _envio;
 
@@ -114,7 +149,9 @@ namespace TimDoLele.Application.Services
                 PedidoId = pedidoId,
                 Telefone = telefone,
                 Texto = texto,
-                Link = $"https://wa.me/{telefone}?text={Uri.EscapeDataString(texto)}",
+                // Endereço direto: o "wa.me" redireciona e nesse caminho
+                // o WhatsApp Web/computador estraga os emojis
+                Link = $"https://api.whatsapp.com/send?phone={telefone}&text={Uri.EscapeDataString(texto)}",
                 MensagensIds = pendentes.Select(m => m.Id).ToList()
             };
         }
@@ -136,7 +173,8 @@ namespace TimDoLele.Application.Services
         // Quantas mensagens faltam enviar (para o selo "📲 Avisar cliente")
         public async Task<Dictionary<Guid, int>> ContarPendentesAsync(List<Guid> pedidoIds)
         {
-            if (pedidoIds.Count == 0)
+            // Modo automático: o sistema envia sozinho, não tem botão
+            if (pedidoIds.Count == 0 || _envio.EnviaAutomaticamente)
                 return new Dictionary<Guid, int>();
 
             return await _context.MensagensWhatsapp
@@ -168,7 +206,23 @@ namespace TimDoLele.Application.Services
             {
                 try
                 {
-                    await _envio.EnviarAsync(mensagem.Telefone, mensagem.Texto);
+                    var pedido = await _context.Pedidos.FindAsync(mensagem.PedidoId);
+                    var cliente = pedido == null ? null : await _context.Clientes.FindAsync(pedido.ClienteId);
+
+                    if (pedido == null || cliente == null)
+                    {
+                        mensagem.Ignorar();
+                        continue;
+                    }
+
+                    await _envio.EnviarAsync(new MensagemParaEnviar
+                    {
+                        Telefone = mensagem.Telefone,
+                        Tipo = mensagem.Tipo,
+                        Texto = mensagem.Texto,
+                        Valores = await MontarValoresAsync(pedido, cliente.Nome)
+                    });
+
                     mensagem.MarcarEnviada();
                 }
                 catch (Exception ex)
@@ -190,56 +244,47 @@ namespace TimDoLele.Application.Services
             string nomeCliente,
             TipoMensagemWhatsapp tipo)
         {
+            var modelo = tipo switch
+            {
+                TipoMensagemWhatsapp.PedidoRecebido => TextoPedidoRecebido,
+                TipoMensagemWhatsapp.EmPreparo => TextoEmPreparo,
+                TipoMensagemWhatsapp.SaiuParaEntrega => TextoSaiuParaEntrega,
+                TipoMensagemWhatsapp.ProntoParaRetirada => TextoProntoParaRetirada,
+                _ => "Atualização do seu pedido *#{codigo}*."
+            };
+
+            var valores = await MontarValoresAsync(pedido, nomeCliente);
+
+            foreach (var (chave, valor) in valores)
+                modelo = modelo.Replace("{" + chave + "}", valor);
+
+            return modelo;
+        }
+
+        // Valores dos marcadores {nome}, {codigo}... (texto manual e API oficial)
+        private async Task<Dictionary<string, string>> MontarValoresAsync(
+            Pedido pedido,
+            string nomeCliente)
+        {
             var config = await _context.ConfiguracoesLoja.FirstOrDefaultAsync();
 
-            var loja = config?.NomeEstabelecimento ?? "Tim do Lelê Lanches";
-            var primeiroNome = (nomeCliente ?? "").Trim().Split(' ')[0];
-            var codigo = pedido.Codigo;
             var entrega = pedido.TipoEntrega == TipoEntrega.Delivery;
 
-            switch (tipo)
+            var prazo = config == null
+                ? "em breve"
+                : entrega
+                    ? TextoPrazo(config.PrazoEntregaMin, config.PrazoEntregaMax)
+                    : TextoPrazo(config.PrazoRetiradaMin, config.PrazoRetiradaMax);
+
+            return new Dictionary<string, string>
             {
-                case TipoMensagemWhatsapp.PedidoRecebido:
-                {
-                    var prazo = config == null
-                        ? null
-                        : entrega
-                            ? TextoPrazo(config.PrazoEntregaMin, config.PrazoEntregaMax)
-                            : TextoPrazo(config.PrazoRetiradaMin, config.PrazoRetiradaMax);
-
-                    var linhas = new List<string>
-                    {
-                        $"Olá, {primeiroNome}! ✅ Recebemos seu pedido *#{codigo}* no *{loja}*.",
-                        $"Total: {TextoHelper.FormatarDinheiro(pedido.Total)}"
-                    };
-
-                    if (prazo != null)
-                        linhas.Add($"Previsão de {(entrega ? "entrega" : "retirada")}: {prazo}.");
-
-                    linhas.Add("Vamos te avisando por aqui. 😉");
-
-                    return string.Join("\n", linhas);
-                }
-
-                case TipoMensagemWhatsapp.EmPreparo:
-                    return $"👨‍🍳 Seu pedido *#{codigo}* já está sendo preparado!";
-
-                case TipoMensagemWhatsapp.SaiuParaEntrega:
-                    return $"🛵 Seu pedido *#{codigo}* saiu para entrega! Em breve chega aí.";
-
-                case TipoMensagemWhatsapp.ProntoParaRetirada:
-                {
-                    var texto = $"🛍️ Seu pedido *#{codigo}* está pronto para retirada! Pode vir buscar.";
-
-                    if (!string.IsNullOrWhiteSpace(config?.Endereco))
-                        texto += $"\nEndereço: {config.Endereco}";
-
-                    return texto;
-                }
-
-                default:
-                    return $"Atualização do seu pedido *#{codigo}*.";
-            }
+                ["nome"] = (nomeCliente ?? "").Trim().Split(' ')[0],
+                ["codigo"] = pedido.Codigo,
+                ["loja"] = config?.NomeEstabelecimento ?? "Tim do Lelê Lanches",
+                ["total"] = TextoHelper.FormatarDinheiro(pedido.Total),
+                ["prazo"] = prazo,
+                ["tipo"] = entrega ? "entrega" : "retirada"
+            };
         }
 
         private static string TextoPrazo(int minimo, int maximo)

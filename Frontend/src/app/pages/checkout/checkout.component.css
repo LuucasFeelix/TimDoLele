@@ -297,6 +297,66 @@
   font-weight: 800;
 }
 
+/* CPF do PIX: resumo abaixo das formas de pagamento */
+.cpf-resumo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff8e1;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cpf-resumo span {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ".payment-card button" deixa todo botão com 100% de largura */
+.payment-card .cpf-resumo button {
+  width: auto;
+  margin: 0;
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: #f8b400;
+  color: #111;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+/* Campo do CPF dentro do popup */
+.cpf-popup-campo {
+  width: 100%;
+  margin: 4px 0 8px;
+  padding: 14px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.cpf-popup-campo:focus {
+  outline: none;
+  border-color: #f8b400;
+}
+
+.cpf-dica {
+  margin: 0 0 14px;
+  color: #777;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .troco-info.troco-erro {
   color: #b00020;
 }
@@ -709,4 +769,11 @@
     padding: 15px;
     font-size: 14px;
   }
+}
+
+/* Símbolo do PIX (verde-água oficial) */
+.logo-pix {
+  width: 22px;
+  height: 22px;
+  fill: #32bcad;
 }

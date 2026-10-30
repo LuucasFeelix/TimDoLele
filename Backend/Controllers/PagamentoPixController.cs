@@ -60,6 +60,20 @@ namespace TimDoLeLe.Controllers
             return Ok();
         }
 
+        // Aviso do PagBank: manda o pedido inteiro no corpo,
+        // o id dele ("ORDE_...") é o nosso IdExterno.
+        [AllowAnonymous]
+        [HttpPost("aviso-pagbank")]
+        public async Task<IActionResult> ReceberAvisoPagBank([FromBody] System.Text.Json.JsonElement corpo)
+        {
+            if (corpo.ValueKind != System.Text.Json.JsonValueKind.Object ||
+                !corpo.TryGetProperty("id", out var id) ||
+                string.IsNullOrWhiteSpace(id.GetString()))
+                return Ok();
+
+            return await ReceberAviso(id.GetString()!);
+        }
+
         // SÓ PARA TESTES: faz o papel do cliente pagando o PIX.
         // Funciona apenas em desenvolvimento e com o simulador.
         [AllowAnonymous]

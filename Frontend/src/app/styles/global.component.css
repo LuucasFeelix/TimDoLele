@@ -1,1 +1,13 @@
 @import './design-system.component.css';
+
+/* Celular: tira o "flash" azul que aparece ao tocar em botões e links */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Tocar rápido num botão não seleciona o texto dele */
+button,
+a {
+  -webkit-user-select: none;
+  user-select: none;
+}

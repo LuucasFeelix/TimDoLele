@@ -338,7 +338,9 @@ namespace TimDoLele.Application.Services
                 await _pixService
                     .GerarCobrancaAsync(
                         pedido,
-                        nomeCliente
+                        nomeCliente,
+                        CpfHelper.ApenasNumeros(dto.CpfPagador),
+                        dto.Telefone
                     );
             }
 

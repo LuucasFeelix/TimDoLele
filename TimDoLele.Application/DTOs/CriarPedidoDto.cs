@@ -17,6 +17,9 @@ namespace TimDoLeLe.Application.DTOs
 
         public decimal? TrocoPara { get; set; }
 
+        // CPF de quem paga o PIX (o PagBank exige). Não fica salvo.
+        public string? CpfPagador { get; set; }
+
         // Código do cupom de desconto (opcional)
         public string? CupomCodigo { get; set; }
 

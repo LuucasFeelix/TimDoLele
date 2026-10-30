@@ -33,7 +33,11 @@ namespace TimDoLele.Application.Services
 
         // Chamado ao criar o pedido (antes de salvar).
         // Se a empresa falhar, o pedido não é criado.
-        public async Task GerarCobrancaAsync(Pedido pedido, string nomeCliente)
+        public async Task GerarCobrancaAsync(
+            Pedido pedido,
+            string nomeCliente,
+            string cpfCliente,
+            string telefoneCliente)
         {
             var expiraEm = DateTime.Now.AddMinutes(Math.Max(_opcoes.MinutosParaPagar, 1));
 
@@ -47,7 +51,9 @@ namespace TimDoLele.Application.Services
                     CodigoPedido = pedido.Codigo,
                     Valor = pedido.Total,
                     ExpiraEm = expiraEm,
-                    NomeCliente = nomeCliente
+                    NomeCliente = nomeCliente,
+                    CpfCliente = cpfCliente,
+                    TelefoneCliente = telefoneCliente
                 });
             }
             catch (Exception ex)

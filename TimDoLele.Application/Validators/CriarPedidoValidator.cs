@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using TimDolele.Core.Enums;
+using TimDoLele.Application.Helpers;
 using TimDoLeLe.Application.DTOs;
 
 namespace TimDoLele.Application.Validators
@@ -18,6 +20,12 @@ namespace TimDoLele.Application.Validators
                     return digitos == 10 || digitos == 11;
                 })
                 .WithMessage("Informe um telefone válido com DDD.");
+
+            // PIX: o PagBank exige o CPF de quem paga
+            RuleFor(x => x.CpfPagador)
+                .Must(CpfHelper.Valido)
+                .When(x => x.FormaPagamento == FormaPagamento.Pix)
+                .WithMessage("Informe um CPF válido para pagar com PIX.");
 
             RuleFor(x => x.Itens)
                 .NotEmpty()

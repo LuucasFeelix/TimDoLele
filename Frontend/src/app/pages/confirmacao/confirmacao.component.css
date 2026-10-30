@@ -92,3 +92,13 @@
     font-size: 22px;
   }
 }
+
+/* Celular: ícone de confirmação menor (sobra espaço para o resto) */
+@media (max-width: 600px) {
+  .success-icon {
+    width: 72px;
+    height: 72px;
+    font-size: 38px;
+    margin-bottom: 16px;
+  }
+}
