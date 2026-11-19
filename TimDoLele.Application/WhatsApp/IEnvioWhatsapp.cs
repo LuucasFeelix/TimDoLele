@@ -48,10 +48,14 @@ namespace TimDoLele.Application.WhatsApp
         // "Identificação do número de telefone" (Phone number ID) na Meta
         public string IdNumeroTelefone { get; set; } = string.Empty;
 
-        public string VersaoApi { get; set; } = "v23.0";
+        public string VersaoApi { get; set; } = "v25.0";
 
         // Idioma dos modelos cadastrados na Meta
         public string Idioma { get; set; } = "pt_BR";
+
+        // Senha que VOCÊ inventa e coloca igual na tela de Webhooks da Meta
+        // (a Meta usa para confirmar que o endereço do aviso é nosso)
+        public string TokenVerificacaoWebhook { get; set; } = string.Empty;
     }
 
     // Modo manual: o sistema prepara a mensagem e o admin envia
