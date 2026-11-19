@@ -721,6 +721,46 @@
 
     </section>
 
+
+    <!-- ====================================== -->
+    <!-- IMPRESSORA -->
+    <!-- ====================================== -->
+
+    <section class="config-card">
+
+      <div class="section-title">
+
+        <div>
+          <h2>🖨️ Impressora</h2>
+          <p>
+            A comanda sai na impressora padrão do Windows.
+            Use este teste para conferir o tamanho do papel,
+            as margens e se a impressora está ligada.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="section-actions">
+
+        <button
+          type="button"
+          class="save-button"
+          (click)="imprimirTeste()"
+          [disabled]="imprimindoTeste"
+        >
+          {{
+            imprimindoTeste
+              ? 'Imprimindo...'
+              : '🖨️ Imprimir comanda de teste'
+          }}
+        </button>
+
+      </div>
+
+    </section>
+
   </ng-container>
 
 </div>

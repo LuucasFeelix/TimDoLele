@@ -331,6 +331,35 @@ namespace TimDoLeLe.Controllers
             return Ok(relatorio);
         }
 
+        // Planilha do relatório (abre no Excel)
+        [Authorize(Roles = "Admin")]
+        [HttpGet("relatorios/exportar")]
+        public async Task<IActionResult>
+            ExportarRelatorio(
+                [FromQuery]
+                string periodo = "hoje",
+
+                [FromQuery]
+                DateTime? dataInicio = null,
+
+                [FromQuery]
+                DateTime? dataFim = null)
+        {
+            var arquivo =
+                await _pedidoService
+                    .ExportarRelatorioExcelAsync(
+                        periodo,
+                        dataInicio,
+                        dataFim
+                    );
+
+            return File(
+                arquivo,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                $"relatorio-{periodo}-{DateTime.Now:yyyy-MM-dd}.xlsx"
+            );
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<IActionResult>

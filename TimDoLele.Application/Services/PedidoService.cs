@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ClosedXML.Excel;
 using TimDolele.Core.Entities;
 using TimDolele.Core.Enums;
 using TimDoLele.Application.DTOs;
@@ -1037,11 +1038,15 @@ namespace TimDoLele.Application.Services
             return pedido;
         }
 
-        public async Task<RelatorioDto>
-            ObterRelatorioAsync(
-                string periodo = "hoje",
-                DateTime? dataInicio = null,
-                DateTime? dataFim = null)
+        // =====================================================
+        // RELATÓRIO: período e exportação (planilha)
+        // =====================================================
+
+        // "hoje", "ontem", "semana", "mes" ou "personalizado" -> [inicio, fim)
+        private static (DateTime Inicio, DateTime Fim) PeriodoRelatorio(
+            string periodo,
+            DateTime? dataInicio,
+            DateTime? dataFim)
         {
             DateTime inicio;
             DateTime fim;
@@ -1107,6 +1112,269 @@ namespace TimDoLele.Application.Services
 
                     break;
             }
+
+            return (inicio, fim);
+        }
+
+        // Planilha do Excel (.xlsx): resumo, valores por forma de
+        // pagamento e valores de cada dia do período.
+        // Cancelados não entram nos valores.
+        public async Task<byte[]> ExportarRelatorioExcelAsync(
+            string periodo = "hoje",
+            DateTime? dataInicio = null,
+            DateTime? dataFim = null)
+        {
+            var relatorio =
+                await ObterRelatorioAsync(periodo, dataInicio, dataFim);
+
+            var (inicio, fim) =
+                PeriodoRelatorio(periodo, dataInicio, dataFim);
+
+            var pedidos =
+                await ApenasVisiveisParaLoja(_context.Pedidos)
+                    .Where(p =>
+                        p.DataHora >= inicio &&
+                        p.DataHora < fim &&
+                        p.Status != StatusPedido.Cancelado)
+                    .Select(p => new { p.DataHora, p.FormaPagamento, p.TipoEntrega, p.Total })
+                    .ToListAsync();
+
+            // Colunas de pagamento (só aparece "Não informado" se existir)
+            var formas = new List<(string Titulo, Func<FormaPagamento, bool> Filtro)>
+            {
+                ("PIX", f => f == FormaPagamento.Pix),
+                ("Dinheiro", f => f == FormaPagamento.Dinheiro),
+                ("Crédito", f => f == FormaPagamento.CartaoCredito),
+                ("Débito", f => f == FormaPagamento.CartaoDebito)
+            };
+
+            if (pedidos.Any(p => !Enum.IsDefined(p.FormaPagamento)))
+                formas.Add(("Não informado", f => !Enum.IsDefined(f)));
+
+            const string FormatoDinheiro = "\"R$\" #,##0.00";
+
+            // Zero aparece como "-" (tabela por dia fica mais limpa)
+            const string FormatoDinheiroDia = "\"R$\" #,##0.00;-\"R$\" #,##0.00;\"-\"";
+            var amarelo = XLColor.FromHtml("#F8B400");
+            var cinza = XLColor.FromHtml("#F3F4F6");
+
+            using var planilha = new XLWorkbook();
+            var aba = planilha.Worksheets.Add("Relatório");
+
+            aba.Style.Font.FontName = "Calibri";
+            aba.Style.Font.FontSize = 11;
+
+            var ultimaColuna = formas.Count + 3;
+
+            // ---------- TÍTULO ----------
+            var titulo = aba.Range(1, 1, 1, ultimaColuna).Merge();
+            titulo.Value = "Relatório de vendas - Tim do Lelê Lanches";
+            titulo.Style.Font.Bold = true;
+            titulo.Style.Font.FontSize = 16;
+            titulo.Style.Fill.BackgroundColor = amarelo;
+            titulo.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            aba.Row(1).Height = 28;
+
+            var subtitulo = aba.Range(2, 1, 2, ultimaColuna).Merge();
+            subtitulo.Value =
+                $"Período: {inicio:dd/MM/yyyy} a {fim.AddDays(-1):dd/MM/yyyy}" +
+                $"   |   Gerado em {DateTime.Now:dd/MM/yyyy HH:mm}";
+            subtitulo.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            subtitulo.Style.Font.FontColor = XLColor.FromHtml("#555555");
+
+            var linha = 4;
+
+            // ---------- RESUMO ----------
+            linha = TituloSecao(aba, linha, "RESUMO", ultimaColuna, amarelo);
+
+            var totalVendido = pedidos.Sum(p => p.Total);
+
+            var resumo = new List<(string Rotulo, object Valor, string? Formato)>
+            {
+                ("Total vendido (sem cancelados)", totalVendido, FormatoDinheiro),
+                ("Faturamento (pedidos entregues)", relatorio.Faturamento, FormatoDinheiro),
+                ("Pedidos (sem cancelados)", pedidos.Count, null),
+                ("Ticket médio", pedidos.Count > 0 ? totalVendido / pedidos.Count : 0m, FormatoDinheiro),
+                ("Pedidos entregues", relatorio.Resumo.PedidosEntregues, null),
+                ("Pedidos cancelados", relatorio.Resumo.PedidosCancelados, null),
+                ("Pedidos de entrega", pedidos.Count(p => p.TipoEntrega == TipoEntrega.Delivery), null),
+                ("Pedidos de retirada", pedidos.Count(p => p.TipoEntrega == TipoEntrega.Retirada), null)
+            };
+
+            foreach (var (rotulo, valor, formato) in resumo)
+            {
+                aba.Cell(linha, 1).Value = rotulo;
+                aba.Cell(linha, 1).Style.Font.Bold = true;
+
+                var celula = aba.Cell(linha, 2);
+                celula.Value = XLCellValue.FromObject(valor);
+                celula.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+
+                if (formato != null)
+                    celula.Style.NumberFormat.Format = formato;
+
+                aba.Range(linha, 1, linha, 2).Style.Border.BottomBorder = XLBorderStyleValues.Hair;
+                linha++;
+            }
+
+            linha++;
+
+            // ---------- POR FORMA DE PAGAMENTO ----------
+            linha = TituloSecao(aba, linha, "POR FORMA DE PAGAMENTO", ultimaColuna, amarelo);
+
+            Cabecalho(aba, linha, cinza, "Forma de pagamento", "Pedidos", "Valor", "% do total");
+            linha++;
+
+            var inicioFormas = linha;
+
+            foreach (var (tituloForma, filtro) in formas)
+            {
+                var daForma = pedidos.Where(p => filtro(p.FormaPagamento)).ToList();
+                var valor = daForma.Sum(p => p.Total);
+
+                aba.Cell(linha, 1).Value = tituloForma;
+                aba.Cell(linha, 2).Value = daForma.Count;
+                aba.Cell(linha, 3).Value = valor;
+                aba.Cell(linha, 3).Style.NumberFormat.Format = FormatoDinheiro;
+                aba.Cell(linha, 4).Value = totalVendido > 0 ? valor / totalVendido : 0m;
+                aba.Cell(linha, 4).Style.NumberFormat.Format = "0.00%";
+                linha++;
+            }
+
+            LinhaTotal(aba, linha, 4);
+            aba.Cell(linha, 1).Value = "TOTAL";
+            aba.Cell(linha, 2).FormulaA1 = $"SUM(B{inicioFormas}:B{linha - 1})";
+            aba.Cell(linha, 3).FormulaA1 = $"SUM(C{inicioFormas}:C{linha - 1})";
+            aba.Cell(linha, 3).Style.NumberFormat.Format = FormatoDinheiro;
+            aba.Cell(linha, 4).Value = totalVendido > 0 ? 1m : 0m;
+            aba.Cell(linha, 4).Style.NumberFormat.Format = "0.00%";
+            Bordas(aba.Range(inicioFormas - 1, 1, linha, 4));
+            linha += 2;
+
+            // ---------- POR DIA ----------
+            linha = TituloSecao(aba, linha, "VALORES POR DIA", ultimaColuna, amarelo);
+
+            var cabecalhoDia = new List<string> { "Data", "Pedidos" };
+            cabecalhoDia.AddRange(formas.Select(f => f.Titulo));
+            cabecalhoDia.Add("Total do dia");
+
+            Cabecalho(aba, linha, cinza, cabecalhoDia.ToArray());
+            linha++;
+
+            var inicioDias = linha;
+
+            foreach (var dia in pedidos.GroupBy(p => p.DataHora.Date).OrderBy(g => g.Key))
+            {
+                aba.Cell(linha, 1).Value = dia.Key;
+                aba.Cell(linha, 1).Style.NumberFormat.Format = "dd/mm/yyyy";
+                aba.Cell(linha, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                aba.Cell(linha, 2).Value = dia.Count();
+
+                var coluna = 3;
+
+                foreach (var (_, filtro) in formas)
+                {
+                    aba.Cell(linha, coluna).Value = dia.Where(p => filtro(p.FormaPagamento)).Sum(p => p.Total);
+                    coluna++;
+                }
+
+                aba.Cell(linha, coluna).Value = dia.Sum(p => p.Total);
+                aba.Cell(linha, coluna).Style.Font.Bold = true;
+
+                aba.Range(linha, 3, linha, coluna).Style.NumberFormat.Format = FormatoDinheiroDia;
+                linha++;
+            }
+
+            if (linha == inicioDias)
+            {
+                aba.Range(linha, 1, linha, ultimaColuna).Merge().Value = "Nenhuma venda no período.";
+                aba.Cell(linha, 1).Style.Font.Italic = true;
+                linha++;
+            }
+            else
+            {
+                LinhaTotal(aba, linha, ultimaColuna);
+                aba.Cell(linha, 1).Value = "TOTAL";
+
+                for (var coluna = 2; coluna <= ultimaColuna; coluna++)
+                {
+                    var letra = XLHelper.GetColumnLetterFromNumber(coluna);
+                    aba.Cell(linha, coluna).FormulaA1 = $"SUM({letra}{inicioDias}:{letra}{linha - 1})";
+
+                    if (coluna > 2)
+                        aba.Cell(linha, coluna).Style.NumberFormat.Format = FormatoDinheiro;
+                }
+            }
+
+            Bordas(aba.Range(inicioDias - 1, 1, linha, ultimaColuna));
+
+            // ---------- LARGURAS ----------
+            aba.Column(1).Width = 34;
+
+            for (var coluna = 2; coluna <= ultimaColuna; coluna++)
+                aba.Column(coluna).Width = 16;
+
+            aba.PageSetup.PageOrientation = XLPageOrientation.Landscape;
+            aba.PageSetup.FitToPages(1, 0);
+
+            using var memoria = new MemoryStream();
+            planilha.SaveAs(memoria);
+
+            return memoria.ToArray();
+        }
+
+        private static int TituloSecao(IXLWorksheet aba, int linha, string texto, int colunas, XLColor cor)
+        {
+            var faixa = aba.Range(linha, 1, linha, colunas).Merge();
+            faixa.Value = texto;
+            faixa.Style.Font.Bold = true;
+            faixa.Style.Font.FontSize = 12;
+            faixa.Style.Border.BottomBorder = XLBorderStyleValues.Medium;
+            faixa.Style.Border.BottomBorderColor = cor;
+
+            return linha + 1;
+        }
+
+        private static void Cabecalho(IXLWorksheet aba, int linha, XLColor cor, params string[] titulos)
+        {
+            for (var i = 0; i < titulos.Length; i++)
+            {
+                var celula = aba.Cell(linha, i + 1);
+                celula.Value = titulos[i];
+                celula.Style.Font.Bold = true;
+                celula.Style.Fill.BackgroundColor = cor;
+                celula.Style.Alignment.Horizontal = i == 0
+                    ? XLAlignmentHorizontalValues.Left
+                    : XLAlignmentHorizontalValues.Right;
+            }
+        }
+
+        private static void LinhaTotal(IXLWorksheet aba, int linha, int colunas)
+        {
+            var faixa = aba.Range(linha, 1, linha, colunas);
+            faixa.Style.Font.Bold = true;
+            faixa.Style.Fill.BackgroundColor = XLColor.FromHtml("#FFF4C2");
+            faixa.Style.Border.TopBorder = XLBorderStyleValues.Thin;
+        }
+
+        private static void Bordas(IXLRange faixa)
+        {
+            faixa.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            faixa.Style.Border.InsideBorder = XLBorderStyleValues.Hair;
+        }
+
+        public async Task<RelatorioDto>
+            ObterRelatorioAsync(
+                string periodo = "hoje",
+                DateTime? dataInicio = null,
+                DateTime? dataFim = null)
+        {
+            var (inicio, fim) =
+                PeriodoRelatorio(
+                    periodo,
+                    dataInicio,
+                    dataFim
+                );
 
             var pedidos =
                 await ApenasVisiveisParaLoja(_context.Pedidos)
@@ -1223,7 +1491,7 @@ namespace TimDoLele.Application.Services
                             new FormaPagamentoRelatorioDto
                             {
                                 Nome =
-                                    g.Key.ToString(),
+                                    Enum.IsDefined(g.Key) ? g.Key.ToString() : "NaoInformado",
 
                                 Quantidade =
                                     g.Count(),
