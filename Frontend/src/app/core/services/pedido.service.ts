@@ -132,10 +132,29 @@ export class PedidoService {
     );
   }
 
-  getRelatorio(periodo: string = 'hoje') {
+  // dataInicio/dataFim ("2026-11-01") só no período "personalizado"
+  getRelatorio(periodo: string = 'hoje', dataInicio?: string, dataFim?: string) {
     return this.http.get<any>(
-      `${this.api}/relatorios?periodo=${periodo}`
+      `${this.api}/relatorios?${this.filtroRelatorio(periodo, dataInicio, dataFim)}`
     );
+  }
+
+  // Planilha do relatório (arquivo do Excel .xlsx)
+  exportarRelatorio(periodo: string = 'hoje', dataInicio?: string, dataFim?: string) {
+    return this.http.get(
+      `${this.api}/relatorios/exportar?${this.filtroRelatorio(periodo, dataInicio, dataFim)}`,
+      { responseType: 'blob' }
+    );
+  }
+
+  private filtroRelatorio(periodo: string, dataInicio?: string, dataFim?: string): string {
+    let filtro = `periodo=${periodo}`;
+
+    if (periodo === 'personalizado' && dataInicio && dataFim) {
+      filtro += `&dataInicio=${dataInicio}&dataFim=${dataFim}`;
+    }
+
+    return filtro;
   }
 
   getCardapio() {

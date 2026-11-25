@@ -21,6 +21,40 @@
     </div>
   </header>
 
+  <!-- Período personalizado: escolhe as datas -->
+  <div
+    *ngIf="periodoAtual === 'personalizado'"
+    class="periodo-personalizado card"
+  >
+    <label>
+      De
+      <input
+        type="date"
+        [value]="dataInicio"
+        [max]="dataFim"
+        (change)="alterarDataInicio($event)"
+      />
+    </label>
+
+    <label>
+      Até
+      <input
+        type="date"
+        [value]="dataFim"
+        [min]="dataInicio"
+        (change)="alterarDataFim($event)"
+      />
+    </label>
+
+    <button
+      type="button"
+      (click)="aplicarPersonalizado()"
+      [disabled]="loading"
+    >
+      Ver relatório
+    </button>
+  </div>
+
   <div *ngIf="loading" class="loading card">
     Carregando relatório...
   </div>
@@ -203,8 +237,12 @@
         📅 Relatório referente ao período selecionado
       </div>
 
-      <button>
-        ⬇ Exportar relatório
+      <button
+        type="button"
+        (click)="exportarRelatorio()"
+        [disabled]="exportando"
+      >
+        {{ exportando ? 'Exportando...' : '⬇ Exportar relatório' }}
       </button>
     </footer>
 

@@ -5,6 +5,7 @@ import {
 } from 'rxjs';
 
 import { PedidoService } from './pedido.service';
+import { ComandaImpressaoService } from './comanda-impressao.service';
 
 export type StatusImpressao =
   | 'Aguardando'
@@ -63,7 +64,8 @@ export class ImpressaoPedidoService {
     this.pedidosComErroSubject.asObservable();
 
   constructor(
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    private comandaImpressaoService: ComandaImpressaoService
   ) { }
 
   async adicionarNaFila(
@@ -445,30 +447,6 @@ export class ImpressaoPedidoService {
       `🖨️ Iniciando impressão do pedido #${pedido.codigo}...`
     );
 
-    console.log(
-      'Pedido enviado para impressão:',
-      {
-        id:
-          pedido.id,
-
-        codigo:
-          pedido.codigo,
-
-        cliente:
-          pedido.nomeCliente,
-
-        total:
-          pedido.total,
-
-        itens:
-          pedido.itens
-      }
-    );
-
-    await this.aguardar(
-      2000
-    );
-
     if (
       this.simularErroImpressao
     ) {
@@ -478,8 +456,16 @@ export class ImpressaoPedidoService {
       );
     }
 
+    // Manda a comanda para a impressora padrão do Windows.
+    // Com o atalho do painel (--kiosk-printing) sai direto, sem janela.
+    // Obs.: o navegador não sabe se a impressora está sem papel ou
+    // desligada; nesse caso o Windows segura na fila dele.
+    await this.comandaImpressaoService.imprimir(
+      pedido
+    );
+
     console.log(
-      `🧾 Impressão simulada concluída: #${pedido.codigo}`
+      `🧾 Comanda enviada para a impressora: #${pedido.codigo}`
     );
   }
 

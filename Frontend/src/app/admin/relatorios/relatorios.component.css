@@ -59,6 +59,46 @@
   box-shadow: 0 8px 18px rgba(248, 180, 0, .24);
 }
 
+/* Período personalizado (datas) */
+.periodo-personalizado {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 18px 22px;
+  margin-bottom: 22px;
+}
+
+.periodo-personalizado label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #444;
+}
+
+.periodo-personalizado input {
+  padding: 11px 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.periodo-personalizado button {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 10px;
+  background: #f8b400;
+  color: #111;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.periodo-personalizado button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
 .loading {
   padding: 24px;
   color: #666;

@@ -24,6 +24,7 @@ import {
 } from '../../core/services/configuracao-loja.service';
 import { SemEmojiDirective } from '../../core/directives/sem-emoji.directive';
 import { AvisoService } from '../../core/services/aviso.service';
+import { ComandaImpressaoService } from '../../core/services/comanda-impressao.service';
 
 @Component({
   selector: 'app-configuracoes',
@@ -41,7 +42,30 @@ export class ConfiguracoesComponent implements OnInit {
   // Popup padrão de avisos (substitui alert/confirm)
   private aviso = inject(AvisoService);
 
+  // Comanda de teste (card "Impressora")
+  private comandaImpressaoService = inject(ComandaImpressaoService);
+
+  imprimindoTeste = false;
+
   carregando = true;
+
+  // Imprime uma comanda de exemplo para testar a impressora
+  async imprimirTeste(): Promise<void> {
+    if (this.imprimindoTeste) {
+      return;
+    }
+
+    this.imprimindoTeste = true;
+
+    try {
+      await this.comandaImpressaoService.imprimirTeste();
+    } catch (erro) {
+      console.error('Erro ao imprimir a comanda de teste:', erro);
+      this.aviso.erro('Não foi possível imprimir a comanda de teste.');
+    } finally {
+      this.imprimindoTeste = false;
+    }
+  }
 
   salvandoConfiguracoes = false;
   salvandoHorarios = false;

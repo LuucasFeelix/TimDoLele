@@ -40,6 +40,42 @@ export class ComandaImpressaoService {
     await this.imprimirHtml(html);
   }
 
+  // Comanda de exemplo (Admin > Configurações > Impressora),
+  // para testar a impressora sem precisar de pedido de verdade
+  async imprimirTeste(): Promise<void> {
+    await this.imprimir({
+      codigo: 'TESTE123',
+      dataHora: new Date(),
+      tipoEntrega: 'Delivery',
+      nomeCliente: 'Cliente Teste',
+      telefone: '(16) 99999-9999',
+      endereco: 'Rua de Teste, 123 - casa',
+      bairro: 'Centro',
+      itens: [
+        {
+          quantidade: 2,
+          produtoNome: 'X-Burguer',
+          valor: 50,
+          adicionais: [{ nome: 'Bacon', quantidade: 1 }],
+          observacao: 'sem cebola'
+        },
+        {
+          quantidade: 1,
+          produtoNome: 'Refrigerante lata',
+          valor: 6,
+          adicionais: []
+        }
+      ],
+      subTotal: 56,
+      desconto: 0,
+      delivery: 5,
+      total: 61,
+      formaPagamento: 'Dinheiro',
+      trocoPara: 100,
+      pixPago: false
+    });
+  }
+
   // =====================================================
   // MONTAGEM DA COMANDA
   // =====================================================
