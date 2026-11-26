@@ -94,6 +94,28 @@ namespace TimDoLele.Application.Services
             await _context.MensagensWhatsapp.AddAsync(
                 new MensagemWhatsapp(pedido.Id, tipo, telefone, texto)
             );
+
+            // Modo automático: avisa a rotina de envio para não esperar os 20 s
+            if (_envio.EnviaAutomaticamente)
+            {
+                try
+                {
+                    NovaMensagem.Release();
+                }
+                catch (SemaphoreFullException)
+                {
+                    // Já estava avisada; não precisa avisar de novo
+                }
+            }
+        }
+
+        // "Campainha" da rotina de envio (VerificacaoPixBackgroundService)
+        private static readonly SemaphoreSlim NovaMensagem = new(0, 1);
+
+        // true = acordou por mensagem nova; false = passou o tempo
+        public static Task<bool> AguardarNovaMensagemAsync(TimeSpan tempoMaximo, CancellationToken cancelamento)
+        {
+            return NovaMensagem.WaitAsync(tempoMaximo, cancelamento);
         }
 
         // Atalho para quando só temos o pedido (carrega o cliente)

@@ -56,7 +56,13 @@ namespace TimDoLeLe.Services
                     _logger.LogError(ex, "Erro ao verificar pagamentos PIX pendentes");
                 }
 
-                await Task.Delay(Intervalo, stoppingToken);
+                // Espera os 20 s, mas acorda antes se surgir mensagem de
+                // WhatsApp nova (o cliente recebe em poucos segundos)
+                if (await WhatsappService.AguardarNovaMensagemAsync(Intervalo, stoppingToken))
+                {
+                    // Dá tempo de quem criou a mensagem terminar de salvar
+                    await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
+                }
             }
         }
     }
