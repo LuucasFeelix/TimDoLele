@@ -766,6 +766,32 @@
 
 
       <!-- ========================================= -->
+      <!-- CANCELAMENTO (motivo) -->
+      <!-- ========================================= -->
+
+      <section
+        *ngIf="pedidoSelecionado.motivoCancelamento"
+        class="detail-section cancelamento-info"
+      >
+
+        <h3>
+          ❌ Pedido cancelado
+        </h3>
+
+        <p>
+          <strong>Motivo:</strong>
+          {{ pedidoSelecionado.motivoCancelamento }}
+        </p>
+
+        <small *ngIf="pedidoSelecionado.canceladoEm">
+          Cancelado em
+          {{ pedidoSelecionado.canceladoEm | date: 'dd/MM/yyyy HH:mm' }}
+        </small>
+
+      </section>
+
+
+      <!-- ========================================= -->
       <!-- CLIENTE -->
       <!-- ========================================= -->
 
@@ -1100,9 +1126,8 @@
             class="danger-button"
 
             (click)="
-              alterarStatus(
-                pedidoSelecionado.id,
-                4
+              cancelarPedido(
+                pedidoSelecionado
               )
             "
           >

@@ -11,6 +11,9 @@ import { Injectable, signal } from '@angular/core';
 //   this.aviso.atencao('Informe o nome.');
 //
 //   if (!(await this.aviso.confirmar('Excluir "X"?'))) return;
+//
+//   const motivo = await this.aviso.perguntarMotivo('Por quê?', { motivos: ['A', 'B'] });
+//   if (!motivo) return;   // null = desistiu
 // =====================================================
 
 export type TipoAviso = 'sucesso' | 'erro' | 'atencao' | 'info';
@@ -28,7 +31,10 @@ export interface Aviso {
   // Botão de confirmar em vermelho (ações como excluir)
   perigo: boolean;
 
-  responder: (confirmou: boolean) => void;
+  // Pergunta com motivo: opções prontas + campo "Outro"
+  motivos?: string[];
+
+  responder: (confirmou: boolean, texto?: string) => void;
 }
 
 export interface OpcoesConfirmacao {
@@ -36,6 +42,10 @@ export interface OpcoesConfirmacao {
   textoConfirmar?: string;
   textoCancelar?: string;
   perigo?: boolean;
+}
+
+export interface OpcoesMotivo extends OpcoesConfirmacao {
+  motivos: string[];
 }
 
 const TITULOS: Record<TipoAviso, string> = {
@@ -88,8 +98,26 @@ export class AvisoService {
     });
   }
 
+  // Resolve o motivo escolhido/digitado, ou null se desistir
+  perguntarMotivo(mensagem: string, opcoes: OpcoesMotivo): Promise<string | null> {
+    return new Promise(resolve => {
+      this.enfileirar({
+        tipo: opcoes.perigo ? 'erro' : 'atencao',
+        titulo: opcoes.titulo ?? 'Informe o motivo',
+        mensagem,
+        confirmacao: true,
+        textoConfirmar: opcoes.textoConfirmar ?? 'Confirmar',
+        textoCancelar: opcoes.textoCancelar ?? 'Cancelar',
+        perigo: opcoes.perigo ?? false,
+        motivos: opcoes.motivos,
+        responder: (confirmou, texto) =>
+          resolve(confirmou && texto?.trim() ? texto.trim() : null)
+      });
+    });
+  }
+
   // Chamado pelo componente do popup
-  responder(confirmou: boolean): void {
+  responder(confirmou: boolean, texto?: string): void {
     const aviso = this.atual();
 
     if (!aviso) {
@@ -98,7 +126,7 @@ export class AvisoService {
 
     this.atual.set(this.fila.shift() ?? null);
 
-    aviso.responder(confirmou);
+    aviso.responder(confirmou, texto);
   }
 
   private mostrar(tipo: TipoAviso, mensagem: string, titulo?: string): Promise<void> {

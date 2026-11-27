@@ -603,6 +603,10 @@ namespace TimDoLele.Application.Services
                 {
                     PixPago = pixPagos.Contains(p.Id),
 
+                    MotivoCancelamento = p.MotivoCancelamento,
+
+                    CanceladoEm = p.CanceladoEm,
+
                     WhatsappPendentes =
                         whatsappPendentes.GetValueOrDefault(p.Id),
 
@@ -750,6 +754,10 @@ namespace TimDoLele.Application.Services
             {
                 PixPago = pixPago,
 
+                MotivoCancelamento = pedido.MotivoCancelamento,
+
+                CanceladoEm = pedido.CanceladoEm,
+
                 WhatsappPendentes =
                     whatsappPendentes.GetValueOrDefault(pedido.Id),
 
@@ -893,6 +901,50 @@ namespace TimDoLele.Application.Services
                 status == StatusPedido.Cancelado &&
                 pedido.CupomId.HasValue
             )
+            {
+                var cupom =
+                    await _context.Cupons
+                        .FindAsync(
+                            pedido.CupomId.Value
+                        );
+
+                cupom?.EstornarUso();
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        // Cancela guardando o motivo (aparece nos detalhes do pedido)
+        public async Task CancelarAsync(
+            Guid pedidoId,
+            string? motivo)
+        {
+            var pedido =
+                await _context.Pedidos
+                    .FindAsync(pedidoId);
+
+            if (pedido == null)
+            {
+                throw new NotFoundException(
+                    "Pedido não encontrado"
+                );
+            }
+
+            // Sem emoji/símbolos estranhos (mesma regra das observações)
+            var texto =
+                TextoHelper.LimparParaImpressao(motivo);
+
+            if (string.IsNullOrWhiteSpace(texto))
+            {
+                throw new BadRequestException(
+                    "Informe o motivo do cancelamento."
+                );
+            }
+
+            pedido.Cancelar(texto);
+
+            // Cancelou um pedido com cupom: devolve o uso do cupom
+            if (pedido.CupomId.HasValue)
             {
                 var cupom =
                     await _context.Cupons

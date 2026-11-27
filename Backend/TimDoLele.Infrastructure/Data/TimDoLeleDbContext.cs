@@ -203,6 +203,10 @@ namespace TimDoLele.Infrastructure.Data
                 .Property(p => p.CupomCodigo)
                 .HasMaxLength(20);
 
+            modelBuilder.Entity<Pedido>()
+                .Property(p => p.MotivoCancelamento)
+                .HasMaxLength(200);
+
             base.OnModelCreating(modelBuilder);
         }
     }

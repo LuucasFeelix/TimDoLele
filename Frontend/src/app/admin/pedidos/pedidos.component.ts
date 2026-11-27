@@ -38,6 +38,7 @@ import { AvisoService } from '../../core/services/aviso.service';
 import { ComandaImpressaoService } from '../../core/services/comanda-impressao.service';
 import { WhatsappService } from '../../core/services/whatsapp.service';
 import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
+import { MOTIVOS_CANCELAMENTO } from '../../core/utils/cancelamento.utils';
 
 
 @Component({
@@ -1596,6 +1597,58 @@ export class PedidosComponent
   // =========================================
   // CANCELAMENTO
   // =========================================
+
+  // Pede confirmação antes (cancelar não tem volta)
+  async cancelarPedido(
+    pedido: any
+  ): Promise<void> {
+
+    const mensagem = pedido.pixPago
+      ? `Por que o pedido #${pedido.codigo} está sendo cancelado?\n\n` +
+        'ATENÇÃO: este pedido já foi PAGO via PIX. ' +
+        'O valor precisa ser devolvido ao cliente pelo app do banco.'
+      : `Por que o pedido #${pedido.codigo} está sendo cancelado?`;
+
+    const motivo =
+      await this.aviso.perguntarMotivo(
+        mensagem,
+        {
+          titulo: 'Cancelar pedido',
+          motivos: MOTIVOS_CANCELAMENTO,
+          textoConfirmar: 'Cancelar pedido',
+          textoCancelar: 'Voltar',
+          perigo: true
+        }
+      );
+
+    if (!motivo) {
+      return;
+    }
+
+    this.pedidoService
+      .cancelarPedido(
+        pedido.id,
+        motivo
+      )
+      .subscribe({
+        next: () =>
+          this.carregarPedidos(
+            pedido.id
+          ),
+
+        error: (erro: any) => {
+          console.error(
+            'Erro ao cancelar pedido:',
+            erro
+          );
+
+          this.aviso.erro(
+            'Erro ao cancelar o pedido.'
+          );
+        }
+      });
+  }
+
 
   podeCancelar(
     pedido: any

@@ -28,6 +28,44 @@
         {{ aviso.mensagem }}
       </p>
 
+      <!-- Pergunta com motivo: opções prontas + "Outro" -->
+      @if (aviso.motivos?.length) {
+        <div class="aviso-motivos">
+          @for (motivo of aviso.motivos; track motivo) {
+            <button
+              type="button"
+              class="aviso-motivo"
+              [class.escolhido]="motivoEscolhido === motivo"
+              (click)="escolherMotivo(motivo)"
+            >
+              {{ motivo }}
+            </button>
+          }
+
+          <button
+            type="button"
+            class="aviso-motivo"
+            [class.escolhido]="motivoEscolhido === 'Outro'"
+            (click)="escolherMotivo('Outro')"
+          >
+            Outro
+          </button>
+        </div>
+
+        @if (motivoEscolhido === 'Outro') {
+          <textarea
+            id="aviso-outro-motivo"
+            class="aviso-outro"
+            rows="2"
+            maxlength="200"
+            placeholder="Escreva o motivo"
+            semEmoji
+            [value]="outroMotivo"
+            (input)="aoDigitarOutro($event)"
+          ></textarea>
+        }
+      }
+
       <div class="aviso-botoes">
 
         @if (aviso.confirmacao) {
@@ -44,6 +82,7 @@
           type="button"
           class="aviso-confirmar"
           [class.perigo]="aviso.perigo"
+          [disabled]="pedeMotivo && !motivoFinal"
           (click)="confirmar()"
         >
           {{ aviso.textoConfirmar }}
