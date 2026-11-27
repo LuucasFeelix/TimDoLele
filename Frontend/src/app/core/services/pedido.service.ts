@@ -80,6 +80,14 @@ export class PedidoService {
     );
   }
 
+  // Cancela guardando o motivo
+  cancelarPedido(id: string, motivo: string) {
+    return this.http.put(
+      `${this.api}/${id}/cancelar`,
+      { motivo }
+    );
+  }
+
 
   colocarNaFila(id: string) {
     return this.http.put(

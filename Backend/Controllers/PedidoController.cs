@@ -114,6 +114,29 @@ namespace TimDoLeLe.Controllers
         }
 
 
+        // Cancelar com motivo (o motivo fica salvo no pedido)
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id}/cancelar")]
+        public async Task<IActionResult>
+            Cancelar(
+                Guid id,
+                [FromBody] CancelarPedidoDto dto)
+        {
+            await _pedidoService
+                .CancelarAsync(
+                    id,
+                    dto.Motivo
+                );
+
+            await AvisarMudancaStatusAsync(
+                id,
+                StatusPedido.Cancelado
+            );
+
+            return NoContent();
+        }
+
+
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}/status")]
         public async Task<IActionResult>
@@ -127,6 +150,20 @@ namespace TimDoLeLe.Controllers
                     status
                 );
 
+            await AvisarMudancaStatusAsync(
+                id,
+                status
+            );
+
+            return NoContent();
+        }
+
+
+        // Telas abertas (dashboard / pedidos) atualizam na hora
+        private async Task AvisarMudancaStatusAsync(
+            Guid id,
+            StatusPedido status)
+        {
             var dataEvento =
                 DateTime.Now;
 
@@ -167,8 +204,6 @@ namespace TimDoLeLe.Controllers
                             dataEvento
                     }
                 );
-
-            return NoContent();
         }
 
 

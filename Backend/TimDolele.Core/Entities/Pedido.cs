@@ -40,6 +40,11 @@ public class Pedido : BaseEntity
     // Desconto em R$ sobre o subtotal (não afeta a taxa de entrega)
     public decimal Desconto { get; private set; }
 
+    // Por que o pedido foi cancelado (aparece nos detalhes do pedido)
+    public string? MotivoCancelamento { get; private set; }
+
+    public DateTime? CanceladoEm { get; private set; }
+
     public StatusImpressao StatusImpressao { get; private set; }
 
     public DateTime? DataImpressao { get; private set; }
@@ -185,6 +190,23 @@ public class Pedido : BaseEntity
         }
 
         Status = novoStatus;
+    }
+
+
+    public void Cancelar(string motivo)
+    {
+        if (string.IsNullOrWhiteSpace(motivo))
+        {
+            throw new Exception(
+                "Informe o motivo do cancelamento.");
+        }
+
+        AtualizarStatus(StatusPedido.Cancelado);
+
+        var texto = motivo.Trim();
+
+        MotivoCancelamento = texto.Length > 200 ? texto[..200] : texto;
+        CanceladoEm = DateTime.Now;
     }
 
 

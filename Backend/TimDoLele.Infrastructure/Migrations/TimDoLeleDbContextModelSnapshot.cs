@@ -28,6 +28,9 @@ namespace TimDoLele.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("CanceladoEm")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
@@ -57,6 +60,10 @@ namespace TimDoLele.Infrastructure.Migrations
 
                     b.Property<int>("FormaPagamento")
                         .HasColumnType("int");
+
+                    b.Property<string>("MotivoCancelamento")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<Guid?>("PagamentoId")
                         .HasColumnType("uniqueidentifier");

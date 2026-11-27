@@ -81,6 +81,54 @@
   color: white;
 }
 
+.aviso-confirmar:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+/* Pergunta com motivo */
+.aviso-motivos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.aviso-motivo {
+  padding: 8px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 999px;
+  background: white;
+  color: #333;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.aviso-motivo.escolhido {
+  border-color: #e30613;
+  background: #fff1f2;
+  color: #b00020;
+}
+
+.aviso-outro {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.aviso-outro:focus {
+  outline: none;
+  border-color: #e30613;
+}
+
 .aviso-cancelar {
   background: #f1f1f1;
   color: #333;

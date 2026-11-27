@@ -673,6 +673,30 @@
   margin-bottom: 22px;
 }
 
+/* Motivo do cancelamento (detalhes do pedido) */
+.cancelamento-info {
+  padding: 16px 18px;
+  border: 1px solid #fecaca;
+  border-radius: 14px;
+  background: #fef2f2;
+}
+
+.cancelamento-info h3 {
+  color: #b91c1c;
+  margin-bottom: 8px;
+}
+
+.cancelamento-info p {
+  color: #333;
+  font-size: 15px;
+}
+
+.cancelamento-info small {
+  display: block;
+  margin-top: 6px;
+  color: #777;
+}
+
 .detail-section h3 {
   color: #111;
   font-size: 18px;

@@ -135,6 +135,16 @@
       >
         📲 Avisar cliente
       </button>
+
+      <!-- Cancelar (pede confirmação antes) -->
+      <button
+        type="button"
+        class="acao-cancelar"
+        (click)="cancelarPedido(pedido)"
+        [disabled]="atualizandoId === pedido.id"
+      >
+        ✕ Cancelar
+      </button>
     </div>
 
     </div>
@@ -207,6 +217,16 @@
       >
         📲 Avisar cliente
       </button>
+
+      <!-- Cancelar (pede confirmação antes) -->
+      <button
+        type="button"
+        class="acao-cancelar"
+        (click)="cancelarPedido(pedido)"
+        [disabled]="atualizandoId === pedido.id"
+      >
+        ✕ Cancelar
+      </button>
     </div>
 
     </div>
@@ -278,6 +298,16 @@
         (click)="avisarCliente(pedido)"
       >
         📲 Avisar cliente
+      </button>
+
+      <!-- Cancelar (pede confirmação antes) -->
+      <button
+        type="button"
+        class="acao-cancelar"
+        (click)="cancelarPedido(pedido)"
+        [disabled]="atualizandoId === pedido.id"
+      >
+        ✕ Cancelar
       </button>
     </div>
 

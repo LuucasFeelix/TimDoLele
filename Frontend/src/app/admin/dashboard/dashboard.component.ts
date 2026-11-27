@@ -8,6 +8,7 @@ import { AvisoService } from '../../core/services/aviso.service';
 import { NotificacaoSignalrService } from '../../core/services/notificacao-signalr.service';
 import { DinheiroPipe } from '../../shared/pipes/dinheiro.pipe';
 import { WhatsappService } from '../../core/services/whatsapp.service';
+import { MOTIVOS_CANCELAMENTO } from '../../core/utils/cancelamento.utils';
 
 // Status do backend (StatusPedido)
 const STATUS_EM_PREPARO = 1;
@@ -155,6 +156,46 @@ export class Dashboard implements OnInit, OnDestroy {
   // Saiu para entrega / Pronto para retirada -> Entregue
   marcarEntregue(pedido: any): void {
     this.alterarStatus(pedido, STATUS_ENTREGUE);
+  }
+
+  // Cancelar: pede confirmação antes (não tem volta)
+  async cancelarPedido(pedido: any): Promise<void> {
+    if (this.atualizandoId) {
+      return;
+    }
+
+    const mensagem = pedido.pixPago
+      ? `Por que o pedido #${pedido.codigo} está sendo cancelado?\n\n` +
+        'ATENÇÃO: este pedido já foi PAGO via PIX. ' +
+        'O valor precisa ser devolvido ao cliente pelo app do banco.'
+      : `Por que o pedido #${pedido.codigo} está sendo cancelado?`;
+
+    const motivo = await this.aviso.perguntarMotivo(mensagem, {
+      titulo: 'Cancelar pedido',
+      motivos: MOTIVOS_CANCELAMENTO,
+      textoConfirmar: 'Cancelar pedido',
+      textoCancelar: 'Voltar',
+      perigo: true
+    });
+
+    if (!motivo) {
+      return;
+    }
+
+    this.atualizandoId = pedido.id;
+
+    this.pedidoService.cancelarPedido(pedido.id, motivo).subscribe({
+      next: () => {
+        this.atualizandoId = null;
+        this.carregarPedidos();
+      },
+      error: (err: any) => {
+        console.error(err);
+        this.atualizandoId = null;
+        this.aviso.erro('Erro ao cancelar o pedido.');
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   private alterarStatus(pedido: any, status: number): void {
